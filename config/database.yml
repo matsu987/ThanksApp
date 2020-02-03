@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: ThanksApp_production
-  username: ThanksApp
-  password: <%= ENV['THANKSAPP_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
