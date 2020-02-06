@@ -9,6 +9,6 @@
     "vue-template-compiler": "^2.6.11"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.10.2"
+    "webpack-dev-server": "^3.10.3"
   }
 }
