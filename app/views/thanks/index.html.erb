@@ -1,0 +1,27 @@
+<div id="app">
+  <div class="header">
+    <button class="mypage-btn">マイページ</button>
+  </div>
+  <div class="main-box">
+  <%= link_to "送信", new_thank_path %>
+  <div class="thanks_box">
+    <% if @thanks %>
+      <%= @thanks.each do |th| %>
+        <div class="thank">
+          <div class="thank_sender">
+            <%= th.sender.name %>
+          </div>
+          <div class="thank_receiver">
+            <%= th.receiver.name %>
+          </div>
+          <div class="thank_text">
+            <%= th.text %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="side-bar">
+  </div>
+  </div>
+</div>

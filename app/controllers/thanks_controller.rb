@@ -1,5 +1,9 @@
 class ThanksController < ApplicationController
 
+  def index
+    @thanks = Thank.all
+  end
+
   def create
     thank = Thank.new(thank_params)
     if thank.save
