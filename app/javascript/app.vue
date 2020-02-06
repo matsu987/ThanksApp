@@ -5,7 +5,6 @@
       <SideBar></SideBar>
       <Form></Form>
     </div>
-    <p>{{ message }}</p>
   </div>
 </template>
 
