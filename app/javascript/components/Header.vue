@@ -2,6 +2,7 @@
   <div class="header">
     <img class="logo" src="~logo.png">
     <button class="mypage-btn">マイページ</button>
+    <button class="logout-btn">ログアウト</button>
   </div>
 </template>
 
@@ -27,6 +28,11 @@ export default {
 }
 
 .mypage-btn {
+  position: absolute;
+  top: 70px;
+  right: 150px;
+}
+.logout-btn {
   position: absolute;
   top: 70px;
   right: 50px;
