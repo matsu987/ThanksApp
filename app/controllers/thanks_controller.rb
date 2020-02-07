@@ -21,6 +21,13 @@ class ThanksController < ApplicationController
     @thank = Thank.find(params[:id]).update(thank_params)
     redirect_to root_path
   end
+
+  def destroy
+    thank = Thank.find(params[:id])
+    thank.delete
+    redirect_to root_path
+  end
+
   private
 
   def thank_params

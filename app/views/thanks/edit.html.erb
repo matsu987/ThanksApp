@@ -5,6 +5,7 @@
   <div class="main-box">
   <%= form_with model: @thank , local: true do |f| %>
     <%= f.submit %>
+    <%= link_to "削除", thank_path(@thank.id), method: :delete %>
     <div class="thanks_box">
       <div class="thank">
         <div class="thank_sender">

@@ -9,6 +9,7 @@
       <% @thanks.each do |th| %>
         <div class="thank">
           <%= link_to "編集", edit_thank_path(th.id) %>
+          <%= link_to "削除", thank_path(th.id), method: :delete %>
           <div class="thank_sender">
             <%= th.sender.name %>
           </div>
