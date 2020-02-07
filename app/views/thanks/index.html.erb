@@ -1,6 +1,7 @@
 <div id="app">
   <div class="header">
     <button class="mypage-btn">マイページ</button>
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
   </div>
   <div class="main-box">
   <%= link_to "送信", new_thank_path %>
