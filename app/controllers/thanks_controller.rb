@@ -1,5 +1,13 @@
 class ThanksController < ApplicationController
 
+  def index
+    @thanks = Thank.all
+  end
+
+  def edit
+    @thank = Thank.find(params[:id])
+  end
+
   def create
     thank = Thank.new(thank_params)
     if thank.save
@@ -7,6 +15,17 @@ class ThanksController < ApplicationController
     else
       render json: { errors: thank.errors.full_messages }
     end
+  end
+
+  def update
+    @thank = Thank.find(params[:id]).update(thank_params)
+    redirect_to root_path
+  end
+
+  def destroy
+    thank = Thank.find(params[:id])
+    thank.delete
+    redirect_to root_path
   end
 
   private
