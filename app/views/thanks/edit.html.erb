@@ -1,0 +1,26 @@
+<div id="app">
+  <div class="header">
+    <button class="mypage-btn">マイページ</button>
+  </div>
+  <div class="main-box">
+  <%= form_with model: @thank , local: true do |f| %>
+    <%= f.submit %>
+    <div class="thanks_box">
+      <div class="thank">
+        <div class="thank_sender">
+          <%= @thank.sender.name %>
+        </div>
+        <div class="thank_receiver">
+          <%= @thank.receiver.name %>
+          <input type="hidden" name="thank[receiver_id]" value="<%= @thank.receiver.id + 1 %>">
+        </div>
+        <div class="thank_text">
+          <%= f.text_field :text %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="side-bar">
+  </div>
+  </div>
+</div>

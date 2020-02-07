@@ -4,6 +4,10 @@ class ThanksController < ApplicationController
     @thanks = Thank.all
   end
 
+  def edit
+    @thank = Thank.find(params[:id])
+  end
+
   def create
     thank = Thank.new(thank_params)
     if thank.save
@@ -13,6 +17,10 @@ class ThanksController < ApplicationController
     end
   end
 
+  def update
+    @thank = Thank.find(params[:id]).update(thank_params)
+    redirect_to root_path
+  end
   private
 
   def thank_params

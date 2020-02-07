@@ -8,6 +8,7 @@
     <% if @thanks %>
       <% @thanks.each do |th| %>
         <div class="thank">
+          <%= link_to "編集", edit_thank_path(th.id) %>
           <div class="thank_sender">
             <%= th.sender.name %>
           </div>
