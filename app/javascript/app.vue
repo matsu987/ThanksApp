@@ -13,6 +13,8 @@ import Header from 'components/Header.vue';
 import SideBar from 'components/SideBar.vue';
 import Form from 'components/Form.vue';
 
+import 'flower.png'
+
 export default {
   components: {
     Header,Form,SideBar
@@ -26,9 +28,13 @@ export default {
 </script>
 
 <style scoped>
+#app {
+  background-image: url('~flower.png')
+}
 .main-box {
   display: flex;
-  margin-top: 100px;
+  height: calc( 100vh - 100px);
+  width: 100%;
 }
 p {
   font-size: 2em;

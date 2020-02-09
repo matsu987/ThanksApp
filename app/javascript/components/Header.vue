@@ -1,8 +1,11 @@
 <template>
   <div class="header">
     <img class="logo" src="~logo.png">
-    <button class="mypage-btn">マイページ</button>
-    <button class="logout-btn">ログアウト</button>
+    <div class="toggle_btn" v-on:click="openMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </template>
 
@@ -10,21 +13,51 @@
 import 'logo.png'
 
 export default {
+  data: function(){
+    return {
+
+    }
+  },
+  methods: {
+    openModal: function(){
+      this.showContent = true
+    }
+  }
 }
 </script>
 
 <style scoped>
+.toggle_btn span {
+  display: block;
+  position: absolute;
+  right: 120px;
+  width: 30px;
+  height: 2px;
+  background-color: orange;
+  border-radius: 4px;
+  transition: all .5s;
+}
+.toggle_btn span:nth-child(1) {
+  top: 35px;
+}
+.toggle_btn span:nth-child(2) {
+  top: 45px;
+}
+.toggle_btn span:nth-child(3) {
+  top: 55px;
+}
 .header {
-  display: flex;
   position: relative;
-  height: 100px;
   width: 100%;
-  background-color: red;
+  height: 100px;
+  background-color: #fff;
 }
 
 .logo {
-  height: 100px;
-  margin-left: 50px;
+  position: absolute;
+  top: 25px;
+  left: 120px;
+  height: 50px;
 }
 
 .mypage-btn {
