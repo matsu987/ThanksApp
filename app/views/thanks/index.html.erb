@@ -2,6 +2,7 @@
   <div class="header">
     <%= form_with url: "/search/users/index", method: :get, remote: true do | f | %>
       <%= f.search_field :input, id: "search_form" %>
+      <span id="details"></span>
     <% end %>
     <button class="mypage-btn">マイページ</button>
     <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
