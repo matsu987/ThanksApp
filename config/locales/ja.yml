@@ -8,9 +8,9 @@ ja:
         name: 名前
         email: メールアドレス
       thank:
-        text: 熱い感謝のメッセージ
-        receiver: サプライズのある仕事をした人
-        sender: サプライズサンクスを送る人
+        text: 「熱い感謝のメッセージ」
+        receiver: 「サプライズのある仕事をした人」
+        sender: 「サプライズサンクスを送る人」
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
