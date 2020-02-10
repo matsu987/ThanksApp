@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :group_users
+  has_many :grops, through: :group_users
   has_many :sended_thnks, class_name: 'Thanks', foreign_key: 'sender_id'
   has_many :received_thanks, class_name: 'Thanks', foreign_key: 'receiver_id'
 
