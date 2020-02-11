@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
   has_many :group_users
   has_many :grops, through: :group_users
-  has_many :sended_thnks, class_name: 'Thanks', foreign_key: 'sender_id'
-  has_many :received_thanks, class_name: 'Thanks', foreign_key: 'receiver_id'
+  has_many :sended_thanks, class_name: 'Thank', foreign_key: 'sender_id'
+  has_many :received_thanks, class_name: 'Thank', foreign_key: 'receiver_id'
 
   # 先頭は文字列から始まり、末尾は@di-v.co.jpの形のemailを許可
   VALID_EMAIL_REGEX = /\A[a-zA-Z0-9_\#!$%&`'*+\-{|}~^\/=?\.]+@di-v.co.jp\z/
