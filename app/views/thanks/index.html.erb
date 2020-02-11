@@ -4,6 +4,7 @@
       <%= f.search_field :input, id: "search_form" %>
       <span id="details"></span>
     <% end %>
+    <button id="search_group">グループ検索</button>
     <button class="mypage-btn">マイページ</button>
     <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
   </div>
