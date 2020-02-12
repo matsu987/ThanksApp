@@ -5,5 +5,9 @@ Rails.application.routes.draw do
   resources :thanks, except: %i(index, show)
   namespace :search do
     get 'users/index'
+    get 'units/index'
+    get 'groups/index'
+    get 'teams/index'
+    get 'ranks/index'
   end
 end
