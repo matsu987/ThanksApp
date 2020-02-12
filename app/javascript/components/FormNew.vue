@@ -25,9 +25,9 @@
           <div class="receiver-select">
             <img class="logo" src="~momo.jpeg">
             <p class="receiver-text">To: </p>
-            <input class="receiver-input" v-model="thank.receiver_name" type="text">
+            <!--<input class="receiver-input" v-model="thank.receiver_name" type="text">-->
+            <input class="receiver_id receiver-input" v-model="thank.receiver_id" type="text">
             <p class="receiver-text">さん</p>
-            <input class="receiver_id hidden" v-model="thank.receiver_id" type="text">
           </div>
           <textarea class="thanks-message" v-model="thank.text" type="text"></textarea>
           <div class="sender-select">
