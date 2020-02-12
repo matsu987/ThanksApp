@@ -19,5 +19,5 @@ class User < ApplicationRecord
   validates :password, format: {with: VALID_PASSWORD_REGEX }
   # president:　社長, ul: ユニットリーダー, gl:グループリーダー
   # bl: エリア統括, sbl: 拠点統括, tl: チームリーダー, mem: メンバー
-  enum rank: { president: 0, ul: 1, gl: 2, bl: 3, sbl: 4, tl: 5, mem: 6 }
+  enum rank: { "代表": 0, "ユニットリーダー": 1, "グループリーダー": 2, "エリア統括": 3, "拠点統括": 4, "チームリーダー": 5, "メンバー": 6 }
 end
