@@ -18,27 +18,27 @@
         <button class="close-btn" v-on:click="closeModal">Close</button>
       </div>
     </div>
-
+    <!-- 投稿用フォーム-->
     <form @submit.prevent="createThank">
       <div class="thanks-form">
         <div class="thanks-form-box">
           <div class="receiver-select">
             <img class="logo" src="~momo.jpeg">
             <p class="receiver-text">To: </p>
-            <input class="receiver-input" v-model="thank.receiver_id" type="text">
+            <!--<input class="receiver-input" v-model="thank.receiver_name" type="text">-->
+            <input class="receiver_id receiver-input" v-model="thank.receiver_id" type="text">
+            <p class="receiver-text">さん</p>
           </div>
           <textarea class="thanks-message" v-model="thank.text" type="text"></textarea>
           <div class="sender-select">
             <img class="logo" src="~momo.jpeg">
-            <p class="sender-text">From: 田中太郎</p>
+            <p class="sender-text">From: {{ current_user.name }}</p>
           </div>
         </div>
       </div>
       <div class="form-btn">
-        <button class="return-btn" type="button">戻る</button>
         <div class="form-submit">
-          <button class="draft-btn" type="button">下書き保存</button>
-          <button class="confirm-btn" type="submit">確定する</button>
+          <button class="confirm-btn" type="submit">保存する</button>
         </div>
       </div>
     </form>
@@ -51,26 +51,38 @@ import axios from 'axios';
 export default {
   data: function () {
     return {
+      current_user: {},
       thank: {
-        sender_id: '',
+        id: '',
+        receiver_id: '',
         text: ''
       },
+      receiver: {
+
+      },
       errors: '',
-      showContent: false
+      showContent: false,
     }
+  },
+  created() {
+    axios
+    .get('/thanks.json')
+    .then(response => {
+      this.$data.current_user = response.data.current_user
+    });
   },
   mounted:function(){
     axios.defaults.headers.common = {
-    'X-Requested-With': 'XMLHttpRequest',
-    'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')};
-
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
   },
   methods: {
     openModal: function(){
-      this.showContent = true
+      this.$data.showContent = true
     },
     closeModal: function(){
-      this.showContent = false
+      this.$data.showContent = false
     },
     resetForm: function(){
       this.$data.thank.receiver_id = ''
@@ -78,7 +90,7 @@ export default {
     },
     createThank: function(event) {
       axios
-        .post('/thanks', this.thank)
+        .post('/thanks.json', this.thank)
         .then(response => {
           this.errors = '';
           if (response.status === 200){
@@ -93,12 +105,37 @@ export default {
           this.openModal();
           this.resetForm();
         })
-        // .catch(error => {
-        //   console.error(error.response.data.errors);
-        //   if (error.response.data && error.response.data.errors) {
-        //     this.errors = error.response.data.errors;
-        //   }
-    }
+        .catch(error => {
+          console.error(error.response.data.errors);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+    updateThank: function(event) {
+      axios
+        .post('/thanks.json', this.thank)
+        .then(response => {
+          this.errors = '';
+          if (response.status === 200){
+            if (response.data && response.data.errors) {
+            this.errors = response.data.errors;
+          }
+
+          } else {
+
+            let e = response.data;
+          }
+          this.openModal();
+          this.resetForm();
+        })
+        .catch(error => {
+          console.error(error.response.data.errors);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
   }
 }
 </script>
@@ -166,8 +203,13 @@ export default {
 
 .form-btn{
   display: flex;
-  justify-content: space-between;
+  position: relative;
   margin: 30px;
+}
+
+.form-submit {
+  position: absolute;
+  right: 0;
 }
 
 .return-btn {
@@ -228,6 +270,10 @@ export default {
   padding-top: 40px;
   font-size: 20px;
   text-align: center;
+}
+
+.hidden {
+  display: none;
 }
 
 p {

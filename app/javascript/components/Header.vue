@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <img class="logo" src="~logo.png">
-    <div class="toggle_btn" v-on:click="openMenu">
+    <div class="toggle_btn">
       <span></span>
       <span></span>
       <span></span>
@@ -19,9 +19,6 @@ export default {
     }
   },
   methods: {
-    openModal: function(){
-      this.showContent = true
-    }
   }
 }
 </script>
