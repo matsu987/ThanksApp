@@ -19,26 +19,26 @@
       </div>
     </div>
 
-    <form @submit.prevent="createThank">
+    <!-- 編集用フォーム-->
+    <form @submit.prevent="updateThank">
       <div class="thanks-form">
         <div class="thanks-form-box">
           <div class="receiver-select">
             <img class="logo" src="~momo.jpeg">
-            <p class="receiver-text">To: </p>
-            <input class="receiver-input" v-model="thank.receiver_id" type="text">
+            <p class="receiver-text">To: {{ receiver.name}} さん</p>
+            <input class="receiver_id hidden" v-model="thank.receiver_id" type="text">
           </div>
           <textarea class="thanks-message" v-model="thank.text" type="text"></textarea>
           <div class="sender-select">
             <img class="logo" src="~momo.jpeg">
-            <p class="sender-text">From: 田中太郎</p>
+            <p class="sender-text">From: {{ current_user.name }}</p>
           </div>
         </div>
       </div>
       <div class="form-btn">
         <button class="return-btn" type="button">戻る</button>
         <div class="form-submit">
-          <button class="draft-btn" type="button">下書き保存</button>
-          <button class="confirm-btn" type="submit">確定する</button>
+          <button class="confirm-btn" type="submit">更新する</button>
         </div>
       </div>
     </form>
@@ -47,38 +47,52 @@
 
 <script>
 import axios from 'axios';
+var editUrl = location.pathname + '.json'
+
 
 export default {
   data: function () {
     return {
-      thank: {
-        sender_id: '',
-        text: ''
-      },
+      form: true,
+      current_user: {},
+      receiver: {},
+      thank: {},
       errors: '',
-      showContent: false
+      showContent: false,
+      updateUrl: ''
     }
+  },
+  created() {
+    axios
+    .get(editUrl)
+    .then(response => {
+     this.$data.current_user = response.data.current_user
+     this.$data.receiver = response.data.receiver
+     this.$data.thank = response.data.thank
+     this.$data.updateUrl = "/thanks/" + response.data.thank.id + '.json'
+    });
   },
   mounted:function(){
     axios.defaults.headers.common = {
-    'X-Requested-With': 'XMLHttpRequest',
-    'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')};
-
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
   },
   methods: {
     openModal: function(){
-      this.showContent = true
+      this.$data.showContent = true
     },
     closeModal: function(){
-      this.showContent = false
+      this.$data.showContent = false
     },
     resetForm: function(){
       this.$data.thank.receiver_id = ''
       this.$data.thank.text = ''
     },
-    createThank: function(event) {
+    updateThank: function(event) {
+      console.log(event)
       axios
-        .post('/thanks', this.thank)
+        .patch(this.updateUrl, this.thank)
         .then(response => {
           this.errors = '';
           if (response.status === 200){
@@ -91,14 +105,14 @@ export default {
             let e = response.data;
           }
           this.openModal();
-          this.resetForm();
         })
-        // .catch(error => {
-        //   console.error(error.response.data.errors);
-        //   if (error.response.data && error.response.data.errors) {
-        //     this.errors = error.response.data.errors;
-        //   }
-    }
+        .catch(error => {
+          console.error(error.response.data.errors);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
   }
 }
 </script>
@@ -166,8 +180,13 @@ export default {
 
 .form-btn{
   display: flex;
-  justify-content: space-between;
+  position: relative;
   margin: 30px;
+}
+
+.form-submit {
+  position: absolute;
+  right: 0;
 }
 
 .return-btn {
@@ -228,6 +247,10 @@ export default {
   padding-top: 40px;
   font-size: 20px;
   text-align: center;
+}
+
+.hidden {
+  display: none;
 }
 
 p {

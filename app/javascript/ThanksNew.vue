@@ -3,7 +3,7 @@
     <Header></Header>
     <div class="main-box">
       <SideBar></SideBar>
-      <Form></Form>
+      <FormNew></FormNew>
     </div>
   </div>
 </template>
@@ -11,13 +11,13 @@
 <script>
 import Header from 'components/Header.vue';
 import SideBar from 'components/SideBar.vue';
-import Form from 'components/Form.vue';
+import FormNew from 'components/FormNew.vue';
 
 import 'flower.png'
 
 export default {
   components: {
-    Header,Form,SideBar
+    Header,FormNew,SideBar
   },
   data: function () {
     return {
