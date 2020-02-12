@@ -46,6 +46,21 @@ export default {
           array.push(url);
         });
       });
+  },
+  updated() {
+    axios
+      .get('/thanks.json')
+      .then(response => {
+        var thanks = response.data.send_thanks
+        this.$data.thanks = thanks
+        this.$data.receivers = response.data.receivers
+
+        thanks.forEach(thank => {
+          var url = "/thanks/" + thank.id + "/edit"
+          var array = this.$data.editUrls
+          array.push(url);
+        });
+      });
   }
 }
 </script>
