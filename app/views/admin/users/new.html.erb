@@ -1,0 +1,14 @@
+<%= form_with(model: @user, url: admin_users_path, method: :post, local: true) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <%= f.label "名前" %>
+    <%= f.text_field  :name %>
+    <%= f.label "ランク" %>
+    <%= f.select(:rank, User.ranks.keys)%>
+    <%= f.label "ステータス" %>
+    <%= f.text_field  :status %>
+    <%= f.label "メールアドレス" %>
+    <%= f.text_field  :email %>
+    <%= f.label "パスワード" %>
+    <%= f.text_field  :password %>
+    <%= f.submit %>
+<% end %>
