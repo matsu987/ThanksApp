@@ -54,6 +54,7 @@ export default {
         var thanks = response.data.send_thanks
         this.$data.thanks = thanks
         this.$data.receivers = response.data.receivers
+
         var array = this.$data.editUrls
         
         thanks.forEach(thank => {
