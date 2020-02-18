@@ -55,13 +55,14 @@ export default {
         this.$data.thanks = thanks
         this.$data.receivers = response.data.receivers
 
+        var array = this.$data.editUrls
+        
         thanks.forEach(thank => {
           var url = "/thanks/" + thank.id + "/edit"
-          var array = this.$data.editUrls
           array.push(url);
         });
       });
-  }
+  },
 }
 </script>
 
