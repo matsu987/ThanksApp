@@ -26,7 +26,10 @@
             <img class="logo" src="~momo.jpeg">
             <p class="receiver-text">To: </p>
             <!--<input class="receiver-input" v-model="thank.receiver_name" type="text">-->
-            <input class="receiver_id receiver-input" v-model="thank.receiver_id" type="text">
+            <input class="receiver_id receiver-input" v-model="keyword" @click="userSelect" @keydown.enter="userSelect" @input="onInput" @keyup="onInput" type="text" autocomplete="on" list="user">
+            <datalist id="user">
+              <option v-for="(user, index) in searchUsers" :key="user.id">{{user.name}}</option>
+            </datalist>
             <p class="receiver-text">さん</p>
           </div>
           <textarea class="thanks-message" v-model="thank.text" type="text"></textarea>
@@ -55,13 +58,13 @@ export default {
       thank: {
         id: '',
         receiver_id: '',
-        text: ''
+        text: '',
       },
-      receiver: {
-
-      },
+      receiver: {},
       errors: '',
       showContent: false,
+      keyword: '',
+      searchUsers: []
     }
   },
   created() {
@@ -78,6 +81,24 @@ export default {
     };
   },
   methods: {
+    userSelect: function(e){
+      e.preventDefault();
+    },
+    onInput: function(){
+      axios
+        .get('/search/users/index.json', {params: this.keyword})
+        .then(response => {
+          if (response.data.length !== 0){
+            this.$data.searchUsers = []
+            var users = response.data
+            var array = this.$data.searchUsers
+
+            users.forEach(user => {
+              array.push(user);
+            });
+          }
+        })
+    },
     openModal: function(){
       this.$data.showContent = true
     },
@@ -89,6 +110,14 @@ export default {
       this.$data.thank.text = ''
     },
     createThank: function(event) {
+      var users = this.$data.searchUsers
+
+      users.forEach(user => {
+        if (user.name === this.keyword){
+          this.$data.thank.receiver_id = `${user.id}`;
+        }
+      });
+
       axios
         .post('/thanks.json', this.thank)
         .then(response => {
