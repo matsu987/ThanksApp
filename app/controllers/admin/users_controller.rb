@@ -45,7 +45,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def if_not_admin
-        redirect_to root_path unless current_user.status === "admin"
+        redirect_to root_path unless current_user.status === "管理者"
     end
 
     def set_user

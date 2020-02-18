@@ -11,8 +11,8 @@ class User < ApplicationRecord
 
   # president: 社長, ul: ユニットリーダー, gl:グループリーダー
   # bl: エリア統括, sbl: 拠点統括, tl: チームリーダー, mem: メンバー
-  enum rank: { president: 0, ul: 1, gl: 2, bl: 3, sbl: 4, tl: 5, mem: 6 }
-  enum status: { standard_user: 0, admin:1 }
+  enum rank: { "社長": 0, "ユニットリーダー": 1, "グループリーダー": 2, "エリア統括": 3, "拠点統括": 4, "チームリーダー": 5, "メンバー": 6 }
+  enum status: { "社員": 0, "管理者":1 }
 
 
   # 先頭は文字列から始まり、末尾は@di-v.co.jpの形のemailを許可
