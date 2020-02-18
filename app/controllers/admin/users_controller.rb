@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-    # before_action :if_not_admin
+    before_action :if_not_admin
     before_action :set_user, only: [:edit, :update, :destroy]
 
     def index
@@ -44,10 +44,9 @@ class Admin::UsersController < ApplicationController
         params.require(:user).permit(:name, :rank, :status, :email, :password)
     end
 
-    # def if_not_admin
-    #     binding.pry
-    #     redirect_to root_path unless current_user.rank === "president"
-    # end
+    def if_not_admin
+        redirect_to root_path unless current_user.status === "admin"
+    end
 
     def set_user
         @user = User.find(params[:id])

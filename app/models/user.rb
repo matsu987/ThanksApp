@@ -12,6 +12,8 @@ class User < ApplicationRecord
   # president: 社長, ul: ユニットリーダー, gl:グループリーダー
   # bl: エリア統括, sbl: 拠点統括, tl: チームリーダー, mem: メンバー
   enum rank: { president: 0, ul: 1, gl: 2, bl: 3, sbl: 4, tl: 5, mem: 6 }
+  enum status: { standard_user: 0, admin:1 }
+
 
   # 先頭は文字列から始まり、末尾は@di-v.co.jpの形のemailを許可
   VALID_EMAIL_REGEX = /\A[a-zA-Z0-9_\#!$%&`'*+\-{|}~^\/=?\.]+@di-v.co.jp\z/
@@ -25,4 +27,7 @@ class User < ApplicationRecord
   validates :rank,
   inclusion: {in: User.ranks.keys}
 
+  # 指定された値がenumのkeyだった場合は許可
+  validates :status,
+  inclusion: {in: User.statuses.keys}
 end
