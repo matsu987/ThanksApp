@@ -2,7 +2,7 @@
   <center class="thanks-index">
     <div class="thanks-index-message">
       <div class="index-message-image">
-        <img src="/assets/Surprisethanks.png" alt="Suprisethanks.png">
+        <img src="~Surprisethanks.png" alt="Suprisethanks.png">
       </div>
       <section class="index-message-middle">
         <h2>"感謝を伝える"</h2>
@@ -14,13 +14,13 @@
       </section>
     </div>
     <div class="index-contents">
-      <ThanksContent class="index-content" path="" message-first="みんなの" message-second="サプライズサンクスを見る" image="/assets/send.png" image-name="ハガキ"></ThanksContent>
-      <ThanksContent class="index-content" path="/thanks/new" message-first="サプライズサンクスを送る" image="/assets/send.png" image-name="メモ帳"></ThanksContent>
-      <ThanksContent class="index-content last" path="" message-first="自分に届いた" message-second="サプライズサンクスを見る" image="/assets/zibunno.png" image-name="手紙"></ThanksContent> 
+      <ThanksContent class="index-content" path="" message-first="みんなの" message-second="サプライズサンクスを見る" image="/minnano.png" alt="minnano.png" image-name="ハガキ"></ThanksContent>
+      <ThanksContent class="index-content" path="/thanks/new" message-first="サプライズサンクスを送る" image="/send.png" image-name="メモ帳"></ThanksContent>
+      <ThanksContent class="index-content last" path="" message-first="自分に届いた" message-second="サプライズサンクスを見る" image="/zibunno.png" image-name="手紙"></ThanksContent> 
     </div>
   </center>
 </template>
-　　　　　　　　
+
 <script>
 // suprise_thanks用のpngもらう
 import 'zibunno.png'
