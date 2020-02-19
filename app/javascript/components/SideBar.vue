@@ -4,7 +4,7 @@
       <a :href="editUrls[index]">
         <div class="sended-thanks-box">
           <div class="icon-box">
-          <img class="logo" src="~momo.jpeg">
+          <img class="logo" src="~person.png">
           </div>
           <div class="sended-message-box">
             <div class="reciver-box">
@@ -23,6 +23,7 @@
 
 <script>
 import axios from 'axios';
+import 'person.png'
 
 export default {
   data: function () {

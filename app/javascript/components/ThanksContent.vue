@@ -20,7 +20,8 @@ import 'minnano.png'
 export default {
   props: [ 'messageFirst', 'messageSecond', 'image', 'imageName', 'path'],
   data: function(){
-    return
+    return{
+    }
   },
   methods: {
   }

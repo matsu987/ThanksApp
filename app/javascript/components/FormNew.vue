@@ -23,7 +23,7 @@
       <div class="thanks-form">
         <div class="thanks-form-box">
           <div class="receiver-select">
-            <img class="logo" src="~momo.jpeg">
+            <img class="logo" src="~person.png">
             <p class="receiver-text">To: </p>
             <!--<input class="receiver-input" v-model="thank.receiver_name" type="text">-->
             <input class="receiver_id receiver-input" v-model="keyword" @click="userSelect" @keydown.enter="userSelect" @input="onInput" @keyup="onInput" type="text" autocomplete="on" list="user">
@@ -34,7 +34,7 @@
           </div>
           <textarea class="thanks-message" v-model="thank.text" type="text"></textarea>
           <div class="sender-select">
-            <img class="logo" src="~momo.jpeg">
+            <img class="logo" src="~person.png">
             <p class="sender-text">From: {{ current_user.name }}</p>
           </div>
         </div>
@@ -50,6 +50,7 @@
 
 <script>
 import axios from 'axios';
+import 'person.png'
 
 export default {
   data: function () {
@@ -88,8 +89,9 @@ export default {
       axios
         .get('/search/users/index.json', {params: this.keyword})
         .then(response => {
+          this.$data.searchUsers = []
+          console.log(response)
           if (response.data.length !== 0){
-            this.$data.searchUsers = []
             var users = response.data
             var array = this.$data.searchUsers
 
@@ -106,7 +108,7 @@ export default {
       this.$data.showContent = false
     },
     resetForm: function(){
-      this.$data.thank.receiver_id = ''
+      this.$data.keyword = ''
       this.$data.thank.text = ''
     },
     createThank: function(event) {
@@ -133,6 +135,7 @@ export default {
           }
           this.openModal();
           this.resetForm();
+          this.$data.searchUsers = []
         })
         .catch(error => {
           console.error(error.response.data.errors);
