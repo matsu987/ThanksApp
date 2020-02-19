@@ -5,6 +5,6 @@ if @users_vue
     json.email user.email
     json.time user.created_at
   end
-else
-  json.users @users_vue
+# else
+#   json.users @users_vue
 end
