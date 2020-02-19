@@ -90,6 +90,7 @@ export default {
         .get('/search/users/index.json', {params: this.keyword})
         .then(response => {
           this.$data.searchUsers = []
+          console.log(response)
           if (response.data.length !== 0){
             var users = response.data
             var array = this.$data.searchUsers
@@ -134,6 +135,7 @@ export default {
           }
           this.openModal();
           this.resetForm();
+          this.$data.searchUsers = []
         })
         .catch(error => {
           console.error(error.response.data.errors);
