@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="index-contents">
-
+      <PasswordForm></PasswordForm>
     </div>
   </center>
 </template>
@@ -16,13 +16,14 @@ import 'zibunno.png'
 import 'send.png'
 import 'minnano.png'
 import 'Surprisethanks.png'
+import PasswordForm from 'components/PasswordForm.vue';
 
 export default {
   data: function(){
     return {
     }
   },
-  components: {  },
+  components: { PasswordForm },
   methods: {
   }
 }
@@ -48,6 +49,7 @@ export default {
   }
   .index-contents{
     display: flex;
+    justify-content: center;
     
   }
   .index-content{
