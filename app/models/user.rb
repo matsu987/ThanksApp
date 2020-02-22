@@ -21,9 +21,9 @@ class User < ApplicationRecord
   VALID_PASSWORD_REGEX = /\A[a-z0-9]{6,}/i
 
   validates :name, presence: :true
-  # validate :email_custom_error
+  validate :email_custom_error
   # validates :email, format: {with: VALID_EMAIL_REGEX }
-  validates :password, presence: :true, allow_nil: :true
+  validates :password, format: {with: VALID_PASSWORD_REGEX }, allow_nil: :true
   # , on: :"/users/confirmation?confirmation_token=abcdef"
   # 指定された値がenumのkeyだった場合は許可
 

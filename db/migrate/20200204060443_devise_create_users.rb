@@ -3,7 +3,7 @@
 class DeviseCreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
-      t.string  :name,               null: false, default: ""
+      t.string  :name,               null: false
       t.string  :email,              null: false, default: ""
       t.text    :introduction
       t.integer :status,             null: false, default: 0
