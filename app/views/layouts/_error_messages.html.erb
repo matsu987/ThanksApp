@@ -1,8 +1,10 @@
-<% if model.errors.any? %>
+<% if @user.errors.any? %>
     <div class="alert alert-warning">
         <ul>
-        <% model.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
+          <% model.errors.each do |attr, msg| %>
+            <% if model.errors[attr].first == msg %>
+            <li><%= "#{attr} #{msg}" %></li>
+            <% end %>
         <% end %>
         </ul>
     </div>

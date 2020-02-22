@@ -11,8 +11,8 @@ class Admin::UsersController < ApplicationController
     end
 
     def create
-        user = User.new(user_management_params)
-        if user.save
+        @user = User.new(user_management_params)
+        if @user.save
         render :create
         else
         render :new
