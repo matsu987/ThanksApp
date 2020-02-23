@@ -43,8 +43,11 @@ class ThanksController < ApplicationController
 
   def destroy
     thank = Thank.find(params[:id])
-    thank.delete
-    redirect_to root_path
+    if thank.delete
+      render json: thank, status: :created
+    else
+      render json: { errors: thank.errors.full_messages }
+    end
   end
 
   private
