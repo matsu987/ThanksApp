@@ -7,6 +7,7 @@
     </div>
     <div class="index-contents">
       <PasswordForm></PasswordForm>
+      <PasswordRegister></PasswordRegister>
     </div>
   </center>
 </template>
@@ -17,13 +18,15 @@ import 'send.png'
 import 'minnano.png'
 import 'Surprisethanks.png'
 import PasswordForm from 'components/PasswordForm.vue';
+import PasswordRegister from 'components/PasswordRegister.vue';
+
 
 export default {
   data: function(){
     return {
     }
   },
-  components: { PasswordForm },
+  components: { PasswordForm, PasswordRegister},
   methods: {
   }
 }
