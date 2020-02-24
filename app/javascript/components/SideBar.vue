@@ -103,7 +103,12 @@ export default {
 }
 
 .thanks-message {
+  width: 13.5em;
   margin-top: 3%;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  height: 60px;
+  overflow: hidden;
 }
 
 .status-box {
