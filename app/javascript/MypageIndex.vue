@@ -3,23 +3,24 @@
     <Header></Header>
     <a href="/users/1/mypages">test</a>
     <div class="main-box">
-      <ThanksIndexContent></ThanksIndexContent>
+     <MypageIndexContents></MypageIndexContents>
     </div>
   </div>
 </template>
 
 <script>
 import Header from 'components/Header.vue';
-import ThanksIndexContent from 'components/ThanksIndexContent.vue';
+import MypageIndexContents from 'components/MypageIndexContents.vue';
 import 'flower.png'
 
 export default {
   components: {
-    Header, ThanksIndexContent
+    Header, MypageIndexContents
   },
   data: function () {
     return {
-      message: "Hello Vue!"
+      current_user: {},
+
     }
   }
 }
