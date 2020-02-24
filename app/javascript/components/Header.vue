@@ -1,6 +1,8 @@
 <template>
   <div class="header">
-    <img class="logo" src="~logo.png">
+    <a href="/">
+      <img class="logo" src="~logo.png">
+    </a>
     <div class="toggle_btn">
       <span></span>
       <span></span>

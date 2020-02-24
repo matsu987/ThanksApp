@@ -19,25 +19,41 @@
       </div>
     </div>
 
+    <div class="overlay" v-show="deletePop">
+      <div class="content">
+        <div class="error-message" v-if="errors.length != 0">
+          <ul v-for="e in errors" :key="e">
+            <li><font color="red">{{ e }}</font></li>
+          </ul>
+        </div>
+        <p class="success-message-delete">感謝のメッセージを削除しました！</p>
+        <a href="/thanks/new">
+          <button class="close-btn" >Close</button>
+        </a>
+      </div>
+    </div>
+
     <!-- 編集用フォーム-->
     <form @submit.prevent="updateThank">
       <div class="thanks-form">
         <div class="thanks-form-box">
           <div class="receiver-select">
-            <img class="logo" src="~momo.jpeg">
+            <img class="logo" src="~person.png">
             <p class="receiver-text">To: {{ receiver.name}} さん</p>
             <input class="receiver_id hidden" v-model="thank.receiver_id" type="text">
           </div>
           <textarea class="thanks-message" v-model="thank.text" type="text"></textarea>
           <div class="sender-select">
-            <img class="logo" src="~momo.jpeg">
+            <img class="logo" src="~person.png">
             <p class="sender-text">From: {{ current_user.name }}</p>
           </div>
         </div>
       </div>
       <div class="form-btn">
-        <button class="return-btn" type="button">戻る</button>
+        <!--戻るボタン確認-->
+        <!--<button class="return-btn" type="button">戻る</button>-->
         <div class="form-submit">
+          <button class="delete-btn" type="button" @click="thanksDelete">削除する</button>
           <button class="confirm-btn" type="submit">更新する</button>
         </div>
       </div>
@@ -47,6 +63,8 @@
 
 <script>
 import axios from 'axios';
+import 'person.png'
+
 var editUrl = location.pathname + '.json'
 
 
@@ -59,7 +77,8 @@ export default {
       thank: {},
       errors: '',
       showContent: false,
-      updateUrl: ''
+      updateUrl: '',
+      deletePop: false
     }
   },
   created() {
@@ -79,6 +98,15 @@ export default {
     };
   },
   methods: {
+    thanksDelete: function(){
+      var deleteUrl = "/thanks/" + this.$data.thank.id + '.json'
+      axios
+        .delete(deleteUrl)
+        .then(response => {
+          this.$data.deletePop = true
+        });
+
+    },
     openModal: function(){
       this.$data.showContent = true
     },
@@ -236,6 +264,15 @@ export default {
   text-align: center;
 }
 
+.success-message-delete {
+  display: block;
+  margin-bottom: 40px;
+  padding-top: 40px;
+  font-size: 20px;
+  color: red;
+  text-align: center;
+}
+
 .sub-message {
     font-size: 14px;
     text-align: center;
@@ -251,6 +288,11 @@ export default {
 
 .hidden {
   display: none;
+}
+
+.delete-btn {
+  background: red;
+  color: #fff;
 }
 
 p {
