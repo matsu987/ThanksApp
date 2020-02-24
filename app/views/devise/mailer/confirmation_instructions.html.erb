@@ -1,5 +1,9 @@
-<p>Welcome <%= @email %>!</p>
+<p>サンクスアプリへようこそ！</p>
+<p><%= @email %>のメールアドレスにて、ユーザー登録がありました。</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>以下のリンクへアクセスし、アカウントの認証を完了させてください。</p>
+<p><%= link_to 'アカウントの認証', confirmation_url(@resource, confirmation_token: @token) %></p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>※このURLの有効期限は3日間です。</p>
+<p>期限内にアカウント認証が出来なかった場合は、以下のリンクへアクセスし「アカウント認証が済んでいない方」から認証をお願いします</p>
+<p><%= link_to 'サンクスアプリ', '/' %>
