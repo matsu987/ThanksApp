@@ -5,9 +5,10 @@ class Search::UsersController < ApplicationController
     #vue用
     @sended_thanks = current_user.sended_thanks
     @sended_users = []
+    @sended_users << current_user.id
     @sended_thanks.each do |thank|
       @sended_users << thank.receiver_id
     end
-    @users_vue = User.where("name LIKE ? || email LIKE ?", "%#{params["0"]}%", "%#{params["0"]}%"  ).where.not(id: @sended_users)
+    @users_vue = User.where("name LIKE ?" , "%#{params["0"]}%").where.not(id: @sended_users)
   end
 end

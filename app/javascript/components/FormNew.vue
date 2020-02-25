@@ -6,7 +6,7 @@
         「下書き」のままでは送信されませんので、必ず期日までに<span class="emphasis">確定する</span>ボタンを押してください！
       </P>
     </div>
-    <transition name="fade">
+    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
       <div class="overlay" v-show="showContent">
         <div class="content">
           <div class="error-message" v-if="errors.length != 0">
@@ -28,10 +28,12 @@
             <p class="receiver-text">To: </p>
             <!--<input class="receiver-input" v-model="thank.receiver_name" type="text">-->
             <input class="receiver_id receiver-input" v-model="keyword" @click="userSelect" @keydown.enter="userSelect" @input="onInput" @keyup="onInput" type="text" autocomplete="on" list="user">
-            <datalist id="user">
-              <option v-for="(user, index) in searchUsers" :key="user.id">{{user.name}}</option>
-            </datalist>
-            <p class="receiver-text">さん</p>
+            <div id="user-search-result">
+              <datalist id="user">
+                <option v-for="(user, index) in searchUsers" :key="user.id">{{user.name}}</option>
+              </datalist>
+              <p class="receiver-text">さん</p>
+            </div>
           </div>
           <textarea class="thanks-message" v-model="thank.text" type="text"></textarea>
           <div class="sender-select">
@@ -91,6 +93,11 @@ export default {
         .get('/search/users/index.json', {params: this.keyword})
         .then(response => {
           this.$data.searchUsers = []
+          var userSearchResult = document.getElementById('user-search-result');
+            var noUser = document.getElementById("no-user")
+            if (noUser){
+              document.getElementById("no-user").remove();
+            }
           if (response.data.length !== 0){
             var users = response.data
             var array = this.$data.searchUsers
@@ -98,6 +105,8 @@ export default {
             users.forEach(user => {
               array.push(user);
             });
+          } else {
+            userSearchResult.insertAdjacentHTML('beforebegin','<p id="no-user" style="width: 182px; height: 50px; position: absolute; top: 60px; left: 103px; border: solid 0.5px black; line-height: 50px; padding-left: 5px; font-weight: bold; background: black; color: #fff; font-size: 11px; border-radius: 0.2em;">ユーザーが見つかりませんでした</p>');
           }
         })
     },
@@ -173,22 +182,6 @@ export default {
 </script>
 
 <style scoped>
-
-.fade-enter{
-  opacity: 0;
-}
-.fade-enter-active{
-  transition: opacity 0.5s;
-}
-
-.fade-leave-active{
-  transition: opacity 0.5s;
-}
-
-.fade-leave-to{
-  opacity: 0;
-}
-
 .form-box {
   position: absolute;
   width: calc( 100% - 550px);
@@ -211,6 +204,7 @@ export default {
 .receiver-select{
   display: flex;
   margin-top: 10px;
+  position: relative;
 }
 
 .receiver-text{
@@ -343,5 +337,9 @@ button {
   height: 40px;
   border-radius: 40px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#test {
+  
 }
 </style>

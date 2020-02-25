@@ -1,6 +1,6 @@
 <template>
   <div class="side-bar">
-    <transition-group name="fade">
+    <transition-group enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutUp" appear>
       <li v-for="(thank, index) in thanks" :key="thank.id">
         <a :href="editUrls[index]">
           <div class="sended-thanks-box">
@@ -59,7 +59,7 @@ export default {
         this.$data.receivers = response.data.receivers
 
         var array = this.$data.editUrls
-        
+
         thanks.forEach(thank => {
           var url = "/thanks/" + thank.id + "/edit"
           array.push(url);
@@ -70,21 +70,6 @@ export default {
 </script>
 
 <style scoped>
-
-.fade-enter{
-  opacity: 0;
-}
-.fade-enter-active{
-  transition: opacity 0.5s;
-}
-
-.fade-leave-active{
-  transition: opacity 0.5s;
-}
-
-.fade-leave-to{
-  opacity: 0;
-}
 .side-bar {
   height: 600px;
   width: 300px;
