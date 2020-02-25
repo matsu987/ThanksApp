@@ -1,23 +1,25 @@
 <template>
   <div class="side-bar">
-    <template v-for="(thank, index) in thanks">
-      <a :href="editUrls[index]">
-        <div class="sended-thanks-box">
-          <div class="icon-box">
-          <img class="logo" src="~person.png">
-          </div>
-          <div class="sended-message-box">
-            <div class="reciver-box">
-              <p class="receiver-name">{{receivers[index]}}<span class="blank"></span>さん</p>
-              <p class="thanks-message">{{thank.text}}</p>
+    <transition-group name="fade">
+      <li v-for="(thank, index) in thanks" :key="thank.id">
+        <a :href="editUrls[index]">
+          <div class="sended-thanks-box">
+            <div class="icon-box">
+            <img class="logo" src="~person.png">
+            </div>
+            <div class="sended-message-box">
+              <div class="reciver-box">
+                <p class="receiver-name">{{receivers[index]}}<span class="blank"></span>さん</p>
+                <p class="thanks-message">{{thank.text}}</p>
+              </div>
+            </div>
+            <div class="status-box">
+                下書き
             </div>
           </div>
-          <div class="status-box">
-              下書き
-          </div>
-        </div>
-      </a>
-    </template>
+        </a>
+      </li>
+    </transition-group>
   </div>
 </template>
 
@@ -68,6 +70,21 @@ export default {
 </script>
 
 <style scoped>
+
+.fade-enter{
+  opacity: 0;
+}
+.fade-enter-active{
+  transition: opacity 0.5s;
+}
+
+.fade-leave-active{
+  transition: opacity 0.5s;
+}
+
+.fade-leave-to{
+  opacity: 0;
+}
 .side-bar {
   height: 600px;
   width: 300px;
@@ -103,14 +120,23 @@ export default {
 }
 
 .thanks-message {
+  width: 13.5em;
   margin-top: 3%;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  height: 60px;
+  overflow: hidden;
 }
 
 .status-box {
-    writing-mode: vertical-rl;
     text-align: center;
     border-left: dotted 2px black;
     background-color: #C4C4C4;
+    padding-top: 15px;
+}
+
+li {
+  list-style: none;
 }
 
 p {
