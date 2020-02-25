@@ -7,7 +7,7 @@
       </P>
     </div>
     
-    <transition name="fade">
+    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
       <div class="overlay" v-show="showContent">
         <div class="content">
           <div class="error-message" v-if="errors.length != 0">
@@ -21,7 +21,7 @@
       </div>
     </transition>
     
-    <transition name="fade">
+    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
       <div class="overlay" v-show="deletePop">
         <div class="content">
           <div class="error-message" v-if="errors.length != 0">
@@ -55,8 +55,9 @@
         </div>
       </div>
       <div class="form-btn">
-        <!--戻るボタン確認-->
-        <!--<button class="return-btn" type="button">戻る</button>-->
+        <a href="/thanks/new">
+          <button class="return-btn" type="button">戻る</button>
+        </a>
         <div class="form-submit">
           <button class="delete-btn" type="button" @click="thanksDelete">削除する</button>
           <button class="confirm-btn" type="submit">更新する</button>
@@ -123,7 +124,6 @@ export default {
       this.$data.thank.text = ''
     },
     updateThank: function(event) {
-      console.log(event)
       axios
         .patch(this.updateUrl, this.thank)
         .then(response => {
@@ -151,22 +151,6 @@ export default {
 </script>
 
 <style scoped>
-
-.fade-enter{
-  opacity: 0;
-}
-.fade-enter-active{
-  transition: opacity 0.5s;
-}
-
-.fade-leave-active{
-  transition: opacity 0.5s;
-}
-
-.fade-leave-to{
-  opacity: 0;
-}
-
 .form-box {
   position: absolute;
   width: calc( 100% - 550px);
