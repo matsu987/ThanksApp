@@ -11,7 +11,7 @@
         <button class="close-btn" v-on:click="closeModal">Close</button>
       </div>
     </div>
-    <form action="/users/confirmation" accept-charset="UTF-8" method="post">
+    <form action="/users/confirmation" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
       <div class="form_content">
         <div class="password_form">
           <label for="pass">PASS</label>
@@ -31,12 +31,19 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
   data: function(){
     return{
       errors: '',
     }
+  },
+  mounted:function(){
+    axios.defaults.headers.common = {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
   },
   methods: {
     userSelect: function(e){
@@ -68,17 +75,17 @@ export default {
       this.$data.keyword = ''
       this.$data.thank.text = ''
     },
-    createThank: function(event) {
-      var users = this.$data.searchUsers
+    createPass: function(event) {
+      // var users = this.$data.searchUsers
 
-      users.forEach(user => {
-        if (user.name === this.keyword){
-          this.$data.thank.receiver_id = `${user.id}`;
-        }
-      });
+      // users.forEach(user => {
+      //   if (user.name === this.keyword){
+      //     this.$data.thank.receiver_id = `${user.id}`;
+      //   }
+      // });
 
       axios
-        .post('/thanks.json', this.thank)
+        .post('/users/confirmation.json', this.thank)
         .then(response => {
           this.errors = '';
           if (response.status === 200){
@@ -126,6 +133,7 @@ export default {
         });
     },
   }
+
 }
 </script>
 
