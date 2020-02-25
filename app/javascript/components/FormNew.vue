@@ -6,18 +6,19 @@
         「下書き」のままでは送信されませんので、必ず期日までに<span class="emphasis">確定する</span>ボタンを押してください！
       </P>
     </div>
-
-    <div class="overlay" v-show="showContent">
-      <div class="content">
-        <div class="error-message" v-if="errors.length != 0">
-          <ul v-for="e in errors" :key="e">
-            <li><font color="red">{{ e }}</font></li>
-          </ul>
+    <transition name="fade">
+      <div class="overlay" v-show="showContent">
+        <div class="content">
+          <div class="error-message" v-if="errors.length != 0">
+            <ul v-for="e in errors" :key="e">
+              <li><font color="red">{{ e }}</font></li>
+            </ul>
+          </div>
+          <p class="success-message"v-if="errors.length == 0">熱い感謝のメッセージを受け取りました！<br><span class="sub-message">期限までは投稿画面にて編集可能です。</span></p>
+          <button class="close-btn" v-on:click="closeModal">Close</button>
         </div>
-        <p class="success-message"v-if="errors.length == 0">熱い感謝のメッセージを受け取りました！<br><span class="sub-message">期限までは投稿画面にて編集可能です。</span></p>
-        <button class="close-btn" v-on:click="closeModal">Close</button>
       </div>
-    </div>
+    </transition>
     <!-- 投稿用フォーム-->
     <form @submit.prevent="createThank">
       <div class="thanks-form">
@@ -90,7 +91,6 @@ export default {
         .get('/search/users/index.json', {params: this.keyword})
         .then(response => {
           this.$data.searchUsers = []
-          console.log(response)
           if (response.data.length !== 0){
             var users = response.data
             var array = this.$data.searchUsers
@@ -173,6 +173,21 @@ export default {
 </script>
 
 <style scoped>
+
+.fade-enter{
+  opacity: 0;
+}
+.fade-enter-active{
+  transition: opacity 0.5s;
+}
+
+.fade-leave-active{
+  transition: opacity 0.5s;
+}
+
+.fade-leave-to{
+  opacity: 0;
+}
 
 .form-box {
   position: absolute;
