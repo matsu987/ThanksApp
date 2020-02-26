@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
+    sessions: "users/sessions",
     registrations: "users/registrations",
-    confirmations: "users/confirmations"
+    confirmations: "users/confirmations",
+    passwords: "users/paswords"
   }
   devise_scope :user do
     patch "users/confirmation", to: "users/confirmations#confirm"
