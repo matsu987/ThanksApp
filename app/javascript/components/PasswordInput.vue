@@ -3,27 +3,34 @@
     <div class="overlay" v-show="showContent">
       <div class="content">
         <div class="error-message" v-if="errors.length != 0">
-          <ul v-for="e in errors" :key="e">
-            <li><font color="red">{{ e }}</font></li>
+          <ul >
+            <li><font color="red">{{ errors }}</font></li>
           </ul>
         </div>
         <p class="success-message" v-if="errors.length == 0">パスワード入力確認いたしました！<br><span class="sub-message">早速感謝の言葉をお伝えしましょう^^</span></p>
         <button class="close-btn" v-on:click="closeModal">Close</button>
       </div>
     </div>
-    <form action="/users/confirmation" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
+    <form action="/users/sign_in" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
       <div class="form_content">
+        <div class="email_form">
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" placeholder="emailを入力してください" v-model="email">
+        </div>
         <div class="password_form">
           <label for="pass">PASS</label>
-          <input autocomplete="off" type="password" id="pass" />
+          <input type="password" id="pass" placeholder="passwordを入力してください" v-model="password">
         </div>
       </div>
       <div class="form_bottom_content">
-        <input type="submit" name="commit" value="パスワードを確定する">
-          <p>
-            <a href="#" class="resetting_pass">
-              パスワードを再設定する ▶ ︎
-            </a>
+        <input type="submit" value="ログイン">
+        <p>
+          <a href="/users/password/new" class="resetting_pass">
+            パスワードを忘れた ▶ ︎
+          </a>
+          <a href="/users/confirmation/new" class="resetting_pass">
+            認証がまだのかたはこちら ▶ ︎
+          </a>
           </p>
       </div>
     </form>
@@ -37,6 +44,7 @@ export default {
   data: function(){
     return{
       errors: '',
+      email: '',
       password: '',
       showContent: false
     }
@@ -55,59 +63,35 @@ export default {
       this.$data.showContent = false
     },
     resetForm: function(){
-      this.$data.keyword = ''
-      this.$data.thank.text = ''
+      this.$data.email = ''
+      this.$data.password = ''
     },
     createPass: function(event) {
       axios
-        .post('/users/confirmation.json', [this.email, this.password])
+        .post('/users/sign_in', {email: this.email, password: this.password})
         .then(response => {
           this.errors = '';
           if (response.status === 200){
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
-          }
-
+            }
+            else{
+              this.openModal();
+              setTimeout("location.reload()",1000);
+            }
           } else {
-
-            let e = response.data;
-          }
-          this.openModal();
-          this.resetForm();
-          this.$data.searchUsers = []
-        })
-        .catch(error => {
-          console.error(error.response.data.errors);
-          if (error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors;
-          }
-        });
-    },
-    updateThank: function(event) {
-      axios
-        .post('/thanks.json', this.thank)
-        .then(response => {
-          this.errors = '';
-          if (response.status === 200){
-            if (response.data && response.data.errors) {
-            this.errors = response.data.errors;
-          }
-
-          } else {
-
             let e = response.data;
           }
           this.openModal();
           this.resetForm();
         })
         .catch(error => {
-          console.error(error.response.data.errors);
           if (error.response.data && error.response.data.errors) {
             this.errors = error.response.data.errors;
           }
         });
-    },
-  }
+      },
+    }
 
 }
 </script>
@@ -157,47 +141,5 @@ export default {
     color: #888888;
     font-family: Noto Sans CJK JP;
     letter-spacing: 0.02em;
-  }
-  .overlay{
-  width: 50%;
-  height: 50%;
-  z-index: 1;
-  position: fixed;
-  top: 25%;
-  left: 25%;
-  background-color: #fff;
-  border: 2px solid #555555;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  }
-
-  .close-btn {
-    display: block;
-    margin: auto;
-
-  }
-
-  .success-message {
-    display: block;
-    margin-bottom: 40px;
-    padding-top: 40px;
-    font-size: 20px;
-    color: #ADDCD9;
-    text-align: center;
-  }
-
-  .sub-message {
-      font-size: 14px;
-      text-align: center;
-  }
-
-  .error-message {
-    display: block;
-    margin-bottom: 40px;
-    padding-top: 40px;
-    font-size: 20px;
-    text-align: center;
   }
 </style>

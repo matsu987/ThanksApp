@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="index-contents">
-      <PasswordInput></PasswordInput>
+      <PasswordRegister></PasswordRegister>
     </div>
   </center>
 </template>
@@ -16,7 +16,7 @@ import 'zibunno.png'
 import 'send.png'
 import 'minnano.png'
 import 'Surprisethanks.png'
-import PasswordInput from 'components/PasswordInput.vue';
+import PasswordRegister from 'components/PasswordRegister.vue';
 
 
 export default {
@@ -24,7 +24,7 @@ export default {
     return {
     }
   },
-  components: { PasswordInput },
+  components: { PasswordRegister},
   methods: {
   }
 }
