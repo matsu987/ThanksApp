@@ -11,11 +11,11 @@
         <button class="close-btn" v-on:click="closeModal">Close</button>
       </div>
     </div>
-    <form action="/users/confirmation" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
+    <form action="/users/password" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
       <div class="form_content">
         <div class="password_form">
-          <label for="pass">PASS</label>
-          <input autocomplete="off" type="password" id="pass" v-model="password">
+          <label for="email">Email</label>
+          <input autocomplete="off" type="email" id="email" v-model="email">
         </div>
       </div>
       <div class="form_bottom_content">
@@ -61,7 +61,7 @@ export default {
     },
     createPass: function(event) {
       axios
-        .patch('/users/confirmation', {password: this.password})
+        .post('/users/password', {email: this.email})
         .then(response => {
           this.errors = '';
           if (response.status === 200){

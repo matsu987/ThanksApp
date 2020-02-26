@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     sessions: "users/sessions",
     registrations: "users/registrations",
     confirmations: "users/confirmations",
-    passwords: "users/paswords"
+    passwords: "users/passwords"
   }
   devise_scope :user do
     patch "users/confirmation", to: "users/confirmations#confirm"
