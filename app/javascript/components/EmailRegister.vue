@@ -3,12 +3,15 @@
     <div class="overlay" v-show="showContent">
       <div class="content">
         <div class="error-message" v-if="errors.length != 0">
-          <ul v-for="e in errors" :key="e">
-            <li><font color="red">{{ e }}</font></li>
+          <ul >
+            <li><font color="red">{{ errors }}</font></li>
           </ul>
         </div>
-        <p class="success-message" v-if="errors.length == 0">パスワード入力確認いたしました！<br><span class="sub-message">早速感謝の言葉をお伝えしましょう^^</span></p>
-        <button class="close-btn" v-on:click="closeModal">Close</button>
+        <p class="success-message" v-if="errors.length == 0">{{ success_introduction }}</p>
+        <button class="close-btn" v-on:click="closeModal">
+          <a v-if="errors.length == 0" href="/">Close</a>
+          <p v-if="errors.length != 0">Close</p>
+        </button>
       </div>
     </div>
     <form action="/users/password" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
@@ -39,6 +42,7 @@ export default {
       errors: '',
       email: '',
       password: '',
+      success_introduction: '',
       showContent: false
     }
   },
@@ -65,12 +69,12 @@ export default {
         .then(response => {
           this.errors = '';
           if (response.status === 200){
-            if (response.data && response.data.errors) {
-            this.errors = response.data.errors;
+            if (response.data && response.data.errors_introduction) {
+            this.errors = response.data.errors_introduction;
             }
             else{
+              this.success_introduction = response.data.success_introduction;
               this.openModal();
-              setTimeout("location.reload()",1000);
             }
           } else {
             let e = response.data;
@@ -134,5 +138,47 @@ export default {
     color: #888888;
     font-family: Noto Sans CJK JP;
     letter-spacing: 0.02em;
+  }
+  .overlay{
+    width: 50%;
+    height: 50%;
+    z-index: 1;
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    background-color: #fff;
+    border: 2px solid #555555;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-btn {
+    display: block;
+    margin: auto;
+
+  }
+
+  .success-message {
+    display: block;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    font-size: 20px;
+    color: #ADDCD9;
+    text-align: center;
+  }
+
+  .sub-message {
+      font-size: 14px;
+      text-align: center;
+  }
+
+  .error-message {
+    display: block;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    font-size: 20px;
+    text-align: center;
   }
 </style>

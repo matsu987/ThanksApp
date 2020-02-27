@@ -12,14 +12,19 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   def create
-    binding.pry
-    self.resource = resource_class.send_reset_password_instructions(resource_params)
+    self.resource = resource_class.send_reset_password_instructions(email: params[:email])
+    # resource_paramsには{email: "~~~~~~~"}が入る。
+    # resourceはUserクラスのインスタンスが入る。
     yield resource if block_given?
 
     if successfully_sent?(resource)
-      respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
+      # respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
+      render json: {success_introduction: "パスワード再設定のためのメールを送信いたしました。" }
+      # after_sending_reset_password_instructions_path_for(resource_name)は"/users/sign_in"を生成
+      # resource_nameが:userを返り値として返す。
     else
-      respond_with(resource)
+      render json: {errors_introduction: "登録されていないメールアドレスです。" }
+      # respond_with(resource)
     end
   end
 

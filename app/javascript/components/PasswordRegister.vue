@@ -135,4 +135,47 @@ export default {
     font-family: Noto Sans CJK JP;
     letter-spacing: 0.02em;
   }
+
+  .overlay{
+    width: 50%;
+    height: 50%;
+    z-index: 1;
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    background-color: #fff;
+    border: 2px solid #555555;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-btn {
+    display: block;
+    margin: auto;
+
+  }
+
+  .success-message {
+    display: block;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    font-size: 20px;
+    color: #ADDCD9;
+    text-align: center;
+  }
+
+  .sub-message {
+      font-size: 14px;
+      text-align: center;
+  }
+
+  .error-message {
+    display: block;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    font-size: 20px;
+    text-align: center;
+  }
 </style>
