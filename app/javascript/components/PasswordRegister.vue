@@ -15,7 +15,7 @@
       <div class="form_content">
         <div class="password_form">
           <label for="pass">PASS</label>
-          <input autocomplete="off" type="password" id="pass" v-model="password">
+          <input autocomplete="on" type="password" id="pass" v-model="password">
         </div>
       </div>
       <div class="form_bottom_content">

@@ -18,7 +18,7 @@
       <div class="form_content">
         <div class="password_form">
           <label for="email">Email</label>
-          <input autocomplete="off" type="email" id="email" v-model="email">
+          <input autocomplete="on" type="email" id="email" v-model="email">
         </div>
       </div>
       <div class="form_bottom_content">
