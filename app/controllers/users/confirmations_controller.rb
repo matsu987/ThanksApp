@@ -7,9 +7,16 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # end
 
   # POST /resource/confirmation
-  # def create
-  #   super
-  # end
+  def create
+    self.resource = resource_class.send_confirmation_instructions(email: params[:email])
+    yield resource if block_given?
+
+    if successfully_sent?(resource)
+      render json: {success_introduction: "パスワード再設定のためのメールを送信いたしました。" }
+    else
+      render json: {errors_introduction: "登録されていないメールアドレスです。" }
+    end
+  end
   
   # GET /resource/confirmation?confirmation_token=abcdef
   def show

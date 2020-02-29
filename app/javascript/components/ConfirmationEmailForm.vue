@@ -61,7 +61,7 @@ export default {
     },
     sendEmail: function(event) {
       axios
-        .post('/users/confirmation', {email: this.email})
+        .post('/users/confirmation', { email: this.email })
         .then(response => {
           this.errors = '';
           if (response.status === 200){
@@ -70,7 +70,7 @@ export default {
             }
             else{
               this.openModal();
-              setTimeout("location.reload()",1000);
+              setTimeout("location.reload()",2000);
             }
           } else {
             let e = response.data;
