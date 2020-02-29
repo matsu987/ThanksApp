@@ -14,15 +14,15 @@
         </button>
       </div>
     </div>
-    <form action="/users/password" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
+    <form @submit.prevent="resetPass">
       <div class="form_content">
         <div class="password_form">
-          <label for="email">Email</label>
-          <input autocomplete="on" type="email" id="email" v-model="email">
+          <label for="pass">Pass</label>
+          <input autocomplete="on" type="password" id="pass" v-model="password">
         </div>
       </div>
       <div class="form_bottom_content">
-        <input type="submit" name="commit" value="認証メールを送信する。">
+        <input type="submit" name="commit" value="パスワードを確定する">
           <p>
             <a href="#" class="resetting_pass">
               パスワードを再設定する ▶ ︎
@@ -43,14 +43,18 @@ export default {
       email: '',
       password: '',
       success_introduction: '',
-      showContent: false
+      showContent: false,
+      reset_password_token: '',
+      confirmation_token: ''
     }
   },
-  mounted:function(){
-    axios.defaults.headers.common = {
-      'X-Requested-With': 'XMLHttpRequest',
-      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    };
+  mounted: {
+    function(){
+      axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      };
+    }
   },
   methods: {
     openModal: function(){
@@ -63,9 +67,20 @@ export default {
       this.$data.email = ''
       this.$data.password = ''
     },
-    createPass: function(event) {
+    resetPass: function(event) {
+      axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      };
+      // 1.URLから (指定したパラメータ名~&|$|#) で終わる箇所を抜き出し
+      const value = window.location.href.match(new RegExp("[?&]" + "reset_password_token" + "=(.*?)(&|$|#)"));
+      // 2.パラメータ名に一致する値が存在しない場合は空返却
+      if (value == null) return '';
+      // 3.パラメータ名に一致する値が存在した場合はURLデコードして返却
+      this.$data.reset_password_token = decodeURIComponent(value[1]);
+
       axios
-        .post('/users/password', {email: this.email})
+        .put('/users/password', {pass: this.pass, reset_password_token: this.reset_password_token})
         .then(response => {
           this.errors = '';
           if (response.status === 200){
@@ -87,9 +102,8 @@ export default {
             this.errors = error.response.data.errors;
           }
         });
-      },
     }
-
+  }
 }
 </script>
 

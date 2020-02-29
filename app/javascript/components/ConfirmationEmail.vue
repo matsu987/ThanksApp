@@ -3,26 +3,23 @@
     <div class="overlay" v-show="showContent">
       <div class="content">
         <div class="error-message" v-if="errors.length != 0">
-          <ul >
-            <li><font color="red">{{ errors }}</font></li>
+          <ul v-for="e in errors" :key="e">
+            <li><font color="red">{{ e }}</font></li>
           </ul>
         </div>
-        <p class="success-message" v-if="errors.length == 0">{{ success_introduction }}</p>
-        <button class="close-btn" v-on:click="closeModal">
-          <a v-if="errors.length == 0" href="/">Close</a>
-          <p v-if="errors.length != 0">Close</p>
-        </button>
+        <p class="success-message" v-if="errors.length == 0">認証メールを送信しました！<br><span class="sub-message">メールをご確認ください^^</span></p>
+        <button class="close-btn" v-on:click="closeModal">Close</button>
       </div>
     </div>
-    <form action="/users/password" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
+    <form action="/users/confirmation" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
       <div class="form_content">
         <div class="password_form">
           <label for="email">Email</label>
-          <input autocomplete="on" type="email" id="email" v-model="email">
+          <input autocomplete="on" type="email" id="email" v-model="password">
         </div>
       </div>
       <div class="form_bottom_content">
-        <input type="submit" name="commit" value="認証メールを送信する。">
+        <input type="submit" name="commit" value="認証メールを送信する">
           <p>
             <a href="#" class="resetting_pass">
               パスワードを再設定する ▶ ︎
@@ -42,7 +39,6 @@ export default {
       errors: '',
       email: '',
       password: '',
-      success_introduction: '',
       showContent: false
     }
   },
@@ -65,16 +61,16 @@ export default {
     },
     createPass: function(event) {
       axios
-        .post('/users/password', {email: this.email})
+        .post('/users/confirmation', {email: this.email})
         .then(response => {
           this.errors = '';
           if (response.status === 200){
-            if (response.data && response.data.errors_introduction) {
-            this.errors = response.data.errors_introduction;
+            if (response.data && response.data.errors) {
+            this.errors = response.data.errors;
             }
             else{
-              this.success_introduction = response.data.success_introduction;
               this.openModal();
+              setTimeout("location.reload()",1000);
             }
           } else {
             let e = response.data;
@@ -139,6 +135,7 @@ export default {
     font-family: Noto Sans CJK JP;
     letter-spacing: 0.02em;
   }
+
   .overlay{
     width: 50%;
     height: 50%;

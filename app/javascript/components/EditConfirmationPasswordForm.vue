@@ -3,18 +3,21 @@
     <div class="overlay" v-show="showContent">
       <div class="content">
         <div class="error-message" v-if="errors.length != 0">
-          <ul v-for="e in errors" :key="e">
-            <li><font color="red">{{ e }}</font></li>
+          <ul >
+            <li><font color="red">{{ errors }}</font></li>
           </ul>
         </div>
-        <p class="success-message" v-if="errors.length == 0">パスワード入力確認いたしました！<br><span class="sub-message">早速感謝の言葉をお伝えしましょう^^</span></p>
-        <button class="close-btn" v-on:click="closeModal">Close</button>
+        <p class="success-message" v-if="errors.length == 0">{{ success_introduction }}</p>
+        <button class="close-btn" v-on:click="closeModal">
+          <a v-if="errors.length == 0" href="/">Close</a>
+          <p v-if="errors.length != 0">Close</p>
+        </button>
       </div>
     </div>
-    <form action="/users/confirmation" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
+    <form @submit.prevent="resetPass">
       <div class="form_content">
         <div class="password_form">
-          <label for="pass">PASS</label>
+          <label for="pass">Pass</label>
           <input autocomplete="on" type="password" id="pass" v-model="password">
         </div>
       </div>
@@ -39,14 +42,19 @@ export default {
       errors: '',
       email: '',
       password: '',
-      showContent: false
+      success_introduction: '',
+      showContent: false,
+      reset_password_token: '',
+      confirmation_token: ''
     }
   },
-  mounted:function(){
-    axios.defaults.headers.common = {
-      'X-Requested-With': 'XMLHttpRequest',
-      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    };
+  mounted: {
+    function(){
+      axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      };
+    }
   },
   methods: {
     openModal: function(){
@@ -59,18 +67,29 @@ export default {
       this.$data.email = ''
       this.$data.password = ''
     },
-    createPass: function(event) {
+    resetPass: function(event) {
+      axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      };
+      // 1.URLから (指定したパラメータ名~&|$|#) で終わる箇所を抜き出し
+      const value = window.location.href.match(new RegExp("[?&]" + "confirmation_token" + "=(.*?)(&|$|#)"));
+      // 2.パラメータ名に一致する値が存在しない場合は空返却
+      if (value == null) return '';
+      // 3.パラメータ名に一致する値が存在した場合はURLデコードして返却
+      this.$data.confirmation_token = decodeURIComponent(value[1]);
+
       axios
-        .patch('/users/confirmation', {password: this.password})
+        .patch('/users/password', {password: this.password, confirmation_token: this.confirmation_token})
         .then(response => {
           this.errors = '';
           if (response.status === 200){
-            if (response.data && response.data.errors) {
-            this.errors = response.data.errors;
+            if (response.data && response.data.errors_introduction) {
+            this.errors = response.data.errors_introduction;
             }
             else{
+              this.success_introduction = response.data.success_introduction;
               this.openModal();
-              setTimeout("location.reload()",1000);
             }
           } else {
             let e = response.data;
@@ -83,9 +102,8 @@ export default {
             this.errors = error.response.data.errors;
           }
         });
-      },
     }
-
+  }
 }
 </script>
 
@@ -135,7 +153,6 @@ export default {
     font-family: Noto Sans CJK JP;
     letter-spacing: 0.02em;
   }
-
   .overlay{
     width: 50%;
     height: 50%;
