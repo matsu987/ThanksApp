@@ -11,11 +11,11 @@
         <button class="close-btn" v-on:click="closeModal">Close</button>
       </div>
     </div>
-    <form action="/users/confirmation" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
+    <form action="/users/confirmation" accept-charset="UTF-8" method="post" @submit.prevent="sendEmail">
       <div class="form_content">
         <div class="password_form">
           <label for="email">Email</label>
-          <input autocomplete="on" type="email" id="email" v-model="password">
+          <input autocomplete="on" type="email" id="email" v-model="email">
         </div>
       </div>
       <div class="form_bottom_content">
@@ -59,7 +59,7 @@ export default {
       this.$data.email = ''
       this.$data.password = ''
     },
-    createPass: function(event) {
+    sendEmail: function(event) {
       axios
         .post('/users/confirmation', {email: this.email})
         .then(response => {

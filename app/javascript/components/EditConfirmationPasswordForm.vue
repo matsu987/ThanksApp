@@ -14,7 +14,7 @@
         </button>
       </div>
     </div>
-    <form @submit.prevent="resetPass">
+    <form @submit.prevent="setPass">
       <div class="form_content">
         <div class="password_form">
           <label for="pass">Pass</label>
@@ -67,7 +67,7 @@ export default {
       this.$data.email = ''
       this.$data.password = ''
     },
-    resetPass: function(event) {
+    setPass: function(event) {
       axios.defaults.headers.common = {
         'X-Requested-With': 'XMLHttpRequest',
         'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -80,7 +80,7 @@ export default {
       this.$data.confirmation_token = decodeURIComponent(value[1]);
 
       axios
-        .patch('/users/password', {password: this.password, confirmation_token: this.confirmation_token})
+        .patch('/users/confirmation', {password: this.password, confirmation_token: this.confirmation_token})
         .then(response => {
           this.errors = '';
           if (response.status === 200){

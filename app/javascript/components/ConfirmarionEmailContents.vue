@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="index-contents">
-      <EditConfirmationPasswordForm></EditConfirmationPasswordForm>
+      <ConfirmationEmailForm></ConfirmationEmailForm>
     </div>
   </center>
 </template>
@@ -16,7 +16,7 @@ import 'zibunno.png'
 import 'send.png'
 import 'minnano.png'
 import 'Surprisethanks.png'
-import EditConfirmationPasswordForm from 'components/EditConfirmationPasswordForm.vue';
+import ConfirmationEmailForm from 'components/ConfirmationEmailForm.vue';
 
 
 export default {
@@ -24,7 +24,7 @@ export default {
     return {
     }
   },
-  components: { EditConfirmationPasswordForm },
+  components: { ConfirmationEmailForm },
   methods: {
   }
 }
