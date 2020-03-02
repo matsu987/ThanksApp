@@ -114,6 +114,7 @@ ja:
         sign_in: ログイン
       signed_in: ログインしました。
       signed_out: ログアウトしました。
+      invalid: 無効なemailまたはpasswordです。
     shared:
       links:
         back: 戻る
