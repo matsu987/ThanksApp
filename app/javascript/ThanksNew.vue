@@ -29,7 +29,9 @@ export default {
 
 <style scoped>
 #app {
-  background-image: url('~flower.png')
+  background-image: url('~flower.png');
+  background-color:rgba(255,255,255,0.8);
+  background-blend-mode:lighten;
 }
 .main-box {
   display: flex;

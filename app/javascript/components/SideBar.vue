@@ -14,7 +14,7 @@
               </div>
             </div>
             <div class="status-box">
-                下書き
+                公開前
             </div>
           </div>
         </a>
