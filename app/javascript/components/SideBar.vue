@@ -48,23 +48,7 @@ export default {
         });
         this.sidebarThanks.editUrls = array
       });
-  },
-  updated() {
-    // axios
-    //   .get('/thanks.json')
-    //   .then(response => {
-    //     var thanks = response.data.send_thanks
-    //     this.$data.thanks = thanks
-    //     this.$data.receivers = response.data.receivers
-
-    //     var array = this.$data.editUrls
-
-    //     thanks.forEach(thank => {
-    //       var url = "/thanks/" + thank.id + "/edit"
-    //       array.push(url);
-    //     });
-    //   });
-  },
+  }
 }
 </script>
 
