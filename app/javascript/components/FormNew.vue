@@ -2,8 +2,8 @@
   <div class="form-box">
     <div class="thanks-notice">
       <p class="thanks-notice-message">
-        「確定済み」のサプライズサンクスは、総会日に一斉送信されます<br>
-        「下書き」のままでは送信されませんので、必ず期日までに<span class="emphasis">確定する</span>ボタンを押してください！
+        「公開前」のサプライズサンクスは、総会日に一斉送信されます<br>
+        「下書き」のままでは送信されませんので、必ず期日までに<span class="emphasis">保存する</span>ボタンを押してください！
       </P>
     </div>
     <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
