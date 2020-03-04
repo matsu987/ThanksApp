@@ -56,6 +56,7 @@ import axios from 'axios';
 import 'person.png'
 
 export default {
+  props: ["sidebarThanks"],
   data: function () {
     return {
       current_user: {},
@@ -120,6 +121,24 @@ export default {
       this.$data.keyword = ''
       this.$data.thank.text = ''
     },
+    sidebarUpdate: function(){
+      axios
+      .get('/thanks.json')
+      .then(response => {
+        var thanks = response.data.send_thanks
+        this.sidebarThanks.thanks = thanks
+        this.sidebarThanks.receivers = response.data.receivers
+
+        var array = []
+
+        thanks.forEach(thank => {
+          var url = "/thanks/" + thank.id + "/edit"
+          array.push(url);
+        });
+        this.sidebarThanks.editUrls = array
+        this.$emit("side-update", this.sidebarThanks)
+      });
+    },
     createThank: function(event) {
       var users = this.$data.searchUsers
 
@@ -142,6 +161,7 @@ export default {
 
             let e = response.data;
           }
+          this.sidebarUpdate();
           this.openModal();
           this.resetForm();
           this.$data.searchUsers = []
@@ -152,31 +172,7 @@ export default {
             this.errors = error.response.data.errors;
           }
         });
-    },
-    updateThank: function(event) {
-      axios
-        .post('/thanks.json', this.thank)
-        .then(response => {
-          this.errors = '';
-          if (response.status === 200){
-            if (response.data && response.data.errors) {
-            this.errors = response.data.errors;
-          }
-
-          } else {
-
-            let e = response.data;
-          }
-          this.openModal();
-          this.resetForm();
-        })
-        .catch(error => {
-          console.error(error.response.data.errors);
-          if (error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors;
-          }
-        });
-    },
+    }
   }
 }
 </script>

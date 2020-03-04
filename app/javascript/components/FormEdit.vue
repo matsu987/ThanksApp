@@ -75,6 +75,7 @@ var editUrl = location.pathname + '.json'
 
 
 export default {
+  props: ["sidebarThanks"],
   data: function () {
     return {
       form: true,
@@ -123,6 +124,24 @@ export default {
       this.$data.thank.receiver_id = ''
       this.$data.thank.text = ''
     },
+    sidebarUpdate: function(){
+      axios
+      .get('/thanks.json')
+      .then(response => {
+        var thanks = response.data.send_thanks
+        this.sidebarThanks.thanks = thanks
+        this.sidebarThanks.receivers = response.data.receivers
+
+        var array = []
+
+        thanks.forEach(thank => {
+          var url = "/thanks/" + thank.id + "/edit"
+          array.push(url);
+        });
+        this.sidebarThanks.editUrls = array
+        this.$emit("side-update", this.sidebarThanks)
+      });
+    },
     updateThank: function(event) {
       axios
         .patch(this.updateUrl, this.thank)
@@ -137,6 +156,7 @@ export default {
 
             let e = response.data;
           }
+          this.sidebarUpdate();
           this.openModal();
         })
         .catch(error => {
