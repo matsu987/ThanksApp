@@ -1,15 +1,15 @@
 <template>
   <div class="side-bar">
     <transition-group enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutUp" appear>
-      <li v-for="(thank, index) in thanks" :key="thank.id">
-        <a :href="editUrls[index]">
+      <li v-for="(thank, index) in sidebarThanks.thanks" :key="thank.id">
+        <a :href="sidebarThanks.editUrls[index]">
           <div class="sended-thanks-box">
             <div class="icon-box">
             <img class="logo" src="~person.png">
             </div>
             <div class="sended-message-box">
               <div class="reciver-box">
-                <p class="receiver-name">{{receivers[index]}}<span class="blank"></span>さん</p>
+                <p class="receiver-name">{{sidebarThanks.receivers[index]}}<span class="blank"></span>さん</p>
                 <p class="thanks-message">{{thank.text}}</p>
               </div>
             </div>
@@ -28,11 +28,9 @@ import axios from 'axios';
 import 'person.png'
 
 export default {
+  props: ["sidebarThanks"],
   data: function () {
     return {
-      thanks: [],
-      receivers: [],
-      editUrls: []
     }
   },
   created() {
@@ -40,32 +38,17 @@ export default {
       .get('/thanks.json')
       .then(response => {
         var thanks = response.data.send_thanks
-        this.$data.thanks = thanks
-        this.$data.receivers = response.data.receivers
-
-        thanks.forEach(thank => {
-          var url = "/thanks/" + thank.id + "/edit"
-          var array = this.$data.editUrls
-          array.push(url);
-        });
-      });
-  },
-  updated() {
-    axios
-      .get('/thanks.json')
-      .then(response => {
-        var thanks = response.data.send_thanks
-        this.$data.thanks = thanks
-        this.$data.receivers = response.data.receivers
-
-        var array = this.$data.editUrls
+        this.sidebarThanks.thanks = thanks
+        this.sidebarThanks.receivers = response.data.receivers
+        var array = []
 
         thanks.forEach(thank => {
           var url = "/thanks/" + thank.id + "/edit"
           array.push(url);
         });
+        this.sidebarThanks.editUrls = array
       });
-  },
+  }
 }
 </script>
 

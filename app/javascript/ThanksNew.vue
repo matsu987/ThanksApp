@@ -2,8 +2,8 @@
   <div id="app">
     <Header></Header>
     <div class="main-box">
-      <SideBar></SideBar>
-      <FormNew></FormNew>
+      <SideBar v-bind:sidebar-thanks="sidebarThanks"></SideBar>
+      <FormNew v-bind:sidebar-thanks="sidebarThanks" v-on:sidebar-update="sidebarThanks = $event"></FormNew>
     </div>
   </div>
 </template>
@@ -21,7 +21,11 @@ export default {
   },
   data: function () {
     return {
-      message: "Hello Vue!"
+      sidebarThanks: {
+        thanks: [],
+        receivers: [],
+        editUrls: []
+      }
     }
   }
 }
