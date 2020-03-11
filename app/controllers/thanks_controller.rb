@@ -1,7 +1,6 @@
 class ThanksController < ApplicationController
 
   def index
-    @thanks = Thank.all
     @sended_thanks = current_user.sended_thanks
     @send_thanks = []
     @receivers = []

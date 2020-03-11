@@ -40,8 +40,7 @@ Rails.application.configure do
     port: 587,
     user_name:  Rails.application.credentials.mail[:sender],
     password: Rails.application.credentials[:app_password],
-    authentication: :plain,
-    enable_starttls_auto: true
+    authentication: :plain
   }
   config.action_mailer.perform_caching = false
 
