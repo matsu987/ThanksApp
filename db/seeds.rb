@@ -43,5 +43,8 @@
 # user4 = User.new(name: "栗田ひかり", email: "hikari.kurita@di-v.co.jp", status: 1, rank: 1)
 # user4.save!
 
-user3 = User.new(name: "奥脇真人", email: "masato.okuwaki@di-v.co.jp", status: 0, rank: 3)
-user3.save!
+# user5 = User.new(name: "奥脇真人", email: "masato.okuwaki@di-v.co.jp", status: 0, rank: 3)
+# user5.save!
+
+user6 = User.new(name: "藤井智之", email: "tomo.fujii@di-v.co.jp", status: 0, rank: 4)
+user6.save!
