@@ -3,23 +3,26 @@
     <div class="overlay" v-show="showContent">
       <div class="content">
         <div class="error-message" v-if="errors.length != 0">
-          <ul v-for="e in errors" :key="e">
-            <li><font color="red">{{ e }}</font></li>
+          <ul >
+            <li><font color="red">{{ errors }}</font></li>
           </ul>
         </div>
-        <p class="success-message" v-if="errors.length == 0">認証メールを送信しました！<br><span class="sub-message">メールをご確認ください^^</span></p>
-        <button class="close-btn" v-on:click="closeModal">Close</button>
+        <p class="success-message" v-if="errors.length == 0">{{ success_introduction }}</p>
+        <button class="close-btn" v-on:click="closeModal">
+          <a v-if="errors.length == 0" href="/">Close</a>
+          <p v-if="errors.length != 0">Close</p>
+        </button>
       </div>
     </div>
-    <form action="/users/confirmation" accept-charset="UTF-8" method="post" @submit.prevent="sendEmail">
+    <form @submit.prevent="resetPass">
       <div class="form_content">
         <div class="password_form">
-          <label for="email">Email</label>
-          <input autocomplete="on" type="email" id="email" v-model="email">
+          <label for="pass">Pass</label>
+          <input autocomplete="on" type="password" id="pass" v-model="password">
         </div>
       </div>
       <div class="form_bottom_content">
-        <input type="submit" name="commit" value="認証メールを送信する">
+        <input type="submit" name="commit" value="パスワードを確定する">
           <p>
             <a href="#" class="resetting_pass">
               パスワードを再設定する ▶ ︎
@@ -39,14 +42,19 @@ export default {
       errors: '',
       email: '',
       password: '',
-      showContent: false
+      success_introduction: '',
+      showContent: false,
+      reset_password_token: '',
+      confirmation_token: ''
     }
   },
-  mounted:function(){
-    axios.defaults.headers.common = {
-      'X-Requested-With': 'XMLHttpRequest',
-      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    };
+  mounted: {
+    function(){
+      axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      };
+    }
   },
   methods: {
     openModal: function(){
@@ -59,18 +67,29 @@ export default {
       this.$data.email = ''
       this.$data.password = ''
     },
-    sendEmail: function(event) {
+    resetPass: function(event) {
+      axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      };
+      // 1.URLから (指定したパラメータ名~&|$|#) で終わる箇所を抜き出し
+      const value = window.location.href.match(new RegExp("[?&]" + "reset_password_token" + "=(.*?)(&|$|#)"));
+      // 2.パラメータ名に一致する値が存在しない場合は空返却
+      if (value == null) return '';
+      // 3.パラメータ名に一致する値が存在した場合はURLデコードして返却
+      this.$data.reset_password_token = decodeURIComponent(value[1]);
+
       axios
-        .post('/users/confirmation', { email: this.email })
+        .put('/users/password', {pass: this.pass, reset_password_token: this.reset_password_token})
         .then(response => {
           this.errors = '';
           if (response.status === 200){
-            if (response.data && response.data.errors) {
-            this.errors = response.data.errors;
+            if (response.data && response.data.errors_introduction) {
+            this.errors = response.data.errors_introduction;
             }
             else{
+              this.success_introduction = response.data.success_introduction;
               this.openModal();
-              setTimeout("location.reload()",2000);
             }
           } else {
             let e = response.data;
@@ -83,9 +102,8 @@ export default {
             this.errors = error.response.data.errors;
           }
         });
-      },
     }
-
+  }
 }
 </script>
 
@@ -97,7 +115,7 @@ export default {
     box-sizing: border-box;
   }
   .form_content{
-    margin: 90px 0 40px;
+    margin: 90px 0 40px; 
   }
   .form_content label{
     display: inline-block;
@@ -135,7 +153,6 @@ export default {
     font-family: Noto Sans CJK JP;
     letter-spacing: 0.02em;
   }
-
   .overlay{
     width: 50%;
     height: 50%;

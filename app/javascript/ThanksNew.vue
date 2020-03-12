@@ -2,8 +2,8 @@
   <div id="app">
     <Header></Header>
     <div class="main-box">
-      <SideBar></SideBar>
-      <FormNew></FormNew>
+      <SideBar v-bind:sidebar-thanks="sidebarThanks"></SideBar>
+      <FormNew v-bind:sidebar-thanks="sidebarThanks" v-on:sidebar-update="sidebarThanks = $event"></FormNew>
     </div>
   </div>
 </template>
@@ -21,7 +21,11 @@ export default {
   },
   data: function () {
     return {
-      message: "Hello Vue!"
+      sidebarThanks: {
+        thanks: [],
+        receivers: [],
+        editUrls: []
+      }
     }
   }
 }
@@ -29,7 +33,9 @@ export default {
 
 <style scoped>
 #app {
-  background-image: url('~flower.png')
+  background-image: url('~flower.png');
+  background-color:rgba(255,255,255,0.8);
+  background-blend-mode:lighten;
 }
 .main-box {
   display: flex;

@@ -2,30 +2,23 @@
   <div id="app">
     <Header></Header>
     <div class="main-box">
-      <SideBar v-bind:sidebar-thanks="sidebarThanks"></SideBar>
-      <FormEdit v-bind:sidebar-thanks="sidebarThanks" v-on:sidebar-update="sidebarThanks = $event"></FormEdit>
+      <ConfirmarionEmailContents></ConfirmarionEmailContents>
     </div>
   </div>
 </template>
 
 <script>
 import Header from 'components/Header.vue';
-import SideBar from 'components/SideBar.vue';
-import FormEdit from 'components/FormEdit.vue';
-
+import ConfirmarionEmailContents from 'components/ConfirmarionEmailContents.vue';
 import 'flower.png'
 
 export default {
   components: {
-    Header,FormEdit,SideBar
+    Header, ConfirmarionEmailContents
   },
   data: function () {
     return {
-      sidebarThanks: {
-        thanks: [],
-        receivers: [],
-        editUrls: []
-      }
+      message: "Hello Vue!"　
     }
   }
 }

@@ -20,7 +20,8 @@ Devise.setup do |config|
   # with default "from" parameter.
   # config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   config.mailer_sender =  Rails.application.credentials.mail[:sender]
-
+  config.http_authenticatable_on_xhr = false
+  config.navigational_formats = ["*/*", :html, :json]
   # Configure the class responsible to send e-mails.
   config.mailer = 'Devise::Mailer'
   #認証メールを任意の文章にする
