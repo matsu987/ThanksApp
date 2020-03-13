@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <Header></Header>
-    <TransmissionBox></TransmissionBox>
+    <ReceptionBox></ReceptionBox>
     </div>
   </div>
 </template>
 
 <script>
 import Header from 'components/Header.vue';
-import TransmissionBox from 'components/TransmissionBox.vue';
+import ReceptionBox from 'components/ReceptionBox.vue';
 import 'flower.png'
 
 export default {
   components: {
-    Header,TransmissionBox
+    Header,ReceptionBox
   },
   data: function () {
     return {

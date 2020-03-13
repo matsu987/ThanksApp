@@ -2,7 +2,7 @@
   <div class="main-box">
     <div class="main-header">
       <div class="main-header-left">
-        送ったサプライズサンクス
+        受け取ったサプライズサンクス
         <img class="send-img" src="~send.png" alt="send.png">
       </div>
       <div class="main-header-right">
@@ -23,20 +23,20 @@
     </div>
     <div class="messages-box">
       <li v-for="(thank, index) in thanks" :key="thank.id" class="message-box">
-        <a href="#" class="thnak-show-link">
+        <a href="#" class="thank-show-link">
           <div class="icon">
             <img class="logo" src="~person.png">
           </div>
           <div class="receiver-box">
             <div class="receiver-name">
-              {{ receivers[index]}}  さん
+              {{ senders[index]}}  さん
             </div>
             <div class="receiver-message">
               {{thank.text}}
             </div>
           </div>
           <div class="message-status">
-            公開済み
+            未開封
           </div>
         </a>
       </li>
@@ -73,7 +73,7 @@ export default {
   data: function(){
     return{
       thanks: [],
-      receivers: []
+      senders: []
     }
   },
   created() {
@@ -81,9 +81,10 @@ export default {
     axios
       .get(url)
       .then(response => {
-        var thanks = response.data.send_thanks
+        console.log(response)
+        var thanks = response.data.receive_thanks
         this.$data.thanks = thanks
-        this.$data.receivers = response.data.receivers
+        this.$data.senders = response.data.senders
 
         // 詳細ページに飛ぶためのリンク
         // var array = []
@@ -112,7 +113,7 @@ export default {
   height: 50px;
   width: 370px;
   position: relative;
-  background: #92CECA;
+  background: #FFC152;
   border-radius: 5px;
 
   font-family: Noto Sans CJK JP;
@@ -201,7 +202,7 @@ export default {
   width: 30px;
   text-align: center;
   border-left: dotted 2px black;
-  background-color: #ADDCD9;
+  background-color: #FFC967;
   padding-top: 15px;
 }
 
@@ -226,7 +227,7 @@ export default {
   margin: 10% 30%;
 }
 
-.thnak-show-link {
+.thank-show-link {
   display: flex;
   width: 100%;
 }
