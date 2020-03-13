@@ -63,9 +63,9 @@ export default {
 }
 
 .sended-thanks-box {
-    display: flex;
-    height: 19.5%;
-    border-bottom: dotted 3px  black;
+  display: flex;
+  height: 19.5%;
+  border-bottom: dotted 3px  black;
 }
 
 .logo {
@@ -97,10 +97,10 @@ export default {
 }
 
 .status-box {
-    text-align: center;
-    border-left: dotted 2px black;
-    background-color: #C4C4C4;
-    padding-top: 15px;
+  text-align: center;
+  border-left: dotted 2px black;
+  background-color: #C4C4C4;
+  padding-top: 15px;
 }
 
 li {
