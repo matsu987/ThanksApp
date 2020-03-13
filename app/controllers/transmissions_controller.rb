@@ -1,6 +1,7 @@
 class TransmissionsController < ApplicationController
   def index
-    @sended_thanks = current_user.sended_thanks
+    user = User.find(params[:user_id])
+    @sended_thanks = user.sended_thanks
     @send_thanks = []
     @receivers = []
     @sended_thanks.each do |send_thank|

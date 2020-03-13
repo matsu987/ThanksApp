@@ -20,5 +20,6 @@ Rails.application.routes.draw do
 
   resources :users, except: [:new, :create, :edit, :destroy] do
     resources :transmissions, only: [:index]
+    resources :receptions, only: [:index]
   end
 end
