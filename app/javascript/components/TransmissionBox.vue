@@ -3,7 +3,7 @@
     <div class="main-header">
       <div class="main-header-left">
         送ったサプライズサンクス
-        <img class="send-img" src="~send.png" alt="send.png">
+        <img class="send-img" src="/transmission.png" alt="transmission.png">
       </div>
       <div class="main-header-right">
         <div class="back">
@@ -22,29 +22,33 @@
       </div>
     </div>
     <div class="messages-box">
-      <li v-for="(thank, index) in thanks" :key="thank.id" class="message-box">
-        <a href="#" class="thank-show-link">
-          <div class="icon">
-            <img class="logo" src="~person.png">
-          </div>
-          <div class="sender-box">
-            <div class="sender-name">
-              {{ receivers[index]}}  さん
+      <transition-group enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutUp" appear>
+        <li v-for="(thank, index) in thanks" :key="thank.id" class="message-box">
+          <a href="#" class="thank-show-link">
+            <div class="icon">
+              <img class="logo" src="~person.png">
             </div>
-            <div class="sender-message">
-              {{thank.text}}
+            <div class="sender-box">
+              <div class="sender-name">
+                {{ receivers[index]}}  さん
+              </div>
+              <div class="sender-message">
+                {{thank.text}}
+              </div>
             </div>
-          </div>
-          <div class="message-status">
-            公開済み
-          </div>
-        </a>
-      </li>
+            <div class="message-status">
+              公開済み
+            </div>
+          </a>
+        </li>
+      </transition-group>
     </div>
     <div class="main-footer">
-      <div class="main-footer-left">
-        戻る
-      </div>
+      <a href="/">
+        <div class="main-footer-left">
+          戻る
+        </div>
+      </a>
       <div class="main-footer-right">
         <div class="back">
         </div>
@@ -52,7 +56,7 @@
           前へ
         </div>
         <div class="select-month">
-          {{thanks.length}}件中 1-10件
+          {{thanks.length}}件中 1-{{thanks.length}}件
         </div>
         <div class="month">
           次へ
@@ -68,6 +72,7 @@
 import axios from 'axios';
 import 'person.png';
 import 'send.png';
+import 'transmission.png';
 
 export default {
   data: function(){
@@ -132,8 +137,8 @@ export default {
   height: 100px;
   width: 100px;
   position: absolute;
-  top: -30px;
-  right: -50px;
+  top: -20px;
+  right: -40px;
 }
 
 .main-header-right {
@@ -219,6 +224,10 @@ export default {
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow: hidden;
+  height: 80px;
 }
 
 .logo {
