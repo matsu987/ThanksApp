@@ -16,13 +16,14 @@
     <div class="index-contents">
       <ThanksContent class="index-content" path="" message-first="みんなの" message-second="サプライズサンクスを見る" image="/minnano.png" alt="minnano.png" image-name="ハガキ"></ThanksContent>
       <ThanksContent class="index-content" path="/thanks/new" message-first="サプライズサンクスを送る" image="/send.png" image-name="メモ帳"></ThanksContent>
-      <ThanksContent class="index-content last" path="" message-first="自分に届いた" message-second="サプライズサンクスを見る" image="/zibunno.png" image-name="手紙"></ThanksContent> 
+      <ThanksContent class="index-content" path="" message-first="自分に届いた" message-second="サプライズサンクスを見る" image="/zibunno.png" image-name="手紙"></ThanksContent> 
+      <ThanksContent class="index-content last" :path="link" message-first="送信一覧" message-second="" image="/send.png" image-name="メモ帳"></ThanksContent> 
     </div>
   </center>
 </template>
 
 <script>
-// suprise_thanks用のpngもらう
+import axios from 'axios';
 import 'zibunno.png'
 import 'send.png'
 import 'minnano.png'
@@ -32,7 +33,15 @@ import ThanksContent from 'components/ThanksContent.vue';
 export default {
   data: function(){
     return {
+      link: ""
     }
+  },
+  created() {
+    axios
+    .get('/thanks.json')
+    .then(response => {
+      this.$data.link = `/users/${response.data.current_user.id}/transmissions`
+    });
   },
   components: { ThanksContent },
   methods: {

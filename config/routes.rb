@@ -17,4 +17,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
   end
+
+  resources :users, except: [:new, :create, :edit, :destroy] do
+    resources :transmissions, only: [:index]
+  end
 end
