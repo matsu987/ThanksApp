@@ -2,23 +2,23 @@
   <div id="app">
     <Header></Header>
     <div class="main-box">
-      <CreatePasswordContents></CreatePasswordContents>
+      <ResetPasswordContents></ResetPasswordContents>
     </div>
   </div>
 </template>
 
 <script>
 import Header from 'components/Header.vue';
-import CreatePasswordContents from 'components/CreatePasswordContents.vue';
+import ResetPasswordContents from 'components/reset_password/ResetPasswordContents.vue';
 import 'flower.png'
 
 export default {
   components: {
-    Header, CreatePasswordContents
+    Header, ResetPasswordContents
   },
   data: function () {
     return {
-      message: "Hello Vue!"　
+      message: "Hello Vue!"
     }
   }
 }

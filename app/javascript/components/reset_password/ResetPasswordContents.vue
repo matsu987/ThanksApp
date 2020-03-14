@@ -16,7 +16,7 @@ import 'zibunno.png'
 import 'send.png'
 import 'minnano.png'
 import 'Surprisethanks.png'
-import EmailRegister from 'components/EmailRegister.vue';
+import EmailRegister from 'components/reset_password/EmailRegister.vue';
 
 
 export default {
