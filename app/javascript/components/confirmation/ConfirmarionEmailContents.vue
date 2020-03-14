@@ -16,7 +16,7 @@ import 'zibunno.png'
 import 'send.png'
 import 'minnano.png'
 import 'Surprisethanks.png'
-import ConfirmationEmailForm from 'components/ConfirmationEmailForm.vue';
+import ConfirmationEmailForm from 'components/confirmation/ConfirmationEmailForm.vue';
 
 
 export default {

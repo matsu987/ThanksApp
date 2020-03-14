@@ -9,7 +9,7 @@
 
 <script>
 import Header from 'components/Header.vue';
-import ConfirmarionEmailContents from 'components/ConfirmarionEmailContents.vue';
+import ConfirmarionEmailContents from 'components/confirmation/ConfirmarionEmailContents.vue';
 import 'flower.png'
 
 export default {
