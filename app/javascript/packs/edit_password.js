@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import EditPassword from '../EditPassword.vue'
+import EditPassword from '../components/edit_password/EditPassword.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const editPassword = new Vue({

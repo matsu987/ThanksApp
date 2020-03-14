@@ -7,10 +7,15 @@
             <li><font color="red">{{ e }}</font></li>
           </ul>
         </div>
-        <p class="success-message" v-if="errors.length == 0">認証メールを送信しました！<br><span class="sub-message">メールをご確認ください^^</span></p>
+        <p class="success-message" v-if="errors.length == 0">メールアドレスを確認しました！<br><span class="sub-message">送信に数分かかる場合がございます。しばらくお待ちください。</span></p>
         <button class="close-btn" v-on:click="closeModal">Close</button>
       </div>
     </div>
+      <div class="introduction">
+        <p>初めて利用する際にはユーザー登録が必要です。</p><br>
+        <p>ご自身の社用メールアドレスを入力してください。</p><br>
+        <p>アカウント認証のメールをお送りします。</p>
+      </div>
     <form action="/users/confirmation" accept-charset="UTF-8" method="post" @submit.prevent="sendEmail">
       <div class="form_content">
         <div class="password_form">
@@ -20,11 +25,17 @@
       </div>
       <div class="form_bottom_content">
         <input type="submit" name="commit" value="認証メールを送信する">
-          <p>
-            <a href="#" class="resetting_pass">
-              パスワードを再設定する ▶ ︎
-            </a>
-          </p>
+        <p>
+          <i class="far fa-question-circle"></i>
+          <a href="/users/password/new" class="resetting_pass">
+            パスワードを再設定する ▶ ︎
+          </a>
+        </p>
+        <p>
+          <a href="/" class="resetting_pass">
+            ◀︎ ログインページに戻る  ︎
+          </a>
+        </p>
       </div>
     </form>
   </div>
@@ -96,8 +107,20 @@ export default {
     height: 400px;
     box-sizing: border-box;
   }
+  .introduction{
+    margin-top: 40px;
+  }
+  .introduction p{
+    display: inline;
+    font-family: Noto Sans CJK JP;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #333333;
+  }
   .form_content{
-    margin: 90px 0 40px;
+    margin: 35px 0 40px; 
   }
   .form_content label{
     display: inline-block;
@@ -167,8 +190,9 @@ export default {
   }
 
   .sub-message {
-      font-size: 14px;
-      text-align: center;
+    font-size: 14px;
+    text-align: center;
+    color: #ADDCD9;
   }
 
   .error-message {

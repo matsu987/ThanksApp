@@ -16,7 +16,7 @@ import 'zibunno.png'
 import 'send.png'
 import 'minnano.png'
 import 'Surprisethanks.png'
-import EditPasswordForm from 'components/EditPasswordForm.vue';
+import EditPasswordForm from 'components/edit_password/EditPasswordForm.vue';
 
 
 export default {
