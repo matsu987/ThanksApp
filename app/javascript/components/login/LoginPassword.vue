@@ -25,20 +25,25 @@
       <div class="form_bottom_content">
         <input type="submit" value="ログイン">
         <p>
+          <i class="far fa-question-circle"></i>
           <a href="/users/password/new" class="resetting_pass">
             パスワードを忘れた ▶ ︎
           </a>
+        </p>
+        <p>
+          <img src="~first_login.png" alt="初心者マーク">
           <a href="/users/confirmation/new" class="resetting_pass">
             認証がまだのかたはこちら ▶ ︎
           </a>
-          </p>
+        </p>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import 'first_login.png';
 
 export default {
   data: function(){
