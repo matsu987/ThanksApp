@@ -3,35 +3,39 @@
     <div class="overlay" v-show="showContent">
       <div class="content">
         <div class="error-message" v-if="errors.length != 0">
-          <ul >
-            <li><font color="red">{{ errors }}</font></li>
+          <ul v-for="e in errors" :key="e">
+            <li><font color="red">{{ e }}</font></li>
           </ul>
         </div>
-        <p class="success-message" v-if="errors.length == 0">パスワード入力確認いたしました！<br><span class="sub-message">早速感謝の言葉をお伝えしましょう^^</span></p>
+        <p class="success-message" v-if="errors.length == 0">メールアドレスを確認しました！<br><span class="sub-message">送信に数分かかる場合がございます。しばらくお待ちください。</span></p>
         <button class="close-btn" v-on:click="closeModal">Close</button>
       </div>
     </div>
-    <form action="/users/sign_in" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
+      <div class="introduction">
+        <p>初めて利用する際にはユーザー登録が必要です。</p><br>
+        <p>ご自身の社用メールアドレスを入力してください。</p><br>
+        <p>アカウント認証のメールをお送りします。</p>
+      </div>
+    <form action="/users/confirmation" accept-charset="UTF-8" method="post" @submit.prevent="sendEmail">
       <div class="form_content">
-        <div class="email_form">
-          <label for="email">E-Mail</label>
-          <input type="email" id="email" placeholder="emailを入力してください" v-model="email">
-        </div>
         <div class="password_form">
-          <label for="pass">PASS</label>
-          <input type="password" id="pass" placeholder="passwordを入力してください" v-model="password">
+          <label for="email">E-mail</label>
+          <input autocomplete="on" type="email" id="email" v-model="email" placeholder="taro.yamada@di-v.co.jp">
         </div>
       </div>
       <div class="form_bottom_content">
-        <input type="submit" value="ログイン">
+        <input type="submit" name="commit" value="認証メールを送信する">
         <p>
+          <i class="far fa-question-circle"></i>
           <a href="/users/password/new" class="resetting_pass">
-            パスワードを忘れた ▶ ︎
+            パスワードを再設定する ▶ ︎
           </a>
-          <a href="/users/confirmation/new" class="resetting_pass">
-            認証がまだのかたはこちら ▶ ︎
+        </p>
+        <p>
+          <a href="/" class="resetting_pass">
+            ◀︎ ログインページに戻る  ︎
           </a>
-          </p>
+        </p>
       </div>
     </form>
   </div>
@@ -66,9 +70,9 @@ export default {
       this.$data.email = ''
       this.$data.password = ''
     },
-    createPass: function(event) {
+    sendEmail: function(event) {
       axios
-        .post('/users/sign_in', {email: this.email, password: this.password})
+        .post('/users/confirmation', { email: this.email })
         .then(response => {
           this.errors = '';
           if (response.status === 200){
@@ -77,7 +81,7 @@ export default {
             }
             else{
               this.openModal();
-              setTimeout("location.reload()",1000);
+              setTimeout("location.reload()",2000);
             }
           } else {
             let e = response.data;
@@ -103,8 +107,20 @@ export default {
     height: 400px;
     box-sizing: border-box;
   }
+  .introduction{
+    margin-top: 40px;
+  }
+  .introduction p{
+    display: inline;
+    font-family: Noto Sans CJK JP;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #333333;
+  }
   .form_content{
-    margin: 90px 0 40px; 
+    margin: 35px 0 40px; 
   }
   .form_content label{
     display: inline-block;
@@ -115,7 +131,6 @@ export default {
     font-family: Noto Sans CJK JP;
     font-size: 14px;
     letter-spacing: 0.02em;
-    padding-right: 9px;
   }
   .form_content input{
     display: inline-block;
@@ -133,7 +148,8 @@ export default {
     color: #FFFFFF;
     border-radius: 40px;
     background-color: #FFC152;
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border:none;
   }
   .form_bottom_content .resetting_pass{
     display: inline-block;
@@ -143,46 +159,47 @@ export default {
     letter-spacing: 0.02em;
   }
 
-.overlay{
-  width: 50%;
-  height: 50%;
-  z-index: 1;
-  position: fixed;
-  top: 25%;
-  left: 25%;
-  background-color: #fff;
-  border: 2px solid #555555;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .overlay{
+    width: 50%;
+    height: 50%;
+    z-index: 1;
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    background-color: #fff;
+    border: 2px solid #555555;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.close-btn {
-  display: block;
-  margin: auto;
+  .close-btn {
+    display: block;
+    margin: auto;
 
-}
+  }
 
-.success-message {
-  display: block;
-  margin-bottom: 40px;
-  padding-top: 40px;
-  font-size: 20px;
-  color: #ADDCD9;
-  text-align: center;
-}
+  .success-message {
+    display: block;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    font-size: 20px;
+    color: #92CECA;;
+    text-align: center;
+  }
 
-.sub-message {
+  .sub-message {
     font-size: 14px;
     text-align: center;
-}
+    color: #92CECA;;
+  }
 
-.error-message {
-  display: block;
-  margin-bottom: 40px;
-  padding-top: 40px;
-  font-size: 20px;
-  text-align: center;
-}
+  .error-message {
+    display: block;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    font-size: 20px;
+    text-align: center;
+  }
 </style>

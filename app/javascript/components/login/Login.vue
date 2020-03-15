@@ -2,19 +2,19 @@
   <div id="app">
     <Header></Header>
     <div class="main-box">
-      <InputPasswordContents></InputPasswordContents>
+      <LoginContents></LoginContents>
     </div>
   </div>
 </template>
 
 <script>
 import Header from 'components/Header.vue';
-import InputPasswordContents from 'components/InputPasswordContents.vue';
+import LoginContents from 'components/login/LoginContents.vue';
 import 'flower.png'
 
 export default {
   components: {
-    Header, InputPasswordContents
+    Header, LoginContents
   },
   data: function () {
     return {

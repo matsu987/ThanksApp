@@ -17,8 +17,8 @@
     <form @submit.prevent="resetPass">
       <div class="form_content">
         <div class="password_form">
-          <label for="pass">Pass</label>
-          <input autocomplete="on" type="password" id="pass" v-model="password">
+          <label for="pass">PASS</label>
+          <input autocomplete="on" type="password" id="pass" v-model="password" placeholder="6文字以上の半角英数字">
         </div>
       </div>
       <div class="form_bottom_content">
@@ -126,7 +126,6 @@ export default {
     font-family: Noto Sans CJK JP;
     font-size: 14px;
     letter-spacing: 0.02em;
-    padding-right: 9px;
   }
   .form_content input{
     display: inline-block;
@@ -144,7 +143,8 @@ export default {
     color: #FFFFFF;
     border-radius: 40px;
     background-color: #FFC152;
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border:none;
   }
   .form_bottom_content .resetting_pass{
     display: inline-block;
@@ -179,7 +179,7 @@ export default {
     margin-bottom: 40px;
     padding-top: 40px;
     font-size: 20px;
-    color: #ADDCD9;
+    color: #92CECA;;
     text-align: center;
   }
 

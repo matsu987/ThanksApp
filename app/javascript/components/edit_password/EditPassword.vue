@@ -9,7 +9,7 @@
 
 <script>
 import Header from 'components/Header.vue';
-import EditPasswordContents from 'components/EditPasswordContents.vue';
+import EditPasswordContents from 'components/edit_password/EditPasswordContents.vue';
 import 'flower.png'
 
 export default {

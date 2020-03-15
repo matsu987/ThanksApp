@@ -14,20 +14,31 @@
         </button>
       </div>
     </div>
+    <div class="introduction">
+      <p>パスワードをお忘れの場合は</p><br>
+      <p>登録メールアドレスを入力して入力してパスワードの再設定を行ってください。</p><br>
+      <p>パスワード再設定用のメールをお送りします。</p>
+    </div>
     <form action="/users/password" accept-charset="UTF-8" method="post" @submit.prevent="createPass">
       <div class="form_content">
         <div class="password_form">
-          <label for="email">Email</label>
-          <input autocomplete="on" type="email" id="email" v-model="email">
+          <label for="email">E-mail</label>
+          <input autocomplete="on" type="email" id="email" v-model="email" placeholder="taro.yamada@di-v.co.jp">
         </div>
       </div>
       <div class="form_bottom_content">
         <input type="submit" name="commit" value="認証メールを送信する。">
-          <p>
-            <a href="#" class="resetting_pass">
-              パスワードを再設定する ▶ ︎
-            </a>
-          </p>
+        <p>
+          <img src="~first_login.png" alt="初心者マーク">
+          <a href="/users/confirmation/new" class="resetting_pass">
+            初めて利用する方はこちら ▶ ︎
+          </a>
+        </p>
+        <p>
+          <a href="/" class="resetting_pass">
+            ◀︎ ログインページに戻る︎
+          </a>
+        </p>
       </div>
     </form>
   </div>
@@ -35,6 +46,7 @@
 
 <script>
 import axios from 'axios'
+import 'first_login.png';
 
 export default {
   data: function(){
@@ -100,8 +112,20 @@ export default {
     height: 400px;
     box-sizing: border-box;
   }
+  .introduction{
+    margin-top: 40px;
+  }
+  .introduction p{
+    display: inline;
+    font-family: Noto Sans CJK JP;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #333333;
+  }
   .form_content{
-    margin: 90px 0 40px; 
+    margin: 35px 0 40px; 
   }
   .form_content label{
     display: inline-block;
@@ -112,7 +136,6 @@ export default {
     font-family: Noto Sans CJK JP;
     font-size: 14px;
     letter-spacing: 0.02em;
-    padding-right: 9px;
   }
   .form_content input{
     display: inline-block;
@@ -130,7 +153,8 @@ export default {
     color: #FFFFFF;
     border-radius: 40px;
     background-color: #FFC152;
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border:none;
   }
   .form_bottom_content .resetting_pass{
     display: inline-block;
@@ -165,7 +189,7 @@ export default {
     margin-bottom: 40px;
     padding-top: 40px;
     font-size: 20px;
-    color: #ADDCD9;
+    color: #92CECA;;
     text-align: center;
   }
 

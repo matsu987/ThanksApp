@@ -2,23 +2,23 @@
   <div id="app">
     <Header></Header>
     <div class="main-box">
-      <CreatePasswordContents></CreatePasswordContents>
+      <ConfirmarionEmailContents></ConfirmarionEmailContents>
     </div>
   </div>
 </template>
 
 <script>
 import Header from 'components/Header.vue';
-import CreatePasswordContents from 'components/CreatePasswordContents.vue';
+import ConfirmarionEmailContents from 'components/confirmation/ConfirmarionEmailContents.vue';
 import 'flower.png'
 
 export default {
   components: {
-    Header, CreatePasswordContents
+    Header, ConfirmarionEmailContents
   },
   data: function () {
     return {
-      message: "Hello Vue!"　
+      message: "Hello Vue!"
     }
   }
 }

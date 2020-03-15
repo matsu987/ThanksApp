@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="index-contents">
-      <PasswordInput></PasswordInput>
+      <EditPasswordForm></EditPasswordForm>
     </div>
   </center>
 </template>
@@ -16,7 +16,7 @@ import 'zibunno.png'
 import 'send.png'
 import 'minnano.png'
 import 'Surprisethanks.png'
-import PasswordInput from 'components/PasswordInput.vue';
+import EditPasswordForm from 'components/edit_password/EditPasswordForm.vue';
 
 
 export default {
@@ -24,7 +24,7 @@ export default {
     return {
     }
   },
-  components: { PasswordInput },
+  components: { EditPasswordForm },
   methods: {
   }
 }
@@ -36,6 +36,9 @@ export default {
     margin: 0 auto;
     font-size: 14px;
     font-family: Noto Sans CJK JP;
+  }
+  .thanks-index-message{
+    margin-bottom: 40px
   }
   .index-message-middle {
     margin-top: 20px;

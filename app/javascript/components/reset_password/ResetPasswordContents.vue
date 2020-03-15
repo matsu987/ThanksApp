@@ -16,7 +16,7 @@ import 'zibunno.png'
 import 'send.png'
 import 'minnano.png'
 import 'Surprisethanks.png'
-import EmailRegister from 'components/EmailRegister.vue';
+import EmailRegister from 'components/reset_password/EmailRegister.vue';
 
 
 export default {
@@ -36,6 +36,9 @@ export default {
     margin: 0 auto;
     font-size: 14px;
     font-family: Noto Sans CJK JP;
+  }
+  .thanks-index-message{
+    margin-bottom: 40px
   }
   .index-message-middle {
     margin-top: 20px;
