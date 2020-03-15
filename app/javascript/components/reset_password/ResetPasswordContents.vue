@@ -37,6 +37,9 @@ export default {
     font-size: 14px;
     font-family: Noto Sans CJK JP;
   }
+  .thanks-index-message{
+    margin-bottom: 40px
+  }
   .index-message-middle {
     margin-top: 20px;
   }
