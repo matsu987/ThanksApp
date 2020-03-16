@@ -80,4 +80,4 @@ gem 'rails-i18n'
 gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem 'ancestry'
-gem 'font-awesome-sass'
+# gem 'font-awesome-sass'
