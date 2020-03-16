@@ -29,7 +29,7 @@
       <div class="form_bottom_content">
         <input type="submit" name="commit" value="認証メールを送信する。">
         <p>
-          <img src="~first_login.png" alt="初心者マーク">
+          <img src="~beginner_icon.svg" alt="初心者マーク">
           <a href="/users/confirmation/new" class="resetting_pass">
             初めて利用する方はこちら ▶ ︎
           </a>
@@ -46,7 +46,7 @@
 
 <script>
 import axios from 'axios'
-import 'first_login.png';
+import 'beginner_icon.svg';
 
 export default {
   data: function(){

@@ -26,7 +26,7 @@
       <div class="form_bottom_content">
         <input type="submit" name="commit" value="認証メールを送信する">
         <p>
-          <i class="far fa-question-circle"></i>
+          <img src="~help-24px.svg" alt="ヘルプマーク">
           <a href="/users/password/new" class="resetting_pass">
             パスワードを再設定する ▶ ︎
           </a>
@@ -43,6 +43,7 @@
 
 <script>
 import axios from 'axios'
+import 'help-24px.svg'
 
 export default {
   data: function(){
