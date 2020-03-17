@@ -31,10 +31,10 @@
           </a>
         </p>
         <p>
-          <img src="~beginner_icon.svg" alt="初心者マーク">
-          <a href="/users/confirmation/new" class="resetting_pass">
-            認証がまだのかたはこちら ▶ ︎
-          </a>
+          <img class="beginner" src="~beginner_icon.svg" alt="初心者マーク">
+          <span class="resetting_pass">
+            認証がまだのかたは管理者にお問い合わせください  ︎
+          </span>
         </p>
       </div>
     </form>
@@ -189,5 +189,8 @@ export default {
   padding-top: 40px;
   font-size: 20px;
   text-align: center;
+}
+.beginner{
+  height: 16px
 }
 </style>

@@ -29,10 +29,10 @@
       <div class="form_bottom_content">
         <input type="submit" name="commit" value="認証メールを送信する。">
         <p>
-          <img src="~beginner_icon.svg" alt="初心者マーク">
-          <a href="/users/confirmation/new" class="resetting_pass">
-            初めて利用する方はこちら ▶ ︎
-          </a>
+          <img class="beginner" src="~beginner_icon.svg" alt="初心者マーク">
+          <span class="resetting_pass">
+            初めて利用する方は管理者にお問い合わせください ︎
+          </span>
         </p>
         <p>
           <a href="/" class="resetting_pass">
@@ -205,4 +205,7 @@ export default {
     font-size: 20px;
     text-align: center;
   }
+  .beginner{
+  height: 16px
+}
 </style>
