@@ -10,12 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_154315) do
+ActiveRecord::Schema.define(version: 2020_03_17_034434) do
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "text", null: false
+    t.bigint "user_id"
+    t.bigint "thank_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["thank_id"], name: "index_comments_on_thank_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "post_number"
+    t.text "address"
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_companies_on_name"
+  end
 
   create_table "group_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "group_id"
     t.bigint "user_id"
-    t.integer "status", default: 0, null: false
+    t.boolean "enrollment", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_group_users_on_group_id"
@@ -25,19 +45,63 @@ ActiveRecord::Schema.define(version: 2020_02_10_154315) do
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry"
+    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_groups_on_company_id"
     t.index ["name"], name: "index_groups_on_name"
+  end
+
+  create_table "recomend_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "recomendation_id"
+    t.bigint "user_id"
+    t.text "text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recomendation_id"], name: "index_recomend_comments_on_recomendation_id"
+    t.index ["user_id"], name: "index_recomend_comments_on_user_id"
+  end
+
+  create_table "recomendations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "recomender_id"
+    t.bigint "electeder_id"
+    t.boolean "decision", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["electeder_id"], name: "index_recomendations_on_electeder_id"
+    t.index ["recomender_id"], name: "index_recomendations_on_recomender_id"
+  end
+
+  create_table "thank_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "thank_id"
+    t.boolean "like", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sender_id"], name: "index_thank_likes_on_sender_id"
+    t.index ["thank_id"], name: "index_thank_likes_on_thank_id"
   end
 
   create_table "thanks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text", null: false
     t.bigint "sender_id"
     t.bigint "receiver_id"
+    t.boolean "transmisson_status", default: false, null: false
+    t.boolean "reception_status", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["receiver_id"], name: "index_thanks_on_receiver_id"
     t.index ["sender_id"], name: "index_thanks_on_sender_id"
+  end
+
+  create_table "user_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "receiver_id"
+    t.boolean "like", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_user_likes_on_receiver_id"
+    t.index ["sender_id"], name: "index_user_likes_on_sender_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -61,8 +125,19 @@ ActiveRecord::Schema.define(version: 2020_02_10_154315) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "thanks"
+  add_foreign_key "comments", "users"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
+  add_foreign_key "groups", "companies"
+  add_foreign_key "recomend_comments", "recomendations"
+  add_foreign_key "recomend_comments", "users"
+  add_foreign_key "recomendations", "users", column: "electeder_id"
+  add_foreign_key "recomendations", "users", column: "recomender_id"
+  add_foreign_key "thank_likes", "thanks"
+  add_foreign_key "thank_likes", "users", column: "sender_id"
   add_foreign_key "thanks", "users", column: "receiver_id"
   add_foreign_key "thanks", "users", column: "sender_id"
+  add_foreign_key "user_likes", "users", column: "receiver_id"
+  add_foreign_key "user_likes", "users", column: "sender_id"
 end
