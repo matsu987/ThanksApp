@@ -25,16 +25,16 @@
       <div class="form_bottom_content">
         <input type="submit" value="ログイン">
         <p>
-          <i class="far fa-question-circle"></i>
+          <img src="~help-24px.svg" alt="ヘルプマーク">
           <a href="/users/password/new" class="resetting_pass">
             パスワードを忘れた ▶ ︎
           </a>
         </p>
         <p>
-          <img src="~first_login.png" alt="初心者マーク">
-          <a href="/users/confirmation/new" class="resetting_pass">
-            認証がまだのかたはこちら ▶ ︎
-          </a>
+          <img class="beginner" src="~beginner_icon.svg" alt="初心者マーク">
+          <span class="resetting_pass">
+            認証がまだのかたは管理者にお問い合わせください  ︎
+          </span>
         </p>
       </div>
     </form>
@@ -43,8 +43,8 @@
 
 <script>
 import axios from 'axios';
-import 'first_login.png';
-
+import 'beginner_icon.svg';
+import 'help-24px.svg'
 export default {
   data: function(){
     return{
@@ -189,5 +189,8 @@ export default {
   padding-top: 40px;
   font-size: 20px;
   text-align: center;
+}
+.beginner{
+  height: 16px
 }
 </style>
