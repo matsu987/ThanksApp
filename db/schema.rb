@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_03_17_034434) do
   create_table "group_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "group_id"
     t.bigint "user_id"
+    t.integer "rank", default: 0, null: false
     t.boolean "enrollment", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
