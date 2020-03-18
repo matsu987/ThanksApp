@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import EditConfirmationPassword from '../EditConfirmationPassword.vue'
+import EditConfirmationPassword from '../components/edit_confirmation_password/EditConfirmationPassword.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const editConfirmationPassword = new Vue({
