@@ -9,7 +9,7 @@
 
 <script>
 import Header from 'components/Header.vue';
-import EditConfirmationPasswordContents from 'components/EditConfirmationPasswordContents.vue';
+import EditConfirmationPasswordContents from 'components/edit_confirmation_password/EditConfirmationPasswordContents.vue';
 import 'flower.png'
 
 export default {

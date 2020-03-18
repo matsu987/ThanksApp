@@ -16,7 +16,7 @@ import 'zibunno.png'
 import 'send.png'
 import 'minnano.png'
 import 'Surprisethanks.png'
-import EditConfirmationPasswordForm from 'components/EditConfirmationPasswordForm.vue';
+import EditConfirmationPasswordForm from 'components/edit_confirmation_password/EditConfirmationPasswordForm.vue';
 
 
 export default {
