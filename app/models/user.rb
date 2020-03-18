@@ -34,9 +34,6 @@ class User < ApplicationRecord
   # , on: :"/users/confirmation?confirmation_token=abcdef"
   # 指定された値がenumのkeyだった場合は許可
 
-  validates :rank,
-  inclusion: {in: User.ranks.keys}
-
   # 指定された値がenumのkeyだった場合は許可
   validates :status,
   inclusion: {in: User.statuses.keys}
@@ -51,7 +48,7 @@ class User < ApplicationRecord
    end
 
 
-    def password_required?
+  def password_required?
     # confirmed?メソッドでconfirmed_atに値が入っているかを確認
     # 入っていればsuperでtrueに入る
     super if confirmed?
