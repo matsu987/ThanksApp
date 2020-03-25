@@ -37,7 +37,8 @@
           </div>
           <textarea class="thanks-message" v-model="thank.text" type="text"></textarea>
           <div class="sender-select">
-            <img class="logo" src="~person.png">
+            <img v-if="avatar" class="logo" :src="avatar">
+            <img v-else class="logo" src="~person.png">
             <p class="sender-text">From: {{ current_user.name }}</p>
           </div>
         </div>
@@ -60,6 +61,7 @@ export default {
   data: function () {
     return {
       current_user: {},
+      avatar: '',
       thank: {
         id: '',
         receiver_id: '',
@@ -74,9 +76,10 @@ export default {
   },
   created() {
     axios
-    .get('/thanks.json')
+    .get('/users.json')
     .then(response => {
       this.$data.current_user = response.data.current_user
+      this.$data.avatar = response.data.avatar
     });
   },
   mounted:function(){
@@ -230,6 +233,7 @@ export default {
   line-height: 80px;
   font-weight: bold;
   color: black;
+  padding-left: 5px;
 }
 
 .sender-input{
@@ -326,6 +330,7 @@ p {
 img {
   height: 80px;
   width: 80px;
+  border-radius: 999px;
 }
 
 button {

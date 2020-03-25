@@ -43,14 +43,16 @@
       <div class="thanks-form">
         <div class="thanks-form-box">
           <div class="receiver-select">
-            <img class="logo" src="~person.png">
-            <p class="receiver-text">To: {{ receiver.name}} さん</p>
+            <img v-if="receiver.avatar" class="receiver_icon" :src="receiver.avatar">
+            <img v-else class="receiver_icon" src="~person.png">
+            <p class="receiver-text">To: {{ receiver.user.name}} さん</p>
             <input class="receiver_id hidden" v-model="thank.receiver_id" type="text">
           </div>
           <textarea class="thanks-message" v-model="thank.text" type="text"></textarea>
           <div class="sender-select">
-            <img class="logo" src="~person.png">
-            <p class="sender-text">From: {{ current_user.name }}</p>
+            <img v-if="current_user.avatar" class="login-icon" :src="current_user.avatar">
+            <img v-else class="login-icon" src="~person.png">
+            <p class="sender-text">From: {{ current_user.user.name }}</p>
           </div>
         </div>
       </div>
@@ -92,6 +94,7 @@ export default {
     axios
     .get(editUrl)
     .then(response => {
+      console.log(response)
      this.$data.current_user = response.data.current_user
      this.$data.receiver = response.data.receiver
      this.$data.thank = response.data.thank
@@ -196,7 +199,7 @@ export default {
 }
 
 .receiver-text{
-  line-height: 80px;
+  line-height: 90px;
   font-weight: bold;
   color: black;
 }
@@ -209,7 +212,7 @@ export default {
 
 .thanks-message{
   width: 100%;
-  height: 65%;
+  height: 63%;
 }
 
 .sender-select{
@@ -332,6 +335,7 @@ p {
 img {
   height: 80px;
   width: 80px;
+  border-radius: 999px;
 }
 
 button {
@@ -339,5 +343,13 @@ button {
   height: 40px;
   border-radius: 40px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.receiver_icon {
+  margin: 5px 5px;
+}
+
+.login-icon {
+  margin-right: 5px;
 }
 </style>
