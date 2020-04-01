@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :recomends, class_name: 'Recomendation', foreign_key: 'recomender_id'
   has_many :electeds, class_name: 'Recomendation', foreign_key: 'electeder_id'
   has_many :recomend_comments
+  mount_uploader :avatar, ImageUploader
+
 
   # president: 社長, ul: ユニットリーダー, gl:グループリーダー
   # bl: エリア統括, sbl: 拠点統括, tl: チームリーダー, mem: メンバー

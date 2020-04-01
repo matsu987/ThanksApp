@@ -5,11 +5,12 @@
         <a :href="sidebarThanks.editUrls[index]">
           <div class="sended-thanks-box">
             <div class="icon-box">
-            <img class="logo" src="~person.png">
+            <img v-if="sidebarThanks.receivers[index].avatar" class="logo" :src="sidebarThanks.receivers[index].avatar">
+            <img v-else class="logo" src="~person.png">
             </div>
             <div class="sended-message-box">
               <div class="reciver-box">
-                <p class="receiver-name">{{sidebarThanks.receivers[index]}}<span class="blank"></span>さん</p>
+                <p class="receiver-name">{{sidebarThanks.receivers[index].name}}<span class="blank"></span>さん</p>
                 <p class="thanks-message">{{thank.text}}</p>
               </div>
             </div>
@@ -71,7 +72,8 @@ export default {
 .logo {
   height: 80px;
   width: 80px;
-  margin-top: 22%;
+  margin-top: 15%;
+  border-radius: 999px;
 }
 
 .sended-message-box {
@@ -101,6 +103,10 @@ export default {
   border-left: dotted 2px black;
   background-color: #C4C4C4;
   padding-top: 15px;
+}
+
+.icon-box {
+  padding: 0 5px;
 }
 
 li {

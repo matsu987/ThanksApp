@@ -1,3 +1,3 @@
 json.thank @thank
-json.receiver @thank.receiver
-json.current_user current_user
+json.receiver @receiver_user
+json.current_user @login_user

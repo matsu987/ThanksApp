@@ -3,22 +3,33 @@
     <a href="/">
       <img class="logo" src="~logo.png">
     </a>
-    <div class="toggle_btn">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <a :href="myPageUrl">
+      <div class="toggle_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </a>
   </div>
 </template>
 
 <script>
 import 'logo.png'
+import axios from 'axios';
 
 export default {
   data: function(){
     return {
-
+      myPageUrl: '/',
     }
+  },
+  created() {
+    console.log("test")
+    axios
+    .get('/users.json')
+    .then(response => {
+      this.$data.myPageUrl = `/users/${response.data.current_user.id}`
+    });
   },
   methods: {
   }

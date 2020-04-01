@@ -6,8 +6,11 @@ class ThanksController < ApplicationController
     @receivers = []
     @sended_thanks.each do |send_thank|
       @send_thanks << send_thank
-      @receivers   << send_thank.receiver.name
+      receiver = send_thank.receiver
+      data = {name: send_thank.receiver.name, avatar: send_thank.receiver.avatar.url }
+      @receivers << data
     end
+
     respond_to do |format|
       format.html
       format.json
@@ -16,6 +19,12 @@ class ThanksController < ApplicationController
 
   def edit
     @thank = Thank.find(params[:id])
+    @login_avatar = ""
+    @receiver_avatar = ""
+
+    @login_user = {user: current_user, avatar: current_user.avatar.url}
+    @receiver_user = {user: @thank.receiver, avatar: @thank.receiver.avatar.url}
+
     respond_to do |format|
       format.html
       format.json
