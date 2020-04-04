@@ -82,7 +82,9 @@ export default {
             }
             else{
               this.openModal();
-              setTimeout("location.reload()",1000);
+              setTimeout(function(){
+                location.href = "/"
+                },1000);
             }
           } else {
             let e = response.data;
