@@ -1,4 +1,4 @@
-# require "csv"
+require "csv"
 
 # # ユニット一覧
 # u_marketing,u_business_promotion = Group.create([{name: "マーケティング"}, {name: "事業推進"}])
@@ -24,6 +24,8 @@
 #   )
 # end
 
+
+
 # CSV.foreach('db/seeds/csv/thanks_app_group_users.csv', headers: true) do |row|
 #   GroupUser.create(
 #     group_id: row['group_id'],
@@ -35,7 +37,7 @@
 
 
 # companyテーブル
-companies = [{name: "株式会社div"}]
+companies = [{name: "株式会社div"},{name: "株式会社ELE"}]
 companies.each do |company|
   find_company = Company.where(name: company[:name])
 
@@ -112,19 +114,19 @@ end
 # ユーザー（オペレーション転職）
 users = [
   #オペレーション_転職（GL）
-  {name: "藤井智之", email: "tomo.fujii@di-v.co.jp", status: 0, rank1: 4, rank2: 0, rank3: 0, group1: "オペレーション_転職", group1_parent: "", group2: "", group2_parent: "", group3: "", group3_parent: ""},
-  #メンターチーム東日本統括
-  {name: "奥脇真人", email: "masato.okuwaki@di-v.co.jp", status: 0, rank1: 3, rank2: 3, rank3: 0, group1: "メンターチーム東日本統括", group1_parent: "オペレーション_転職", group2: "デザインメンターチーム統括", group2_parent: "オペレーション_転職", group3: "", group3_parent: ""},
-  #メンターチーム東京統括
-  # {name: "栗原秀虎", email: "hidetake.kurihara@di-v.co.jp", status: 0, rank1: 2, rank2: 0, rank3: 0, group1: "メンターチーム東京統括", group1_parent: "メンターチーム東日本統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
-  #東京1（エンジニア）
-  {name: "熊谷裕樹", email: "hiroki.kumagai@di-v.co.jp", status: 1, rank1: 1, rank2: 0, rank3: 0, group1: "東京1（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
+  # {name: "藤井智之", email: "tomo.fujii@di-v.co.jp", status: 0, rank1: 4, rank2: 0, rank3: 0, group1: "オペレーション_転職", group1_parent: "", group2: "", group2_parent: "", group3: "", group3_parent: ""},
+  # #メンターチーム東日本統括
+  # {name: "奥脇真人", email: "masato.okuwaki@di-v.co.jp", status: 0, rank1: 3, rank2: 3, rank3: 0, group1: "メンターチーム東日本統括", group1_parent: "オペレーション_転職", group2: "デザインメンターチーム統括", group2_parent: "オペレーション_転職", group3: "", group3_parent: ""},
+  # #メンターチーム東京統括
+  # # {name: "栗原秀虎", email: "hidetake.kurihara@di-v.co.jp", status: 0, rank1: 2, rank2: 0, rank3: 0, group1: "メンターチーム東京統括", group1_parent: "メンターチーム東日本統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
+  # #東京1（エンジニア）
+  # {name: "熊谷裕樹", email: "hiroki.kumagai@di-v.co.jp", status: 1, rank1: 1, rank2: 0, rank3: 0, group1: "東京1（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
   # {name: "櫻井駿介", email: "shunsuke.sakurai@di-v.co.jp", status: 0, rank1: 0, rank2: 0, rank3: 0, group1: "東京1（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "東京1", group2_parent: "デザインメンターチーム統括", group3: "", group3_parent: ""},
   # {name: "馬場惇史郎", email: "baba.junshiro@di-v.co.jp", status: 0, rank1: 0, rank2: 0, rank3: 0, group1: "東京1（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
-  {name: "長松軒昇吾", email: "shogo.chomatsuken@di-v.co.jp", status: 1, rank1: 0, rank2: 0, rank3: 0, group1: "東京1（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
+  # {name: "長松軒昇吾", email: "shogo.chomatsuken@di-v.co.jp", status: 1, rank1: 0, rank2: 0, rank3: 0, group1: "東京1（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
   # {name: "石山玲央奈", email: "reona.ishiyama@di-v.co.jp", status: 0, rank1: 0, rank2: 0, rank3: 0, group1: "東京1（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
-  #東京2（エンジニア）
-  {name: "大石尚哉", email: "naoki.oishi@di-v.co.jp", status: 1, rank1: 1, rank2: 0, rank3: 0, group1: "東京2（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
+  # #東京2（エンジニア）
+  # {name: "大石尚哉", email: "naoki.oishi@di-v.co.jp", status: 1, rank1: 1, rank2: 0, rank3: 0, group1: "東京2（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
   # {name: "杉山了紀", email: "akinori.sugiyama@di-v.co.jp", status: 0, rank1: 0, rank2: 0, rank3: 0, group1: "東京2（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
   # {name: "千葉良晴", email: "yoshiharu.chiba@di-v.co.jp", status: 0, rank1: 0, rank2: 0, rank3: 0, group1: "東京2（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
   # {name: "豊田優士", email: "yushi.toyoda@di-v.co.jp", status: 0, rank1: 0, rank2: 0, rank3: 0, group1: "東京2（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
@@ -207,7 +209,7 @@ users = [
   # #ライフコーチ管理チーム
   # {name: "高野快", email: "kai.takano@di-v.co.jp", status: 0, rank1: 1, rank2: 0, rank3: 0, group1: "ライフコーチ管理チーム", group1_parent: "ライフコーチチーム東日本統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
   #東京1
-  {name: "栗田ひかり", email: "hikari.kurita@di-v.co.jp", status: 1, rank1: 1, rank2: 0, rank3: 0, group1: "東京1", group1_parent: "デザインメンターチーム統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
+  # {name: "栗田ひかり", email: "hikari.kurita@di-v.co.jp", status: 1, rank1: 1, rank2: 0, rank3: 0, group1: "東京1", group1_parent: "デザインメンターチーム統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
   # {name: "足立浩平", email: "kohei.adachi@di-v.co.jp", status: 0, rank1: 0, rank2: 0, rank3: 0, group1: "東京1", group1_parent: "デザインメンターチーム統括", group2: "教室管理チーム", group2_parent: "デザインライフコーチチーム統括", group3: "", group3_parent: ""},
   # {name: "國見愛", email: "kunimi.ai@di-v.co.jp", status: 0, rank1: 0, rank2: 0, rank3: 0, group1: "東京1", group1_parent: "デザインメンターチーム統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
   # {name: "松浦舞", email: "mai.matsura@di-v.co.jp", status: 0, rank1: 0, rank2: 0, rank3: 0, group1: "東京1", group1_parent: "デザインメンターチーム統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
@@ -220,6 +222,112 @@ users = [
   # {name: "田後はるか", email: "haruka.tago@di-v.co.jp", status: 0, rank1: 0, rank2: 0, rank3: 0, group1: "東京1", group1_parent: "デザインライフコーチチーム統括", group2: "", group2_parent: "", group3: "", group3_parent: ""},
   #教室管理チーム
 ]
+
+CSV.foreach('db/seeds/csv/thanks-app-users.csv', headers: true) do |row|
+  case row["管理者"]
+  when "管理者"
+    row["管理者"] = 1
+  else
+    row["管理者"] = 0
+  end
+
+  case row["役職1"]
+  when "メンバー"
+    row["役職1"] = 0
+  when "チームリーダー"
+    row["役職1"] = １
+  when "拠点統括"
+    row["役職1"] = ２
+  when "エリア統括"
+    row["役職1"] = ３
+  when "グループリーダー"
+    row["役職1"] = 4
+  when "ユニットリーダー"
+    row["役職1"] = 5
+  when "秘書"
+    row["役職1"] = 6
+  when "内部監査担当者"
+    row["役職1"] = 7
+  when "新規事業担当者"
+    row["役職1"] = 8
+  when "代表取締役"
+    row["役職1"] = 9
+  when "社長"
+    row["役職1"] = 10
+  else
+    row["役職1"] = 0
+  end
+  
+  case row["役職2"]
+  when "メンバー"
+    row["役職2"] = 0
+  when "チームリーダー"
+    row["役職2"] = １
+  when "拠点統括"
+    row["役職2"] = ２
+  when "エリア統括"
+    row["役職2"] = ３
+  when "グループリーダー"
+    row["役職2"] = 4
+  when "ユニットリーダー"
+    row["役職2"] = 5
+  when "秘書"
+    row["役職2"] = 6
+  when "内部監査担当者"
+    row["役職2"] = 7
+  when "新規事業担当者"
+    row["役職2"] = 8
+  when "代表取締役"
+    row["役職2"] = 9
+  when "社長"
+    row["役職2"] = 10
+  else
+    row["役職2"] = nil
+  end
+    
+  case row["役職3"]
+  when "メンバー"
+    row["役職3"] = 0
+  when "チームリーダー"
+    row["役職3"] = １
+  when "拠点統括"
+    row["役職3"] = ２
+  when "エリア統括"
+    row["役職3"] = ３
+  when "グループリーダー"
+    row["役職3"] = 4
+  when "ユニットリーダー"
+    row["役職3"] = 5
+  when "秘書"
+    row["役職3"] = 6
+  when "内部監査担当者"
+    row["役職3"] = 7
+  when "新規事業担当者"
+    row["役職3"] = 8
+  when "代表取締役"
+    row["役職3"] = 9
+  when "社長"
+    row["役職3"] = 10
+  else
+    row["役職3"] = nil
+  end
+
+  user = {
+    name: row["氏名"],
+    email: row["email"],
+    status: row["管理者"],
+    group1: row["部署名1"],
+    rank1: row["役職1"],
+    group1_parent: row["部署1の親部署"],
+    group2: row["部署名2"],
+    rank2: row["役職2"],
+    group2_parent: row["部署2の親部署"],
+    group3: row["部署名3"],
+    rank3: row["役職3"],
+    group3_parent: row["部署3の親部署"]
+  }
+  users << user
+end
 
 # users = [{name: "長松軒昇吾", email: "shogo.chomatsuken@di-v.co.jp", status: 1, rank1: 2, rank2: 3, rank3: 0, group1: "東京1（エンジニア）", group1_parent: "メンターチーム東京統括", group2: "教室管理チーム", group2_parent: "デザインライフコーチチーム統括", group3: "", group3_parent: ""}]
 users.each do |user|
