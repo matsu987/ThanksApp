@@ -32,8 +32,7 @@ set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 set :keep_releases, 5
 
 # デプロイ処理が終わった後、Unicornを再起動するための記述
-set :linked_files, %w{ config/master.key }
-set :linked_files, %w{ db/seeds/csv/thanks-app-users.csv }
+set :linked_files, %w{ config/master.key db/seeds/csv/thanks-app-users.csv }
 
 # 元々記述されていた after 「'deploy:publishing', 'deploy:restart'」以下を削除して、次のように書き換え
 
@@ -43,23 +42,18 @@ namespace :deploy do
     invoke 'unicorn:restart'
   end
 
-  desc 'upload master.key'
+  desc 'upload master.key csv'
   task :upload do
     on roles(:app) do |host|
       if test "[ ! -d #{shared_path}/config ]"
         execute "mkdir -p #{shared_path}/config"
       end
       upload!('config/master.key', "#{shared_path}/config/master.key")
-    end
-  end
 
-  desc 'upload csv'
-  task :upload do
-    on roles(:app) do |host|
       if test "[ ! -d #{shared_path}/db/seeds/csv ]"
         execute "mkdir -p #{shared_path}/db/seeds/csv"
       end
-      upload!('config/master.key', "#{shared_path}/db/seeds/csv/thanks-app-users.csv")
+      upload!('db/seeds/csv/thanks-app-users.csv', "#{shared_path}/db/seeds/csv/thanks-app-users.csv")
     end
   end
   before :starting, 'deploy:upload'
