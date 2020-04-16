@@ -48,6 +48,8 @@ a {
 }
 .thanks-content:hover{
   border-radius: 50%;
-  border: solid 3px #FFC967;
+  /* border: solid 3px #FFC967; */
+  background: rgba(255, 201, 103, 0.7);
+  backdrop-filter: blur(4px);
 }
 </style>
