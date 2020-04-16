@@ -28,7 +28,7 @@ export default {
       transmissionLink: "",
       receptionLink: "",
       newPath: "/thanks/new",
-      usernLink: ""
+      userLink: ""
     }
   },
   created() {
