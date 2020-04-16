@@ -9,6 +9,7 @@
       <SideBarContent :path="receptionLink" message="受信一覧" image="/zibunno.png" image-name="手紙"></SideBarContent> 
       <SideBarContent :path="newPath" message="新規作成" image="/send.png" image-name="メモ帳"></SideBarContent>
       <SideBarContent :path="transmissionLink" message="送信一覧" image="/transmission.png" image-name="送信一覧"></SideBarContent> 
+      <SideBarContent :path="userLink" message="登録情報編集" image="" image-name=""></SideBarContent> 
     </div>
   </div>
 </template>
@@ -26,7 +27,8 @@ export default {
     return {
       transmissionLink: "",
       receptionLink: "",
-      newPath: "/thanks/new"
+      newPath: "/thanks/new",
+      usernLink: ""
     }
   },
   created() {
@@ -35,6 +37,7 @@ export default {
     .then(response => {
       this.$data.transmissionLink = `/users/${response.data.current_user.id}/transmissions`
       this.$data.receptionLink = `/users/${response.data.current_user.id}/receptions`
+      this.$data.userLink = `/users/${response.data.current_user.id}`
     });
   },
   methods: {
