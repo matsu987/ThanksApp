@@ -2,7 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable
+        #  , :confirmable
 
   has_many :group_users
   has_many :groups, through: :group_users
@@ -49,9 +50,9 @@ class User < ApplicationRecord
    end
 
 
-  def password_required?
-    # confirmed?メソッドでconfirmed_atに値が入っているかを確認
-    # 入っていればsuperでtrueに入る
-    super if confirmed?
-  end
+  # def password_required?
+  #   # confirmed?メソッドでconfirmed_atに値が入っているかを確認
+  #   # 入っていればsuperでtrueに入る
+  #   super if confirmed?
+  # end
 end
