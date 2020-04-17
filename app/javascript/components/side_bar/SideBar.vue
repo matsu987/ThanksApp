@@ -52,6 +52,7 @@ export default {
   #side_bar {
     position: absolute;
     right: 0;
+    z-index: 100;
     width: 500px;
     height: 100vh;
     background-color: white;
