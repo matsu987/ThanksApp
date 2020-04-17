@@ -3,24 +3,29 @@
     <a href="/">
       <img class="logo" src="~logo.png">
     </a>
-    <a :href="myPageUrl">
-      <div class="toggle_btn">
+    <!-- <a :href="myPageUrl"> -->
+      <div v-on:click="openMenu" v-show="menu" class="toggle_btn">
         <span></span>
         <span></span>
         <span></span>
       </div>
-    </a>
+    <!-- </a> -->
+    <SideBar v-show="sideBar" v-on:closeMenu="onCloseMenu"></SideBar>
   </div>
 </template>
 
 <script>
 import 'logo.png'
 import axios from 'axios';
+import SideBar from 'components/side_bar/SideBar.vue';
 
 export default {
+  components: { SideBar },
   data: function(){
     return {
       myPageUrl: '/',
+      sideBar: false,
+      menu: true
     }
   },
   created() {
@@ -32,32 +37,42 @@ export default {
     });
   },
   methods: {
+    openMenu: function(){
+      this.sideBar = true
+      this.menu = false
+    },
+    onCloseMenu: function(e){
+      this.sideBar = false
+      this.menu = true
+    }
   }
 }
 </script>
 
 <style scoped>
-.toggle_btn span {
-  display: block;
+.toggle_btn{
+  height: 30px;
+  width: 30px;
   position: absolute;
   right: 120px;
+  top: 35px;
   width: 30px;
+}
+.toggle_btn span {
+  display: block;
   height: 2px;
   background-color: orange;
   border-radius: 4px;
   transition: all .5s;
 }
 .toggle_btn span:nth-child(1) {
-  top: 35px;
+  margin-bottom: 8px;
 }
 .toggle_btn span:nth-child(2) {
-  top: 45px;
+  margin-bottom: 8px;
 }
-.toggle_btn span:nth-child(3) {
-  top: 55px;
-}
+
 .header {
-  position: relative;
   width: 100%;
   height: 100px;
   background-color: #fff;

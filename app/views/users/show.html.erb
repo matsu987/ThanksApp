@@ -9,6 +9,10 @@
       <p><%= error_message%></p>
     <% end %>
   <% end %>
+  <%= form.label :email, "新しいEmailを入力してください" %><br>
+  <%= form.email_field :email %><br>
+  <%= form.label :password, "新しいPasswordを入力してください" %><br>
+  <%= form.password_field :password %><br>
   <%= form.file_field :avatar %><br>
   <%= form.submit %>
 <% end %>

@@ -14,8 +14,8 @@
       </section>
     </div>
     <div class="index-contents">
-      <ThanksContent class="index-content" path="" message-first="みんなの" message-second="サプライズサンクスを見る" image="/minnano.png" alt="minnano.png" image-name="ハガキ"></ThanksContent>
-      <ThanksContent class="index-content" path="/thanks/new" message-first="サプライズサンクスを送る" image="/send.png" image-name="メモ帳"></ThanksContent>
+      <ThanksContent class="index-content" path="" message-first="全サプライズサンクス一覧" image="/minnano.png" alt="minnano.png" image-name="ハガキ"></ThanksContent>
+      <ThanksContent class="index-content" path="/thanks/new" message-first="新規作成" image="/send.png" image-name="メモ帳"></ThanksContent>
       <ThanksContent class="index-content" :path="receptionLink" message-first="受信一覧" message-second="" image="/zibunno.png" image-name="手紙"></ThanksContent> 
       <ThanksContent class="index-content last" :path="transmissionLink" message-first="送信一覧" message-second="" image="/transmission.png" image-name="送信一覧"></ThanksContent> 
     </div>
@@ -58,6 +58,7 @@ export default {
     margin: 0 auto;
     font-size: 14px;
     font-family: Noto Sans CJK JP;
+    color: #333333;
   }
   .index-message-middle {
     margin-top: 20px;
