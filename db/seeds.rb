@@ -68,25 +68,33 @@ CSV.foreach('db/seeds/csv/div-users.csv', headers: true) do |row|
   when "メンバー"
     row["役職1"] = 0
   when "チームリーダー"
-    row["役職1"] = １
-  when "拠点統括"
-    row["役職1"] = ２
-  when "エリア統括"
-    row["役職1"] = ３
-  when "グループリーダー"
+    row["役職1"] = 1
+  when "拠点リーダー"
+    row["役職1"] = 2
+  when "チーム統括"
+    row["役職1"] = 3
+  when "エリアリーダー"
     row["役職1"] = 4
-  when "ユニットリーダー"
+  when "グループリーダー"
     row["役職1"] = 5
-  when "秘書"
+  when "ユニットリーダー"
     row["役職1"] = 6
-  when "内部監査担当者"
+  when "秘書"
     row["役職1"] = 7
-  when "新規事業担当者"
+  when "内部監査担当者"
     row["役職1"] = 8
-  when "代表取締役"
+  when "新規事業担当者"
     row["役職1"] = 9
-  when "社長"
+  when "代表取締役"
     row["役職1"] = 10
+  when "社長"
+    row["役職1"] = 11
+  when "業務委託"
+    row["役職1"] = 12
+  when "派遣"
+    row["役職1"] = 13
+  when "アルバイト"
+    row["役職1"] = 14
   else
     row["役職1"] = 0
   end
@@ -95,25 +103,33 @@ CSV.foreach('db/seeds/csv/div-users.csv', headers: true) do |row|
   when "メンバー"
     row["役職2"] = 0
   when "チームリーダー"
-    row["役職2"] = １
-  when "拠点統括"
-    row["役職2"] = ２
-  when "エリア統括"
-    row["役職2"] = ３
-  when "グループリーダー"
+    row["役職2"] = 1
+  when "拠点リーダー"
+    row["役職2"] = 2
+  when "チーム統括"
+    row["役職2"] = 3
+  when "エリアリーダー"
     row["役職2"] = 4
-  when "ユニットリーダー"
+  when "グループリーダー"
     row["役職2"] = 5
-  when "秘書"
+  when "ユニットリーダー"
     row["役職2"] = 6
-  when "内部監査担当者"
+  when "秘書"
     row["役職2"] = 7
-  when "新規事業担当者"
+  when "内部監査担当者"
     row["役職2"] = 8
-  when "代表取締役"
+  when "新規事業担当者"
     row["役職2"] = 9
-  when "社長"
+  when "代表取締役"
     row["役職2"] = 10
+  when "社長"
+    row["役職2"] = 11
+  when "業務委託"
+    row["役職2"] = 12
+  when "派遣"
+    row["役職2"] = 13
+  when "アルバイト"
+    row["役職2"] = 14
   else
     row["役職2"] = nil
   end
@@ -122,25 +138,33 @@ CSV.foreach('db/seeds/csv/div-users.csv', headers: true) do |row|
   when "メンバー"
     row["役職3"] = 0
   when "チームリーダー"
-    row["役職3"] = １
-  when "拠点統括"
-    row["役職3"] = ２
-  when "エリア統括"
-    row["役職3"] = ３
-  when "グループリーダー"
+    row["役職3"] = 1
+  when "拠点リーダー"
+    row["役職3"] = 2
+  when "チーム統括"
+    row["役職3"] = 3
+  when "エリアリーダー"
     row["役職3"] = 4
-  when "ユニットリーダー"
+  when "グループリーダー"
     row["役職3"] = 5
-  when "秘書"
+  when "ユニットリーダー"
     row["役職3"] = 6
-  when "内部監査担当者"
+  when "秘書"
     row["役職3"] = 7
-  when "新規事業担当者"
+  when "内部監査担当者"
     row["役職3"] = 8
-  when "代表取締役"
+  when "新規事業担当者"
     row["役職3"] = 9
-  when "社長"
+  when "代表取締役"
     row["役職3"] = 10
+  when "社長"
+    row["役職3"] = 11
+  when "業務委託"
+    row["役職3"] = 12
+  when "派遣"
+    row["役職3"] = 13
+  when "アルバイト"
+    row["役職3"] = 14
   else
     row["役職3"] = nil
   end
