@@ -9,22 +9,20 @@ class GroupsController < ApplicationController
   end
 
   def create #部署登録
-    @group_1 = @parent_group.children.new(@group_params_1)
-    if @group_1.save
-      if @group_params_2[:name] != ""
-        @group_2 = @group_1.children.new(@group_params_2)
-        if @group_2.save
-          if @group_params_3[:name] != ""
-            @group_3 = @group_2.children.new(@group_params_3)
-            if @group_3.save
-            end
-          end
-        end
-      end
-      redirect_to regist_groups_path
+    case [@group_params_1[:name].present?, @group_params_2[:name].present?, @group_params_3[:name].present?]
+    when [true, false, false]
+      @group_1 = @parent_group.children.create(@group_params_1)
+    when [true, true, false]
+      @group_1 = @parent_group.children.create(@group_params_1)
+      @group_2 = @group_1.children.create(@group_params_2)
+    when [true, true, true]
+      @group_1 = @parent_group.children.create(@group_params_1)
+      @group_2 = @group_1.children.create(@group_params_2)
+      @group_3 = @group_2.children.create(@group_params_3)
     else
-      render :new
+      redirect_to new_group_path and return
     end
+    redirect_to regist_groups_path
   end
 
   def regist #グループ設定画面
@@ -52,10 +50,13 @@ class GroupsController < ApplicationController
 
   private
   def group_params
-    @parent_group = Group.find(params[:group][:id])
-    @group_params_1 = {name: params[:group][:name_1], company_id: @parent_group.company_id}
-    @group_params_2 = {name: params[:group][:name_2], company_id: @parent_group.company_id}
-    @group_params_3 = {name: params[:group][:name_3], company_id: @parent_group.company_id}
+    if params[:group][:id].empty?
+      redirect_to new_group_path
+    else
+      @parent_group = Group.find(params[:group][:id])
+      @group_params_1 = {name: params[:group][:name_1], company_id: @parent_group.company_id}
+      @group_params_2 = {name: params[:group][:name_2], company_id: @parent_group.company_id}
+      @group_params_3 = {name: params[:group][:name_3], company_id: @parent_group.company_id}
+    end
   end
-
 end
