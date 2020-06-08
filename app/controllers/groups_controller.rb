@@ -47,17 +47,6 @@ class GroupsController < ApplicationController
     @group_children = @group.children
   end
 
-  # def admin #グループ設定（管理者）
-  #   group_users = current_user.group_users.where(status: 1)
-  #   @groups = []
-  #   group_users.each do |group_user|
-  #     group = Group.find(group_user.group_id)
-  #     group.subtree.each do |group|
-  #      @groups << group
-  #     end
-  #   end
-  # end
-
   def depart_request_create #グループ申請許可
   end
 
@@ -69,6 +58,4 @@ class GroupsController < ApplicationController
     @group_params_3 = {name: params[:group][:name_3], company_id: @parent_group.company_id}
   end
 
-  def depart_join_params
-  end
 end
