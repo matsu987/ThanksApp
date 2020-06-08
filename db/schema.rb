@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2020_03_17_034434) do
     t.bigint "user_id"
     t.integer "rank", default: 0, null: false
     t.boolean "enrollment", default: true, null: false
+    t.integer "status", default: 0, null: false
+    t.boolean "request", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_group_users_on_group_id"
@@ -109,7 +111,6 @@ ActiveRecord::Schema.define(version: 2020_03_17_034434) do
     t.string "name", null: false
     t.string "email", default: "", null: false
     t.text "introduction"
-    t.integer "status", default: 0, null: false
     t.string "avatar"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

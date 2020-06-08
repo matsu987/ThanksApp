@@ -4,13 +4,33 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar%>
+  </div>
+
+  <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= f.text_field :name, autocomplete: "off" %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :introduction %><br />
+    <%= f.text_area :introduction, autocomplete: "off" %>
   </div>
 
   <div class="actions">

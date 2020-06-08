@@ -31,4 +31,16 @@ Rails.application.routes.draw do
       delete 'image/destroy', to: "users#image_destroy"
     end
   end
+
+  resources :companies, only: [:new, :create]
+  resources :groups, only: [:new, :create] do
+    collection do
+      get "regist", to: "groups#regist"
+      get "depart_join", to: "groups#depart_join"
+      get "get_group", to: "groups#get_group"
+      get "admin",   to: "groups#admin"
+      patch "depart_join_create", to: "groups#depart_join_create"
+      patch "depart_request_create", to: "groups#depart_request_create"
+    end
+  end
 end
