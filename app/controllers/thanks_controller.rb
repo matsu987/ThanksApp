@@ -1,4 +1,5 @@
 class ThanksController < ApplicationController
+  before_action :user_group_confirmation, except: [:index]
 
   def index
     @sended_thanks = current_user.sended_thanks
@@ -63,4 +64,11 @@ class ThanksController < ApplicationController
   def thank_params
     params.require(:thank).permit(:text, :receiver_id).merge(sender_id: current_user.id)
   end
+
+  def user_group_confirmation
+    if current_user.groups.empty?
+      redirect_to regist_groups_path
+    end
+  end
+
 end

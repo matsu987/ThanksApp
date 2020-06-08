@@ -21,7 +21,6 @@ class User < ApplicationRecord
 
   # president: 社長, ul: ユニットリーダー, gl:グループリーダー
   # bl: エリア統括, sbl: 拠点統括, tl: チームリーダー, mem: メンバー
-  enum status: { "社員": 0, "管理者": 1 }
 
 
   # 先頭は文字列から始まり、末尾は@di-v.co.jpの形のemailを許可
@@ -37,8 +36,6 @@ class User < ApplicationRecord
   # 指定された値がenumのkeyだった場合は許可
 
   # 指定された値がenumのkeyだった場合は許可
-  validates :status,
-  inclusion: {in: User.statuses.keys}
 
 
    def email_custom_error

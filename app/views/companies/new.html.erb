@@ -1,0 +1,8 @@
+会社画面
+<%= form_with model: @company, local: true do |f| %>
+  会社名：<%= f.text_field :name %>
+  郵便番号（任意）：<%= f.text_field :post_number %>
+  住所（任意）：<%= f.text_field :address %>
+  電話番号（任意）：<%= f.text_field :phone_number %>
+  <%= f.submit %>
+<% end %>

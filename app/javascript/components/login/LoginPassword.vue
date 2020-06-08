@@ -32,9 +32,9 @@
         </p>
         <p>
           <img class="beginner" src="~beginner_icon.svg" alt="初心者マーク">
-          <span class="resetting_pass">
-            認証がまだのかたは管理者にお問い合わせください  ︎
-          </span>
+          <a class="resetting_pass" href="/users/sign_up">
+            新規登録
+          </a>
         </p>
       </div>
     </form>
@@ -111,7 +111,7 @@ export default {
     box-sizing: border-box;
   }
   .form_content{
-    margin: 90px 0 40px; 
+    margin: 90px 0 40px;
   }
   .form_content label{
     display: inline-block;
