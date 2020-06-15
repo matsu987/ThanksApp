@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   #ユーザー検索
   namespace :search do
     get 'users/index'
+    get 'groups/index'
   end
 
   #管理者
