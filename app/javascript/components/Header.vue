@@ -29,7 +29,6 @@ export default {
     }
   },
   created() {
-    console.log("test")
     axios
     .get('/users.json')
     .then(response => {

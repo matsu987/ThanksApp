@@ -19,21 +19,46 @@
         </div>
       </div>
     </transition>
+    <!-- ユーザー検索ポップアップ -->
+    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+      <div class="user-overlay" v-show="showUserSelect">
+        <div class="user-content">
+          <div class="side-content">
+            グループ一覧
+            <div class="groups">
+              <ul>
+                <li v-for="(group, index) in groups" :key="group.id" @click="groupBox(index)" :data-id="group.id"  ref="group" class="group-list">{{group.name}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="main-content">
+            <input type="text" v-model="searchData.keyword" @input="onInput" class="user-input">
+            <div id="user-search-result">
+              <ul class="users-box">
+                <li v-for="(user, index) in searchUsers" :key="user.id" class="user-box" @click="userBox(index)" :data-id="user.id" :data-name="user.name" :data-avatar="user.avatar.url" ref="user">
+                  <img v-if="user.avatar.url" class="logo-small" :src="user.avatar.url">
+                  <img v-else class="logo-small" src="~person.png">
+                  <p class="user-name">{{user.name}}さん（{{user.email}}）</p>
+                </li>
+              </ul>
+              <p class="receiver-text"></p>
+            </div>
+          </div>
+        </div>
+        <button class="close-btn" v-on:click="closeUserModal">Close</button>
+      </div>
+    </transition>
     <!-- 投稿用フォーム-->
     <form @submit.prevent="createThank">
       <div class="thanks-form">
         <div class="thanks-form-box">
           <div class="receiver-select">
-            <img class="logo" src="~person.png">
-            <p class="receiver-text">To: </p>
-            <!--<input class="receiver-input" v-model="thank.receiver_name" type="text">-->
-            <input class="receiver_id receiver-input" v-model="keyword" @click="userSelect" @keydown.enter="userSelect" @input="onInput" @keyup="onInput" type="text" autocomplete="on" list="user">
-            <div id="user-search-result">
-              <datalist id="user">
-                <option v-for="(user, index) in searchUsers" :key="user.id">{{user.name}}</option>
-              </datalist>
-              <p class="receiver-text">さん</p>
+            <div v-if= "thank.receiver_id" class="receiver-box">
+              <img v-if="thank.receiver_avatar" class="logo-small" :src="thank.receiver_avatar">
+              <img v-else class="logo-small" src="~person.png">
+              <p class="user-name">{{thank.receiver_name}}さん</p>
             </div>
+            <button type="button" @click="userSelect">感謝を送りたい人を選択</button>
           </div>
           <textarea class="thanks-message" v-model="thank.text" type="text"></textarea>
           <div class="sender-select">
@@ -64,14 +89,21 @@ export default {
       avatar: '',
       thank: {
         id: '',
-        receiver_id: '',
         text: '',
+        receiver_id: '',
+        receiver_name: '',
+        receiver_avatar: ''
       },
       receiver: {},
       errors: '',
       showContent: false,
-      keyword: '',
-      searchUsers: []
+      showUserSelect: false,
+      searchUsers: [],
+      groups: [],
+      searchData: {
+        selectGroup: "",
+        keyword: '',
+      }
     }
   },
   created() {
@@ -91,26 +123,25 @@ export default {
   methods: {
     userSelect: function(e){
       e.preventDefault();
+      this.$data.showUserSelect = true
+      axios
+        .get('/search/groups/index.json')
+        .then(response => {
+          this.$data.groups = response.data
+        })
     },
     onInput: function(){
       axios
-        .get('/search/users/index.json', {params: this.keyword})
+        .get('/search/users/index.json', {params: this.searchData})
         .then(response => {
           this.$data.searchUsers = []
           var userSearchResult = document.getElementById('user-search-result');
-            var noUser = document.getElementById("no-user")
-            if (noUser){
-              document.getElementById("no-user").remove();
-            }
           if (response.data.length !== 0){
             var users = response.data
-            var array = this.$data.searchUsers
-
+            this.$data.searchUsers = []
             users.forEach(user => {
-              array.push(user);
+              this.$data.searchUsers.push(user);
             });
-          } else {
-            userSearchResult.insertAdjacentHTML('beforebegin','<p id="no-user" style="width: 182px; height: 50px; position: absolute; top: 60px; left: 103px; border: solid 0.5px black; line-height: 50px; padding-left: 5px; font-weight: bold; background: black; color: #fff; font-size: 11px; border-radius: 0.2em;">ユーザーが見つかりませんでした</p>');
           }
         })
     },
@@ -119,6 +150,9 @@ export default {
     },
     closeModal: function(){
       this.$data.showContent = false
+    },
+    closeUserModal: function(){
+      this.$data.showUserSelect = false
     },
     resetForm: function(){
       this.$data.keyword = ''
@@ -143,14 +177,6 @@ export default {
       });
     },
     createThank: function(event) {
-      var users = this.$data.searchUsers
-
-      users.forEach(user => {
-        if (user.name === this.keyword){
-          this.$data.thank.receiver_id = `${user.id}`;
-        }
-      });
-
       axios
         .post('/thanks.json', this.thank)
         .then(response => {
@@ -168,13 +194,32 @@ export default {
           this.openModal();
           this.resetForm();
           this.$data.searchUsers = []
+          this.$data.thank = {
+                                id: '',
+                                text: '',
+                                receiver_id: '',
+                                receiver_name: '',
+                                receiver_avatar: ''
+                              }
         })
         .catch(error => {
-          console.error(error.response.data.errors);
           if (error.response.data && error.response.data.errors) {
             this.errors = error.response.data.errors;
           }
         });
+    },
+    userBox: function(e) {
+      // eは選択されたユーザーの配列番号
+      let selectUserBox = this.$refs.user[e]
+      this.$data.thank.receiver_id = $(selectUserBox).data("id")
+      this.$data.thank.receiver_name = $(selectUserBox).data("name")
+      this.$data.thank.receiver_avatar = $(selectUserBox).data("avatar")
+      this.closeUserModal();
+    },
+    groupBox: function(e) {
+      // eは選択されたグループの配列番号
+      let selectGroupBox = this.$refs.group[e]
+      this.$data.searchData.selectGroup = $(selectGroupBox).data("id")
     }
   }
 }
@@ -285,9 +330,23 @@ export default {
   justify-content: center;
 }
 
+.user-overlay{
+  width: 50%;
+  height: 50%;
+  z-index: 1;
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  background-color: #fff;
+  border: 2px solid #555555;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
 .close-btn {
   display: block;
-  margin: auto;
+  margin: 0 auto;
 
 }
 
@@ -340,7 +399,63 @@ button {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-#test {
-  
+.user-content {
+  display: flex;
+  width: 100%;
+  height: 85%;
+  padding: 10px 0;
+}
+
+.side-content {
+  width: 30%;
+  height: 100%;
+  text-align: center;
+}
+
+.main-content {
+  width: 70%;
+  height: 100%;
+}
+
+.logo-small {
+  width: 50px;
+  height: 50px;
+}
+
+.users-box {
+  overflow: scroll;
+}
+
+.user-box {
+  display: flex;
+  padding: 10px;
+  border-bottom: solid 1px black;
+}
+
+.user-name {
+  line-height: 40px;
+  margin-left: 10px;
+  color: black;
+}
+
+.group-list {
+  padding: 10px;
+  border-bottom: solid 1px black;
+}
+
+#user-search-result {
+  height: 85%;
+  width: 80%;
+  margin: 15px auto;
+  border: solid 1px black;
+}
+
+.user-input {
+  display: block;
+  margin: 0 auto;
+}
+
+.receiver-box {
+  display: flex;
 }
 </style>

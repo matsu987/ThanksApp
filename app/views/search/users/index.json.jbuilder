@@ -4,5 +4,6 @@ if @users_vue
     json.name user.name
     json.email user.email
     json.time user.created_at
+    json.avatar user.avatar
   end
 end
