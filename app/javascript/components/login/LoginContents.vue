@@ -1,7 +1,7 @@
 <template>
   <div class="login-form__conts">
 
-    <!-- ログインポップアップ-->
+    <!-- ポップアップ -->
     <div class="login-popup">
       <div class="overlay" v-show="showContent">
         <div class="content">
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <!-- ログインフォーム-->
+    <!-- ログインフォーム -->
     <form action="/users/sign_in" accept-charset="UTF-8" method="post" class="login-form" @submit.prevent="createPass">
       <img src='~ari-letter-logo.jpg' class="ari-logo">
       <div class="login-form__content">

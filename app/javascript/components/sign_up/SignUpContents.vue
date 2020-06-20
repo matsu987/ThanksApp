@@ -1,7 +1,7 @@
 <template>
   <div class="signup-form__conts">
 
-    <!-- ログインポップアップ-->
+    <!-- ポップアップ-->
     <div class="signup-popup">
       <div class="overlay" v-show="showContent">
         <div class="content">
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <!-- ログインフォーム-->
+    <!-- サインアップフォーム-->
     <form action="/users/sign_up" accept-charset="UTF-8" method="post" class="signup-form" @submit.prevent="createUser">
       <img src='~ari-letter-logo.jpg' class="ari-logo">
       <div class="signup-form__content">
