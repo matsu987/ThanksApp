@@ -1,24 +1,15 @@
-# README
+# ログインページ
+rails: users/sessions#new
+js: javascript/packs/login.js
+vue: {
+  parent: components/login/Login.vue
+  child: components/login/Logincontens.vue
+}
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# ユーザー新規登録ページ
+rails: users/registrations#new
+js: javascript/packs/sign_up.js
+vue: {
+  parent: components/sign_up/SignUp.vue
+  child: components/sign_up/SignUpContens.vue
+}
