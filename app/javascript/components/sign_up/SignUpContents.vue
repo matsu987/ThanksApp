@@ -1,8 +1,8 @@
 <template>
-  <div class="login-form__conts">
+  <div class="signup-form__conts">
 
-    <!-- ポップアップ -->
-    <div class="login-popup">
+    <!-- ポップアップ-->
+    <div class="signup-popup">
       <div class="overlay" v-show="showContent">
         <div class="content">
           <div class="error-message" v-if="errors.length != 0">
@@ -16,30 +16,26 @@
       </div>
     </div>
 
-    <!-- ログインフォーム -->
-    <form action="/users/sign_in" accept-charset="UTF-8" method="post" class="login-form" @submit.prevent="createPass">
+    <!-- サインアップフォーム-->
+    <form action="/users/sign_up" accept-charset="UTF-8" method="post" class="signup-form" @submit.prevent="createUser">
       <img src='~ari-letter-logo.jpg' class="ari-logo">
-      <div class="login-form__content">
+      <div class="signup-form__content">
+        <label for="name">Name</label>
+        <input type="text" id="name" v-model="name" placeholder="例）山田太郎">
+      </div>
+      <div class="signup-form__content">
         <label for="email">E-Mail</label>
         <input type="email" id="email" v-model="email" placeholder="例）taro.yamada@di-v.co.jp">
       </div>
-      <div class="login-form__content">
-        <label for="pass">PASS</label>
-        <input type="password" id="pass" placeholder="例）6文字以上の半角英数字" v-model="password">
+      <div class="signup-form__content">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="例）6文字以上の半角英数字" v-model="password">
       </div>
-      <input type="submit" value="ログイン" class="login-form__btn">
-      <div class="login-form__help">
-        <img class="login-form__icon" src="~login-help.png" alt="ヘルプマーク">
-        <a href="/users/password/new" class="login-form__txt">
-          パスワードを再設定する
-        </a>
+      <div class="signup-form__content password_conf">
+        <label for="password_conf">Password Confirmation</label>
+        <input type="password" id="password-conf" placeholder="例）6文字以上の半角英数字" v-model="password_conf">
       </div>
-      <div class="login-form__sign-up">
-        <img class="login-form__icon" src="~login-beginner.png" alt="初心者マーク">
-        <a class="login-form__txt" href="/users/sign_up">
-          初めて利用する方はこちら
-        </a>
-      </div>
+      <input type="submit" value="新規登録" class="signup-form__btn">
     </form>
   </div>
 </template>
@@ -54,8 +50,10 @@ export default {
   data: function(){
     return{
       errors: '',
+      name: '',
       email: '',
       password: '',
+      password_conf: '',
       showContent: false
     }
   },
@@ -76,9 +74,9 @@ export default {
       this.$data.email = ''
       this.$data.password = ''
     },
-    createPass: function(event) {
+    createUser: function(event) {
       axios
-        .post('/users/sign_in', {email: this.email, password: this.password})
+        .post('/users', {name: this.name, email: this.email, password: this.password, password_confirmation: this.password_conf})
         .then(response => {
           this.errors = '';
           if (response.status === 200){
@@ -109,7 +107,7 @@ export default {
 </script>
 
 <style scoped>
-  .login-form__conts{
+  .signup-form__conts{
     background-color: #F8F8F8;
     width: 50%;
     height: 80vh;
@@ -163,7 +161,7 @@ export default {
   }
 
   /* ログインフォーム */
-  .login-form {
+  .signup-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -176,13 +174,13 @@ export default {
     margin-top: 20px;
   }
 
-  .login-form__content {
+  .signup-form__content {
     display: flex;
     width: 100%;
     padding: 40px 100px 0 100px;
   }
 
-  .login-form__content label {
+  .signup-form__content label {
     display: inline-block;
     background-color: #888888;
     width: 100px;
@@ -195,7 +193,11 @@ export default {
     margin: 0 20px 0 50px;
   }
 
-  .login-form__content input {
+  .password_conf label {
+    line-height: 23px;
+  }
+
+  .signup-form__content input {
     display: inline-block;
     flex-grow: 1;
     height: 50px;
@@ -206,7 +208,7 @@ export default {
     margin-right: 50px;
   }
 
-  .login-form__btn {
+  .signup-form__btn {
     width: 200px;
     height: 50px;
     background: #FFC152;
@@ -215,24 +217,5 @@ export default {
     border: none;
     border-radius: 30px;
     margin: 40px 0;
-  }
-
-  .login-form__help {
-    margin-bottom: 20px;
-  }
-
-  .login-form__icon {
-    height: 12px;
-    margin-right: 30px;
-  }
-
-  .login-form__txt {
-    font-size: 12px;
-    color: #888888;
-  }
-
-  .login-form__txt::after {
-    content: "▶️";
-    margin-left: 30px;
   }
 </style>
