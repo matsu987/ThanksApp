@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Header from 'components/Header.vue';
+import Header from '../shared/Header.vue';
 import EditConfirmationPasswordContents from 'components/edit_confirmation_password/EditConfirmationPasswordContents.vue';
 import 'flower.png'
 

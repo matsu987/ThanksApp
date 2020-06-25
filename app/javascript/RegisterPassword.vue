@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Header from 'components/Header.vue';
+import Header from 'components/shared/Header.vue';
 import RegisterPasswordContents from 'components/RegisterPasswordContents.vue';
 import 'flower.png'
 

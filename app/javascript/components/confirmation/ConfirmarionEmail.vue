@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Header from 'components/Header.vue';
+import Header from '../shared/Header.vue';
 import ConfirmarionEmailContents from 'components/confirmation/ConfirmarionEmailContents.vue';
 import 'flower.png'
 
