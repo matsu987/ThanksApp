@@ -66,6 +66,7 @@ export default {
     flex-direction: column;
     text-align: center;
     width: 60%;
+    background: #EDEDED;
   }
 
   .header-top{
