@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Header from 'components/Header.vue';
+import Header from 'components/shared/Header.vue';
 import SideBar from 'components/SideBar.vue';
 import FormNew from 'components/FormNew.vue';
 

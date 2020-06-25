@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import ThanksIndex from '../ThanksIndex.vue'
+import ThanksIndex from '../components/top/ThanksIndex.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const thanksIndex = new Vue({

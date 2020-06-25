@@ -2,12 +2,11 @@
   <div id="app">
     <Header></Header>
     <TransmissionBox></TransmissionBox>
-    </div>
   </div>
 </template>
 
 <script>
-import Header from 'components/Header.vue';
+import Header from 'components/shared/Header.vue';
 import TransmissionBox from 'components/TransmissionBox.vue';
 import 'flower.png'
 

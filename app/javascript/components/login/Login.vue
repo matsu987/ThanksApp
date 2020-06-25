@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Header from 'components/Header.vue';
+import Header from '../shared/Header.vue';
 import LoginContents from 'components/login/LoginContents.vue';
 import 'flower.png'
 
