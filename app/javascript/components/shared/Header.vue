@@ -28,7 +28,7 @@ import 'logo.png'
 import axios from 'axios'
 import NavAll from 'components/shared/NavAll.vue';
 import NavMypage from 'components/shared/NavMypage.vue';
-import NavBtn from 'components/shared/NavBtn.vue';
+import NavBtn from 'components/shared/parts/NavBtn.vue';
 // import ActNavBtn from 'components/shared/ActNavBtn.vue';
 
 export default {
@@ -51,7 +51,6 @@ export default {
   },
   computed:{
     currentNav: function(){
-      console.log('Nav' + this.currentTab)
       return 'Nav' + this.currentTab
     }
   },

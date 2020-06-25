@@ -19,7 +19,7 @@
 <script>
 import 'logo.png'
 import axios from 'axios';
-import NavBtn from 'components/shared/NavBtn.vue';
+import NavBtn from 'components/shared/parts/NavBtn.vue';
 
 export default {
   components: { NavBtn },
@@ -47,9 +47,6 @@ export default {
         }
       }
     }
-  },
-  created: function(){
-    console.log(this);
   },
   methods: {
     setActive: function(e){
