@@ -1,17 +1,17 @@
 <template>
   <main id="app" class="container">
     <div class="main-conts">
-      <LoginContents></LoginContents>
+      <SignUpContents></SignUpContents>
     </div>
   </main>
 </template>
 
 <script>
-import LoginContents from 'components/login/LoginContents.vue';
+import SignUpContents from 'components/sign_up/SignUpContents.vue';
 
 export default {
   components: {
-    LoginContents
+    SignUpContents
   },
   data: function () {
     return {
