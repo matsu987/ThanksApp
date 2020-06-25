@@ -13,56 +13,51 @@
             <!-- 現在のheaderTabの名前("mypageなど")、NavBtnに渡すtabの名前、NavBtnに渡すtabのテキストをpropで送る -->
             <!-- emitでNavBtnにてクリックした後headerTabの変更を監視 -->
             <!-- setActiveでheaderTabの変更をしてtoppageにemitで送る -->
-            <NavBtn :current-tab-name="headerTab" :tab-name="tab.keyName" :text="tab.text" v-on:active="setActive"></NavBtn>
+            <NavBtn :current-tab-name="currentTab" :tab-name="tab.keyName" :text="tab.text" v-on:active="setActive"></NavBtn>
           </li>
         </ul>
       </div>
     </div>
-    <Nav></Nav>
-    <components :is="currentNav"></components>
+    <!-- <NavMypage> </NavMypage> -->
+    <component :is="currentNav"></component>
   </header>
 </template>
 
 <script>
 import 'logo.png'
 import axios from 'axios'
-import Nav from 'components/shared/Nav.vue';
+import NavAll from 'components/shared/NavAll.vue';
+import NavMypage from 'components/shared/NavMypage.vue';
 import NavBtn from 'components/shared/NavBtn.vue';
 // import ActNavBtn from 'components/shared/ActNavBtn.vue';
 
 export default {
-  components: { Nav, NavBtn},
-  props: [ 'currentTab' ],
+  components: { NavAll, NavMypage, NavBtn},
+  // props: [ ],
   data: function(){
     return {
-
-
-
-
-      
-      headerTab: this.currentTab,
+      currentTab: 'Mypage',
       tabs: {
-        "mypage": {
+        "Mypage": {
           "text": "マイページ",
-          "keyName": "mypage"
+          "keyName": "Mypage"
         },
-        "all": {
+        "All": {
           "text": "全社員",
-          "keyName": "all"
+          "keyName": "All"
         }
       }
     }
   },
-  created: function () {
-      console.log(this.currentTab);
-    },
   computed:{
-
+    currentNav: function(){
+      console.log('Nav' + this.currentTab)
+      return 'Nav' + this.currentTab
+    }
   },
   methods: {
     setActive: function(e){
-      this.headerTab = e.text;
-      this.$emit('change', this.headerTab)
+      this.currentTab = e.text;
     }
   }
 }

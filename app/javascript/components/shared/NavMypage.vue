@@ -9,7 +9,7 @@
     <div class="header-gNav">
       <ul>
         <li v-for='tab in tabs.mypage'>
-          <NavBtn :tab-name="tab" :text="tab.text"></NavBtn>          
+          <NavBtn :current-tab-name="currentTab" :tab-name="tab.keyName" :text="tab.text" v-on:active="setActive"></NavBtn>
         </li>
       </ul>  
     </div>
@@ -22,51 +22,39 @@ import axios from 'axios';
 import NavBtn from 'components/shared/NavBtn.vue';
 
 export default {
-  props: [ 'currentTab'],
   components: { NavBtn },
-  created: function(){
-    for ( const tab in this.tabs ){
-      if (tab == this.headerTab){
-        this.selectedTab = tab;
-        console.log(this.selectedTab)
-      }
-    }
-  },
   data: function(){
     return {
-      headerTab: this.currentTab,
-      selectedTab: "",
+      currentTab: "new",
       tabs: {
         mypage: {
           "new": {
-            "text": "新規作成"
+            "text": "新規作成",
+            "keyName": "new"
           },
           "send": {
-            "text": "送信一覧"  
+            "text": "送信一覧",
+            "keyName": "send"
           },
           "receive": {
-            "text": "受信一覧"
+            "text": "受信一覧",
+            "keyName": "receive"
           },
           "account": {
-            "text": "アカウント設定"
-          }
-        },
-        all: {
-          "all": {
-            "text": "全アリレター"
-          },
-          "data": {
-            "text": "データ可視化"
-          },
-          "root": {
-            "text": "管理者"
+            "text": "アカウント設定",
+            "keyName": "account"
           }
         }
       }
     }
   },
+  created: function(){
+    console.log(this);
+  },
   methods: {
-
+    setActive: function(e){
+      this.currentTab = e.text;
+    }
   }
 }
 </script>

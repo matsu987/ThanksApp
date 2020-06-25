@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <Header v-on:change="onchange" :currentTab="currentHeaderTab"></Header>
+    <Header></Header>
     <Contents></Contents>
   </div>
 </template>
@@ -16,13 +16,6 @@ export default {
   },
   data: function () {
     return {
-      currentHeaderTab: "mypage"
-    }
-  },
-  methods: {
-    onchange: function(e){
-      this.currentHeaderTab = e;
-
     }
   },
   // 後に追加予定
