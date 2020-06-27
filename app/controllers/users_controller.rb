@@ -32,32 +32,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def group_update
-  end
-
-  def login_update
-    @user = User.find(params[:id])
-    if @user.update(login_params)
-      sign_out
-      sign_in(@user)
-      redirect_to user_path(@user)
-    else
-      render :edit
-    end
-  end
-
-  def image_destroy
-    user = User.find(params[:id])
-    user.update(avatar: "")
-    redirect_to user_path(user)
-  end
-
   private
   def user_params
-    params.permit(:avatar, :family_name, :given_name)
-  end
-
-  def login_params
-    params.permit(:email, :password)
+    if params[:avatar] != ""
+      params.permit(:avatar, :family_name, :given_name)
+    else
+      params.permit(:family_name, :given_name)
+    end
   end
 end

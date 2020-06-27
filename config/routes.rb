@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :transmissions, only: [:index]
     resources :receptions, only: [:index]
     member do
-      patch "login_update", to: "users#login_update"
+      patch "login_update", to: "user/login#update"
       delete 'image/destroy', to: "users#image_destroy"
     end
   end
