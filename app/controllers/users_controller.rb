@@ -20,12 +20,29 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def edit
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user)
     else
-      render :show
+      render :edit
+    end
+  end
+
+  def group_update
+  end
+
+  def login_update
+    @user = User.find(params[:id])
+    if @user.update(login_params)
+      sign_out
+      sign_in(@user)
+      redirect_to user_path(@user)
+    else
+      render :edit
     end
   end
 
@@ -37,6 +54,10 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:avatar, :email, :password)
+    params.permit(:avatar, :family_name, :given_name)
+  end
+
+  def login_params
+    params.permit(:email, :password)
   end
 end

@@ -1,14 +1,15 @@
 <template>
-    <p class="gNav-section__text">{{ navText }}</p>
+    <a :href="navUrl" class="gNav-section__text">{{ navText }}</a>
 </template>
 
 <script>
 
 export default {
-  props: [ 'text' ],
+  props: [ 'text', 'url' ],
   data: function(){
     return {
-      navText: this.text
+      navText: this.text,
+      navUrl: this.url
     }
   },
   methods: {

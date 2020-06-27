@@ -25,7 +25,7 @@
       </div>
       <div class="login-form__content">
         <label for="pass">PASS</label>
-        <input type="password" id="pass" placeholder="例）6文字以上の半角英数字" v-model="password">
+        <input type="password" id="pass" placeholder="例）6文字以上の半角英数字" v-model="password" autocomplete="new-password">
       </div>
       <input type="submit" value="ログイン" class="login-form__btn">
       <div class="login-form__help">
