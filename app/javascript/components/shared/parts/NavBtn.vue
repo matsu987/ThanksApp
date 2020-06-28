@@ -7,7 +7,7 @@
 
 <script>
 import axios from 'axios';
-import CheckBox from 'CheckBox.vue'
+import CheckBox from './checkBox.vue'
 import NavName from 'NavName.vue'
 
 export default {
