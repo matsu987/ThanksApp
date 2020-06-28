@@ -1,11 +1,20 @@
 class GroupsController < ApplicationController
   before_action :group_params, only: [:create]
-  def new #部署登録画面
-    if current_user.groups.empty?
-      render :regist
+
+  def index
+    group_users = current_user.group_users
+    group_users_admin = group_users.where(status: 1)
+
+    case [group_users.present?, group_users_admin.present?]
+    when [true, true]
+      @group_admin = Group.find(group_users_admin.first.group_id)
+    when [true, false]
+      @group = Group.find(group_users.first.group_id).root
+    else
     end
-    @group = Group.new
-    @companies = current_user.groups
+  end
+
+  def new
   end
 
   def create #部署登録
@@ -22,22 +31,7 @@ class GroupsController < ApplicationController
     else
       redirect_to new_group_path and return
     end
-    redirect_to regist_groups_path
-  end
-
-  def regist #グループ設定画面
-  end
-
-  def depart_join #部署参加画面
-  end
-
-  def depart_join_create #部署参加申請
-    group = Group.find(params[:group_id])
-    if group.update(user_ids: current_user.id)
-      redirect_to root_path
-    else
-      render :depart_join
-    end
+    redirect_to new_group_path
   end
 
   def get_group #グループ参加画面のjs用
@@ -45,18 +39,11 @@ class GroupsController < ApplicationController
     @group_children = @group.children
   end
 
-  def depart_request_create #グループ申請許可
-  end
-
   private
   def group_params
-    if params[:group][:id].empty?
-      redirect_to new_group_path
-    else
-      @parent_group = Group.find(params[:group][:id])
-      @group_params_1 = {name: params[:group][:name_1], company_id: @parent_group.company_id}
-      @group_params_2 = {name: params[:group][:name_2], company_id: @parent_group.company_id}
-      @group_params_3 = {name: params[:group][:name_3], company_id: @parent_group.company_id}
-    end
+    @parent_group = Group.find(params[:company][:id])
+    @group_params_1 = {name: params[:parent_group][:name], company_id: @parent_group.company_id}
+    @group_params_2 = {name: params[:child_group][:name], company_id: @parent_group.company_id}
+    @group_params_3 = {name: params[:grandchild_group][:name], company_id: @parent_group.company_id}
   end
 end

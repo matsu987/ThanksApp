@@ -1,5 +1,21 @@
 <template>
   <main>
+
+    <!-- ポップアップ -->
+    <div class="popup">
+      <div class="overlay" v-show="showContent">
+        <div class="content">
+          <div class="error-message" v-if="errors.length != 0">
+            <ul >
+              <li><font color="red">{{ errors }}</font></li>
+            </ul>
+          </div>
+          <p class="success-message" v-if="errors.length == 0">登録が完了しました！<br><span class="sub-message">ユーザー設定画面から部署に参加してください</span></p>
+          <button class="close-btn" v-on:click="closeModal">Close</button>
+        </div>
+      </div>
+    </div>
+
     <div v-if='current_company.name != ""'>
       <section class="company">
         <h2>会社情報</h2>
@@ -7,25 +23,25 @@
           <div class="company__form__boxies">
             <div class="company__form__boxies__box">
               <label>
-                <div class="company__form__boxies__box--required">会社名</div>
+                <div class="company__form__boxies__box form--required">会社名</div>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="current_company.name" placeholder="例）株式会社〇〇〇〇">
             </div>
             <div class="company__form__boxies__box">
               <label>
-                <p class="company__form__boxies__box--optional">郵便番号</p>
+                <p class="company__form__boxies__box form--optional">郵便番号</p>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="current_company.post_number" placeholder="例）123-xxxx">
             </div>
             <div class="company__form__boxies__box">
               <label>
-                <p class="company__form__boxies__box--optional">住所</p>
+                <p class="company__form__boxies__box form--optional">住所</p>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="current_company.address" placeholder="例）東京都〇〇区〇〇〇〇">
             </div>
             <div class="company__form__boxies__box">
               <label>
-                <p class="company__form__boxies__box--optional">電話番号</p>
+                <p class="company__form__boxies__box form--optional">電話番号</p>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="current_company.phone_number" placeholder="例）0120-1234-xxxx">
             </div>
@@ -41,25 +57,25 @@
           <div class="company__form__boxies">
             <div class="company__form__boxies__box">
               <label>
-                <div class="company__form__boxies__box--required">会社名</div>
+                <div class="form--required">会社名</div>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="company.name" placeholder="例）株式会社〇〇〇〇">
             </div>
             <div class="company__form__boxies__box">
               <label>
-                <p class="company__form__boxies__box--optional">郵便番号</p>
+                <p class="form--optional">郵便番号</p>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="company.post_number" placeholder="例）123-xxxx">
             </div>
             <div class="company__form__boxies__box">
               <label>
-                <p class="company__form__boxies__box--optional">住所</p>
+                <p class="form--optional">住所</p>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="company.address" placeholder="例）東京都〇〇区〇〇〇〇">
             </div>
             <div class="company__form__boxies__box">
               <label>
-                <p class="company__form__boxies__box--optional">電話番号</p>
+                <p class="form--optional">電話番号</p>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="company.phone_number" placeholder="例）0120-1234-xxxx">
             </div>
@@ -72,19 +88,33 @@
     <div v-if="current_company.admin">
       <section class="group">
         <h2 class="group--admin">新部署登録</h2>
-        <form class="group__form">
+        <form class="group__form" @submit.prevent="createGroup">
           <div class="group__form__boxies">
             <div class="group__form__boxies__box">
               <label>会社登録</label>
               <select class="group__form__boxies__box__text">
-                <option value="">選択してください</option>
+                <option v-model="admin_group.name" :value="admin_group.id">{{admin_group.name}}</option>
               </select>
             </div>
-            <div class="group__form__boxies__box">
-              <label>部署登録</label>
-              <select class="group__form__boxies__box__text">
-                <option value="">選択してください</option>
-              </select>
+            <div class="group__form__boxies__box" v-show="parent_group.show">
+              <label>
+                <div class="form--required">部署登録</div>
+              </label>
+              <input class="group__form__boxies__box__text" type="text" v-model="parent_group.name" placeholder="親部署名" @input="onInputParent">
+            </div>
+
+            <div class="group__form__boxies__box" v-show="child_group.show">
+              <label>
+                <div class="form--optional">部署登録</div>
+              </label>
+              <input class="group__form__boxies__box__text" type="text" v-model="child_group.name" placeholder="子部署名" @input="onInputChild">
+            </div>
+
+            <div class="group__form__boxies__box"v-show="grandchild_group.show">
+              <label>
+                <div class="form--optional">部署登録</div>
+              </label>
+              <input class="group__form__boxies__box__text" type="text" v-model="grandchild_group.name" placeholder="孫部署名">
             </div>
           </div>
           <input type="submit" value="登録" class="group__form__submit">
@@ -115,7 +145,22 @@ export default {
         address: '',
         phone_number: '',
         admin: false
-      }
+      },
+      admin_group: {},
+      parent_group: {
+        show: true,
+        name: ''
+      },
+      child_group: {
+        show: false,
+        name: ''
+      },
+      grandchild_group: {
+        show: false,
+        name: ''
+      },
+      showContent: false,
+      errors: '',
     }
   },
   created() {
@@ -127,6 +172,12 @@ export default {
         this.$data.current_company.admin = response.data.admin
       }
     });
+
+    axios
+    .get('/groups.json')
+    .then(response => {
+      this.$data.admin_group = response.data
+    });
   },
   mounted:function(){
     axios.defaults.headers.common = {
@@ -135,16 +186,24 @@ export default {
     };
   },
   methods: {
+    openModal: function(){
+      this.$data.showContent = true
+    },
+    closeModal: function(){
+      this.$data.showContent = false
+      document.location.reload()
+    },
     createCompany: function(event) {
       axios
         .post("/companies", this.company)
         .then(response => {
           this.errors = '';
           if (response.status === 200){
-            document.location.reload()
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
-          }
+            } else {
+              this.openModal();
+            }
 
           } else {
             let e = response.data;
@@ -165,7 +224,45 @@ export default {
           if (response.status === 200){
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
+          } else {
+            this.openModal();
           }
+
+          } else {
+            let e = response.data;
+          }
+        })
+        .catch(error => {
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+    onInputParent: function(event) {
+      if (this.parent_group.name == ""){
+        this.child_group.show = false
+      } else {
+        this.child_group.show = true
+      }
+    },
+    onInputChild: function(event) {
+      if (this.child_group.name == ""){
+        this.grandchild_group.show = false
+      } else {
+        this.grandchild_group.show = true
+      }
+    },
+    createGroup: function(e) {
+      axios
+        .post("/groups.json", {company: this.admin_group, parent_group: this.parent_group, child_group: this.child_group, grandchild_group: this.grandchild_group})
+        .then(response => {
+          this.errors = '';
+          if (response.status === 200){
+            if (response.data && response.data.errors) {
+            this.errors = response.data.errors;
+            } else {
+              this.openModal();
+            }
 
           } else {
             let e = response.data;
@@ -214,6 +311,52 @@ form {
   display: none;
 }
 
+/* ポップアップ */
+.overlay{
+  width: 60%;
+  height: 50%;
+  z-index: 1;
+  position: fixed;
+  top: 25%;
+  left: 20%;
+  background-color: #fff;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-message {
+  display: block;
+  margin-bottom: 40px;
+  padding-top: 40px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.success-message {
+  display: block;
+  margin-bottom: 40px;
+  padding-top: 40px;
+  font-size: 20px;
+  color: #92CECA;
+  text-align: center;
+}
+
+.sub-message {
+  font-size: 14px;
+  text-align: center;
+}
+
+.close-btn {
+  display: block;
+  margin: auto;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+}
+
 /* 会社登録 */
 .company {
   height: 300px;
@@ -233,13 +376,13 @@ form {
   justify-content: space-between;
 }
 
-.company__form__boxies__box--required {
+.form--required {
   width: 100px;
   display: flex;
   justify-content: space-between;
 }
 
-.company__form__boxies__box--required::after {
+.form--required::after {
   width: 35px;
   text-align: center;
   content: '必須';
@@ -248,13 +391,13 @@ form {
   background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
 }
 
-.company__form__boxies__box--optional {
+.form--optional {
   width: 100px;
   display: flex;
   justify-content: space-between;
 }
 
-.company__form__boxies__box--optional::after {
+.form--optional::after {
   width: 35px;
   text-align: center;
   content: '任意';
@@ -285,7 +428,7 @@ form {
 /* 部署登録 */
 
 .group {
-  height: 180px;
+  height: 300px;
 }
 
 .group--admin::after {
@@ -319,7 +462,7 @@ form {
 
 .group__form__submit {
   width: 100px;
-  height: 50px;
+  height: 150px;
   background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
   border: none;
   border-radius: 10px;

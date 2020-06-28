@@ -22,4 +22,13 @@ class Group < ApplicationRecord
       render :new
     end
   end
+
+  def data_custom(groups, company, parent_group, child_group, grandchild_group)
+    group = { company: {name: company&.name,id: company&.id},
+              parent_group: {name: parent_group&.name, id: parent_group&.id},
+              child_group: {name: child_group&.name, id: child_group&.id},
+              grandchild_group: {name: grandchild_group&.name, id: grandchild_group&.id}
+            }
+    groups << group
+  end
 end
