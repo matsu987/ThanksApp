@@ -34,10 +34,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :companies, only: [:new, :create]
-  resources :groups, only: [:new, :create] do
+  namespace :user do
+    get 'groups', to: 'group#index'
+    get 'groups/search', to: 'group#search'
+    post 'groups', to: 'group#create'
+    get 'groups/belongs_group', to:'group#belongs_group'
+    delete 'groups/destroy', to: 'group#destroy'
+  end
+
+  resources :companies, only: [:index, :create, :update]
+  resources :groups, only: [:index, :new, :create, :edit, :update] do
     collection do
-      get "regist", to: "groups#regist"
       get "depart_join", to: "groups#depart_join"
       get "get_group", to: "groups#get_group"
       get "admin",   to: "groups#admin"

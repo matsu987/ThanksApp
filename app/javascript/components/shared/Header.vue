@@ -63,6 +63,10 @@ export default {
 </script>
 
 <style scoped>
+  header {
+    position: fixed;
+  }
+  
   ul{
     list-style: none;
   }

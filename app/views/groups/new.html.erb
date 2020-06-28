@@ -1,8 +1,2 @@
-部署画面
-<%= form_with model: @group, local: true do |f| %>
-　会社名：<%= f.collection_select(:id, @companies, :id, :name, {prompt: "選択してください"}) %>
-  部署名（親）：<%= f.text_field :name_1 %>
-  部署名（子）：<%= f.text_field :name_2 %>
-  部署名（孫）：<%= f.text_field :name_3 %>
-  <%= f.submit %>
-<% end %>
+<%= javascript_pack_tag 'group_new' %>
+<%= stylesheet_pack_tag 'group_new' %>

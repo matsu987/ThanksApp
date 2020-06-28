@@ -47,6 +47,11 @@ export default {
             "text": "アカウント設定",
             "keyName": "account",
             "url": "/users/1/edit"
+          },
+          "group": {
+            "text": "グループ設定",
+            "keyName": "group",
+            "url": "/groups/new"
           }
         }
       }

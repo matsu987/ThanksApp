@@ -38,7 +38,7 @@ vue: {
 rails: users/sessions#new
 js: javascript/packs/login.js
 vue: {
-  parent: components/login/Login.vue
+  parent: components/login/Login.vue,
   child: components/login/Logincontens.vue
 }
 
@@ -46,7 +46,7 @@ vue: {
 rails: users/registrations#new
 js: javascript/packs/sign_up.js
 vue: {
-  parent: components/sign_up/SignUp.vue
+  parent: components/sign_up/SignUp.vue,
   child: components/sign_up/SignUpContens.vue
 }
 
@@ -54,7 +54,7 @@ vue: {
 rails: users/passwords#new
 js: javascript/packs/reset_password.js
 vue: {
-  parent: components/reset_password/ResetPassword.vue
+  parent: components/reset_password/ResetPassword.vue,
   child: components/reset_password/ResetPasswordContents.vue
 }
 
@@ -62,7 +62,16 @@ vue: {
 rails: users#edit
 js: javascript/packs/user_edit.js
 vue: {
-  parent: components/user_edit/UserEdit.vue
+  parent: components/user_edit/UserEdit.vue,
   child: components/user_edit/UserEditContent.vue,
+         components/shared/Header.vue
+}
+
+# グループ設定ページ
+rails: group#new
+js: group_new.js
+vue: {
+  parent: components/groups/GroupNew.vue,
+  child: components/groups/GroupNewContent.vue,
          components/shared/Header.vue
 }
