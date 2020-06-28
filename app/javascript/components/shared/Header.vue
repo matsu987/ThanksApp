@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import 'logo.png'
+import 'logo_square.png'
 import axios from 'axios'
 import NavAll from 'components/shared/NavAll.vue';
 import NavMypage from 'components/shared/NavMypage.vue';
@@ -71,7 +71,7 @@ export default {
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 40%;
+    width: 45%;
   }
 
   .header-top{
@@ -90,7 +90,6 @@ export default {
   }
 
   .header-top__text{
-    width: 200px;
     margin: 0 auto;
   }
 

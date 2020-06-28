@@ -25,10 +25,11 @@ Rails.application.routes.draw do
   end
 
   #送受信一覧
-  resources :users, except: [:new, :create, :edit, :destroy] do
+  resources :users, except: [:new, :create, :destroy] do
     resources :transmissions, only: [:index]
     resources :receptions, only: [:index]
     member do
+      patch "login_update", to: "user/login#update"
       delete 'image/destroy', to: "users#image_destroy"
     end
   end

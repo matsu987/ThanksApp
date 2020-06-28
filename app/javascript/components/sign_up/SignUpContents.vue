@@ -20,8 +20,12 @@
     <form action="/users/sign_up" accept-charset="UTF-8" method="post" class="signup-form" @submit.prevent="createUser">
       <img src='~ari-letter-logo.jpg' class="ari-logo">
       <div class="signup-form__content">
-        <label for="name">Name</label>
-        <input type="text" id="name" v-model="name" placeholder="例）山田太郎">
+        <label for="family_name">FamilyName</label>
+        <input type="text" id="family_name" v-model="family_name" placeholder="例）山田">
+      </div>
+      <div class="signup-form__content">
+        <label for="given_name">GivenName</label>
+        <input type="text" id="given_name" v-model="given_name" placeholder="例）太郎">
       </div>
       <div class="signup-form__content">
         <label for="email">E-Mail</label>
@@ -50,7 +54,8 @@ export default {
   data: function(){
     return{
       errors: '',
-      name: '',
+      family_name: '',
+      given_name: '',
       email: '',
       password: '',
       password_conf: '',
@@ -76,7 +81,7 @@ export default {
     },
     createUser: function(event) {
       axios
-        .post('/users', {name: this.name, email: this.email, password: this.password, password_confirmation: this.password_conf})
+        .post('/users', {family_name: this.family_name, given_name: this.given_name, email: this.email, password: this.password, password_confirmation: this.password_conf})
         .then(response => {
           this.errors = '';
           if (response.status === 200){
@@ -110,7 +115,7 @@ export default {
   .signup-form__conts{
     background-color: #F8F8F8;
     width: 50%;
-    height: 80vh;
+    height: 94vh;
     box-sizing: border-box;
     border-radius: 40px;
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="gNav-section__link" v-on:click="onclick" :class="{active: isActive}">
     <CheckBox></CheckBox>
-    <NavName :text="navText"></NavName>
+    <NavName :url="navUrl" :text="navText"></NavName>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import CheckBox from 'components/shared/parts/CheckBox.vue'
 import NavName from 'components/shared/parts/NavName.vue'
 
 export default {
-  props: [ 'currentTabName', 'tabName', 'text' ],
+  props: [ 'currentTabName', 'tabName', 'text' , 'url'],
   components: { CheckBox ,NavName},
   created: function () {
   // 現在のheaderTabの名前("mypageなど")、NavBtnに渡すtabの名前、NavBtnに渡すtabのテキストをpropで受け取る。  
@@ -22,6 +22,7 @@ export default {
       currentTab: this.currentTabName,
       navTab: this.tabName,
       navText: this.text,
+      navUrl: this.url,
       isActive: false
     }
   },

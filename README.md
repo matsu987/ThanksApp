@@ -57,3 +57,12 @@ vue: {
   parent: components/reset_password/ResetPassword.vue
   child: components/reset_password/ResetPasswordContents.vue
 }
+
+# ユーザー編集ページ
+rails: users#edit
+js: javascript/packs/user_edit.js
+vue: {
+  parent: components/user_edit/UserEdit.vue
+  child: components/user_edit/UserEditContent.vue,
+         components/shared/Header.vue
+}

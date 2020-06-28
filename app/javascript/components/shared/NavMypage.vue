@@ -9,7 +9,7 @@
     <div class="header-gNav">
       <ul>
         <li v-for='tab in tabs.mypage'>
-          <NavBtn :current-tab-name="currentTab" :tab-name="tab.keyName" :text="tab.text" v-on:active="setActive"></NavBtn>
+          <NavBtn :current-tab-name="currentTab" :tab-name="tab.keyName" :url="tab.url" :text="tab.text" v-on:active="setActive"></NavBtn>
         </li>
       </ul>  
     </div>
@@ -30,19 +30,23 @@ export default {
         mypage: {
           "new": {
             "text": "新規作成",
-            "keyName": "new"
+            "keyName": "new",
+            "url": "#"
           },
           "send": {
             "text": "送信一覧",
-            "keyName": "send"
+            "keyName": "send",
+            "url": "#"
           },
           "receive": {
             "text": "受信一覧",
-            "keyName": "receive"
+            "keyName": "receive",
+            "url": "#"
           },
           "account": {
             "text": "アカウント設定",
-            "keyName": "account"
+            "keyName": "account",
+            "url": "/users/1/edit"
           }
         }
       }
