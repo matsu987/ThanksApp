@@ -34,10 +34,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :companies, only: [:new, :create]
-  resources :groups, only: [:new, :create] do
+  resources :companies, only: [:index, :create, :update]
+  resources :groups, only: [:index, :new, :create, :edit, :update] do
     collection do
-      get "regist", to: "groups#regist"
       get "depart_join", to: "groups#depart_join"
       get "get_group", to: "groups#get_group"
       get "admin",   to: "groups#admin"
