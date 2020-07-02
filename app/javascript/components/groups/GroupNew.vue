@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <Header></Header>
+    <Header header-nav="Mypage" mypage-nav="group"></Header>
     <GroupNewContent></GroupNewContent>
   </div>
 </template>

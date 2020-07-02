@@ -4,7 +4,7 @@
       <div class="header-top">
         <a href="/">
           <img class="header-top__logo" src="~logo.png">
-          <p class="header-top__text">株式会社xxxxxxxx</p>
+          <p class="header-top__text">{{company.name}}</p>
         </a>
       </div>
       <div class="header-gNav">
@@ -33,7 +33,7 @@ import NavBtn from 'components/shared/parts/NavBtn.vue';
 
 export default {
   components: { NavAll, NavMypage, NavBtn},
-  // props: [ ],
+  props: ["headerNav", "mypageNav"],
   data: function(){
     return {
       currentTab: 'Mypage',
@@ -46,12 +46,30 @@ export default {
           "text": "全社員",
           "keyName": "All"
         }
+      },
+      company:{
+        name: "まだ登録されていません"
       }
     }
   },
+  created() {
+    axios
+    .get('/user/groups/belongs_group.json')
+    .then(response =>{
+      if(response.data.company){
+        this.$data.company.name = response.data.company.name
+      }
+      console.log(this)
+    });
+  },
   computed:{
     currentNav: function(){
-      return 'Nav' + this.currentTab
+      if (this.headerNav){
+        return 'Nav' + this.headerNav 
+      }
+      else{
+        return 'Nav' + this.currentTab
+      }
     }
   },
   methods: {

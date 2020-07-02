@@ -2,12 +2,15 @@
   <nav>
     <div class="header-top">
       <a href="/">
-        <img class="header-top__logo" src="~logo.png">
-        <p class="header-top__text">株式会社xxxxxxxx</p>
+        <img class="header-top__logo" :src="this.current_user.avatar.url">
+        <p class="header-top__text">{{ current_user.name }}</p>
       </a>
     </div>
     <div class="header-gNav">
       <ul>
+        <li>
+          <div>新規作成</div>
+        </li>
         <li v-for='tab in tabs.mypage'>
           <NavBtn :current-tab-name="currentTab" :tab-name="tab.keyName" :url="tab.url" :text="tab.text" v-on:active="setActive"></NavBtn>
         </li>
@@ -25,14 +28,9 @@ export default {
   components: { NavBtn },
   data: function(){
     return {
-      currentTab: "new",
+      currentTab: "send",
       tabs: {
         mypage: {
-          "new": {
-            "text": "新規作成",
-            "keyName": "new",
-            "url": "#"
-          },
           "send": {
             "text": "送信一覧",
             "keyName": "send",
@@ -54,6 +52,12 @@ export default {
             "url": "/groups/new"
           }
         }
+      },
+      current_user: {
+        name: null,
+        avatar: {
+          url: ""
+        }
       }
     }
   },
@@ -61,6 +65,18 @@ export default {
     setActive: function(e){
       this.currentTab = e.text;
     }
+  },
+  created(){
+      axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      };
+      axios
+      .get('/thanks.json')
+      .then( response => {
+        this.$data.current_user = response.data.current_user
+        console.log(this.$data.current_user)
+      })
   }
 }
 </script>
@@ -90,6 +106,7 @@ export default {
 
   .header-top__logo{
     width: 150px;
+    height: 100px;
     padding: 20px 0;
   }
 
