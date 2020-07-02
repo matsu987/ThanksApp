@@ -33,9 +33,10 @@ import NavBtn from 'components/shared/parts/NavBtn.vue';
 
 export default {
   components: { NavAll, NavMypage, NavBtn},
-  props: ["headerNav", "mypageNav"],
+  props: ["headerNav", "mypageNav", "user"],
   data: function(){
     return {
+      current_user: this.user,
       currentTab: 'Mypage',
       tabs: {
         "Mypage": {

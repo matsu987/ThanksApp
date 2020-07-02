@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
   root 'thanks#index'
 
   resources :thanks, except: %i(index, show)
-
+  
   #ユーザー検索
   namespace :search do
     get 'users/index'
@@ -26,8 +27,10 @@ Rails.application.routes.draw do
 
   #送受信一覧
   resources :users, except: [:new, :create, :destroy] do
+    namespace :letters do
+      get 'receive/index'
+    end    
     resources :transmissions, only: [:index]
-    resources :receptions, only: [:index]
     member do
       patch "login_update", to: "user/login#update"
       delete 'image/destroy', to: "users#image_destroy"

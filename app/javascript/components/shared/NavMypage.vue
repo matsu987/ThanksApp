@@ -39,7 +39,7 @@ export default {
           "receive": {
             "text": "受信一覧",
             "keyName": "receive",
-            "url": "#"
+            "url": ""
           },
           "account": {
             "text": "アカウント設定",
@@ -77,6 +77,11 @@ export default {
         this.$data.current_user = response.data.current_user
         console.log(this.$data.current_user)
       })
+  },
+  computed: {
+    receive_url: function(){
+      
+    }
   }
 }
 </script>

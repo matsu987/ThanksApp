@@ -1,38 +1,38 @@
 <template>
   <div id="app" class="container">
-    <Header></Header>
-    <Contents></Contents>
+    <Header :user="this.current_user"></Header>
+    <ReceiveContents></ReceiveContents>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import Header from 'components/shared/Header.vue';
-import Contents from 'components/shared/Contents.vue';
+import ReceiveContents from 'components/letters/receive/ReceiveContents.vue';
 
 export default {
   components: {
-    Header, Contents
+    Header, ReceiveContents
   },
   data: function () {
     return {
-
+      current_user: ""
     }
   },
-  // created: function(){
-  //   this.current_user = {}
-  //   axios
-  //     .get('/thanks.json')
-  //     .then(response => {
-  //       var user = response.data.current_user
-  //     });
-  //   console.log(user)
-  // },
+  created: function(){
+    axios.defaults.headers.common = {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };    
+
+    axios
+      .get('/thanks.json')
+      .then(response => {
+        this.$data.current_user = response.data.current_user
+      });
+  }
   // mounted(){
-  //     axios.defaults.headers.common = {
-  //       'X-Requested-With': 'XMLHttpRequest',
-  //       'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-  //     };
+
   //     axios
   //     .get('/thanks.json')
   //     .then( response => {
