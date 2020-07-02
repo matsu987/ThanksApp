@@ -29,7 +29,6 @@ import axios from 'axios'
 import NavAll from 'components/shared/NavAll.vue';
 import NavMypage from 'components/shared/NavMypage.vue';
 import NavBtn from 'components/shared/parts/NavBtn.vue';
-// import ActNavBtn from 'components/shared/ActNavBtn.vue';
 
 export default {
   components: { NavAll, NavMypage, NavBtn},
@@ -60,7 +59,6 @@ export default {
       if(response.data.company){
         this.$data.company.name = response.data.company.name
       }
-      console.log(this)
     });
   },
   computed:{
