@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <Header :user="this.current_user"></Header>
+    <Header :nav="mypageNav"></Header>
     <ReceiveContents></ReceiveContents>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   },
   data: function () {
     return {
-      current_user: ""
+      mypageNav: "receive"
     }
   },
   created: function(){
@@ -31,16 +31,6 @@ export default {
         this.$data.current_user = response.data.current_user
       });
   }
-  // mounted(){
-
-  //     axios
-  //     .get('/thanks.json')
-  //     .then( response => {
-  //       console.log(this)
-  //       this.$data.current_user = response.data.current_user
-  //       console.log(this.$data.current_user)
-  //     })
-  // }
 }
 </script>
 

@@ -3,13 +3,13 @@
     <div class="header-top">
       <a href="/">
         <img class="header-top__logo" :src="this.current_user.avatar.url">
-        <p class="header-top__text">{{ current_user.name }}</p>
+        <p class="header-top__text">{{ current_user.family_name }} {{ current_user.given_name }}</p>
       </a>
     </div>
     <div class="header-gNav">
       <ul>
         <li>
-          <div>新規作成</div>
+          <div class="new">新規作成</div>
         </li>
         <li v-for='tab in tabs.mypage'>
           <NavBtn :current-tab-name="currentTab" :tab-name="tab.keyName" :url="tab.url" :text="tab.text" v-on:active="setActive"></NavBtn>
@@ -26,9 +26,10 @@ import NavBtn from 'components/shared/parts/NavBtn.vue';
 
 export default {
   components: { NavBtn },
+  props: ["nav"],
   data: function(){
     return {
-      currentTab: "send",
+      currentTab: this.nav,
       tabs: {
         mypage: {
           "send": {
@@ -39,7 +40,7 @@ export default {
           "receive": {
             "text": "受信一覧",
             "keyName": "receive",
-            "url": ""
+            "url": "/users/1/letters/receive"
           },
           "account": {
             "text": "アカウント設定",
@@ -75,7 +76,6 @@ export default {
       .get('/thanks.json')
       .then( response => {
         this.$data.current_user = response.data.current_user
-        console.log(this.$data.current_user)
       })
   },
   computed: {
@@ -102,6 +102,7 @@ export default {
   .header-top{
     width: 100%;
     padding: 15px 0;
+    height: 300px;
   }
 
   .header-gNav{
@@ -110,8 +111,7 @@ export default {
   }
 
   .header-top__logo{
-    width: 150px;
-    height: 100px;
+    width: 100px;
     padding: 20px 0;
   }
 
@@ -120,6 +120,15 @@ export default {
     margin: 0 auto;
   }
 
+  .new{
+    background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
+    border-radius: 18px;
+    width: 180px;
+    height: 35px;
+    color: white;
+    margin: 0 auto 20px;
+    line-height: 35px;
+  }
   .gNav-section__link{
     display: flex;
     width: 80%;

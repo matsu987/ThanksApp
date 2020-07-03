@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <Header></Header>
+    <Header :nav="mypageNav"></Header>
     <Contents></Contents>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   },
   data: function () {
     return {
-
+      mypageNav: "send"
     }
   },
 }
