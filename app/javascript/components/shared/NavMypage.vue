@@ -35,7 +35,7 @@ export default {
           "send": {
             "text": "送信一覧",
             "keyName": "send",
-            "url": "#"
+            "url": "/users/1/letters/send"
           },
           "receive": {
             "text": "受信一覧",
@@ -76,6 +76,9 @@ export default {
       .get('/thanks.json')
       .then( response => {
         this.$data.current_user = response.data.current_user
+        this.tabs.mypage.send.url = "/users/" + response.data.current_user.id + "/letters/send"
+        this.tabs.mypage.receive.url = "/users/" + response.data.current_user.id + "/letters/receive"
+        this.tabs.mypage.account.url = "/users/" + response.data.current_user.id + "/edit"
       })
   },
   computed: {
