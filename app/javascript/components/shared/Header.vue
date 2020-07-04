@@ -48,7 +48,7 @@ export default {
         }
       },
       company:{
-        name: "まだ登録されていません"
+        name: ""
       }
     }
   },
@@ -58,6 +58,8 @@ export default {
     .then(response =>{
       if(response.data[0].company.name){
         this.$data.company.name = response.data[0].company.name
+      }else {
+        this.$data.company.name = "まだ登録されていません"
       }
     });
   },
