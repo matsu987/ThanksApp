@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- <NavMypage> </NavMypage> -->
-    <component :is="currentNav"></component>
+    <component :is="currentNav" :nav="mypageNav"></component>
   </header>
 </template>
 
@@ -32,10 +32,10 @@ import NavBtn from 'components/shared/parts/NavBtn.vue';
 
 export default {
   components: { NavAll, NavMypage, NavBtn},
-  props: ["headerNav", "mypageNav", "user"],
+  props: ["headerNav", "nav" ],
   data: function(){
     return {
-      current_user: this.user,
+      mypageNav: this.nav,
       currentTab: 'Mypage',
       tabs: {
         "Mypage": {
@@ -56,8 +56,8 @@ export default {
     axios
     .get('/user/groups/belongs_group.json')
     .then(response =>{
-      if(response.data.company){
-        this.$data.company.name = response.data.company.name
+      if(response.data[0].company.name){
+        this.$data.company.name = response.data[0].company.name
       }
     });
   },
@@ -98,6 +98,7 @@ export default {
   .header-top{
     width: 100%;
     padding: 15px 0;
+    height: 300px;
   }
 
   .header-gNav{

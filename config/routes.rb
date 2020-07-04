@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   #送受信一覧
   resources :users, except: [:new, :create, :destroy] do
     namespace :letters do
-      get 'receive/index'
+      get 'receive', to: 'receive#index'
     end    
     resources :transmissions, only: [:index]
     member do
