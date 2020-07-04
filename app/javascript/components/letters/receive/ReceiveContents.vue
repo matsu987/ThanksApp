@@ -101,7 +101,7 @@ export default {
           .get(url, {
             params: {
               receive_year: this.$data.receive.year,
-              receive_month: this.$data.receive.month
+              receive_month: this.$data.receive.month 
             }
           })
           .then( response => {
@@ -171,7 +171,7 @@ export default {
     // 年月の取得
     var now = new Date();
     this.$data.receive.year = now.getFullYear()
-    this.$data.receive.month = now.getMonth()
+    this.$data.receive.month = now.getMonth() + 1
     // 受信したありレターの取得
     axios.defaults.headers.common = {
       'X-Requested-With': 'XMLHttpRequest',
