@@ -35,16 +35,7 @@ class ThanksController < ApplicationController
 
   def create
     thank = Thank.new(thank_params)
-    thank.transmission_status = true
-    if thank.save
-      render json: thank, status: :created
-    else
-      render json: { errors: thank.errors.full_messages }
-    end
-  end
-
-  def one_time_create
-    thank = Thank.new(thank_params)
+    thank.transmission_status = true if params[:thank][:transmission_status] == true
     if thank.save
       render json: thank, status: :created
     else

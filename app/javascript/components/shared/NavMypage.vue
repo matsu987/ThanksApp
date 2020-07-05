@@ -35,8 +35,8 @@
         </div>
         <div class="form__btn-box">
           <button class="form__btn-box__close">保存せずに閉じる</button>
-          <button class="form__btn-box__one-time" @click="oneTimeCreate">一時保存</button>
-          <button class="form__btn-box__confirm" @click="createThank">確定</button>
+          <button class="form__btn-box__one-time" @click="createThank">一時保存</button>
+          <button class="form__btn-box__confirm" @click="confirm">確定</button>
         </div>
       </form>
     </div>
@@ -135,7 +135,8 @@ export default {
         receiver_family_name: '',
         receiver_given_name: '',
         receiver_email: '',
-        receiver_avatar: ''
+        receiver_avatar: '',
+        transmission_status: false
       },
       showUserSelect: false,
       userSelectbtn: true,
@@ -217,6 +218,10 @@ export default {
         })
 
     },
+    confirm: function(e){
+      this.$data.thank.transmission_status = true
+      this.createThank(e);
+    },
     createThank: function(e) {
       e.preventDefault();
       axios
@@ -241,40 +246,7 @@ export default {
                                 receiver_family_name: '',
                                 receiver_given_name: '',
                                 receiver_email: '',
-                                receiver_avatar: ''
-                              }
-        })
-        .catch(error => {
-          if (error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors;
-          }
-        });
-    },
-    oneTimeCreate: function(e) {
-      e.preventDefault();
-      axios
-        .post('/thanks/one_time.json', this.thank)
-        .then(response => {
-          this.errors = '';
-          if (response.status === 200){
-            if (response.data && response.data.errors) {
-            this.errors = response.data.errors;
-          }
-
-          } else {
-
-            let e = response.data;
-          }
-          this.$data.showfinishContent = true
-          this.$data.searchUsers = []
-          this.$data.thank = {
-                                id: '',
-                                text: '',
-                                receiver_id: '',
-                                receiver_family_name: '',
-                                receiver_given_name: '',
-                                receiver_email: '',
-                                receiver_avatar: ''
+                                receiver_avatar: '',
                               }
         })
         .catch(error => {
