@@ -82,33 +82,7 @@
         </div>
       </div>
     </div>
-        <!--<div class="user-content">
-          <div class="side-content">
-            グループ一覧
-            <div class="groups">
-              <ul>
-                <li v-for="(group, index) in groups" :key="group.id" @click="groupBox(index)" :data-id="group.id"  ref="group" class="group-list">{{group.name}}</li>
-              </ul>
-            </div>
-          </div>
-          <div class="main-content">
-            <input type="text" v-model="searchData.keyword" @input="onInput" class="user-input">
-            <div id="user-search-result">
-              <ul class="users-box">
-                <li v-for="(user, index) in searchUsers" :key="user.id" class="user-box" @click="userBox(index)" :data-id="user.id" :data-name="user.name" :data-avatar="user.avatar.url" ref="user">
-                  <img v-if="user.avatar.url" class="logo-small" :src="user.avatar.url">
-                  <img v-else class="logo-small" src="~person.png">
-                  <p class="user-name">{{user.name}}さん（{{user.email}}）</p>
-                </li>
-              </ul>
-              <p class="receiver-text"></p>
-            </div>
-          </div>
-        </div>
-        <button class="close-btn" v-on:click="closeUserModal">Close</button>
-      </div>-->
   </nav>
-  
 </template>
 
 <script>
