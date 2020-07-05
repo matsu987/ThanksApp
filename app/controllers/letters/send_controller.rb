@@ -14,14 +14,18 @@ class Letters::SendController < ApplicationController
           {
             id: send_thank.id,
             text: send_thank.text,
+            transmission_status: send_thank.transmission_status,
+            reception_status: send_thank.reception_status,
+            receiver: {
+              id: send_thank.receiver.id,
+              name: send_thank.receiver.family_name + send_thank.receiver.given_name,
+              avatar: send_thank.receiver.avatar
+            },
             sender: {
               id: send_thank.sender.id,
-              family_name: send_thank.sender.family_name,
-              given_name: send_thank.sender.given_name,
+              name: send_thank.sender.family_name + send_thank.sender.given_name,
               avatar: send_thank.sender.avatar
-            },
-            transmission_status: send_thank.transmission,
-            reception_status: send_thank.reception_status
+            }
           }
         )
       end

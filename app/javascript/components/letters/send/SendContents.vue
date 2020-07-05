@@ -24,13 +24,54 @@
       </div>        
     </div>
     <div class="contents">
-      <div v-for="thank in thanks" class="content">
+      <div v-for="(thank, index) in thanks" class="content" :key="thank.id" @click="editThank(index)" ref="user">
         <div v-if="thank.transmission_status == 0" class="content_name_unopened">編集中</div>
         <div v-else class="content_name_opened">確定</div>
         <div class="content_text">{{thank.text}}</div>
         <div class="content_from-user">
-          <div class="avatar-img"></div>
-          <div class="user-name">{{thank.sender.family_name}}{{thank.sender.given_name}}さん</div>
+          <img v-if="thank.receiver.avatar.url" class="avatar-img" :src="thank.receiver.avatar.url">
+          <img v-else class="logo" src="~person.png">
+          <div class="user-name">{{thank.receiver.name}}さん</div>
+        </div>
+      </div>
+    </div>
+    <!--  編集ポップアップ -->
+    <div class="overlay" v-show="showContent">
+      <form class="form">
+        <h2 class="form__title">編集</h2>
+        <div v-if= "thank.receiver.id" class="form__reciever">
+          <img v-if="thank.receiver.avatar.url" class="form__reciever__img" :src="thank.receiver.avatar.url">
+          <img v-else class="form__reciever__img" src="~person.png">
+          <p class="form__reciever__name">To: {{thank.receiver.name}}さん</p>
+        </div>
+        <textarea class="form__text" v-model="thank.text" type="text" placeholder="感謝を具体的に書きましょう"></textarea>
+        <div class="form__sender">
+          <img v-if="thank.sender.avatar.url" class="form__avatar" :src="thank.sender.avatar.url">
+          <img v-else class="form__avatar" src="~person.png">
+          <p class="form__sender__name">From: {{ thank.sender.name }}</p>
+        </div>
+        <div class="form__btn-box">
+          <div class="form__btn-box__second">
+            <button class="form__btn-box__close">保存せずに閉じる</button>
+            <button class="form__btn-box__delete" @click="deleteThank">削除</button>
+          </div>
+          <button class="form__btn-box__one-time" @click="oneTime">一時保存</button>
+          <button class="form__btn-box__confirm" @click="confirm">確定</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 投稿完了ポップアップ-->
+    <div class="popup">
+      <div class="overlay-finish" v-show="showfinishContent">
+        <div class="overlay-finish__content">
+          <div class="error-message" v-if="errors.length != 0">
+            <ul >
+              <li><font color="red">{{ errors }}</font></li>
+            </ul>
+          </div>
+          <p class="success-message" v-if="errors.length == 0">更新が完了しました！</p>
+          <button class="overlay-finish__close-btn" v-on:click="closefinishModal">Close</button>
         </div>
       </div>
     </div>
@@ -39,62 +80,37 @@
 
 <script>
 import axios from 'axios';
+import 'person.png'
 
 export default {
 
   data: function(){
     return {
       // ありレターの数はlength、senderとtextも入っている。
-      thanks: [
-        {
-          id: "",
-          text:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          sender: {
-            id: "",
-            family_name: "熊谷",
-            given_name: "真理子",
-            avatar: "test.jpeg"
-          },
-          transmission_status: "0"
-        },
-        {
-          id: "",
-          text:"testtesttesttest",
-          sender: {
-            id: "",
-            family_name: "熊谷",
-            given_name: "隆太郎",
-            avatar: "test.jpeg"
-          },
-          transmission_status: "1"
-        },
-        {
-          id: "",
-          text:"いつもありがとう",
-          sender: {
-            id: "",
-            family_name: "奥脇",
-            given_name: "真人",
-            avatar: "test.jpeg"
-          },
-          transmission_status: "1"
-        },
-        {
-          id: "",
-          text:"testtesttesttest",
-          sender: {
-            id: "",
-            family_name: "長松軒",
-            given_name: "昇悟",
-            avatar: "test.jpeg"
-          },
-          transmission_status: "1"
-        }
-      ],
+      thanks: [],
       send: {
         year: "",
         month: ""
-      }
+      },
+      showContent: false,
+      thank: {
+        id: '',
+        text: '',
+        transmission_status: false,
+        reception_status: false,
+        receiver: {
+          id: '',
+          name: '',
+          avatar: ''
+        },
+        sender: {
+          id: '',
+          name: '',
+          avatar: ''
+        }
+      },
+      showfinishContent: false,
+      errors: ''
     }
   },
   created(){
@@ -147,6 +163,12 @@ export default {
     }    
   },
   methods: {
+    openModal: function(){
+      this.$data.showContent = true
+    },
+    closeModal: function(){
+      this.$data.showContent = false
+    },
     increClick: function(){
       if(this.send.month < 12 ){
         this.send.month++
@@ -222,6 +244,71 @@ export default {
           this.$data.thanks = response.data.send_thanks
         })
       }
+    },
+    editThank: function(e){
+      this.$data.thank = this.$data.thanks[e]
+      this.openModal();
+    },
+    updateThank: function(e){
+      e.preventDefault();
+      let url = "/thanks/" + this.thank.id + ".json"
+      axios
+        .patch(url, this.thank)
+        .then(response => {
+          this.errors = '';
+          if (response.status === 201){
+            this.$data.showfinishContent = true
+            if (response.data && response.data.errors) {
+            this.errors = response.data.errors;
+          }
+
+          } else {
+
+            let e = response.data;
+          }
+        })
+        .catch(error => {
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+
+    },
+    confirm: function(e){
+      this.$data.thank.transmission_status = true
+      this.updateThank(e);
+    },
+    oneTime: function(e){
+      this.$data.thank.transmission_status = false
+      this.updateThank(e);
+    },
+    deleteThank: function(e){
+      e.preventDefault();
+      let url = "/thanks/" + this.thank.id + ".json"
+      axios
+        .delete(url, this.thank)
+        .then(response => {
+          this.errors = '';
+          if (response.status === 201){
+            this.$data.showfinishContent = true
+            if (response.data && response.data.errors) {
+            this.errors = response.data.errors;
+          }
+
+          } else {
+
+            let e = response.data;
+          }
+        })
+        .catch(error => {
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+    closefinishModal: function(e) {
+      this.$data.showfinishContent = false
+      document.location.reload();
     }
   }
 }
@@ -371,4 +458,175 @@ main{
   border-radius: 999px;
 }
 
+/* 編集ポップアップ */
+.overlay{
+  width: 38%;
+  height: 90%;
+  z-index: 1;
+  position: fixed;
+  top: 4%;
+  left: 48%;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  width: 80%;
+}
+
+.form__title {
+  margin: 20px 0;
+  color: #ff0000;
+  text-align: center;
+}
+
+.form__reciever {
+  display: flex;
+  margin: 10px 50px 10px 0;
+}
+
+.form__reciever__img {
+  height: 50px;
+  width: 50px;
+  border-radius: 999px;
+}
+
+.form__reciever__name {
+  line-height: 50px;
+  margin-left: 10px;
+}
+
+.form__user-btn {
+  display: block;
+  background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
+  border-radius: 18px;
+  border: none;
+  width: 30%;
+  height: 45px;
+  color: white;
+  margin: 20px 0 20px 0;
+}
+
+.form__text {
+  height: 60%;
+  width: 100%;
+  border: 1px solid #ff0000;
+}
+
+.form__sender {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 50px 10px 0;
+}
+
+.form__avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 999px;
+}
+
+.form__sender__name {
+  line-height: 50px;
+  margin-left: 10px;
+}
+
+.form__btn-box {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form__btn-box__second {
+  width: 35%;
+}
+
+.form__btn-box__close {
+  display: block;
+  border-radius: 18px;
+  background: #fff;
+  border: 2px solid #BDBDBD;
+  width: 100%;
+  height: 30px;
+  color: #BDBDBD;
+  margin-bottom: 10px;
+}
+
+.form__btn-box__delete {
+  display: block;
+  border-radius: 18px;
+  background: #BDBDBD;
+  width: 100%;
+  height: 30px;
+  color: #fff;
+  border: none;
+}
+
+.form__btn-box__one-time {
+  display: block;
+  border-radius: 18px;
+  border: 2px solid #ff0000;
+  background: #fff;
+  width: 35%;
+  height: 70px;
+  color: #ff0000;
+  margin: 0 10px;
+}
+
+.form__btn-box__confirm {
+  display: block;
+  background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
+  border-radius: 18px;
+  border: none;
+  width: 25%;
+  height: 70px;
+  color: white;
+}
+
+/* 更新完了ポップアップ */
+.overlay-finish{
+  width: 60%;
+  height: 50%;
+  z-index: 1;
+  position: fixed;
+  top: 25%;
+  left: 20%;
+  background-color: #fff;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-message {
+  display: block;
+  margin-bottom: 40px;
+  padding-top: 40px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.success-message {
+  display: block;
+  margin-bottom: 40px;
+  padding-top: 40px;
+  font-size: 20px;
+  color: #92CECA;
+  text-align: center;
+}
+
+.sub-message {
+  font-size: 14px;
+  text-align: center;
+}
+
+.overlay-finish__close-btn {
+  display: block;
+  margin: auto;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+}
 </style>

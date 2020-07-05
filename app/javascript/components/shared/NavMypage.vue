@@ -165,7 +165,7 @@ export default {
     closefinishModal: function(){
       this.$data.showfinishContent = false
       this.$data.showContent = false
-      document.location.reload()
+      document.location.reload();
     },
     newThanks: function(e){
       this.openModal();
