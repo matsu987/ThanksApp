@@ -1,22 +1,22 @@
 <template>
   <div id="app" class="container">
     <Header :nav="mypageNav"></Header>
-    <ReceiveContents></ReceiveContents>
+    <SendContents></SendContents>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import Header from 'components/shared/Header.vue';
-import ReceiveContents from 'components/letters/receive/ReceiveContents.vue';
+import SendContents from 'components/letters/send/SendContents.vue';
 
 export default {
   components: {
-    Header, ReceiveContents
+    Header, SendContents
   },
   data: function () {
     return {
-      mypageNav: "receive"
+      mypageNav: "send"
     }
   }
 }

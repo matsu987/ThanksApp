@@ -29,17 +29,25 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  #送受信一覧
+  # #送受信一覧
   resources :users, except: [:new, :create, :destroy] do
     namespace :letters do
       get 'receive', to: 'receive#index'
-    end    
-    resources :transmissions, only: [:index]
-    member do
-      patch "login_update", to: "user/login#update"
-      delete 'image/destroy', to: "users#image_destroy"
+      get 'send', to: 'send#index'
     end
+    resources :transmissions, only: [:index]
+      member do
+        patch "login_update", to: "user/login#update"
+        delete 'image/destroy', to: "users#image_destroy"
+      end
   end
+
+  # resources :transmissions, only: [:index]
+  #   member do
+  #     patch "login_update", to: "user/login#update"
+  #     delete 'image/destroy', to: "users#image_destroy"
+  #   end
+  # end
 
   namespace :user do
     get 'groups', to: 'group#index'

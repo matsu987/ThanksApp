@@ -1,2 +1,1 @@
-json.receive_thanks @receive_thanks
-json.senders @senders
+json.receive_thanks @received_thanks
