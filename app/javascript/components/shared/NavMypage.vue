@@ -2,7 +2,8 @@
   <nav>
     <div class="header-top">
       <a href="/">
-        <img class="header-top__logo" :src="current_user.avatar.url">
+        <img v-if="current_user.avatar.url" class="header-top__logo" :src="current_user.avatar.url">
+        <img v-else class="header-top__logo" src="~avatar.png">
         <p class="header-top__text">{{ current_user.family_name }} {{ current_user.given_name }}</p>
       </a>
     </div>
@@ -87,6 +88,7 @@
 
 <script>
 import 'logo.png'
+import 'avatar.png';
 import axios from 'axios';
 import NavBtn from 'components/shared/parts/NavBtn.vue';
 

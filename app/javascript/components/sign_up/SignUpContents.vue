@@ -74,6 +74,9 @@ export default {
     },
     closeModal: function(){
       this.$data.showContent = false
+      setTimeout(function(){
+        location.href = "/"
+      },10);
     },
     resetForm: function(){
       this.$data.email = ''
@@ -90,9 +93,6 @@ export default {
             }
             else{
               this.openModal();
-              setTimeout(function(){
-                location.href = "/"
-                },1000);
             }
           } else {
             let e = response.data;
