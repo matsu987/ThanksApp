@@ -36,79 +36,158 @@ export default {
     return {
       // ありレターの数はlength、senderとtextも入っている。
       thanks: [
-        {
-          id: "",
-          text:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          sender: {
-            id: "",
-            family_name: "熊谷",
-            given_name: "真理子",
-            avatar: "test.jpeg"
-          },
-          reception_status: "0"
-        },
-        {
-          id: "",
-          text:"testtesttesttest",
-          sender: {
-            id: "",
-            family_name: "熊谷",
-            given_name: "隆太郎",
-            avatar: "test.jpeg"
-          },
-          reception_status: "1"
-        },
-        {
-          id: "",
-          text:"いつもありがとう",
-          sender: {
-            id: "",
-            family_name: "奥脇",
-            given_name: "真人",
-            avatar: "test.jpeg"
-          },
-          reception_status: "1"
-        },
-        {
-          id: "",
-          text:"testtesttesttest",
-          sender: {
-            id: "",
-            family_name: "長松軒",
-            given_name: "昇悟",
-            avatar: "test.jpeg"
-          },
-          reception_status: "1"
-        }
+        // {
+        //   id: "",
+        //   text:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        //   sender: {
+        //     id: "",
+        //     family_name: "熊谷",
+        //     given_name: "真理子",
+        //     avatar: "test.jpeg"
+        //   },
+        //   reception_status: "0"
+        // },
+        // {
+        //   id: "",
+        //   text:"testtesttesttest",
+        //   sender: {
+        //     id: "",
+        //     family_name: "熊谷",
+        //     given_name: "隆太郎",
+        //     avatar: "test.jpeg"
+        //   },
+        //   reception_status: "1"
+        // },
+        // {
+        //   id: "",
+        //   text:"いつもありがとう",
+        //   sender: {
+        //     id: "",
+        //     family_name: "奥脇",
+        //     given_name: "真人",
+        //     avatar: "test.jpeg"
+        //   },
+        //   reception_status: "1"
+        // },
+        // {
+        //   id: "",
+        //   text:"testtesttesttest",
+        //   sender: {
+        //     id: "",
+        //     family_name: "長松軒",
+        //     given_name: "昇悟",
+        //     avatar: "test.jpeg"
+        //   },
+        //   reception_status: "1"
+        // }
       ],
       receive: {
-        year: "2020",
-        month: "6"
+        year: "",
+        month: ""
       }
-    }
-  },
-  computed: {
-    user_name: () => {
-      return ""
     }
   },
   methods: {
     increClick: function(){
+      // 12月じゃなかったらそのまま月を変更。変更した月で受信したありレターを取得する。
       if(this.receive.month < 12 ){
-        return this.receive.month++
+        this.receive.month++
+          axios.defaults.headers.common = {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          };
+          var url = location.pathname + ".json"
+          axios
+          .get(url, {
+            params: {
+              receive_year: this.$data.receive.year,
+              receive_month: this.$data.receive.month 
+            }
+          })
+          .then( response => {
+            this.$data.thanks = response.data.receive_thanks
+          })
       }else{
+      // 12月じゃなかったらそのまま月を変更。変更した月で受信したありレターを取得する。
         this.receive.year++
-        return this.receive.month = 1
+        this.receive.month = 1
+          axios.defaults.headers.common = {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          };
+          var url = location.pathname + ".json"
+          axios
+          .get(url, {
+            params: {
+              receive_year: this.$data.receive.year,
+              receive_month: this.$data.receive.month
+            }
+          })
+          .then( response => {
+            this.$data.thanks = response.data.receive_thanks
+          })
       }
     },
     decreClick: function(){
       if(this.receive.month > 1){
-        return this.receive.month--
+        this.receive.month--
+          axios.defaults.headers.common = {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          };
+          var url = location.pathname + ".json"
+          axios
+          .get(url, {
+            params: {
+              receive_year: this.$data.receive.year,
+              receive_month: this.$data.receive.month
+            }
+          })
+          .then( response => {
+            this.$data.thanks = response.data.receive_thanks
+          })
       }else{
         this.receive.year--
-        return this.receive.month = 12
+        this.receive.month = 12
+          axios.defaults.headers.common = {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          };
+          var url = location.pathname + ".json"
+          axios
+          .get(url, {
+            params: {
+              receive_year: this.$data.receive.year,
+              receive_month: this.$data.receive.month
+            }
+          })
+          .then( response => {
+            this.$data.thanks = response.data.receive_thanks
+          })
       }
     }
+  },
+  created(){
+    // 年月の取得
+    var now = new Date();
+    this.$data.receive.year = now.getFullYear()
+    this.$data.receive.month = now.getMonth() + 1
+    // 受信したありレターの取得
+    axios.defaults.headers.common = {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+    var url = location.pathname + ".json"
+    axios
+    .get(url, {
+      params: {
+        receive_year: this.$data.receive.year,
+        receive_month: this.$data.receive.month
+      }
+    })
+    .then( response => {
+      this.$data.thanks = response.data.receive_thanks
+    })
   }
 }
 </script>
@@ -161,11 +240,13 @@ main{
 
 .countbox_title{
   padding: 10px;
+  width: 250px;
 }
 
 .countbox_num{
   border-left: 1px solid #ff0000;
   padding: 10px;
+  width: 50px;
 }
 
 .contents{
