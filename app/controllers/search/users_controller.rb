@@ -20,14 +20,16 @@ class Search::UsersController < ApplicationController
     when [true, false] # グループ検索のみ
       group_ids = Group.find(params[:selectGroup]).subtree_ids
       group_users = GroupUser.where(group_id: group_ids).where.not(user_id: @sended_users)
+      group_user_ids = group_users.map{ |e| e.user_id }.uniq
       @users_vue = []
-      group_users.each do |group_user|
-        @users_vue << group_user.user
+      group_user_ids.each do |group_user_id|
+        user = User.find(group_user_id)
+        @users_vue << user
       end
     when [false, true] # ユーザー検索のみ
       @users_vue = User.where("family_name LIKE ? OR email LIKE ?", "#{params["keyword"]}%", "%#{params["keyword"]}%").where.not(id: @sended_users)
     else
-      @user_vue = []
+      @users_vue = []
     end
   end
 end
