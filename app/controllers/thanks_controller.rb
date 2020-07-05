@@ -8,7 +8,8 @@ class ThanksController < ApplicationController
     @sended_thanks.each do |send_thank|
       @send_thanks << send_thank
       receiver = send_thank.receiver
-      data = {name: send_thank.receiver.name, avatar: send_thank.receiver.avatar.url }
+      receiver_name = send_thank.receiver.family_name + send_thank.receiver.given_name
+      data = {name: receiver_name, avatar: send_thank.receiver.avatar.url }
       @receivers << data
     end
 
@@ -33,6 +34,16 @@ class ThanksController < ApplicationController
   end
 
   def create
+    thank = Thank.new(thank_params)
+    thank.transmission_status = true
+    if thank.save
+      render json: thank, status: :created
+    else
+      render json: { errors: thank.errors.full_messages }
+    end
+  end
+
+  def one_time_create
     thank = Thank.new(thank_params)
     if thank.save
       render json: thank, status: :created

@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'thanks#index'
 
-  resources :thanks, except: %i(index, show)
+  resources :thanks, except: %i(index, show) do
+    collection do
+      post 'one_time', to: "thanks#one_time_create"
+    end
+  end
   
   #ユーザー検索
   namespace :search do

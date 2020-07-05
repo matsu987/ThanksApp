@@ -7,16 +7,27 @@ class Search::UsersController < ApplicationController
     @sended_thanks.each do |thank|
       @sended_users << thank.receiver_id
     end
-    if params[:selectGroup].present?
+
+    case [params[:selectGroup].present?, params[:keyword].present?]
+    when [true, true] # グループ検索、ユーザー検索
       group_ids = Group.find(params[:selectGroup]).subtree_ids
       group_users = GroupUser.where(group_id: group_ids)
       user_ids = []
       group_users.each do |group_user|
         user_ids << group_user.user_id
       end
-      @users_vue = User.where(id: user_ids).where("name LIKE ? OR email LIKE ?", "#{params["0"]}%", "#{params["0"]}%").where.not(id: @sended_users)
+      @users_vue = User.where(id: user_ids).where("family_name LIKE ? OR email LIKE ?", "#{params["keyword"]}%", "%#{params["keyword"]}%").where.not(id: @sended_users)
+    when [true, false] # グループ検索のみ
+      group_ids = Group.find(params[:selectGroup]).subtree_ids
+      group_users = GroupUser.where(group_id: group_ids).where.not(user_id: @sended_users)
+      @users_vue = []
+      group_users.each do |group_user|
+        @users_vue << group_user.user
+      end
+    when [false, true] # ユーザー検索のみ
+      @users_vue = User.where("family_name LIKE ? OR email LIKE ?", "#{params["keyword"]}%", "%#{params["keyword"]}%").where.not(id: @sended_users)
     else
-      @users_vue = User.where("name LIKE ? OR email LIKE ?", "#{params["0"]}%", "#{params["0"]}%").where.not(id: @sended_users)
+      @user_vue = []
     end
   end
 end

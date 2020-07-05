@@ -6,7 +6,7 @@ class Letters::ReceiveController < ApplicationController
     @senders = []
     @received_thanks.each do |receive_thank|
       @receive_thanks << receive_thank
-      @senders   << receive_thank.sender.name
+      @senders   << (receive_thank.sender.family_name + receive_thank.sender.given_name)
     end
     respond_to do |format|
       format.html

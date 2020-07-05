@@ -7,16 +7,20 @@ class User::GroupController < ApplicationController
     case [params[:company_id].present?, params[:parent_group_id].present?, params[:child_group_id].present?, params[:grandchild_group_id].present?]
     when [true, true, true, true]
       group = Group.find(params[:grandchild_group_id])
-      group.update(user_ids: current_user.id)
+      groupuser = GroupUser.where(group_id: group.id, user_id: current_user.id).first_or_initialize
+      groupuser.save
     when [true, true, true, false]
       group = Group.find(params[:child_group_id])
-      group.update(user_ids: current_user.id)
+      groupuser = GroupUser.where(group_id: group.id, user_id: current_user.id).first_or_initialize
+      groupuser.save
     when [true, true, false, false]
       group = Group.find(params[:parent_group_id])
-      group.update(user_ids: current_user.id)
+      groupuser = GroupUser.where(group_id: group.id, user_id: current_user.id).first_or_initialize
+      groupuser.save
     when [true, false, false, false]
       group = Group.find(params[:company_id])
-      group.update(user_ids: current_user.id)
+      groupuser = GroupUser.where(group_id: group.id, user_id: current_user.id).first_or_initialize
+      groupuser.save
     else
     end
   end
