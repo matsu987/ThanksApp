@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
 
   # 先頭は文字列から始まり、末尾は@di-v.co.jpの形のemailを許可
-  VALID_EMAIL_REGEX = /\A[a-zA-Z0-9_\#!$%&`'*+\-{|}~^\/=?\.]+@di-v.co.jp\z/
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   # ６文字以上の半角英数字を許可
   VALID_PASSWORD_REGEX = /\A[a-z0-9]{6,}/i
 
