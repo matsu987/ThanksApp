@@ -56,7 +56,7 @@ export default {
     axios
     .get('/user/groups/belongs_group.json')
     .then(response =>{
-      if(response.data[0].company.name){
+      if(response.data.length){
         this.$data.company.name = response.data[0].company.name
       }else {
         this.$data.company.name = "まだ登録されていません"

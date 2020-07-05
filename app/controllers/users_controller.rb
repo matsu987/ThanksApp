@@ -7,7 +7,8 @@ class UsersController < ApplicationController
     @receivers = []
     @sended_thanks.each do |send_thank|
       @send_thanks << send_thank
-      @receivers   << send_thank.receiver.name
+      receiver_name = send_thank.receiver.family_name + send_thank.receiver.given_name
+      @receivers   << receiver_name
     end
     
     respond_to do |format|
