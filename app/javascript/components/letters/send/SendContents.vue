@@ -92,10 +92,32 @@ export default {
         }
       ],
       send: {
-        year: "2020",
-        month: "6"
+        year: "",
+        month: ""
       }
     }
+  },
+  created(){
+    // 年月の取得
+    var now = new Date();
+    this.$data.send.year = now.getFullYear()
+    this.$data.send.month = now.getMonth() + 1
+    // 受信したありレターの取得
+    axios.defaults.headers.common = {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+    var url = location.pathname + ".json"
+    axios
+    .get(url, {
+      params: {
+        send_year: this.$data.send.year,
+        send_month: this.$data.send.month
+      }
+    })
+    .then( response => {
+      this.$data.thanks = response.data.send_thanks
+    })
   },
   computed: {
     thanks_edit_count: function(){
@@ -127,18 +149,78 @@ export default {
   methods: {
     increClick: function(){
       if(this.send.month < 12 ){
-        return this.send.month++
+        this.send.month++
+        axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        };
+        var url = location.pathname + ".json"
+        axios
+        .get(url, {
+          params: {
+            send_year: this.$data.send.year,
+            send_month: this.$data.send.month
+          }
+        })
+        .then( response => {
+          this.$data.thanks = response.data.send_thanks
+        })
       }else{
         this.send.year++
-        return this.send.month = 1
-      }
+        this.send.month = 1
+        axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        };
+        var url = location.pathname + ".json"
+        axios
+        .get(url, {
+          params: {
+            send_year: this.$data.send.year,
+            send_month: this.$data.send.month
+          }
+        })
+        .then( response => {
+          this.$data.thanks = response.data.send_thanks
+        })
+}
     },
     decreClick: function(){
       if(this.send.month > 1){
-        return this.send.month--
+        this.send.month--
+        axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        };
+        var url = location.pathname + ".json"
+        axios
+        .get(url, {
+          params: {
+            send_year: this.$data.send.year,
+            send_month: this.$data.send.month
+          }
+        })
+        .then( response => {
+          this.$data.thanks = response.data.send_thanks
+        })
       }else{
         this.send.year--
-        return this.send.month = 12
+        this.send.month = 12
+        axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        };
+        var url = location.pathname + ".json"
+        axios
+        .get(url, {
+          params: {
+            send_year: this.$data.send.year,
+            send_month: this.$data.send.month
+          }
+        })
+        .then( response => {
+          this.$data.thanks = response.data.send_thanks
+        })
       }
     }
   }
