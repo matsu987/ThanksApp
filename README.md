@@ -28,11 +28,31 @@ vue: {
 }
 
 # 受信ページ
-rails: receptions/#index
+rails: letters/receptions/#index
 js: javascript/packs/receptions_index.js
 vue: {
-  parent: 
-  child: 
+  parent: components/letters/receive/Receive.vue
+  child:  components/letters/receive/ReceiveContents.vue,
+          components/shared/Header.vue,
+          <!-- マイページの一覧 -->
+          javascript/components/shared/NavMypage.vue,
+          <!-- 全社員の一覧 -->
+          javascript/components/shared/NavAll.vue,
+
+}
+
+# 送信ページ
+rails: letters/send/#index
+js: javascript/packs/receptions_index.js
+vue: {
+  parent: components/letters/send/Receive.vue
+  child:  components/letters/send/ReceiveContents.vue,
+          components/shared/Header.vue,
+          <!-- マイページの一覧 -->
+          javascript/components/shared/NavMypage.vue,
+          <!-- 全社員の一覧 -->
+          javascript/components/shared/NavAll.vue,
+
 }
 # ログインページ
 rails: users/sessions#new
