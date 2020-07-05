@@ -19,8 +19,9 @@
         <div v-else class="content_name_opened">開封済</div>
         <div class="content_text">{{thank.text}}</div>
         <div class="content_from-user">
-          <div class="avatar-img"></div>
-          <div class="user-name">{{thank.sender.family_name}}{{thank.sender.given_name}}さん</div>
+          <img v-if="thank.sender.avatar.url" class="form__avatar" :src="thank.sender.avatar.url">
+          <img v-else class="form__avatar" src="~person.png">
+          <div class="user-name">{{thank.sender.name}}さん</div>
         </div>
       </div>
     </div>
@@ -29,58 +30,14 @@
 
 <script>
 import axios from 'axios';
+import 'person.png';
 
 export default {
 
   data: function(){
     return {
       // ありレターの数はlength、senderとtextも入っている。
-      thanks: [
-        // {
-        //   id: "",
-        //   text:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        //   sender: {
-        //     id: "",
-        //     family_name: "熊谷",
-        //     given_name: "真理子",
-        //     avatar: "test.jpeg"
-        //   },
-        //   reception_status: "0"
-        // },
-        // {
-        //   id: "",
-        //   text:"testtesttesttest",
-        //   sender: {
-        //     id: "",
-        //     family_name: "熊谷",
-        //     given_name: "隆太郎",
-        //     avatar: "test.jpeg"
-        //   },
-        //   reception_status: "1"
-        // },
-        // {
-        //   id: "",
-        //   text:"いつもありがとう",
-        //   sender: {
-        //     id: "",
-        //     family_name: "奥脇",
-        //     given_name: "真人",
-        //     avatar: "test.jpeg"
-        //   },
-        //   reception_status: "1"
-        // },
-        // {
-        //   id: "",
-        //   text:"testtesttesttest",
-        //   sender: {
-        //     id: "",
-        //     family_name: "長松軒",
-        //     given_name: "昇悟",
-        //     avatar: "test.jpeg"
-        //   },
-        //   reception_status: "1"
-        // }
-      ],
+      thanks: [],
       receive: {
         year: "",
         month: ""
@@ -315,7 +272,8 @@ main{
   color: #444444;
   word-break: break-all;
 }
-.avatar-img {
+
+.form__avatar {
   height: 55px;
   width: 55px;
   margin: auto;

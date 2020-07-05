@@ -45,7 +45,7 @@ class ThanksController < ApplicationController
 
   def update
     thank = Thank.find(params[:id])
-    if thank.update(thank_params)
+    if thank.update(update_params)
       render json: thank, status: :created
     else
       render json: { errors: thank.errors.full_messages }
@@ -65,6 +65,10 @@ class ThanksController < ApplicationController
 
   def thank_params
     params.require(:thank).permit(:text, :receiver_id).merge(sender_id: current_user.id)
+  end
+
+  def update_params
+    params.permit(:text, :transmission_status)
   end
 
   def user_group_confirmation

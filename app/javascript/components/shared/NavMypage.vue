@@ -2,7 +2,8 @@
   <nav>
     <div class="header-top">
       <a href="/">
-        <img class="header-top__logo" :src="current_user.avatar.url">
+        <img v-if="current_user.avatar.url" class="header-top__logo" :src="current_user.avatar.url">
+        <img v-else class="header-top__logo" src="~avatar.png">
         <p class="header-top__text">{{ current_user.family_name }} {{ current_user.given_name }}</p>
       </a>
     </div>
@@ -87,6 +88,7 @@
 
 <script>
 import 'logo.png'
+import 'avatar.png';
 import axios from 'axios';
 import NavBtn from 'components/shared/parts/NavBtn.vue';
 
@@ -165,7 +167,7 @@ export default {
     closefinishModal: function(){
       this.$data.showfinishContent = false
       this.$data.showContent = false
-      document.location.reload()
+      document.location.reload();
     },
     newThanks: function(e){
       this.openModal();
@@ -265,9 +267,9 @@ export default {
       .get('/thanks.json')
       .then( response => {
         this.$data.current_user = response.data.current_user
-        this.tabs.mypage.send.url = "/users/" + response.data.current_user.id + "/letters/send"
-        this.tabs.mypage.receive.url = "/users/" + response.data.current_user.id + "/letters/receive"
-        this.tabs.mypage.account.url = "/users/" + response.data.current_user.id + "/edit"
+        this.$data.tabs.mypage.send.url = "/users/" + response.data.current_user.id + "/letters/send"
+        this.$data.tabs.mypage.receive.url = "/users/" + response.data.current_user.id + "/letters/receive"
+        this.$data.tabs.mypage.account.url = "/users/" + response.data.current_user.id + "/edit"
       })
   },
   computed: {

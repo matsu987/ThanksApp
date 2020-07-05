@@ -1,12 +1,12 @@
 class Letters::ReceiveController < ApplicationController
   def index
-    @user = User.find(params[:user_id])
+    # @user = User.find(params[:user_id])
     # 受信一覧を取得したいというリクエストが来た時だけ発火
     if params["receive_year"]
       # 検索したい日付を定義
       search_date = params["receive_year"] + "-" + params["receive_month"] +  "-" + "01"
       # 受信したありレターを作成日ベースで検索
-      received_thanks = @user.received_thanks.where(created_at: search_date.in_time_zone.all_month)
+      received_thanks = current_user.received_thanks.where(created_at: search_date.in_time_zone.all_month)
       # 受信したデータをVueに渡すために加工
       @received_thanks = []
       received_thanks.each do |received_thank|
@@ -16,11 +16,10 @@ class Letters::ReceiveController < ApplicationController
             text: received_thank.text,
             sender: {
               id: received_thank.sender.id,
-              family_name: received_thank.sender.family_name,
-              given_name: received_thank.sender.given_name,
+              name: received_thank.sender.family_name + received_thank.sender.given_name,
               avatar: received_thank.sender.avatar
             },
-            transmission_status: received_thank.transmission,
+            transmission_status: received_thank.transmission_status,
             reception_status: received_thank.reception_status
           }
         )
