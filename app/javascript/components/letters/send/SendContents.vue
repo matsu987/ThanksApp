@@ -30,7 +30,7 @@
         <div class="content_text">{{thank.text}}</div>
         <div class="content_from-user">
           <img v-if="thank.receiver.avatar.url" class="avatar-img" :src="thank.receiver.avatar.url">
-          <img v-else class="logo" src="~person.png">
+          <img v-else class="avatar-img" src="~person.png">
           <div class="user-name">{{thank.receiver.name}}さん</div>
         </div>
       </div>
