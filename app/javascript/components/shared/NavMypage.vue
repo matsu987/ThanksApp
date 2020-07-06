@@ -75,7 +75,7 @@
         <div class="content">
           <div class="error-message" v-if="errors.length != 0">
             <ul >
-              <li><font color="red">{{ errors }}</font></li>
+              <li v-for="error in errors"><font color="red">{{ error }}</font></li>
             </ul>
           </div>
           <p class="success-message" v-if="errors.length == 0">投稿が完了しました！</p>
