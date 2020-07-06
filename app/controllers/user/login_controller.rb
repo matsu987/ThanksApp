@@ -1,4 +1,9 @@
 class User::LoginController < ApplicationController
+
+  def index # ログインしているユーザーのデータを取得するアクション
+    @current_user_groups = current_user&.groups
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update(login_params)

@@ -1,5 +1,4 @@
 class ThanksController < ApplicationController
-  before_action :user_group_confirmation, except: [:index]
 
   def index
     @sended_thanks = current_user.sended_thanks
@@ -70,11 +69,4 @@ class ThanksController < ApplicationController
   def update_params
     params.permit(:text, :transmission_status)
   end
-
-  def user_group_confirmation
-    if current_user.groups.empty?
-      redirect_to regist_groups_path
-    end
-  end
-
 end

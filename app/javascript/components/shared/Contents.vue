@@ -1,6 +1,5 @@
 <template>
   <main>
-
   </main>
 </template>
 
@@ -12,18 +11,12 @@ export default {
   components: { SideBar },
   data: function(){
     return {
-      // myPageUrl: '/',
-      // sideBar: false,
-      // menu: true
+      groups: [],
+      showContent: false
     }
   },
-  // created() {
-  //   axios
-  //   .get('/users.json')
-  //   .then(response => {
-  //     this.$data.myPageUrl = `/users/${response.data.current_user.id}`
-  //   });
-  // },
+  created() {
+  },
   methods: {
     openMenu: function(){
       this.sideBar = true
@@ -38,5 +31,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

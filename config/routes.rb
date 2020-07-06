@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   root 'thanks#index'
 
   resources :thanks, except: %i(index, show)
-  
+
   #ユーザー検索
   namespace :search do
     get 'users/index'
@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     post 'groups', to: 'group#create'
     get 'groups/belongs_group', to:'group#belongs_group'
     delete 'groups/destroy', to: 'group#destroy'
+    get 'login_info', to:'login#index'
   end
 
   resources :companies, only: [:index, :create, :update]
