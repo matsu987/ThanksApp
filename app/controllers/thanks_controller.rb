@@ -2,6 +2,7 @@ class ThanksController < ApplicationController
 
   def index
     @sended_thanks = current_user.sended_thanks
+    @current_user_groups = current_user&.groups
     @send_thanks = []
     @receivers = []
     @sended_thanks.each do |send_thank|

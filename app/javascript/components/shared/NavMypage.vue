@@ -279,13 +279,8 @@ export default {
         this.$data.tabs.mypage.send.url = "/users/" + response.data.current_user.id + "/letters/send"
         this.$data.tabs.mypage.receive.url = "/users/" + response.data.current_user.id + "/letters/receive"
         this.$data.tabs.mypage.account.url = "/users/" + response.data.current_user.id + "/edit"
-      })
-
-      axios
-        .get('/user/login_info.json')
-        .then(response => {
-          this.$data.currentUserGroups = response.data.current_user_groups
-          if (this.$data.currentUserGroups == undefined) {
+        this.$data.currentUserGroups = response.data.current_user_groups
+          if (this.$data.currentUserGroups.length == 0) {
             this.$data.showNewThanks = false
             if (location.pathname == "/users/1/letters/receive"){
               this.$data.showGroups = true
@@ -295,7 +290,7 @@ export default {
               this.$data.showGroups = true
             }
           }
-        });
+      })
   },
   computed: {
     receive_url: function(){
