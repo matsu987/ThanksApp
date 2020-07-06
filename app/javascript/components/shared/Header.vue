@@ -2,10 +2,8 @@
   <header>
     <div class="header-box">
       <div class="header-top">
-        <a href="/">
-          <img class="header-top__logo" src="~logo.png">
-          <p class="header-top__text">{{company.name}}</p>
-        </a>
+        <img class="header-top__logo" src="~logo.png">
+        <p class="header-top__text">{{company.name}}</p>
       </div>
       <div class="header-gNav">
         <ul>
