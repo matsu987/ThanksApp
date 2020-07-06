@@ -167,7 +167,9 @@ export default {
     closefinishModal: function(){
       this.$data.showfinishContent = false
       this.$data.showContent = false
-      document.location.reload();
+      setTimeout(function(){
+              location.href = "/users/1/letters/send"
+      },10);
     },
     newThanks: function(e){
       this.openModal();
