@@ -42,10 +42,10 @@ export default {
           "text": "マイページ",
           "keyName": "Mypage"
         },
-        "All": {
-          "text": "全社員",
-          "keyName": "All"
-        }
+        // "All": {
+        //   "text": "全社員",
+        //   "keyName": "All"
+        // }
       },
       company:{
         name: ""

@@ -438,6 +438,7 @@ main{
   font-size: 12px;
   line-height: 170%;
   letter-spacing: 0.05em;
+  overflow: hidden;
 }
 .content_from-user{
   display: flex;
@@ -457,7 +458,6 @@ main{
   height: 55px;
   width: 55px;
   margin: auto;
-  background: blue;
   border-radius: 999px;
 }
 

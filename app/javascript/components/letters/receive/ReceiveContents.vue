@@ -19,8 +19,8 @@
         <div v-else class="content_name_opened">開封済</div>
         <div class="content_text">{{thank.text}}</div>
         <div class="content_from-user">
-          <img v-if="thank.sender.avatar.url" class="form__avatar" :src="thank.sender.avatar.url">
-          <img v-else class="form__avatar" src="~person.png">
+          <img v-if="thank.sender.avatar.url" class="avatar-img" :src="thank.sender.avatar.url">
+          <img v-else class="avatar-img" src="~person.png">
           <div class="user-name">{{thank.sender.name}}さん</div>
         </div>
       </div>
@@ -37,7 +37,8 @@ export default {
   data: function(){
     return {
       // ありレターの数はlength、senderとtextも入っている。
-      thanks: [],
+      thanks: [
+],
       receive: {
         year: "",
         month: ""
@@ -257,6 +258,7 @@ main{
   font-size: 12px;
   line-height: 170%;
   letter-spacing: 0.05em;
+  overflow: hidden;
 }
 .content_from-user{
   display: flex;
@@ -273,11 +275,10 @@ main{
   word-break: break-all;
 }
 
-.form__avatar {
+.avatar-img {
   height: 55px;
   width: 55px;
   margin: auto;
-  background: blue;
   border-radius: 999px;
 }
 
