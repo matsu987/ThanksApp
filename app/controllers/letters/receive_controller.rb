@@ -14,13 +14,18 @@ class Letters::ReceiveController < ApplicationController
           {
             id: received_thank.id,
             text: received_thank.text,
+            transmission_status: received_thank.transmission_status,
+            reception_status: received_thank.reception_status,
+            receiver: {
+              id: received_thank.receiver.id,
+              name: received_thank.receiver.family_name + received_thank.receiver.given_name,
+              avatar: received_thank.receiver.avatar
+            },
             sender: {
               id: received_thank.sender.id,
               name: received_thank.sender.family_name + received_thank.sender.given_name,
               avatar: received_thank.sender.avatar
-            },
-            transmission_status: received_thank.transmission_status,
-            reception_status: received_thank.reception_status
+            }
           }
         )
       end
