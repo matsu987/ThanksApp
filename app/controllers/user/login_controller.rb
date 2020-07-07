@@ -1,4 +1,5 @@
 class User::LoginController < ApplicationController
+
   def update
     @user = User.find(params[:id])
     if @user.update(login_params)

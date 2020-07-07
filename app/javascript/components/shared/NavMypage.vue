@@ -8,7 +8,7 @@
     <div class="header-gNav">
       <ul>
         <li>
-          <div class="new" @click="newThanks">新規作成</div>
+          <div class="new" @click="newThanks" v-if="showNewThanks">新規作成</div>
         </li>
         <li v-for='tab in tabs.mypage'>
           <NavBtn :current-tab-name="currentTab" :tab-name="tab.keyName" :url="tab.url" :text="tab.text" v-on:active="setActive"></NavBtn>
@@ -81,6 +81,12 @@
         </div>
       </div>
     </div>
+
+    <!-- グループ登録ポップアップ -->
+    <div class="main" v-show="showGroups">
+      <a class="main__btn" href="/groups/new">グループ<br>新規登録</a>
+      <a class="main__btn" href="/users/1/edit">グループ<br>選択</a>
+    </div>
   </nav>
 </template>
 
@@ -147,6 +153,9 @@ export default {
         keyword: '',
       },
       showfinishContent: false,
+      currentUserGroups: [],
+      showGroups: false,
+      showNewThanks: true,
     }
   },
   methods: {
@@ -270,6 +279,17 @@ export default {
         this.$data.tabs.mypage.send.url = "/users/" + response.data.current_user.id + "/letters/send"
         this.$data.tabs.mypage.receive.url = "/users/" + response.data.current_user.id + "/letters/receive"
         this.$data.tabs.mypage.account.url = "/users/" + response.data.current_user.id + "/edit"
+        this.$data.currentUserGroups = response.data.current_user_groups
+          if (this.$data.currentUserGroups.length == 0) {
+            this.$data.showNewThanks = false
+            if (location.pathname == "/users/1/letters/receive"){
+              this.$data.showGroups = true
+            } else if (location.pathname == "/users/1/letters/send"){
+              this.$data.showGroups = true
+            } else if (location.pathname == "/"){
+              this.$data.showGroups = true
+            }
+          }
       })
   },
   computed: {
@@ -600,5 +620,32 @@ export default {
   height: 50px;
   border-radius: 25px;
   border: none;
+}
+
+/* グループポップアップ */
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 90vw;
+  height: 90vh;
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  background: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
+  width: 30%;
+  height: 60%;
+  border-radius: 10px;
+  font-size: 40px;
+  color: #fff;
+  text-align: center;
 }
 </style>

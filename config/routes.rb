@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   root 'thanks#index'
 
   resources :thanks, except: %i(index, show)
-  
+
   #ユーザー検索
   namespace :search do
     get 'users/index'

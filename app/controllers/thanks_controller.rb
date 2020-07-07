@@ -1,8 +1,8 @@
 class ThanksController < ApplicationController
-  before_action :user_group_confirmation, except: [:index]
 
   def index
     @sended_thanks = current_user.sended_thanks
+    @current_user_groups = current_user&.groups
     @send_thanks = []
     @receivers = []
     @sended_thanks.each do |send_thank|
@@ -70,11 +70,4 @@ class ThanksController < ApplicationController
   def update_params
     params.permit(:text, :transmission_status)
   end
-
-  def user_group_confirmation
-    if current_user.groups.empty?
-      redirect_to regist_groups_path
-    end
-  end
-
 end
