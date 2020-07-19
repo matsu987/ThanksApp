@@ -45,7 +45,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails', '~> 4.0.0'
   gem 'rails-controller-testing'
   gem 'factory_bot_rails'
   gem 'faker'
