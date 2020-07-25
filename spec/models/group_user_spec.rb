@@ -38,12 +38,12 @@ RSpec.describe GroupUser, type: :model do
           member.valid?
           expect(member.errors[:status]).to include("を入力してください")
         end
-        it '同じ組み合わせがDBに保存されるとき' do
-          member.save
-          another_member = build(:group_user, user: user, group: group)
-          another_member.valid?
-          expect(member.errors[:group_id]).to include("はすでに存在します")
-        end
+      end
+      it '同じ組み合わせのuser_idとgroup_idがDBに保存されるとき' do
+        member.save
+        another_member = build(:group_user, user: user, group: group)
+        another_member.valid?
+        expect(member.errors[:group_id]).to include("はすでに存在します")
       end
     end
   end
