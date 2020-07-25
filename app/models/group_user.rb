@@ -10,6 +10,7 @@ class GroupUser < ApplicationRecord
   enum status: { "一般": 0, "管理者": 1 }
 
   validates :status, :rank, presence: true
+  validates :group_id, :uniqueness => { :scope => :user_id }
   # validates :status,
   # inclusion: {in: GroupUser.statuses.keys}
 end

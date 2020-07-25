@@ -4,7 +4,7 @@ RSpec.describe GroupUser, type: :model do
   describe '#create' do
     let(:user) {create(:user)}
     let(:group) { create(:group) }
-    let(:member) { create(:group_user, user: user, group: group) }
+    let(:member) { build(:group_user, user: user, group: group) }
 
     context "値が正しい場合" do
       it 'group_user生成に紐づいてuserとgroupが生成されていること' do
@@ -37,6 +37,12 @@ RSpec.describe GroupUser, type: :model do
           member.status = nil
           member.valid?
           expect(member.errors[:status]).to include("を入力してください")
+        end
+        it '同じ組み合わせがDBに保存されるとき' do
+          member.save
+          another_member = build(:group_user, user: user, group: group)
+          another_member.valid?
+          expect(member.errors[:group_id]).to include("はすでに存在します")
         end
       end
     end
