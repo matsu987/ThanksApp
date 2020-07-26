@@ -4,8 +4,8 @@ RSpec.describe Thank, type: :model do
   describe '#create' do
 
     let(:user) { create(:user) }
-    let(:sender) { create(:sender) }
-    let(:receiver) { create(:receiver) }
+    let(:sender) { create(:user) }
+    let(:receiver) { create(:user) }
 
     context '現在実装されている機能' do
       context 'thanksメッセージが保存できる' do
