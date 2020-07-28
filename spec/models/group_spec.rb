@@ -19,7 +19,7 @@ RSpec.describe Group, type: :model do
     end
   end
 
-  describe "#ancestry" do
+  describe "ancestryが正しく機能する" do
     context "階層ごとにgroupが保存できる" do
       it "rootがcompanyと同じもので登録されている" do
         root_group = create(:group)
@@ -88,8 +88,5 @@ RSpec.describe Group, type: :model do
       end      
     end
 
-    context "値が正しく返ってこない" do
-
-    end
   end
 end
