@@ -47,7 +47,7 @@ RSpec.describe Group, type: :model do
 
   end
 
-  describe "#data_custom" do
+  describe "data_customメソッド" do
     context "値が正しく返ってくる" do
       it "companyが渡されていた時に会社の情報を返している" do
         company = create(:company)
