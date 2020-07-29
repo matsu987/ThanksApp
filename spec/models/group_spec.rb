@@ -48,9 +48,9 @@ RSpec.describe Group, type: :model do
   end
 
   describe "data_customメソッド" do
+    let(:company){create(:company)}
     context "値が正しく返ってくる" do
       it "companyが渡されていた時に会社の情報を返している" do
-        company = create(:company)
         root_group =  create(:group)
         info = root_group.data_custom([], company, nil, nil, nil)
         expect(info[0][:company][:name]).to eq company.name
@@ -58,7 +58,6 @@ RSpec.describe Group, type: :model do
       end
 
       it "親部署が渡されていた時に会社の情報を返している" do
-        company = create(:company)
         root_group =  create(:group, :have_parent)
         parent_group = root_group.children[0]
         info = root_group.data_custom([], company, parent_group, nil, nil)
@@ -67,7 +66,6 @@ RSpec.describe Group, type: :model do
       end
 
       it "子部署が渡されていた時に会社の情報を返している" do
-        company = create(:company)
         root_group = create(:group, :have_child)
         parent_group = root_group.children[0]
         child_group =  root_group.children[0].children[0]  
@@ -77,7 +75,6 @@ RSpec.describe Group, type: :model do
       end
 
       it "孫部署が渡されていた時に会社の情報を返している" do
-        company = create(:company)
         root_group = create(:group, :have_grand_child)
         parent_group = root_group.children[0]
         child_group = root_group.children[0].children[0]
