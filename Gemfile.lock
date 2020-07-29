@@ -340,7 +340,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   rails-controller-testing
   rails-i18n
-  rspec-rails (~> 3.5)
+  rspec-rails (~> 4.0.0)
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
