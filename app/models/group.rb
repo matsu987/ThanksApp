@@ -4,25 +4,24 @@ class Group < ApplicationRecord
   belongs_to :company
   has_ancestry
 
-  validates :name, presence: :true
-
-  # def self.groups_create(group1, group2, group3)
-  #   if @group_1.save
-  #     if @group_params_2[:name] != ""
-  #       @group_2 = @group_1.children.new(@group_params_2)
-  #       if @group_2.save
-  #         if @group_params_3[:name] != ""
-  #           @group_3 = @group_2.children.new(@group_params_3)
-  #           if @group_3.save
-  #           end
-  #         end
-  #       end
-  #     end
-  #     redirect_to regist_groups_path
-  #   else
-  #     render :new
-  #   end
-  # end
+  def self.groups_create(group1, group2, group3)
+    
+    if @group_1.save
+      if @group_params_2[:name] != ""
+        @group_2 = @group_1.children.new(@group_params_2)
+        if @group_2.save
+          if @group_params_3[:name] != ""
+            @group_3 = @group_2.children.new(@group_params_3)
+            if @group_3.save
+            end
+          end
+        end
+      end
+      redirect_to regist_groups_path
+    else
+      render :new
+    end
+  end
 
   def data_custom(groups, company, parent_group, child_group, grandchild_group)
     group = { company: {name: company&.name,id: company&.id},
