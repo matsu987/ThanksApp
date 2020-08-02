@@ -38,6 +38,7 @@ RSpec.configure do |config|
   config.include SignIn
   config.include CreateGroup
   config.include PrepareMessage
+
   Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
   config.include Devise::Test::ControllerHelpers, type: :controller
   # config.include ControllerMacros, type: :controller
@@ -63,7 +64,6 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
