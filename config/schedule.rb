@@ -24,7 +24,7 @@ set :output, File.join(Whenever.path, "log", "cron.log")
 set :environment, :development, :production
 
 # 1分毎に`HelloWorld`を出力する
-every 1.minutes do
+every 1.hours do
   begin
     rake "thanks:timer"
   rescue => e
