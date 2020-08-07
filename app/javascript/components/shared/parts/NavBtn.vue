@@ -7,8 +7,8 @@
 
 <script>
 import axios from 'axios';
-import CheckBox from './checkBox.vue'
-import NavName from './navName.vue'
+import CheckBox from './CheckBox.vue'
+import NavName from './NavName.vue'
 
 export default {
   props: [ 'currentTabName', 'tabName', 'text' , 'url'],

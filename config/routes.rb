@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  namespace :api do
+    namespace :admin do
+      get 'users/index'
+    end
+  end
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -23,6 +28,7 @@ Rails.application.routes.draw do
   #管理者
   namespace :admin do
     resources :users
+    resources :tops
   end
 
   # #送受信一覧
