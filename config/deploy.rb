@@ -1,5 +1,6 @@
 # config valid for current version and patch releases of Capistrano
 # lock "~> 3.11.2"
+require "whenever/capistrano"
 
 # set :application, "my_app_name"
 # set :repo_url, "git@example.com:me/my_repo.git"
@@ -60,6 +61,10 @@ namespace :deploy do
   before :starting, 'deploy:upload'
   after :finishing, 'deploy:cleanup'
 end
+
+set :whenever_roles, :batch
+set :whenever_environment, :production
+set :whenever_command, "RAILS_ENV=#{whenever_environment} bundle exec whenever  --update-crontab"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

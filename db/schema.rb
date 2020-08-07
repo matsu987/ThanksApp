@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_034434) do
+ActiveRecord::Schema.define(version: 2020_08_07_055852) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text", null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_03_17_034434) do
     t.string "logo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "release_time", null: false
     t.index ["name"], name: "index_companies_on_name"
   end
 
@@ -94,6 +95,9 @@ ActiveRecord::Schema.define(version: 2020_03_17_034434) do
     t.boolean "reception_status", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "group_id", null: false
+    t.boolean "release", default: false, null: false
+    t.index ["group_id"], name: "index_thanks_on_group_id"
     t.index ["receiver_id"], name: "index_thanks_on_receiver_id"
     t.index ["sender_id"], name: "index_thanks_on_sender_id"
   end
@@ -141,6 +145,7 @@ ActiveRecord::Schema.define(version: 2020_03_17_034434) do
   add_foreign_key "recomendations", "users", column: "recomender_id"
   add_foreign_key "thank_likes", "thanks"
   add_foreign_key "thank_likes", "users", column: "sender_id"
+  add_foreign_key "thanks", "groups"
   add_foreign_key "thanks", "users", column: "receiver_id"
   add_foreign_key "thanks", "users", column: "sender_id"
   add_foreign_key "user_likes", "users", column: "receiver_id"
