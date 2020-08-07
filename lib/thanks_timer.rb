@@ -14,7 +14,11 @@ class ThanksTimer
         year = Time.now.year.to_s
         month = Time.now.month.to_i
         last_day = Date.new(Time.now.year, (Time.now.month + 1), -1).day.to_s
-        company.update(release_time: Time.new(year, (month + 1), last_day, 23, 50, 0, "+09:00" ))
+        if release_time.month.to_i == month
+          company.update(release_time: Time.new(year, (month + 1), last_day, 23, 50, 0, "+09:00" ))
+        else
+          company.update(release_time: Time.new(year, month, last_day, 23, 50, 0, "+09:00" ))
+        end
       end
     end
   end
