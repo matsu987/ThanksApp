@@ -4,7 +4,7 @@ module SignIn
     ActionController::Base.allow_forgery_protection = true
 
     visit  new_user_session_path
-
+    
     # すでに保存されているユーザーのemailとpasswordを入力する
     fill_in 'email', with: user.email
     fill_in 'pass', with: user.password
@@ -12,7 +12,5 @@ module SignIn
     # ログインボタンをクリックする
     click_button "ログイン"
     sleep 3
-
   end
-
 end
