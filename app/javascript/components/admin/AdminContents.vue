@@ -1,7 +1,7 @@
 <template>
   <main>
     <!-- ポップアップ -->
-    <div class="popup">
+    <!-- <div class="popup">
       <div class="overlay" v-show="showContent">
         <div class="content">
           <div class="error-message" v-if="errors.length != 0">
@@ -119,7 +119,7 @@
           <input type="submit" value="登録" class="group__form__submit">
         </form>
       </section>
-    </div>
+    </div> -->
     <div>
       <a href="/admin/users">ユーザー一覧へ</a>
     </div>
@@ -133,150 +133,14 @@ import 'avatar.png';
 export default {
   data: function () {
     return {
-      company: {
-        id: '',
-        name: '',
-        post_number: '',
-        address: '',
-        phone_number: ''
-      },
-      current_company: {
-        id: '',
-        name: '',
-        post_number: '',
-        address: '',
-        phone_number: '',
-        admin: false
-      },
-      admin_group: {},
-      parent_group: {
-        show: true,
-        name: ''
-      },
-      child_group: {
-        show: false,
-        name: ''
-      },
-      grandchild_group: {
-        show: false,
-        name: ''
-      },
-      showContent: false,
-      errors: '',
     }
-  },
-  created() {
-    axios
-    .get('/companies.json')
-    .then(response => {
-      if (Object.keys(response.data).length != 0){
-        this.$data.current_company = response.data.company
-        this.$data.current_company.admin = response.data.admin
-      }
-    });
-
-    axios
-    .get('/groups.json')
-    .then(response => {
-      this.$data.admin_group = response.data
-    });
   },
   mounted:function(){
     axios.defaults.headers.common = {
       'X-Requested-With': 'XMLHttpRequest',
       'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
-  },
-  methods: {
-    openModal: function(){
-      this.$data.showContent = true
-    },
-    closeModal: function(){
-      this.$data.showContent = false
-      document.location.reload()
-    },
-    createCompany: function(event) {
-      axios
-        .post("/companies", this.company)
-        .then(response => {
-          this.errors = '';
-          if (response.status === 200){
-            if (response.data && response.data.errors) {
-            this.errors = response.data.errors;
-            } else {
-              this.openModal();
-            }
-
-          } else {
-            let e = response.data;
-          }
-        })
-        .catch(error => {
-          if (error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors;
-          }
-        });
-    },
-    updateCompany: function(event) {
-      let url = "/companies/" + this.current_company.id + ".json"
-      axios
-        .patch(url, this.current_company)
-        .then(response => {
-          this.errors = '';
-          if (response.status === 200){
-            if (response.data && response.data.errors) {
-            this.errors = response.data.errors;
-          } else {
-            this.openModal();
-          }
-
-          } else {
-            let e = response.data;
-          }
-        })
-        .catch(error => {
-          if (error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors;
-          }
-        });
-    },
-    onInputParent: function(event) {
-      if (this.parent_group.name == ""){
-        this.child_group.show = false
-      } else {
-        this.child_group.show = true
-      }
-    },
-    onInputChild: function(event) {
-      if (this.child_group.name == ""){
-        this.grandchild_group.show = false
-      } else {
-        this.grandchild_group.show = true
-      }
-    },
-    createGroup: function(e) {
-      axios
-        .post("/groups.json", {company: this.admin_group, parent_group: this.parent_group, child_group: this.child_group, grandchild_group: this.grandchild_group})
-        .then(response => {
-          this.errors = '';
-          if (response.status === 200){
-            if (response.data && response.data.errors) {
-            this.errors = response.data.errors;
-            } else {
-              this.openModal();
-            }
-
-          } else {
-            let e = response.data;
-          }
-        })
-        .catch(error => {
-          if (error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors;
-          }
-        });
-    }
-  },
+  }
 }
 </script>
 
@@ -290,185 +154,5 @@ main{
   height: 100vh;
   background-color: #fff;
   margin-left: 35%;
-}
-
-h2 {
-  font-size: 16px;
-  padding-left: 20px;
-  border-bottom: inset 2px #ff0000;
-}
-
-section {
-  width: 80%;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  padding: 10px 30px;
-  margin: 35px auto;
-}
-
-form {
-  padding: 20px;
-}
-
-.hidden {
-  display: none;
-}
-
-/* ポップアップ */
-.overlay{
-  width: 60%;
-  height: 50%;
-  z-index: 1;
-  position: fixed;
-  top: 25%;
-  left: 20%;
-  background-color: #fff;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.error-message {
-  display: block;
-  margin-bottom: 40px;
-  padding-top: 40px;
-  font-size: 20px;
-  text-align: center;
-}
-
-.success-message {
-  display: block;
-  margin-bottom: 40px;
-  padding-top: 40px;
-  font-size: 20px;
-  color: #92CECA;
-  text-align: center;
-}
-
-.sub-message {
-  font-size: 14px;
-  text-align: center;
-}
-
-.close-btn {
-  display: block;
-  margin: auto;
-  width: 200px;
-  height: 50px;
-  border-radius: 25px;
-  border: none;
-}
-
-/* 会社登録 */
-.company {
-  height: 300px;
-}
-
-.company__form {
-  display: flex;
-  padding-top: 40px;
-}
-
-.company__form__boxies {
-  width: 83%;
-}
-
-.company__form__boxies__box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.form--required {
-  width: 100px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.form--required::after {
-  width: 35px;
-  text-align: center;
-  content: '必須';
-  color: #fff;
-  border-radius: 5px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-}
-
-.form--optional {
-  width: 100px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.form--optional::after {
-  width: 35px;
-  text-align: center;
-  content: '任意';
-  color: #fff;
-  border-radius: 5px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-}
-
-.company__form__boxies__box__text {
-  margin: 0 40px 20px 0;
-  height: 30px;
-  width: 60%;
-  padding-left: 20px;
-  border: solid 1px #ff0000;
-  border-radius: 10px;
-}
-
-.company__form__submit {
-  width: 100px;
-  height: 120px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  margin-top: 30px;
-}
-
-/* 部署登録 */
-
-.group {
-  height: 300px;
-}
-
-.group--admin::after {
-  content: "※管理者のみ";
-  font-size: 10px;
-  color: gray;
-}
-
-.group__form {
-  display: flex;
-  padding-top: 40px;
-}
-
-.group__form__boxies {
-  width: 83%;
-}
-
-.group__form__boxies__box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.group__form__boxies__box__text {
-  margin: 0 40px 20px 0;
-  height: 30px;
-  width: 60%;
-  padding-left: 20px;
-  border: solid 1px #ff0000;
-  border-radius: 10px;
-}
-
-.group__form__submit {
-  width: 100px;
-  height: 150px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  margin-top: 20px;
 }
 </style>

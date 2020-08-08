@@ -132,7 +132,8 @@ export default {
         name: null,
         avatar: {
           url: ""
-        }
+        },
+        status: ""
       },
       thank: {
         id: '',
@@ -276,6 +277,15 @@ export default {
       .get('/thanks.json')
       .then( response => {
         this.$data.current_user = response.data.current_user
+        this.$data.current_user.status = response.data.status
+        if(this.$data.current_user.status == "管理者"){
+          this.$data.tabs.mypage["admin"] = 
+            {
+              "text": "管理者",
+              "keyName": "admin",
+              "url": "/admin/tops"
+            }
+        }     
         this.$data.tabs.mypage.send.url = "/users/" + response.data.current_user.id + "/letters/send"
         this.$data.tabs.mypage.receive.url = "/users/" + response.data.current_user.id + "/letters/receive"
         this.$data.tabs.mypage.account.url = "/users/" + response.data.current_user.id + "/edit"

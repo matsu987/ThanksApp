@@ -16,7 +16,7 @@
             <td bgcolor="#99CC00" align="right" nowrap>{{data.user.id}}</td>
             <td bgcolor="#FFFFFF" valign="top">{{data.user.name}}</td>
             <td bgcolor="#FFFFFF" valign="top">{{data.user.email}}</td>
-            <td bgcolor="#FFFFFF" valign="top">{{data.user.status}}</td>
+            <td bgcolor="#FFFFFF" valign="top" @click="changeStatus(data.user.id, data.company.id, data.user.status)">{{data.user.status}}</td>
             <td bgcolor="#FFFFFF" valign="top" v-if="data.parent_group">{{data.parent_group.name}}</td>
             <td bgcolor="#FFFFFF" valign="top" v-else>なし</td>
             <td bgcolor="#FFFFFF" valign="top" v-if="data.children_group">{{data.children_group.name}}</td>
@@ -71,9 +71,7 @@ export default {
       if (Object.keys(response.data).length != 0){
         for(let data of response.data){
           this.$data.users.push(data)
-          console.log(this.$data)
         }
-
       }
     });
   },
@@ -83,7 +81,28 @@ export default {
       'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
-
+  methods: {
+    changeStatus: function(user_id, company_id, status){
+      axios
+      .patch('/api/admin/users/update.json', {
+        user_id: user_id,
+        status: status,
+        company_id: company_id,
+      })
+      .then(response => {
+        if(response.data.error){
+          console.log(response.data.error.text)
+        }
+        else{
+          for(let user of this.$data.users){
+            if(user.id == response.data.user.id){
+              user.status = response.data.user.status
+            }
+          }
+        }
+      });
+    }
+  }
 }
 </script>
 

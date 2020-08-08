@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :api do
-    namespace :admin do
-      get 'users/index'
-    end
-  end
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -67,6 +62,13 @@ Rails.application.routes.draw do
       get "admin",   to: "groups#admin"
       patch "depart_join_create", to: "groups#depart_join_create"
       patch "depart_request_create", to: "groups#depart_request_create"
+    end
+  end
+
+  namespace :api do
+    namespace :admin do
+      get 'users/index'
+      patch 'users/update'
     end
   end
 end
