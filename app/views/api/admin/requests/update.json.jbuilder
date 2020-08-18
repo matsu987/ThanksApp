@@ -9,7 +9,7 @@ else
     json.name       @user.family_name + @user.given_name
     json.email      @user.email
     json.avatar     @user.avatar
-    json.status     @group_user.status
+    json.status     @user.group_users.first.status
     json.request    @user.group_users.first.request
   end
 end

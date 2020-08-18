@@ -5,17 +5,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
         #  , :confirmable
 
-  has_many :group_users
+  has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
-  has_many :sended_thanks, class_name: 'Thank', foreign_key: 'sender_id'
-  has_many :received_thanks, class_name: 'Thank', foreign_key: 'receiver_id'
-  has_many :comments
-  has_many :thank_likes, class_name: "ThankLike", foreign_key: 'sender_id'
-  has_many :sended_likes, class_name: 'UserLike', foreign_key: 'sender_id'
-  has_many :received_likes, class_name: 'UserLike', foreign_key: 'receiver_id'
-  has_many :recomends, class_name: 'Recomendation', foreign_key: 'recomender_id'
-  has_many :electeds, class_name: 'Recomendation', foreign_key: 'electeder_id'
-  has_many :recomend_comments
+  has_many :sended_thanks, class_name: 'Thank', foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_thanks, class_name: 'Thank', foreign_key: 'receiver_id', dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :thank_likes, class_name: "ThankLike", foreign_key: 'sender_id', dependent: :destroy
+  has_many :sended_likes, class_name: 'UserLike', foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_likes, class_name: 'UserLike', foreign_key: 'receiver_id', dependent: :destroy
+  has_many :recomends, class_name: 'Recomendation', foreign_key: 'recomender_id', dependent: :destroy
+  has_many :electeds, class_name: 'Recomendation', foreign_key: 'electeder_id', dependent: :destroy
+  has_many :recomend_comments, dependent: :destroy
   mount_uploader :avatar, ImageUploader
 
 

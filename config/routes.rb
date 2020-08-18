@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  namespace :api do
+    namespace :admin do
+      get 'requests/update'
+    end
+  end
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -69,6 +74,12 @@ Rails.application.routes.draw do
     namespace :admin do
       get 'users/index'
       patch 'users/update'
+      patch 'users/destroy',to: 'users#destroy'
+      patch 'requests/update'
+      patch 'requests/destroy',to: 'requests#destroy'
+    end
+    namespace :lists do
+      get 'groups/index'
     end
   end
 end

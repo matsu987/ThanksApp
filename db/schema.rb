@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 2020_03_17_034434) do
     t.string "post_number"
     t.text "address"
     t.string "phone_number"
-    t.string "logo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_companies_on_name"
@@ -90,7 +89,7 @@ ActiveRecord::Schema.define(version: 2020_03_17_034434) do
     t.text "text", null: false
     t.bigint "sender_id"
     t.bigint "receiver_id"
-    t.boolean "transmission_status", default: false, null: false
+    t.boolean "transmisson_status", default: false, null: false
     t.boolean "reception_status", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

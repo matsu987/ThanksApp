@@ -14,7 +14,7 @@ class Letters::ReceiveController < ApplicationController
           {
             id: received_thank.id,
             text: received_thank.text,
-            transmission_status: received_thank.transmission_status,
+            transmission_status: received_thank.transmisson_status,
             reception_status: received_thank.reception_status,
             receiver: {
               id: received_thank.receiver.id,
