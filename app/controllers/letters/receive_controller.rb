@@ -6,7 +6,7 @@ class Letters::ReceiveController < ApplicationController
       # 検索したい日付を定義
       search_date = params["receive_year"] + "-" + params["receive_month"] +  "-" + "01"
       # 受信したありレターを作成日ベースで検索
-      received_thanks = current_user.received_thanks.where(created_at: search_date.in_time_zone.all_month)
+      received_thanks = current_user.received_thanks.where(created_at: search_date.in_time_zone.all_month).where(release: true)
       # 受信したデータをVueに渡すために加工
       @received_thanks = []
       received_thanks.each do |received_thank|

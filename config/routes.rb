@@ -44,6 +44,10 @@ Rails.application.routes.draw do
       end
   end
 
+  namespace :letters do
+    get "timer", to:"timer#index"
+  end
+
   # resources :transmissions, only: [:index]
   #   member do
   #     patch "login_update", to: "user/login#update"

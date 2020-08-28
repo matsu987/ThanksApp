@@ -64,7 +64,7 @@ class ThanksController < ApplicationController
   private
 
   def thank_params
-    params.require(:thank).permit(:text, :receiver_id).merge(sender_id: current_user.id)
+    params.require(:thank).permit(:text, :receiver_id).merge(sender_id: current_user.id, group_id: current_user.groups.first.root_id)
   end
 
   def update_params

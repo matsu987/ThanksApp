@@ -45,8 +45,17 @@
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="current_company.phone_number" placeholder="例）0120-1234-xxxx">
             </div>
+            <div class="company__form__boxies__box">
+              <label>
+                <p class="company__form__boxies__box form--optional">公開日時</p>
+              </label>
+              <input type="datetime" class="company__form__boxies__box__text" v-model="current_company.release_time" placeholder="例）2020年01月01日23:00">
+            </div>
           </div>
-          <input v-if="current_company.admin" type="submit" value="編集" class="company__form__submit" >
+          <div class="company__form__btn-box">
+            <input v-if="current_company.admin" type="submit" value="編集" class="company__form__submit" >
+            <button v-if="current_company.admin"  type="button" @click="releaseThanks" class="company__form__submit" >メッセージ<br>公開</button>
+          </div>
         </form>
       </section>
     </div>
@@ -78,6 +87,12 @@
                 <p class="form--optional">電話番号</p>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="company.phone_number" placeholder="例）0120-1234-xxxx">
+            </div>
+            <div class="company__form__boxies__box">
+              <label>
+                <p class="company__form__boxies__box form--optional">公開日時</p>
+              </label>
+              <input type="datetime" class="company__form__boxies__box__text" v-model="current_company.release_time" placeholder="例）2020年01月01日23:00">
             </div>
           </div>
           <input type="submit" value="登録" class="company__form__submit" >
@@ -136,7 +151,8 @@ export default {
         name: '',
         post_number: '',
         address: '',
-        phone_number: ''
+        phone_number: '',
+        release_time: ''
       },
       current_company: {
         id: '',
@@ -144,6 +160,7 @@ export default {
         post_number: '',
         address: '',
         phone_number: '',
+        release_time: '',
         admin: false
       },
       admin_group: {},
@@ -273,6 +290,28 @@ export default {
             this.errors = error.response.data.errors;
           }
         });
+    },
+    releaseThanks: function(e) {
+      axios
+        .get("/letters/timer.json")
+        .then(response => {
+          this.errors = '';
+          if (response.status === 200){
+            if (response.data && response.data.errors) {
+            this.errors = response.data.errors;
+            } else {
+              this.openModal();
+            }
+
+          } else {
+            let e = response.data;
+          }
+        })
+        .catch(error => {
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
     }
   },
 }
@@ -359,7 +398,7 @@ form {
 
 /* 会社登録 */
 .company {
-  height: 300px;
+  height: 330px;
 }
 
 .company__form {
@@ -369,6 +408,11 @@ form {
 
 .company__form__boxies {
   width: 83%;
+}
+
+.company__form__btn-box {
+  display: flex;
+  flex-direction: column;
 }
 
 .company__form__boxies__box {
@@ -417,12 +461,12 @@ form {
 
 .company__form__submit {
   width: 100px;
-  height: 120px;
+  height: 90px;
   background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
   border: none;
   border-radius: 10px;
   color: #fff;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 /* 部署登録 */

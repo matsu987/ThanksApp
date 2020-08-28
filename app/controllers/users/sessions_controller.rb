@@ -15,6 +15,7 @@ class Users::SessionsController < Devise::SessionsController
 
     if resource.valid_password?(params[:password])
       sign_in :user, resource
+      redirect_to letters_timer_path
       # return render nothing: true
     else
       render json: {errors: invalid_login_attempt }

@@ -17,6 +17,8 @@ class CompaniesController < ApplicationController
 
   def create #会社登録
     @company = Company.new(company_params)
+    last_day = Date.new(Time.now.year, Time.now.month, -1).day.to_s
+    @company.release_time = "#{last_day} 23:50" unless params[:company][:release_time]
     if @company.save
       group = @company.groups.new(name: params[:company][:name], user_ids: [current_user.id])
       group.group_users.first.status = "管理者"
@@ -44,6 +46,8 @@ class CompaniesController < ApplicationController
 
   private
   def company_params
-    params.require(:company).permit(:name, :post_number, :address, :phone_number)
+    time = params[:company][:release_time].split(/[年|月|日|:]/)
+    params[:company][:release_time] = Time.new(time[0], time[1], time[2], time[3], time[4])
+    params.require(:company).permit(:name, :post_number, :address, :phone_number, :release_time)
   end
 end
