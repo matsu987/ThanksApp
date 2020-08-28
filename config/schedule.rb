@@ -19,9 +19,17 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :output, File.join(Whenever.path, "log", "cron.log")
-# ジョブの実行環境の指定
-set :environment, :development, :production
+require File.expand_path(File.dirname(__FILE__) + "/environment")
+# cronを実行する環境変数
+rails_env = ENV['RAILS_ENV'] || :development
+# cronを実行する環境変数をセット
+set :environment, rails_env
+# cronのログの吐き出し場所
+set :output, "#{Rails.root}/log/cron.log"
+
+# set :output, File.join(Whenever.path, "log", "cron.log")
+# # ジョブの実行環境の指定
+# set :environment, :development, :production
 
 # 1分毎に`HelloWorld`を出力する
 every 1.hours do

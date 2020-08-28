@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_08_07_055852) do
     t.string "post_number"
     t.text "address"
     t.string "phone_number"
+    t.string "logo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "release_time", null: false
