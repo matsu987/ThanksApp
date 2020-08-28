@@ -36,6 +36,14 @@ RSpec.describe Thank, type: :model do
         expect(thank.errors[:text]).to include("を入力してください")
       end
 
+      it 'is invalid without group' do
+        receiver = create(:user)
+        sender = create(:user)
+        thank = build(:thank, receiver_id: receiver.id, sender_id: sender.id, group_id: nil)
+        thank.valid?
+        expect(thank.errors[:group]).to include("を入力してください")
+      end
+
     end
   end
 end

@@ -1,7 +1,7 @@
 class ReceptionsController < ApplicationController
   def index
     user = User.find(params[:user_id])
-    @received_thanks = user.received_thanks
+    @received_thanks = user.received_thanks.where(release: true)
     @receive_thanks = []
     @senders = []
     @received_thanks.each do |receive_thank|
