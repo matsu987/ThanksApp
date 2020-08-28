@@ -62,9 +62,9 @@ namespace :deploy do
   after :finishing, 'deploy:cleanup'
 end
 
-set :whenever_roles, :batch
-set :whenever_environment, :production
-set :whenever_command, "RAILS_ENV=#{whenever_environment} bundle exec whenever  --update-crontab"
+# set :whenever_roles, :batch
+# set :whenever_environment, :production
+# set :whenever_command, "RAILS_ENV=#{whenever_environment} bundle exec whenever  --update-crontab"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
