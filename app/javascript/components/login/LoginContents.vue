@@ -192,6 +192,11 @@ export default {
   [v-cloak] {
       display: none;
   }
+
+  ::placeholder {
+    font-size: 14px;
+  }
+
   .main-logo {
     height: 20vh;
   }
