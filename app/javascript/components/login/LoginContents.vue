@@ -1,5 +1,5 @@
 <template>
-  <div class="main-contents">
+  <div class="main-contents" v-cloak>
     <img class="ari-logo" src="~login/ari-logo.png">
     <div class="main-box">
       <div class="main-box__img">
@@ -28,27 +28,27 @@
         </div>
         <div class="login-signup__box">
           <div class="login-signup__header">
-            <div class="login-box btn active" @click="activeBtn" data-name="login">
+            <div class="login-box btn transparent active" @click="activeBtn" data-name="login">
               ログイン
             </div>
-            <div class="signup-box btn" @click="activeBtn" data-name="signup">
+            <div class="signup-box btn transparent" @click="activeBtn" data-name="signup">
               新規登録
             </div>
           </div>
           <!--ログインフォーム-->
           <form action="/users/sign_in" accept-charset="UTF-8" method="post" class="user-form" v-show="loginForm" @submit.prevent="loginUser">
             <div class="user-form__box">
-              <input type="email" id="email" v-model="email" placeholder="メールアドレス">
+              <input type="email" id="email" v-model="email" placeholder="メールアドレス" v-cloak>
             </div>
             <div class="user-form__box">
-              <input type="password" id="pass" placeholder="パスワード 英数字6文字以上" v-model="password" autocomplete="new-password">
+              <input type="password" id="pass" placeholder="パスワード 英数字6文字以上" v-model="password" autocomplete="new-password" v-cloak>
             </div>
             <div class="user-form__box">
               <input type="submit" value="ログイン" class="login-btn btn">
             </div>
             <div class="user-form__box">
               <img class="login-help__icon" src="~login/help.png" alt="ヘルプマーク">
-              <a href="/users/password/new" class="login-help__txt">
+              <a href="#" class="login-help__txt">
                 パスワードを再設定する
               </a>
             </div>
@@ -57,17 +57,17 @@
           <!--新規登録フォーム-->
           <form action="/users" accept-charset="UTF-8" method="post" class="user-form" v-show="signupForm" @submit.prevent="createUser">
             <div class="user-form__box form-half">
-              <input type="text" id="family_name" v-model="family_name" placeholder="苗字">
-              <input type="text" id="given_name" v-model="given_name" placeholder="名前">
+              <input type="text" id="family_name" v-model="family_name" placeholder="苗字" v-cloak>
+              <input type="text" id="given_name" v-model="given_name" placeholder="名前" v-cloak>
             </div>
             <div class="user-form__box">
-              <input type="email" id="email" v-model="email" placeholder="メールアドレス">
+              <input type="email" id="email" v-model="email" placeholder="メールアドレス" v-cloak>
             </div>
             <div class="user-form__box">
-              <input type="password" id="password" placeholder="パスワード 英数字6文字以上" v-model="password" autocomplete="new-password">
+              <input type="password" id="password" placeholder="パスワード 英数字6文字以上" v-model="password" autocomplete="new-password" v-cloak>
             </div>
             <div class="user-form__box">
-              <input type="password" id="password-conf" placeholder="パスワード確認 英数字6文字以上" v-model="password_conf" autocomplete="new-password">
+              <input type="password" id="password-conf" placeholder="パスワード確認 英数字6文字以上" v-model="password_conf" autocomplete="new-password" v-cloak>
             </div>
             <div class="user-form__box">
               <input type="submit" value="新規登録" class="login-btn btn">
@@ -129,7 +129,6 @@ export default {
         .then(response => {
           this.errors = '';
           if (response.status === 200){
-            console.log(response.data)
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
             }
@@ -154,16 +153,13 @@ export default {
         .then(response => {
           this.errors = '';
           if (response.status === 200){
-            console.log(response.data)
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
-            console.log(response.data.errors)
             }
             else{
               this.openModal();
             }
           } else {
-            console.log(response)
             let e = response.data;
           }
           this.openModal();
@@ -185,7 +181,7 @@ export default {
          this.$data.signupForm = true
       }
       element[0].classList.remove('active');
-      e.currentTarget.className = "active";
+      e.currentTarget.classList.add("active");
     }
   }
 
@@ -193,6 +189,9 @@ export default {
 </script>
 
 <style scoped>
+  [v-cloak] {
+      display: none;
+  }
   .main-logo {
     height: 20vh;
   }
@@ -207,8 +206,6 @@ export default {
     width: 100vw;
     background-size: cover;
     background-image: url("~login/background-pink.png");
-    position: absolute;
-    bottom: 0;
   }
 
   .main-box__img {
@@ -222,9 +219,6 @@ export default {
   .thanks-img {
     max-width: 400px;
     width: 100%;
-    position: absolute;
-    top: 50px;
-    left: 10%;
   }
 
   .pc-img {
@@ -234,12 +228,10 @@ export default {
 
   .login-signup__content {
     flex-grow: 1;
-    height: 80vh;
   }
 
   .login-signup__box {
     width: 80%;
-    height: 80%;
     margin: 0 auto;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
@@ -250,12 +242,21 @@ export default {
     background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
     height: 70px;
     align-items: center;
-    color: #C0C0C0;
+    color: #fff;
     font-weight: bold;
+  }
+
+  .btn {
+    cursor: pointer;
+  }
+
+  .transparent {
+    opacity: 0.5;
   }
 
   .active {
     color: #fff;
+    opacity: 1;
     position: relative;
   }
 
@@ -274,16 +275,12 @@ export default {
     transform: rotate(180deg);
   }
 
-  .btn {
-    cursor: pointer;
-  }
-
   .user-form {
     background: #fff;
-    height: 88%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 10% 0;
   }
 
   .user-form__box {
