@@ -26,5 +26,10 @@
 
   .pc-img {
     padding-left: 5% !important;
+    width: 70% !important;
+  }
+
+  .login-signup__content {
+    height: 90vh;
   }
 }
