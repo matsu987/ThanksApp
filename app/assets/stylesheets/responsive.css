@@ -1,6 +1,6 @@
 
 @media screen and (max-width:480px) {
-  .ari-logo[data-v-03243e8c] {
+  .ari-logo{
     height: 100px !important;
     margin: 3% 0 0 13% !important;
   }
@@ -22,5 +22,9 @@
     position: absolute !important;
     top: initial !important;
     left: 22% !important;
+  }
+
+  .pc-img {
+    padding-left: 5% !important;
   }
 }
