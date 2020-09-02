@@ -294,6 +294,10 @@ export default {
     padding: 30px 0 0 0;
   }
 
+  .user-form__box:first-child {
+    padding: 0;
+  }
+
   .user-form__box input {
     height: 50px;
     width: 60%;
