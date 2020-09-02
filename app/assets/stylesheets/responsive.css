@@ -1,7 +1,7 @@
 
 @media screen and (max-width:480px) {
   ::placeholder {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .ari-logo{
@@ -34,6 +34,6 @@
   }
 
   .login-signup__content {
-    height: 75vh !important;
+    height: 85vh !important;
   }
 }
