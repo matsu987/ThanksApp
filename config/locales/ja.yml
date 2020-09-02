@@ -8,6 +8,8 @@ ja:
         name: 名前
         email: メールアドレス
         avatar: 画像
+        family_name: 姓
+        given_name: 名
       thank:
         text: 「熱い感謝のメッセージ」
         receiver: 「サプライズのある仕事をした人」

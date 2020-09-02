@@ -16,7 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_in(@user)
       redirect_to root_path
     else
-      render :new
+      render json: {errors: @user.errors.full_messages }
     end
   end
 

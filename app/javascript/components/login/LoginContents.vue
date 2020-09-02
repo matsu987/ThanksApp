@@ -1,54 +1,93 @@
 <template>
-  <div class="login-form__conts">
+  <div class="main-contents">
+    <img class="ari-logo" src="~login/ari-logo.png">
+    <div class="main-box">
+      <div class="main-box__img">
+        <img class="thanks-img" src="~login/thanks-text.png">
+        <img class="pc-img" src="~login/pc.png">
+      </div>
 
-    <!-- ポップアップ -->
-    <div class="login-popup">
-      <div class="overlay" v-show="showContent">
-        <div class="content">
-          <div class="error-message" v-if="errors.length != 0">
-            <ul >
-              <li><font color="red">{{ errors }}</font></li>
-            </ul>
+      <div class="login-signup__content">
+        <!-- ポップアップ-->
+        <div class="login-popup">
+          <div class="overlay" v-show="showContent">
+            <div class="content">
+              <div class="error-message" v-if="errors.length != 0">
+                <ul v-show="signupForm" v-for="e in errors" :key="e">
+                  <li><font color="red">{{ e }}</font></li>
+                </ul>
+                <ul v-show="loginForm">
+                  <li><font color="red">{{ errors }}</font></li>
+                </ul>
+              </div>
+              <p class="success-message" v-if="errors.length == 0" v-show="loginForm">ログインに成功しました！<br><span class="sub-message">早速感謝の言葉をお伝えしましょう</span></p>
+              <p class="success-message" v-if="errors.length == 0" v-show="signupForm">登録が完了しました！<br><span class="sub-message">早速感謝の言葉をお伝えしましょう</span></p>
+              <button class="close-btn" v-on:click="closeModal">Close</button>
+            </div>
           </div>
-          <p class="success-message" v-if="errors.length == 0">パスワード入力確認いたしました！<br><span class="sub-message">早速感謝の言葉をお伝えしましょう</span></p>
-          <button class="close-btn" v-on:click="closeModal">Close</button>
+        </div>
+        <div class="login-signup__box">
+          <div class="login-signup__header">
+            <div class="login-box btn active" @click="activeBtn" data-name="login">
+              ログイン
+            </div>
+            <div class="signup-box btn" @click="activeBtn" data-name="signup">
+              新規登録
+            </div>
+          </div>
+          <!--ログインフォーム-->
+          <form action="/users/sign_in" accept-charset="UTF-8" method="post" class="user-form" v-show="loginForm" @submit.prevent="loginUser">
+            <div class="user-form__box">
+              <input type="email" id="email" v-model="email" placeholder="メールアドレス">
+            </div>
+            <div class="user-form__box">
+              <input type="password" id="pass" placeholder="パスワード 英数字6文字以上" v-model="password" autocomplete="new-password">
+            </div>
+            <div class="user-form__box">
+              <input type="submit" value="ログイン" class="login-btn btn">
+            </div>
+            <div class="user-form__box">
+              <img class="login-help__icon" src="~login/help.png" alt="ヘルプマーク">
+              <a href="/users/password/new" class="login-help__txt">
+                パスワードを再設定する
+              </a>
+            </div>
+          </form>
+
+          <!--新規登録フォーム-->
+          <form action="/users" accept-charset="UTF-8" method="post" class="user-form" v-show="signupForm" @submit.prevent="createUser">
+            <div class="user-form__box form-half">
+              <input type="text" id="family_name" v-model="family_name" placeholder="苗字">
+              <input type="text" id="given_name" v-model="given_name" placeholder="名前">
+            </div>
+            <div class="user-form__box">
+              <input type="email" id="email" v-model="email" placeholder="メールアドレス">
+            </div>
+            <div class="user-form__box">
+              <input type="password" id="password" placeholder="パスワード 英数字6文字以上" v-model="password" autocomplete="new-password">
+            </div>
+            <div class="user-form__box">
+              <input type="password" id="password-conf" placeholder="パスワード確認 英数字6文字以上" v-model="password_conf" autocomplete="new-password">
+            </div>
+            <div class="user-form__box">
+              <input type="submit" value="新規登録" class="login-btn btn">
+            </div>
+          </form>
         </div>
       </div>
     </div>
-
-    <!-- ログインフォーム -->
-    <form action="/users/sign_in" accept-charset="UTF-8" method="post" class="login-form" @submit.prevent="createPass">
-      <img src='~ari-letter-logo.jpg' class="ari-logo">
-      <div class="login-form__content">
-        <label for="email">E-Mail</label>
-        <input type="email" id="email" v-model="email" placeholder="例）taro.yamada@di-v.co.jp">
-      </div>
-      <div class="login-form__content">
-        <label for="pass">PASS</label>
-        <input type="password" id="pass" placeholder="例）6文字以上の半角英数字" v-model="password" autocomplete="new-password">
-      </div>
-      <input type="submit" value="ログイン" class="login-form__btn">
-      <div class="login-form__help">
-        <img class="login-form__icon" src="~login-help.png" alt="ヘルプマーク">
-        <a href="/users/password/new" class="login-form__txt">
-          パスワードを再設定する
-        </a>
-      </div>
-      <div class="login-form__sign-up">
-        <img class="login-form__icon" src="~login-beginner.png" alt="初心者マーク">
-        <a class="login-form__txt" href="/users/sign_up">
-          初めて利用する方はこちら
-        </a>
-      </div>
-    </form>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import 'ari-letter-logo.jpg';
-import 'login-help.png';
-import 'login-beginner.png';
+import 'login/help.png';
+import 'login/background-pink.png';
+import 'login/ari-logo.png';
+import 'login/thanks-text.png';
+import 'login/pc.png';
+
+
 
 export default {
   data: function(){
@@ -56,6 +95,11 @@ export default {
       errors: '',
       email: '',
       password: '',
+      family_name: '',
+      given_name: '',
+      password_conf: '',
+      loginForm: true,
+      signupForm: false,
       showContent: false
     }
   },
@@ -71,25 +115,26 @@ export default {
     },
     closeModal: function(){
       this.$data.showContent = false
+      setTimeout(function(){
+        location.href = "/"
+      },10);
     },
     resetForm: function(){
       this.$data.email = ''
       this.$data.password = ''
     },
-    createPass: function(event) {
+    loginUser: function(event) {
       axios
         .post('/users/sign_in', {email: this.email, password: this.password})
         .then(response => {
           this.errors = '';
           if (response.status === 200){
+            console.log(response.data)
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
             }
             else{
               this.openModal();
-              setTimeout(function(){
-                location.href = "/"
-                },1000);
             }
           } else {
             let e = response.data;
@@ -103,19 +148,194 @@ export default {
           }
         });
       },
+    createUser: function(e){
+      axios
+        .post('/users', {family_name: this.family_name, given_name: this.given_name, email: this.email, password: this.password, password_confirmation: this.password_conf})
+        .then(response => {
+          this.errors = '';
+          if (response.status === 200){
+            console.log(response.data)
+            if (response.data && response.data.errors) {
+            this.errors = response.data.errors;
+            console.log(response.data.errors)
+            }
+            else{
+              this.openModal();
+            }
+          } else {
+            console.log(response)
+            let e = response.data;
+          }
+          this.openModal();
+          this.resetForm();
+        })
+        .catch(error => {
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+    activeBtn: function(e){
+      let element = document.getElementsByClassName('active');
+      if (e.currentTarget.dataset.name == "login"){
+         this.$data.loginForm = true
+         this.$data.signupForm = false
+      } else {
+         this.$data.loginForm = false
+         this.$data.signupForm = true
+      }
+      element[0].classList.remove('active');
+      e.currentTarget.className = "active";
     }
+  }
 
 }
 </script>
 
 <style scoped>
-  .login-form__conts{
-    background-color: #F8F8F8;
-    width: 50%;
-    height: 80vh;
-    box-sizing: border-box;
-    border-radius: 40px;
+  .main-logo {
+    height: 20vh;
   }
+
+  .ari-logo {
+    height: 120px;
+    margin: 3% 0 0 12%;
+  }
+
+  .main-box {
+    display: flex;
+    width: 100vw;
+    background-size: cover;
+    background-image: url("~login/background-pink.png");
+    position: absolute;
+    bottom: 0;
+  }
+
+  .main-box__img {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .thanks-img {
+    max-width: 400px;
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    left: 10%;
+  }
+
+  .pc-img {
+    max-width: 720px;
+    width: 100%;
+  }
+
+  .login-signup__content {
+    flex-grow: 1;
+    height: 80vh;
+  }
+
+  .login-signup__box {
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .login-signup__header {
+    display: flex;
+    justify-content: space-around;
+    background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
+    height: 70px;
+    align-items: center;
+    color: #C0C0C0;
+    font-weight: bold;
+  }
+
+  .active {
+    color: #fff;
+    position: relative;
+  }
+
+  .active::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -25px;
+    left: 0;
+    width: 0px;
+    height: 0px;
+    margin: auto;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+    border-width: 15px 15px 0 15px;
+    transform: rotate(180deg);
+  }
+
+  .btn {
+    cursor: pointer;
+  }
+
+  .user-form {
+    background: #fff;
+    height: 88%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .user-form__box {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0 0 0;
+  }
+
+  .user-form__box input {
+    height: 50px;
+    width: 60%;
+    border: 1px solid red;
+  }
+
+  .form-half {
+    display: flex;
+  }
+
+  .form-half input:first-child {
+    margin-right: 10%;
+  }
+
+  .form-half input {
+    width: 25%;
+  }
+
+  .login-btn {
+    width: 200px;
+    height: 50px;
+    background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
+    color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+  }
+
+  .login-help__icon {
+    height: 18px;
+    margin-right: 30px;
+  }
+
+  .login-help__txt {
+    font-size: 12px;
+    color: #888888;
+  }
+
+  .login-help__txt::after {
+    content: "▶️";
+    margin-left: 30px;
+  }
+
   /* ログインポップアップ*/
   .overlay{
     width: 60%;
@@ -160,79 +380,5 @@ export default {
     height: 50px;
     border-radius: 25px;
     border: none;
-  }
-
-  /* ログインフォーム */
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .ari-logo {
-    height: 150px;
-    width: 150px;
-    margin-top: 20px;
-  }
-
-  .login-form__content {
-    display: flex;
-    width: 100%;
-    padding: 40px 100px 0 100px;
-  }
-
-  .login-form__content label {
-    display: inline-block;
-    background-color: #888888;
-    width: 100px;
-    line-height: 50px;
-    text-align: center;
-    color: #FFFFFF;
-    font-family: Noto Sans CJK JP;
-    font-size: 11px;
-    letter-spacing: 0.02em;
-    margin: 0 20px 0 50px;
-  }
-
-  .login-form__content input {
-    display: inline-block;
-    flex-grow: 1;
-    height: 50px;
-    background-color: #fff;
-    box-sizing: border-box;
-    border: none;
-    padding-left: 15px;
-    margin-right: 50px;
-  }
-
-  .login-form__btn {
-    width: 200px;
-    height: 50px;
-    background: #FFC152;
-    color: white;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border: none;
-    border-radius: 30px;
-    margin: 40px 0;
-  }
-
-  .login-form__help {
-    margin-bottom: 20px;
-  }
-
-  .login-form__icon {
-    height: 12px;
-    margin-right: 30px;
-  }
-
-  .login-form__txt {
-    font-size: 12px;
-    color: #888888;
-  }
-
-  .login-form__txt::after {
-    content: "▶️";
-    margin-left: 30px;
   }
 </style>
