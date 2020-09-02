@@ -1,8 +1,9 @@
 
 @media screen and (max-width:480px) {
   .ari-logo{
+    display: block;
+    margin: 0 auto !important;
     height: 100px !important;
-    margin: 3% 0 0 13% !important;
   }
 
   .main-box {
@@ -11,7 +12,6 @@
   }
   
   .main-box__img {
-    flex-direction: initial !important;
     width: 100% !important;
     align-items: initial !important;
   }
@@ -19,17 +19,17 @@
   .thanks-img {
     max-width: 200px !important;
     width: 100% !important;
-    position: absolute !important;
-    top: initial !important;
-    left: 22% !important;
+    position: initial !important;
+    margin: 0 auto !important;
   }
 
   .pc-img {
     padding-left: 5% !important;
-    width: 70% !important;
+    width: 50% !important;
+    margin: 0 auto !important;
   }
 
   .login-signup__content {
-    height: 90vh;
+    height: 100vh !important;
   }
 }
