@@ -1,0 +1,26 @@
+
+@media screen and (max-width:480px) {
+  .ari-logo[data-v-03243e8c] {
+    height: 100px !important;
+    margin: 3% 0 0 13% !important;
+  }
+
+  .main-box {
+    flex-direction: column !important;
+    position: static !important;
+  }
+  
+  .main-box__img {
+    flex-direction: initial !important;
+    width: 100% !important;
+    align-items: initial !important;
+  }
+  
+  .thanks-img {
+    max-width: 200px !important;
+    width: 100% !important;
+    position: absolute !important;
+    top: initial !important;
+    left: 22% !important;
+  }
+}
