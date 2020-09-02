@@ -47,8 +47,6 @@
 <script>
 import axios from 'axios';
 import 'ari-letter-logo.jpg';
-import 'login-help.png';
-import 'login-beginner.png';
 
 export default {
   data: function(){
