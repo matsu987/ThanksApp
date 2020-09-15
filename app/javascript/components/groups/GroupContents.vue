@@ -151,8 +151,8 @@
                 <div class="form--required">コミュニティ名</div>
               </label>
               <p v-if="belong_to_company.company" class="group__form__boxies__box__text">{{belong_to_company.company.name}}</p>
-              <select v-else class="group__form__boxies__box__text" v-model="selected_company">
-                <option v-for="(company, index) in companies" v-model="company.id" :value="company.id" @change="changeCompany">{{company.name}}</option>
+              <select v-else class="group__form__boxies__box__text" v-model="selected_company" @change="changeCompany">
+                <option v-for="(company, index) in companies" v-model="company.id" :value="company.id">{{company.name}}</option>
               </select>
             </div>
             <div class="group__form__boxies__box">
@@ -240,7 +240,6 @@ export default {
     .get(group_belong_url)
     .then(response => {
       this.$data.belong_to_company = response.data
-      console.log(this.$data.belong_to_company)
     });
   },
   mounted:function(){
@@ -349,11 +348,13 @@ export default {
         });
     },
     changeCompany: function(e) {
+      console.log(this.$data.selected_company)
       let url = `/api/users/${this.$data.current_user.id}/groups.json`
       axios
-      .get(url, this.company)
+      .get(url, {params: {company_id: this.$data.selected_company}})
       .then(response => {
         this.$data.groups = response.data
+        console.log(this.$data.groups)
       });
     },
     joinRequest: function(e) {

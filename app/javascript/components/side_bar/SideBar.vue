@@ -10,8 +10,8 @@
         </div>
       </div>
       <div class="side-bar__header__user" v-cloak>
-        <img v-if="current_user.avatar" class="side-bar__header__user__img" :src="current_user.avatar.url" v-cloak>
-        <img v-else class="side-bar__header__user__img" src="~avatar.png" v-cloak>
+        <img v-if="current_user.avatar.url" class="side-bar__header__user__img" :src="current_user.avatar.url">
+        <img v-else class="side-bar__header__user__img" src="~avatar.png">
         <h3 class="side-bar__header__user__name">{{current_user.family_name}} {{current_user.given_name}}さん</h3>
       </div>
     </div>
@@ -179,7 +179,6 @@ export default {
       } else {
         this.$data.links.receive.active = true
       }
-
     });
   },
   methods: {

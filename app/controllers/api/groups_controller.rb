@@ -2,6 +2,8 @@ class Api::GroupsController < ApplicationController
   before_action :group_params, only: [:create]
 
   def index # 複数のグループを取得
+    groups = Group.where(company_id: params[:company_id]).where.not(ancestry: nil) if params[:company_id].present?
+    render json: groups, status: 200
   end
 
   def create # グループ登録
