@@ -2,9 +2,9 @@ class Admin::TopsController < ApplicationController
     # before_action :if_not_admin
     # before_action :set_user, only: [:edit, :update, :destroy]
 
-    def index
+    # def index
     
-    end
+    # end
 
     # def new
     #     @user = User.new
