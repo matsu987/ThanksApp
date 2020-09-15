@@ -1,24 +1,29 @@
 <template>
   <div id="app" class="container">
     <SideBar></SideBar>
-    <ReceiveContents></ReceiveContents>
+    <UserEditContent></UserEditContent>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import SideBar from 'components/side_bar/SideBar.vue';
-import ReceiveContents from 'components/letters/receive/ReceiveContents.vue';
+import OtherUserContents from './OtherUserContents.vue';
 
 export default {
   components: {
-    SideBar, ReceiveContents
+    SideBar, OtherUserContents
   },
   data: function () {
     return {
-      mypageNav: "receive"
     }
-  }
+  },
+  mounted:function(){
+    axios.defaults.headers.common = {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  },
 }
 </script>
 
