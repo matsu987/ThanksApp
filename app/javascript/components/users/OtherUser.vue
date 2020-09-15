@@ -1,18 +1,18 @@
 <template>
   <div id="app" class="container">
-    <Header header-nav="Mypage" mypage-nav="group"></Header>
-    <GroupNewContent></GroupNewContent>
+    <SideBar></SideBar>
+    <UserEditContent></UserEditContent>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import Header from '../shared/Header.vue';
-import GroupNewContent from './GroupNewContent.vue';
+import SideBar from 'components/side_bar/SideBar.vue';
+import OtherUserContents from './OtherUserContents.vue';
 
 export default {
   components: {
-    Header, GroupNewContent
+    SideBar, OtherUserContents
   },
   data: function () {
     return {
@@ -42,4 +42,9 @@ header {
   height: 100vh;
   background-color: #EDEDED;
 } */
+main{
+  width: 65%;
+  height: 100vh;
+  background-color: #fff;
+}
 </style>

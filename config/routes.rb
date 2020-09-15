@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
+  root 'letters/receive#index'
 
-  namespace :api do
-    namespace :admin do
-      get 'requests/update'
-    end
-  end
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -14,8 +10,43 @@ Rails.application.routes.draw do
   devise_scope :user do
     patch "users/confirmation", to: "users/confirmations#confirm"
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'thanks#index'
+
+  namespace :api do
+    get "users/login" # ログインしているユーザーのデータを取得
+    post "users/:user_id/community", to: 'companies#create' # コミュニティ登録
+    patch "users/:user_id/community", to: 'companies#update' # コミュニティ更新
+    get "users/:user_id/company/belong_to", to: 'companies#belong_to_company' #ログインしているユーザーの所属しているコミュニティデータ取得
+    get "users/:user_id/companies", to: 'companies#index' # コミュニティ全取得
+    post "users/:user_id/groups", to: 'groups#create' # グループ登録
+    get "users/:user_id/groups", to: 'groups#index' # 会社に紐づいているグループを取得
+    post "users/:user_id/group_users", to: 'group_users#create'
+    namespace :admin do
+      get 'users/index'
+      patch 'users/update'
+      patch 'users/destroy',to: 'users#destroy'
+      get 'requests/update'
+      patch 'requests/update'
+      patch 'requests/destroy',to: 'requests#destroy'
+    end
+    namespace :lists do
+      get 'groups/index'
+    end
+  end
+
+  resources :users, except: [:new, :create, :destroy] do
+    namespace :letters do
+      get 'receive'    , to: 'receive#index'
+      get 'send'       , to: 'send#index'
+    end
+      get 'community'  , to: 'groups#index'
+      get 'admin'      , to: 'admin/users#index'
+      get 'other'      , to: 'users/other#index'
+    # member do
+    #   patch "login_update", to: "user/login#update"
+    #   delete 'image/destroy', to: "users#image_destroy"
+    # end
+
+  end
 
   resources :thanks, except: %i(index, show)
 
@@ -31,29 +62,11 @@ Rails.application.routes.draw do
     resources :tops
   end
 
-  # #送受信一覧
-  resources :users, except: [:new, :create, :destroy] do
-    namespace :letters do
-      get 'receive', to: 'receive#index'
-      get 'send', to: 'send#index'
-    end
-    resources :transmissions, only: [:index]
-      member do
-        patch "login_update", to: "user/login#update"
-        delete 'image/destroy', to: "users#image_destroy"
-      end
-  end
+
 
   namespace :letters do
     get "timer", to:"timer#index"
   end
-
-  # resources :transmissions, only: [:index]
-  #   member do
-  #     patch "login_update", to: "user/login#update"
-  #     delete 'image/destroy', to: "users#image_destroy"
-  #   end
-  # end
 
   namespace :user do
     get 'groups', to: 'group#index'
@@ -74,16 +87,5 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
-    namespace :admin do
-      get 'users/index'
-      patch 'users/update'
-      patch 'users/destroy',to: 'users#destroy'
-      patch 'requests/update'
-      patch 'requests/destroy',to: 'requests#destroy'
-    end
-    namespace :lists do
-      get 'groups/index'
-    end
-  end
+  
 end

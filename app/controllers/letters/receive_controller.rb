@@ -1,4 +1,6 @@
 class Letters::ReceiveController < ApplicationController
+  before_action :redirect_root
+  
   def index
     # @user = User.find(params[:user_id])
     # 受信一覧を取得したいというリクエストが来た時だけ発火
@@ -33,6 +35,14 @@ class Letters::ReceiveController < ApplicationController
         format.html
         format.json
       end
+    end
+  end
+
+  private
+  def redirect_root
+    if request.path != "/"
+      user = User.find_by(id: params[:user_id])
+      return redirect_to root_path if user.blank? || current_user.id != user.id
     end
   end
 end

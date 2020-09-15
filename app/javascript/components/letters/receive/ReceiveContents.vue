@@ -200,7 +200,7 @@ main{
   width: 65%;
   height: 100vh;
   background-color: #fff;
-  margin-left: 35%;
+  margin-left: 300px;
 }
 
 .main-header{

@@ -1,18 +1,18 @@
 <template>
   <div id="app" class="container">
     <SideBar></SideBar>
-    <AdminUsersContents></AdminUsersContents>
+    <GroupContents></GroupContents>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import SideBar from '../../side_bar/SideBar.vue';
-import AdminUsersContents from './AdminUsersContents.vue';
+import SideBar from 'components/side_bar/SideBar.vue';
+import GroupContents from './GroupContents.vue';
 
 export default {
   components: {
-    SideBar, AdminUsersContents
+    SideBar, GroupContents
   },
   data: function () {
     return {
@@ -30,18 +30,5 @@ export default {
 <style scoped>
 .container {
   display: flex;
-}
-header {
-  width: 35%;
-  height: 100vh;
-  background-color: #fff;
-  display: flex;
-}
-
-main{
-  width: 65%;
-  height: 100vh;
-  background-color: #fff;
-  margin-left: 35%;
 }
 </style>

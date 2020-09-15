@@ -1,18 +1,18 @@
 <template>
   <div id="app" class="container">
-    <Header :nav="mypageNav"></Header>
+    <SideBar></SideBar>
     <SendContents></SendContents>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import Header from 'components/shared/Header.vue';
+import SideBar from 'components/side_bar/SideBar.vue';
 import SendContents from 'components/letters/send/SendContents.vue';
 
 export default {
   components: {
-    Header, SendContents
+    SideBar, SendContents
   },
   data: function () {
     return {

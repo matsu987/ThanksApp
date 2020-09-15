@@ -1,18 +1,18 @@
 <template>
   <div id="app" class="container">
-    <Header :nav="mypageNav"></Header>
+    <SideBar></SideBar>
     <ReceiveContents></ReceiveContents>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import Header from 'components/shared/Header.vue';
+import SideBar from 'components/side_bar/SideBar.vue';
 import ReceiveContents from 'components/letters/receive/ReceiveContents.vue';
 
 export default {
   components: {
-    Header, ReceiveContents
+    SideBar, ReceiveContents
   },
   data: function () {
     return {

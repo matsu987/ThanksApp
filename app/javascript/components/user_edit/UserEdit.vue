@@ -1,18 +1,18 @@
 <template>
   <div id="app" class="container">
-    <Header></Header>
+    <SideBar></SideBar>
     <UserEditContent></UserEditContent>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import Header from '../shared/Header.vue';
+import SideBar from 'components/side_bar/SideBar.vue';
 import UserEditContent from './UserEditContent.vue';
 
 export default {
   components: {
-    Header, UserEditContent
+    SideBar, UserEditContent
   },
   data: function () {
     return {
