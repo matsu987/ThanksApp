@@ -4,37 +4,52 @@
       <img src="~logo.png" class="side-bar__header__logo">
       <div class="side-bar__header__company">
         <img src="~company-logo.png" class="side-bar__header__company__logo">
-        <div class="side-bar__header__company__info">
-          <h3 class="side-bar__header__company__info__name" v-cloak>株式会社テスト</h3>
-          <p class="side-bar__header__company__info__admin" v-cloak>管理者</p>
+        <div class="side-bar__header__company__info" v-cloak>
+          <h3 class="side-bar__header__company__info__name" v-if="belong_to_company.company">{{belong_to_company.company.name}}</h3>
+          <h3 class="side-bar__header__company__info__name" v-else>未所属</h3>
+          <p class="side-bar__header__company__info__admin" v-if="belong_to_company.admin">管理者</p>
         </div>
       </div>
       <div class="side-bar__header__user" v-cloak>
-        <img v-if="current_user.avatar.url" class="side-bar__header__user__img" :src="current_user.avatar.url">
+        <img v-if="current_user.avatar" class="side-bar__header__user__img" :src="current_user.avatar.url">
         <img v-else class="side-bar__header__user__img" src="~avatar.png">
         <h3 class="side-bar__header__user__name">{{current_user.family_name}} {{current_user.given_name}}さん</h3>
       </div>
     </div>
     <button class="thanks-btn" @click="ThanksNew">新規作成</button>
     <ul class="side-bar__menu">
-      <li class="side-bar__menu__list" v-bind:class="[ links.receive.active ? 'active-list' : '']"><a :href="links.receive.url" class="side-bar__menu__list__text" v-bind:class="[ links.receive.active ? 'active-text' : '']">受信一覧</a></li>
-      <li class="side-bar__menu__list" v-bind:class="[ links.send.active ? 'active-list' : '']"><a :href="links.send.url" class="side-bar__menu__list__text" v-bind:class="[ links.send.active ? 'active-text' : '']">送信一覧</a></li>
-      <li class="side-bar__menu__list" v-bind:class="[ links.account.active ? 'active-list' : '']"><a :href="links.account.url" class="side-bar__menu__list__text" v-bind:class="[ links.account.active ? 'active-text' : '']">アカウント設定</a></li>
-      <li class="side-bar__menu__list" v-bind:class="[ links.community.active ? 'active-list' : '']"><a :href="links.community.url" class="side-bar__menu__list__text" v-bind:class="[ links.community.active ? 'active-text' : '']">コミュニティ設定</a></li>
-      <li class="side-bar__menu__list" v-bind:class="[ links.admin.active ? 'active-list' : '']"><a :href="links.admin.url" class="side-bar__menu__list__text" v-bind:class="[ links.admin.active ? 'active-text' : '']">管理者設定</a></li>
-      <li class="side-bar__menu__list" v-bind:class="[ links.other.active ? 'active-list' : '']"><a :href="links.other.url" class="side-bar__menu__list__text" v-bind:class="[ links.other.active ? 'active-text' : '']">その他</a></li>
+      <li class="side-bar__menu__list" v-bind:class="[ links.receive.active ? 'active-list' : '']">
+        <a :href="links.receive.url" class="side-bar__menu__list__text" v-bind:class="[ links.receive.active ? 'active-text' : '']">受信一覧</a>
+      </li>
+      <li class="side-bar__menu__list" v-bind:class="[ links.send.active ? 'active-list' : '']">
+        <a :href="links.send.url" class="side-bar__menu__list__text" v-bind:class="[ links.send.active ? 'active-text' : '']">送信一覧</a>
+      </li>
+      <li class="side-bar__menu__list" v-bind:class="[ links.account.active ? 'active-list' : '']">
+        <a :href="links.account.url" class="side-bar__menu__list__text" v-bind:class="[ links.account.active ? 'active-text' : '']">アカウント設定</a>
+      </li>
+      <li class="side-bar__menu__list" v-bind:class="[ links.community.active ? 'active-list' : '']">
+        <a :href="links.community.url" class="side-bar__menu__list__text" v-bind:class="[ links.community.active ? 'active-text' : '']">コミュニティ設定</a>
+      </li>
+      <li class="side-bar__menu__list" v-bind:class="[ links.admin.active ? 'active-list' : '']" v-if="belong_to_company.admin">
+        <a :href="links.admin.url" class="side-bar__menu__list__text" v-bind:class="[ links.admin.active ? 'active-text' : '']">管理者設定</a>
+      </li>
+      <li class="side-bar__menu__list" v-bind:class="[ links.other.active ? 'active-list' : '']" >
+        <a :href="links.other.url" class="side-bar__menu__list__text" v-bind:class="[ links.other.active ? 'active-text' : '']">その他</a>
+      </li>
     </ul>
     
     <!-- 新規作成ポップアップ -->
     <div class="thanks-overlay" v-show="showThanksNew">
       <form class="form">
         <h2 class="form__title">新規作成</h2>
-        <div v-if= "thank.receiver.id" class="form__reciever" v-cloak>
-          <img v-if="thank.receiver.avatar" class="form__reciever__img" :src="thank.receiver.avatar">
-          <img v-else class="form__reciever__img" src="~avatar.png">
-          <p class="form__reciever__name">To: {{thank.receiver.family_name + thank.receiver.given_name}}さん</p>
+        <div class="flex">
+          <div v-if= "thank.receiver.id" class="form__reciever" v-cloak>
+            <img v-if="thank.receiver.avatar" class="form__reciever__img" :src="thank.receiver.avatar">
+            <img v-else class="form__reciever__img" src="~avatar.png">
+            <p class="form__reciever__name">To: {{thank.receiver.family_name + thank.receiver.given_name}}さん</p>
+          </div>
+          <button class="form__user-btn" @click="userSelectBtn" v-show="showUserSelectBtn">感謝を送りたい人を選択</button>
         </div>
-        <button class="form__user-btn" @click="userSelectBtn" v-show="showUserSelectBtn">感謝を送りたい人を選択</button>
         <textarea class="form__text" v-model="thank.text" type="text" placeholder="感謝を具体的に書きましょう"></textarea>
         <div class="form__sender" v-cloak>
           <img v-if="current_user.avatar" class="form__avatar" :src="current_user.avatar.url">
@@ -55,12 +70,15 @@
         <div class="groups-content">
           <h2 class="groups-content__title">グループから検索する</h2>
           <ul class="groups-content__result">
-            <li v-for="(group, index) in groups" :key="group.id" @click="groupBox(index)" :data-id="group.id"  ref="group" class="groups-content__result__box">{{group.name}}</li>
+            <li v-for="(group, index) in groups" :key="group.id" @click="groupBox(index)" :data-id="group.id" ref="group" class="groups-content__result__box">
+              <p v-if="!group.ancestry">{{group.name}}（コミュニティ全体）</p>
+              <p v-else>{{group.name}}</p>
+            </li>
           </ul>
         </div>
         <div class="arrow-content"></div>
         <div class="users-content">
-          <input type="text" class="user-content__text" v-model="search_keyword" @input="onInput" placeholder="名前で検索する">
+          <input type="text" class="user-content__text" v-model="search_keyword" @input="onInput" placeholder="調整中">
           <ul class="users-content__result">
             <li v-for="(user, index) in searchUsers" :key="user.id" class="users-content__result__box" @click="userBox(index)" :data-id="user.id" :data-family-name="user.family_name" :data-given-name="user.given_name" :data-email="user.email" :data-avatar="user.avatar.url" ref="user">
               <img v-if="user.avatar.url" class="users-content__result__box__img" :src="user.avatar.url">
@@ -102,7 +120,7 @@ export default {
   data: function () {
     return {
       current_user: {},
-      company: {},
+      belong_to_company: {},
       links: {
         receive: {
           url: "",
@@ -144,40 +162,57 @@ export default {
         }
       },
       groups: [],
+      users: [],
       search_keyword: "",
+      searchData: {
+        selectGroup: ""
+      },
       searchUsers: [],
       errors: [],
     }
   },
   created() {
+    // ログインユーザー取得
     axios
     .get('/api/users/login.json')
     .then(response => {
-      this.$data.current_user = response.data
+      if (response.status === 200 ) {
+        this.$data.current_user = response.data
 
-      let id = response.data.id
+        let id = response.data.id
 
-      this.$data.links.receive.url = `/users/${id}/letters/receive`
-      this.$data.links.send.url = `/users/${id}/letters/send`
-      this.$data.links.account.url = `/users/${id}/edit`
-      this.$data.links.community.url = `/users/${id}/community`
-      this.$data.links.admin.url = `/users/${id}/admin`
-      this.$data.links.other.url = `/users/${id}/other`
+        this.$data.links.receive.url = `/users/${id}/letters/receive`
+        this.$data.links.send.url = `/users/${id}/letters/send`
+        this.$data.links.account.url = `/users/${id}/edit`
+        this.$data.links.community.url = `/users/${id}/community`
+        this.$data.links.admin.url = `/users/${id}/admin`
+        this.$data.links.other.url = `/users/${id}/other`
 
-      if (location.pathname == `/users/${id}/letters/receive`){
-        this.$data.links.receive.active = true
-      } else if (location.pathname == `/users/${id}/letters/send`) {
-        this.$data.links.send.active = true
-      } else if (location.pathname == `/users/${id}/edit`) {
-        this.$data.links.account.active = true
-      } else if (location.pathname == `/users/${id}/community`) {
-        this.$data.links.community.active = true
-      } else if (location.pathname == `/users/${id}/admin`) {
-        this.$data.links.admin.active = true
-      } else if (location.pathname == `/users/${id}/other`) {
-        this.$data.links.other.active = true
-      } else {
-        this.$data.links.receive.active = true
+        if (location.pathname == `/users/${id}/letters/receive`){
+          this.$data.links.receive.active = true
+        } else if (location.pathname == `/users/${id}/letters/send`) {
+          this.$data.links.send.active = true
+        } else if (location.pathname == `/users/${id}/edit`) {
+          this.$data.links.account.active = true
+        } else if (location.pathname == `/users/${id}/community`) {
+          this.$data.links.community.active = true
+        } else if (location.pathname == `/users/${id}/admin`) {
+          this.$data.links.admin.active = true
+        } else if (location.pathname == `/users/${id}/other`) {
+          this.$data.links.other.active = true
+        } else {
+          this.$data.links.receive.active = true
+        }
+      }
+    });
+
+    // 所属しているコミュニティを取得
+    let group_belong_url = `/api/users/${this.$data.current_user.id}/company/belong_to.json`;
+    axios
+    .get(group_belong_url)
+    .then(response => {
+      if (response.status === 200) {
+        this.$data.belong_to_company = response.data
       }
     });
   },
@@ -188,63 +223,70 @@ export default {
     userSelectBtn: function(e) {
       e.preventDefault();
       this.$data.showUserSelect = true
+
+      // 所属しているコミュニティのグループを取得
+      let url = `/api/users/${this.$data.current_user.id}/groups.json`;
+      axios
+      .get(url, {params: {company_id: this.$data.belong_to_company.company.id}})
+      .then(response => {
+        this.$data.groups = response.data
+      });
     },
     closeThanksNew: function(e) {
 
     },
     createThank: function(e) {
-      // e.preventDefault();
-      // axios
-      //   .post('/thanks.json', this.thank)
-      //   .then(response => {
-      //     this.errors = '';
-      //     if (response.status === 200){
-      //       if (response.data && response.data.errors) {
-      //       this.errors = response.data.errors;
-      //     }
-
-      //     } else {
-
-      //       let e = response.data;
-      //     }
-      //     this.$data.showfinishContent = true
-      //     this.$data.searchUsers = []
-      //     this.$data.thank = {
-      //                           id: '',
-      //                           text: '',
-      //                           receiver_id: '',
-      //                           receiver_family_name: '',
-      //                           receiver_given_name: '',
-      //                           receiver_email: '',
-      //                           receiver_avatar: '',
-      //                         }
-      //   })
-      //   .catch(error => {
-      //     if (error.response.data && error.response.data.errors) {
-      //       this.errors = error.response.data.errors;
-      //     }
-      //   });
+      e.preventDefault();
+      let url = `/api/users/${this.$data.current_user.id}/thanks.json`;
+      axios
+        .post(url, this.thank)
+        .then(response => {
+          this.errors = '';
+          if (response.status === 200){
+            if (response.data && response.data.errors) {
+            this.errors = response.data.errors;
+            }
+          this.$data.showfinishThanks = true
+          this.$data.searchUsers = []
+          this.$data.thank = {
+                                id: '',
+                                text: '',
+                                receiver: {
+                                  id: "",
+                                  avatar: "",
+                                  family_name: "",
+                                  given_name: "",
+                                  email: "",
+                                },
+                              }
+          }
+        })
+        .catch(error => {
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
 
     },
     confirm: function(e) {
-      // this.$data.thank.transmission_status = true
-      // this.createThank(e);
-
+      this.$data.thank.transmission_status = true
+      this.createThank(e);
     },
     groupBox: function(e) {
-      // let selectGroupBox = this.$refs.group[e]
-      // this.$data.searchData.selectGroup = $(selectGroupBox).data("id")
-      // axios
-      //   .get('/search/users/index.json', {params: this.searchData})
-      //   .then(response => {
-      //     this.$data.searchUsers = []
-      //     if (response.data.length){
-      //       let users = response.data
-      //       users.forEach(user => {
-      //         this.$data.searchUsers.push(user);
-      //       });
-      //     }
-      //   })
+      let selectGroupBox = this.$refs.group[e]
+      this.$data.searchData.selectGroup = $(selectGroupBox).data("id")
+      axios
+        .get('/api/search/users.json', {params: this.searchData})
+        .then(response => {
+          this.$data.searchUsers = []
+          if (response.data.length){
+            let users = response.data
+
+            users.forEach(user => {
+              this.$data.searchUsers.push(user);
+            });
+          }
+        })
     },
     onInput: function(e) {
       // axios
@@ -260,19 +302,23 @@ export default {
       //   })
     },
     userBox: function(e) {
-      // let selectUserBox = this.$refs.user[e]
-      // this.$data.thank.receiver_id = $(selectUserBox).data("id")
-      // this.$data.thank.receiver_family_name = $(selectUserBox).data("family-name")
-      // this.$data.thank.receiver_given_name = $(selectUserBox).data("given-name")
-      // this.$data.thank.receiver_email = $(selectUserBox).data("email")
-      // this.$data.thank.receiver_avatar = $(selectUserBox).data("avatar")
-      // this.$data.userSelectbtn = false
+      let selectUserBox = this.$refs.user[e]
+      this.$data.thank.receiver.id = $(selectUserBox).data("id")
+      this.$data.thank.receiver.family_name = $(selectUserBox).data("family-name")
+      this.$data.thank.receiver.given_name = $(selectUserBox).data("given-name")
+      this.$data.thank.receiver.email = $(selectUserBox).data("email")
+      this.$data.thank.receiver.avatar = $(selectUserBox).data("avatar")
+      this.$data.userSelectbtn = false
+      this.$data.showUserSelect = false
+      console.log(this.$data)
     },
     closeUserModal: function(e) {
-      
+      e.preventDefault();
+      this.$data.showUserSelect = false
     },
     closefinishModal: function(e) {
-
+      e.preventDefault();
+      this.$data.showfinishThanks = false
     }
   }
 }
@@ -426,9 +472,13 @@ export default {
     text-align: center;
   }
 
+  .flex {
+    display: flex;
+  }
+
   .form__reciever {
     display: flex;
-    margin: 10px 50px 10px 0;
+    margin: 15px 10px 10px 0;
   }
 
   .form__reciever__img {
@@ -453,7 +503,7 @@ export default {
   }
 
   .form__text {
-    height: 55%;
+    height: 50%;
     width: 100%;
     border: 1px solid #ff0000;
   }
@@ -514,12 +564,13 @@ export default {
 
   /* ユーザー検索 */
   .user-overlay{
+    max-width: 600px;
     width: 50%;
     height: 83%;
     z-index: 1;
     position: fixed;
     top: 10%;
-    left: 41%;
+    left: 400px;
     background-color: #fff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     align-items: center;
@@ -570,6 +621,7 @@ export default {
   }
 
   .user-content__text {
+    width: 100%;
     margin-bottom: 20px;
     border: dotted 1px gray;
   }

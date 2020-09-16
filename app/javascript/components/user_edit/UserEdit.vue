@@ -37,11 +37,7 @@ header {
   background-color: #fff;
   display: flex;
 }
-/* nav{
-  width: 20%;
-  height: 100vh;
-  background-color: #EDEDED;
-} */
+
 main{
   width: 65%;
   height: 100vh;

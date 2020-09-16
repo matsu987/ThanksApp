@@ -114,7 +114,7 @@ export default {
     }
   },
   created(){
-    // 年月の取得
+    //年月の取得
     var now = new Date();
     this.$data.send.year = now.getFullYear()
     this.$data.send.month = now.getMonth() + 1
@@ -123,7 +123,8 @@ export default {
       'X-Requested-With': 'XMLHttpRequest',
       'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
-    var url = location.pathname + ".json"
+
+    let url = `/api/users/id/letters/send.json`;
     axios
     .get(url, {
       params: {
@@ -132,7 +133,8 @@ export default {
       }
     })
     .then( response => {
-      this.$data.thanks = response.data.send_thanks
+      this.$data.thanks = response.data
+
     })
   },
   computed: {
@@ -251,7 +253,7 @@ export default {
     },
     updateThank: function(e){
       e.preventDefault();
-      let url = "/thanks/" + this.thank.id + ".json"
+      let url = `/api/users/:user_id/letters/send/${this.thank.id}.json`
       axios
         .patch(url, this.thank)
         .then(response => {
@@ -287,7 +289,7 @@ export default {
     },
     deleteThank: function(e){
       e.preventDefault();
-      let url = "/thanks/" + this.thank.id + ".json"
+      let url = `/api/users/:user_id/letters/send/${this.thank.id}.json`
       axios
         .delete(url, this.thank)
         .then(response => {

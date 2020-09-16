@@ -125,6 +125,7 @@
               </label>
               <p v-if="belong_to_company.company" class="group__form__boxies__box__text">{{belong_to_company.company.name}}</p>
               <select v-else class="group__form__boxies__box__text">
+                <option selected>選択してください</option>
                 <option v-for="(company, index) in companies" v-model="company.id" :value="company.id">{{company.name}}</option>
               </select>
             </div>
@@ -152,6 +153,7 @@
               </label>
               <p v-if="belong_to_company.company" class="group__form__boxies__box__text">{{belong_to_company.company.name}}</p>
               <select v-else class="group__form__boxies__box__text" v-model="selected_company" @change="changeCompany">
+                <option selected>選択してください</option>
                 <option v-for="(company, index) in companies" v-model="company.id" :value="company.id">{{company.name}}</option>
               </select>
             </div>
@@ -160,9 +162,11 @@
                 <div class="">グループ名</div>
               </label>
               <select v-if="belong_to_company.groups" class="group__form__boxies__box__text" v-model="selected_group">
+                <option selected>選択してください</option>
                 <option v-for="(group, index) in belong_to_company.group_all" v-model="group.id" :value="group.id">{{group.name}}</option>
               </select>
               <select v-else class="group__form__boxies__box__text">
+                <option selected>選択してください</option>
                 <option v-for="(group, index) in groups" v-model="group.id" :value="group.id">{{group.name}}</option>
               </select>
             </div>
@@ -348,7 +352,6 @@ export default {
         });
     },
     changeCompany: function(e) {
-      console.log(this.$data.selected_company)
       let url = `/api/users/${this.$data.current_user.id}/groups.json`
       axios
       .get(url, {params: {company_id: this.$data.selected_company}})

@@ -80,6 +80,28 @@ export default {
 
     }
   },
+  created(){
+    // 年月の取得
+    var now = new Date();
+    this.$data.receive.year = now.getFullYear()
+    this.$data.receive.month = now.getMonth() + 1
+    // 受信したありレターの取得
+    axios.defaults.headers.common = {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+    var url = `/api/users/id/letters/receive.json`
+    axios
+    .get(url, {
+      params: {
+        receive_year: this.$data.receive.year,
+        receive_month: this.$data.receive.month
+      }
+    })
+    .then( response => {
+      this.$data.thanks = response.data
+    })
+  },
   methods: {
     openModal: function(e){
       this.$data.showContent = true
@@ -104,7 +126,7 @@ export default {
             }
           })
           .then( response => {
-            this.$data.thanks = response.data.receive_thanks
+            this.$data.thanks = response.data
           })
       }else{
       // 12月じゃなかったらそのまま月を変更。変更した月で受信したありレターを取得する。
@@ -134,7 +156,7 @@ export default {
             'X-Requested-With': 'XMLHttpRequest',
             'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
           };
-          var url = location.pathname + ".json"
+          var url = `/api/users/id/letters/receive.json`
           axios
           .get(url, {
             params: {
@@ -143,7 +165,7 @@ export default {
             }
           })
           .then( response => {
-            this.$data.thanks = response.data.receive_thanks
+            this.$data.thanks = response.data
           })
       }else{
         this.receive.year--
@@ -169,28 +191,6 @@ export default {
       this.$data.thank = this.$data.thanks[e]
       this.openModal();
     }
-  },
-  created(){
-    // 年月の取得
-    var now = new Date();
-    this.$data.receive.year = now.getFullYear()
-    this.$data.receive.month = now.getMonth() + 1
-    // 受信したありレターの取得
-    axios.defaults.headers.common = {
-      'X-Requested-With': 'XMLHttpRequest',
-      'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    };
-    var url = location.pathname + ".json"
-    axios
-    .get(url, {
-      params: {
-        receive_year: this.$data.receive.year,
-        receive_month: this.$data.receive.month
-      }
-    })
-    .then( response => {
-      this.$data.thanks = response.data.receive_thanks
-    })
   }
 }
 </script>
