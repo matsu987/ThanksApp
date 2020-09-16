@@ -19,7 +19,13 @@ Rails.application.routes.draw do
     get "users/:user_id/companies", to: 'companies#index' # コミュニティ全取得
     post "users/:user_id/groups", to: 'groups#create' # グループ登録
     get "users/:user_id/groups", to: 'groups#index' # 会社に紐づいているグループを取得
-    post "users/:user_id/group_users", to: 'group_users#create'
+    post "users/:user_id/group_users", to: 'group_users#create' #参加申請
+    get "search/users", to: 'search/users#index' # ユーザー検索
+    post "users/:user_id/thanks", to: 'thanks#create' # メッセージ作成
+    get "users/:user_id/letters/send", to: 'letters/send#index' # 送信メッセージを取得
+    get "users/:user_id/letters/receive", to: 'letters/receive#index' # 受信メッセージを取得
+    patch "users/:user_id/letters/send/:id", to: 'letters/send#update' # メッセージ更新
+    delete "users/:user_id/letters/send/:id", to: 'letters/send#destroy' # メッセージ削除
     namespace :admin do
       get 'users/index'
       patch 'users/update'

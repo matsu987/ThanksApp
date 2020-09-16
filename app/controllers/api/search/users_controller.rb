@@ -1,4 +1,4 @@
-class Search::UsersController < ApplicationController
+class Api::Search::UsersController < ApplicationController
   def index
     case [params[:selectGroup].present?, params[:keyword].present?]
     when [true, true] # グループ検索、ユーザー検索
@@ -23,5 +23,6 @@ class Search::UsersController < ApplicationController
     else
       @users_vue = []
     end
+    render json: @users_vue, status: 200
   end
 end

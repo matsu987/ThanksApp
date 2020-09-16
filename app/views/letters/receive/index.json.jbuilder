@@ -1,1 +1,0 @@
-json.receive_thanks @received_thanks

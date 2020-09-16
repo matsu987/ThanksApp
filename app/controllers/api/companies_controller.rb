@@ -59,6 +59,7 @@ class Api::CompaniesController < ApplicationController
       group_all = Group.where(company_id: company.id).where.not(ancestry: nil)
       render json: {company: company, admin: false, groups: groups, group_all: group_all}, status: 200
     else
+      render json: { errors: "error" }
     end
   end
 

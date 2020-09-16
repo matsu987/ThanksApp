@@ -11,9 +11,9 @@ ja:
         family_name: 姓
         given_name: 名
       thank:
-        text: 「熱い感謝のメッセージ」
-        receiver: 「サプライズのある仕事をした人」
-        sender: 「サプライズサンクスを送る人」
+        text: 「感謝のメッセージ」
+        receiver: 「メッセージを受け取る人」
+        sender: 「メッセージを送る人」
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
