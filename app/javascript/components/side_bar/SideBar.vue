@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="side-bar__header__user" v-cloak>
-        <img v-if="current_user.avatar" class="side-bar__header__user__img" :src="current_user.avatar.url">
+        <img v-if="current_user.avatar.url" class="side-bar__header__user__img" :src="current_user.avatar.url">
         <img v-else class="side-bar__header__user__img" src="~avatar.png">
         <h3 class="side-bar__header__user__name">{{current_user.family_name}} {{current_user.given_name}}さん</h3>
       </div>
@@ -43,7 +43,7 @@
       <form class="form">
         <h2 class="form__title">新規作成</h2>
         <div class="flex">
-          <div v-if= "thank.receiver.id" class="form__reciever" v-cloak>
+          <div v-if= "thank.receiver.id" class="form__reciever">
             <img v-if="thank.receiver.avatar" class="form__reciever__img" :src="thank.receiver.avatar">
             <img v-else class="form__reciever__img" src="~avatar.png">
             <p class="form__reciever__name">To: {{thank.receiver.family_name + thank.receiver.given_name}}さん</p>
@@ -51,7 +51,7 @@
           <button class="form__user-btn" @click="userSelectBtn" v-show="showUserSelectBtn">感謝を送りたい人を選択</button>
         </div>
         <textarea class="form__text" v-model="thank.text" type="text" placeholder="感謝を具体的に書きましょう"></textarea>
-        <div class="form__sender" v-cloak>
+        <div class="form__sender">
           <img v-if="current_user.avatar" class="form__avatar" :src="current_user.avatar.url">
           <img v-else class="form__avatar" src="~avatar.png">
           <p class="form__sender__name">From: {{ current_user.family_name + current_user.given_name }}さん</p>

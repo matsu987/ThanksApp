@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="container">
     <SideBar></SideBar>
-    <UserEditContent></UserEditContent>
+    <OtherUserContents></OtherUserContents>
   </div>
 </template>
 
@@ -31,17 +31,7 @@ export default {
 .container {
   display: flex;
 }
-header {
-  width: 35%;
-  height: 100vh;
-  background-color: #fff;
-  display: flex;
-}
-/* nav{
-  width: 20%;
-  height: 100vh;
-  background-color: #EDEDED;
-} */
+
 main{
   width: 65%;
   height: 100vh;
