@@ -8,7 +8,7 @@
               <button class="tutorial-btn" v-on:click="RegisterModal">コミュニティ登録方法</button>
               <button class="tutorial-btn" v-on:click="JoinModal">グループ参加方法</button>
             </div>
-            <button v-on:click="closeModal">Close</button>
+            <button class="btn btn-color-close btn-size-xs btn-type-round" v-on:click="closeModal">Close</button>
         </div>
         <div id="join-modal" v-show="showJoinStatus">
           <carousel　
