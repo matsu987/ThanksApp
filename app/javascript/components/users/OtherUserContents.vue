@@ -2,7 +2,7 @@
   <main>
     <div>
       <section class="">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeRaD6XQqnSazzUZi5C9PFDNemASB953EGUQP8GPKi66f-B-g/viewform?embedded=true" width="640" height="610" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeRaD6XQqnSazzUZi5C9PFDNemASB953EGUQP8GPKi66f-B-g/viewform?embedded=true" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
       </section>
 
       <section class="">
@@ -69,23 +69,10 @@ export default {
   font-size: 14px;
 }
 
-main{
-  width: calc(100% - 300px);
-  background-color: #fff;
-  margin-left: 300px;
-}
-
 h2 {
   font-size: 16px;
   padding-left: 20px;
   border-bottom: inset 2px #ff0000;
-}
-
-section {
-  width: 80%;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  padding: 10px 30px;
-  margin: 35px auto;
 }
 
 .hidden {
