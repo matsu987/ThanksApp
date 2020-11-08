@@ -37,9 +37,9 @@ header {
   height: 100vh;
   background-color: #EDEDED;
 } */
-main{
+/* main{
   width: 65%;
   height: 100vh;
   background-color: #fff;
-}
+} */
 </style>

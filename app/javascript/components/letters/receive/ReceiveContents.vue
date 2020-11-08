@@ -2,11 +2,11 @@
   <main>
     <div class="main-header">
       <div class="timebox">
-        <span v-on:click="decreClick">←</span>
+        <span v-on:click="decreClick"><</span>
         <div class="time">
           {{receive.year}}年{{receive.month}}月
         </div>
-        <span v-on:click="increClick">→</span>
+        <span v-on:click="increClick">></span>
       </div>
       <div class="countbox">
         <p class="countbox_title">今月受け取った数</p>
@@ -230,7 +230,7 @@ main{
   margin: 0 5px;
 }
 
-.countbox {
+/* .countbox {
   background: linear-gradient(166.64deg, #F9516F 11.31%, #FF8F6B 87.66%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255,255,255,0.0);
@@ -239,17 +239,17 @@ main{
   display: flex;
   font-size: 24px;
   border: 1px solid #ff0000;
-}
+} */
 
-.countbox_title{
+/* .countbox_title{
   padding: 10px;
   width: 250px;
-}
+} */
 
-.countbox_num{
+/* .countbox_num{
   border-left: 1px solid #ff0000;
   padding: 10px;
-  width: 50px;
+  width: 50px; */
 }
 
 .contents{

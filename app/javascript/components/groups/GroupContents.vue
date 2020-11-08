@@ -116,7 +116,7 @@
     <!-- グループ登録 -->
     <div v-if="belong_to_company.admin">
       <section class="group">
-        <h2 class="group--admin">グループ登録</h2>
+        <h2 class="group__admin">グループ登録</h2>
         <form class="group__form" @submit.prevent="createGroup">
           <div class="group__form__boxies">
             <div class="group__form__boxies__box">

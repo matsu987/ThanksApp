@@ -30,6 +30,14 @@ export default {
   background-color:rgba(255,255,255,0.8);
   background-blend-mode:lighten;
 }
+
+main{
+  width: 65%;
+  height: 100vh;
+  background-color: #fff;
+  margin-left: 35%;
+}
+
 .main-box {
   display: flex;
   height: calc( 100vh - 100px);
