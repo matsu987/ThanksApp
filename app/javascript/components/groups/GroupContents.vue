@@ -399,11 +399,11 @@ export default {
   font-size: 14px;
 }
 
-main{
+/* main{
   width: calc(100% - 300px);
   background-color: #fff;
   margin-left: 300px;
-}
+} */
 
 h2 {
   font-size: 16px;
@@ -411,12 +411,12 @@ h2 {
   border-bottom: inset 2px #ff0000;
 }
 
-section {
+/* section {
   width: 80%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 10px 30px;
   margin: 35px auto;
-}
+} */
 
 form {
   padding: 20px;
