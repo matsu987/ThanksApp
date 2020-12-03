@@ -13,7 +13,7 @@
       <div class="side-bar__header__user" v-cloak>
         <img v-if="current_user.avatar.url" class="side-bar__header__user__img" :src="current_user.avatar.url">
         <img v-else class="side-bar__header__user__img" src="~avatar.png">
-        <h3 class="side-bar__header__user__name">{{current_user.family_name}} {{current_user.given_name}}さん</h3>
+        <h3 class="side-bar__header__user__name">{{current_user.family_name + current_user.given_name}}さん</h3>
       </div>
     </div>
     <button class="thanks-btn" @click="ThanksNew">新規作成</button>

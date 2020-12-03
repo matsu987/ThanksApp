@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_08_07_055852) do
     t.string "logo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "release_time", null: false
+    t.string "release_time", default: "月末", null: false
     t.index ["name"], name: "index_companies_on_name"
   end
 

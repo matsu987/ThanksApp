@@ -7,8 +7,6 @@ class Api::CompaniesController < ApplicationController
 
   def create #コミュニティ登録
     company = Company.new(company_params)
-    last_day = Date.new(Time.now.year, Time.now.month, -1).day.to_s
-    company.release_time = "#{last_day} 23:50" unless params[:company][:release_time].present?
     if company.save
       group = company.groups.new(name: params[:company][:name], user_ids: [current_user.id])
       group.group_users.first.status = "管理者"
@@ -65,8 +63,7 @@ class Api::CompaniesController < ApplicationController
 
   private
   def company_params
-    time = params[:company][:release_time].split(/[年|月|日|:]/)
-    params[:company][:release_time] = Time.new(time[0], time[1], time[2], time[3], time[4]) if time.present?
+    params[:company][:release_time] = params[:company][:detailed_time] if params[:company][:detailed_time].present? # 公開日時に詳細日が設定されている場合公開日時を書き換え
     params.require(:company).permit(:name, :post_number, :address, :phone_number, :release_time)
   end
 end

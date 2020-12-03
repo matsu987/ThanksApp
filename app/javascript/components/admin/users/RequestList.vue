@@ -1,22 +1,21 @@
 <template>
   <form class="form">
-    <input class="name" type="text" placeholder="name" v-model="data.user.name">
+    <input class="name" type="text" placeholder="name" v-model="data.user.family_name + data.user.given_name">
     <input class="email" type="text" placeholder="email" v-model="data.user.email">
     <select name="status" class="status" v-model="data.user.status">
       <option disabled :value="data.user.status">{{data.user.status}}</option>
       <option class="status" value="管理者">管理者</option>
       <option class="status" value="一般">一般</option>
     </select>
-    <input class="group" v-model="data.parent_group.name">
-    <input class="group" v-model="data.children_group.name">
-    <input class="group" v-model="data.grandchildren_group.name">
+    <input class="group" v-model="data.group.name">
     <button class="change_btn" type="submit" @click="changeStatus">承認</button>
     <button class="delete_btn" type="submit" @click="deleteStatus">取消</button>  
   </form>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
   props: ['user'],
   data: function () {
@@ -54,25 +53,26 @@ export default {
     };
   },
   methods: {
-    changeStatus: function(){
+    changeStatus: function(e){
+      e.preventDefault();
       axios
       .patch('/api/admin/requests/update.json', {
         user_id:      this.$data.data.user.id,
         status:       this.$data.data.user.status,
-        company_id:   this.$data.data.company_id,
-        request:      this.$data.data.user.request
+        group_id:   this.$data.data.group.id,
+        request:      this.$data.data.request
       })
       .then(response => {
-        if(response.data.error){
-          console.log(response.data.error.text)
-        }
-        else{
-          for(let user of this.$data.users){
-            if(user.id == response.data.user.id){
-              user.status = response.data.user.status
-            }
-          }
-        }
+        // if(response.data.error){
+        //   console.log(response.data.error.text)
+        // }
+        // else{
+        //   for(let user of this.$data.users){
+        //     if(user.id == response.data.user.id){
+        //       user.status = response.data.user.status
+        //     }
+        //   }
+        // }
       });
     },
     deleteStatus: function(){
@@ -85,7 +85,6 @@ export default {
       })
       .then(response => {
         if(response.data.error){
-          console.log(response.data.error.text)
         }
         else{
           for(let user of this.$data.users){
