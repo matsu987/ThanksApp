@@ -4,10 +4,12 @@ class Api::Admin::RequestsController < ApplicationController
     if @error
       return @error
     else
-      @user = User.find(params[:user_id])
-      @user.group_users.first.update(request: true)
-      return @user
+      group = Group.find(params[:group_id])
+      group_user = group.group_users.where(user_id: params[:user_id]).first
+      group_user.update(request: true)
+      group_user
     end
+    render json: "ok", status: 200
   end
 
   def destroy

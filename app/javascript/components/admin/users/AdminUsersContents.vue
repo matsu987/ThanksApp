@@ -8,14 +8,12 @@
               <div class="name">氏名</div>
               <div class="email">メールアドレス</div>
               <div class="status">権限</div>
-              <div class="group">所属1</div>
-              <div class="group">所属2</div>
-              <div class="group">所属3</div>
+              <div class="group">グループ名</div>
               <button class="change_btn bg_none"></button>
               <button class="delete_btn bg_none"></button>                        
             </li>
             <li class="cont" v-for="data in users">
-              <FormLists :user="data" v-if="data.user.request == true"></FormLists>
+              <FormLists :user="data" v-if="data.request == true"></FormLists>
               <RequestList :user="data" v-else></RequestList>
             </li>
           </ul>

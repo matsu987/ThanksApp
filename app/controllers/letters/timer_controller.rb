@@ -7,11 +7,6 @@ class Letters::TimerController < ApplicationController
       thank.update(release: true)
     end
     thanks.where(transmission_status: false)&.destroy_all
-
-    year = Time.now.year.to_s
-    month = Time.now.month.to_i
-    last_day = Date.new(Time.now.year, (Time.now.month + 1), -1).day.to_s
-    company.update(release_time: Time.new(year, (month + 1), last_day, 23, 50, 0, "+09:00" ))
-    redirect_to new_group_path
+    redirect_to root_path
   end
 end

@@ -1,14 +1,12 @@
 <template>
   <form class="form">
-    <input class="name" type="text" placeholder="name" v-model="data.user.name">
+    <input class="name" type="text" placeholder="name" v-model="data.user.family_name + data.user.given_name">
     <input class="email" type="text" placeholder="email" v-model="data.user.email">
     <select name="status" class="status" v-model="data.user.status">
       <option class="status" value="管理者">管理者</option>
       <option class="status" value="一般">一般</option>
     </select>
-    <input class="group" v-model="data.parent_group.name">
-    <input class="group" v-model="data.children_group.name">
-    <input class="group" v-model="data.grandchildren_group.name">
+    <input class="group" v-model="data.group.name">
     <button class="change_btn" type="submit" @click="changeStatus">変更</button>
     <button class="delete_btn" type="submit" @click="deleteStatus">削除</button>  
   </form>
@@ -53,7 +51,8 @@ export default {
     };
   },
   methods: {
-    changeStatus: function(){
+    changeStatus: function(e){
+      e.preventDefault();
       axios
       .patch('/api/admin/users/update.json', {
         user_id: this.$data.data.user.id,

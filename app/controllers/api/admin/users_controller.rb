@@ -4,20 +4,14 @@ class Api::Admin::UsersController < ApplicationController
   def index
     @users = []
     @company_group = current_user.groups.first.root
-    # 会社に所属しているユーザー一覧
-    @company_group.descendants.each do |group|
+    @company_group.subtree.each do |group|
       group.users.each do |user|
-
-        # 新しく会社を登録した後、グループを作成すると、ユーザーが所属しているgroupが2つ以上になる。
-        # ①会社だけのグループ
-        # ②実際に所属するグループ
-        # ②の所属するグループだけ一覧表示に出したい、かつ管理者権限も持たせるため以下のif文を記述している。 
-        if user.group_users.length > 1
-          user.group_users.last.update(status: "管理者", request: true)
-        end
-        @users.push(user)
+        request = group.group_users.where(user_id: user.id).first.request
+        user_info = {user: user, group: group, request: request}
+        @users.push(user_info)
       end
     end
+    render json: @users, status: 200
   end
 
   def update
