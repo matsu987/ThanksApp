@@ -108,7 +108,7 @@ export default {
     border-radius: 40px;
   }
   /* ログインポップアップ*/
-  .overlay{
+  /* .overlay{
     width: 60%;
     height: 50%;
     z-index: 1;
@@ -120,7 +120,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
 
   .error-message {
     display: block;

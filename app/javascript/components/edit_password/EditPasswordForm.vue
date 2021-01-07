@@ -153,7 +153,7 @@ export default {
     font-family: Noto Sans CJK JP;
     letter-spacing: 0.02em;
   }
-  .overlay{
+  /* .overlay{
     width: 50%;
     height: 50%;
     z-index: 1;
@@ -166,7 +166,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
 
   .close-btn {
     display: block;

@@ -200,7 +200,7 @@ main{
   width: 65%;
   height: 100vh;
   background-color: #fff;
-  margin-left: 300px;
+  /* margin-left: 300px; */
 }
 
 .main-header{
@@ -250,7 +250,7 @@ main{
   border-left: 1px solid #ff0000;
   padding: 10px;
   width: 50px; */
-}
+/* } */
 
 .contents{
   width: 100%;

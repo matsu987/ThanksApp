@@ -394,7 +394,7 @@ export default {
 </script>
 
 <style scoped>
-/* 共通 */
+共通
 * {
   font-size: 14px;
 }
@@ -427,19 +427,21 @@ form {
 }
 
 /* ポップアップ */
-.overlay{
+/* .overlay{
   width: 60%;
   height: 50%;
   z-index: 1;
   position: fixed;
-  top: 25%;
-  left: 20%;
-  background-color: #fff;
+  top: 50%;
+  left: 50%;
+  background-color: transparent;
   border-radius: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+  transform: translate(-50%, -50%);
+  box-shadow: transparent;
+} */
 
 .error-message {
   display: block;
@@ -471,119 +473,3 @@ form {
   border-radius: 25px;
   border: none;
 }
-
-/* コミュニテイ登録/情報 */
-
-.company__form {
-  display: flex;
-  padding-top: 40px;
-}
-
-.company__form__boxies {
-  width: 83%;
-}
-
-.company__form__btn-box {
-  display: flex;
-  flex-direction: column;
-}
-
-.company__form__boxies__box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.form--required {
-  width: 150px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.form--required::after {
-  width: 35px;
-  text-align: center;
-  content: '必須';
-  color: #fff;
-  border-radius: 5px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-}
-
-.form--optional {
-  width: 100px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.form--optional::after {
-  width: 35px;
-  text-align: center;
-  content: '任意';
-  color: #fff;
-  border-radius: 5px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-}
-
-.company__form__boxies__box__text {
-  margin: 0 40px 20px 0;
-  height: 30px;
-  width: 60%;
-  padding-left: 20px;
-  border: solid 1px #ff0000;
-  border-radius: 10px;
-}
-
-.company__form__boxies_sub-text {
-  font-size: 11px;
-  color: #888888;
-}
-
-.company__form__submit {
-  width: 100px;
-  height: 90px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  margin-top: 20px;
-}
-
-/* グループ登録/参加申請 */
-
-.group--admin::after {
-  content: "※管理者のみ";
-  font-size: 10px;
-  color: gray;
-}
-
-.group__form {
-  display: flex;
-  padding-top: 40px;
-}
-
-.group__form__boxies {
-  width: 83%;
-}
-
-.group__form__boxies__box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.group__form__boxies__box__text {
-  margin: 0 40px 20px 0;
-  height: 30px;
-  width: 60%;
-  padding-left: 20px;
-  border: solid 1px #ff0000;
-  border-radius: 10px;
-}
-
-.group__form__submit {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-}
-</style>
