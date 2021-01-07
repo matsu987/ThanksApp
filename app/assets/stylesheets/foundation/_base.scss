@@ -179,6 +179,8 @@ input:-webkit-autofill:active {
   background-size: cover;
   background-image: image-url("login/background-pink.png");
   background-color: $white;
+  background-position-y: -45vw;
+  background-repeat: repeat no-repeat;
 }
 
 .main-box__img {
