@@ -252,14 +252,14 @@ main{
   width: 50px; */
 /* } */
 
-.contents{
+/* .contents{
   width: 100%;
   padding: 0 5%;
   display: grid;
   grid-template-columns: 30% 30% 30%;
   grid-template-rows: 300px 300px;
   gap: 10px;
-}
+} */
 /* .content{
   background: #FFFFFF;
   padding: 10px;

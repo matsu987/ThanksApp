@@ -343,11 +343,12 @@ input:-webkit-autofill:active {
     height: auto;
     background-color: $white;
     border-radius: 2rem;
+    box-shadow: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 60px;
+    padding: 40px;
     min-width: 400px;
   }
 }
@@ -555,8 +556,9 @@ input:-webkit-autofill:active {
 .form__text {
   height: 50%;
   width: 100%;
-  min-height: 320px;
+  min-height: 240px;
   border: 2px solid #ff0000;
+  margin: 8px auto;
 }
 
 .form__sender {
@@ -578,6 +580,7 @@ input:-webkit-autofill:active {
   display: flex;
   justify-content: center;
   align-items: baseline;
+  margin-bottom: 16px;
 
   button {
     font-size: 1.4rem;
@@ -744,6 +747,28 @@ input:-webkit-autofill:active {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &__content {
+    background-color: rgba(255, 255, 255, .95);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    width: 100vw;
+    height: 30vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  > .content {
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, .95);
+    width: 100vw;
+    height: 30vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .error-message {
@@ -766,15 +791,6 @@ input:-webkit-autofill:active {
 .sub-message {
   font-size: 1.4rem;
   text-align: center;
-}
-
-.overlay-finish__close-btn {
-  display: block;
-  margin: auto;
-  width: 200px;
-  height: 50px;
-  border-radius: 25px;
-  border: none;
 }
 
 
@@ -862,13 +878,13 @@ main{
   width: 100%;
   padding: 0 5%;
   display: grid;
-  grid-template-columns: 30% 30% 30%;
-  grid-template-rows: 300px 300px;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: auto auto auto;
   gap: 10px;
 }
 .content{
   background: #FFFFFF;
-  padding: 16px;
+  padding: 24px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 .content_name_unopened{
@@ -910,11 +926,11 @@ main{
   font-size: 12px;
   line-height: 170%;
   letter-spacing: 0.05em;
-  overflow: hidden;
+  overflow: scroll;
 }
 .content_from-user{
   display: flex;
-  height: 60px;
+  // height: 60px;
 }
 
 .user-name{
@@ -922,14 +938,16 @@ main{
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
-  line-height: 55px;
+  line-height: 1.4;
   color: #444444;
   word-break: break-all;
+  display: flex;
+  align-items: center;
 }
 .avatar-img {
   height: 55px;
   width: 55px;
-  margin: auto;
+  margin: 0;
   border-radius: 999px;
 }
 
@@ -986,12 +1004,6 @@ main{
   height: 45px;
   color: white;
   margin: 20px 0 20px 0;
-}
-
-.form__text {
-  height: 60%;
-  width: 100%;
-  border: 2px solid #ff0000;
 }
 
 .form__sender {
@@ -1065,19 +1077,19 @@ main{
 }
 
 /* 更新完了ポップアップ */
-.overlay-finish{
-  width: 60%;
-  height: 50%;
-  z-index: 1;
-  position: fixed;
-  top: 25%;
-  left: 20%;
-  background-color: transparent;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+// .overlay-finish{
+//   width: 60%;
+//   height: 50%;
+//   z-index: 1;
+//   position: fixed;
+//   top: 25%;
+//   left: 20%;
+//   background-color: transparent;
+//   border-radius: 40px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
 
 .error-message {
   display: block;
@@ -1103,7 +1115,7 @@ main{
 
 .overlay-finish__close-btn {
   display: block;
-  margin: auto;
+  margin: 0 auto;
   width: 200px;
   height: 50px;
   border-radius: 25px;
@@ -1145,7 +1157,7 @@ form {
   left: 50%;
   transform: translateX(-50%)translateY(-50%);
   background-color: #fff;
-  box-shadow: none;
+  // box-shadow: none;
   border-radius: 40px;
   display: flex;
   align-items: center;
