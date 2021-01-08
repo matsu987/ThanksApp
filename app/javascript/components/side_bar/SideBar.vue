@@ -103,7 +103,7 @@
             </ul>
           </div>
           <p class="success-message" v-if="errors.length == 0">投稿が完了しました！</p>
-          <button class="overlay-finish__close-btn" v-on:click="closefinishModal">Close</button>
+          <button class="btn btn-color-close btn-size-sm btn-type-round" v-on:click="closefinishModal">Close</button>
         </div>
       </div>
     </div>

@@ -186,7 +186,7 @@
             </ul>
           </div>
           <p class="success-message" v-if="errors.length == 0">登録が完了しました！<br><span class="sub-message">ユーザー設定画面から部署に参加してください</span></p>
-          <button class="close-btn" v-on:click="closeModal">Close</button>
+          <button class="btn btn-color-close btn-size-md btn-type-round" v-on:click="closeModal">Close</button>
         </div>
       </div>
     </div>
@@ -395,9 +395,9 @@ export default {
 
 <style scoped>
 共通
-* {
+/* * {
   font-size: 14px;
-}
+} */
 
 /* main{
   width: calc(100% - 300px);
@@ -405,11 +405,11 @@ export default {
   margin-left: 300px;
 } */
 
-h2 {
+/* h2 {
   font-size: 16px;
   padding-left: 20px;
   border-bottom: inset 2px #ff0000;
-}
+} */
 
 /* section {
   width: 80%;
@@ -418,13 +418,13 @@ h2 {
   margin: 35px auto;
 } */
 
-form {
+/* form {
   padding: 20px;
-}
+} */
 
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
 
 /* ポップアップ */
 /* .overlay{
