@@ -2,26 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-*{
+// *{
 
-  font-family: Noto Sans CJK JP,Poppins;
-  box-sizing: border-box;
+//   font-family: Noto Sans CJK JP,Poppins;
+//   box-sizing: border-box;
 
   
 
-  a:hover{
-    opacity: 0.7;
-  }
-}
+//   a:hover{
+//     opacity: 0.7;
+//   }
+// }
 
-::placeholder{
-  color:#AAA;
-  padding-left:1em;
-}
+// ::placeholder{
+//   color:#AAA;
+//   padding-left:1em;
+// }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-}
+// input:-webkit-autofill,
+// input:-webkit-autofill:hover,
+// input:-webkit-autofill:focus,
+// input:-webkit-autofill:active {
+//     transition: background-color 5000s ease-in-out 0s;
+// }

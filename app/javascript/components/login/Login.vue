@@ -1,7 +1,9 @@
 <template>
   <main id="app" class="container">
     <div class="main-contents" v-cloak>
-      <img class="ari-logo" src="~login/ari-logo.png">
+      <div class="main-header">
+        <img class="ari-logo" src="~login/ari-logo.png">
+      </div>
       <div class="main-box">
         <div class="main-box__img">
           <img class="thanks-img" src="~login/thanks-text.png">
@@ -23,7 +25,7 @@
                 </div>
                 <p class="success-message" v-if="errors.length == 0" v-show="loginForm">ログインに成功しました！<br><span class="sub-message">早速感謝の言葉をお伝えしましょう</span></p>
                 <p class="success-message" v-if="errors.length == 0" v-show="signupForm">登録が完了しました！<br><span class="sub-message">早速感謝の言葉をお伝えしましょう</span></p>
-                <button class="close-btn" v-on:click="closeModal">Close</button>
+                <button class="btn btn-color-close btn-size-md btn-type-round" v-on:click="closeModal">Close</button>
               </div>
             </div>
           </div>
@@ -44,12 +46,12 @@
               <div class="user-form__box">
                 <input type="password" id="pass" placeholder="パスワード 英数字6文字以上" v-model="password" autocomplete="new-password" v-cloak>
               </div>
-              <div class="user-form__box">
-                <input type="submit" value="ログイン" class="login-btn btn">
+              <div class="user-form__btn">
+                <input type="submit" value="ログイン" class="login-btn btn btn-color-primary btn-size-md btn-type-round">
               </div>
-              <div class="user-form__box">
-                <img class="login-help__icon" src="~login/help.png" alt="ヘルプマーク">
-                <a href="#" class="login-help__txt">
+              <div class="user-form__help">
+                <img class="user-form__help-icon" src="~login/help.png" alt="ヘルプマーク">
+                <a href="#" class="user-form__help-txt">
                   パスワードを再設定する
                 </a>
               </div>
@@ -70,8 +72,8 @@
               <div class="user-form__box">
                 <input type="password" id="password-conf" placeholder="パスワード確認 英数字6文字以上" v-model="password_conf" autocomplete="new-password" v-cloak>
               </div>
-              <div class="user-form__box">
-                <input type="submit" value="新規登録" class="login-btn btn">
+              <div class="user-form__btn">
+                <input type="submit" value="新規登録" class="login-btn btn btn-color-primary btn-size-md btn-type-round">
               </div>
             </form>
           </div>
@@ -190,202 +192,5 @@ export default {
 
 <style scoped>
 
-[v-cloak] {
-      display: none;
-  }
 
-  ::placeholder {
-    font-size: 10px;
-  }
-
-  .main-logo {
-    height: 20vh;
-  }
-
-  .ari-logo {
-    height: 120px;
-    margin: 3% 0 0 12%;
-  }
-
-  .main-box {
-    display: flex;
-    width: 100vw;
-    background-size: cover;
-    background-image: url("~login/background-pink.png");
-  }
-
-  .main-box__img {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .thanks-img {
-    max-width: 400px;
-    width: 100%;
-  }
-
-  .pc-img {
-    max-width: 720px;
-    width: 100%;
-  }
-
-  .login-signup__content {
-    flex-grow: 1;
-  }
-
-  .login-signup__box {
-    width: 80%;
-    margin: 0 auto;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  }
-
-  .login-signup__header {
-    display: flex;
-    justify-content: space-around;
-    background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
-    height: 70px;
-    align-items: center;
-    color: #fff;
-    font-weight: bold;
-  }
-
-  .btn {
-    cursor: pointer;
-  }
-
-  .transparent {
-    opacity: 0.5;
-  }
-
-  .active {
-    color: #fff;
-    opacity: 1;
-    position: relative;
-  }
-
-  .active::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: -25px;
-    left: 0;
-    width: 0px;
-    height: 0px;
-    margin: auto;
-    border-style: solid;
-    border-color: #fff transparent transparent transparent;
-    border-width: 15px 15px 0 15px;
-    transform: rotate(180deg);
-  }
-
-  .user-form {
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10% 0;
-  }
-
-  .user-form__box {
-    display: flex;
-    justify-content: center;
-    padding: 30px 0 0 0;
-  }
-
-  .user-form__box:first-child {
-    padding: 0;
-  }
-
-  .user-form__box input {
-    height: 50px;
-    width: 60%;
-    border: 1px solid red;
-  }
-
-  .form-half {
-    display: flex;
-  }
-
-  .form-half input:first-child {
-    margin-right: 10%;
-  }
-
-  .form-half input {
-    width: 25%;
-  }
-
-  .login-btn {
-    width: 200px;
-    height: 50px;
-    background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
-    color: white;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border: none;
-    border-radius: 30px;
-    font-weight: bold;
-  }
-
-  .login-help__icon {
-    height: 18px;
-    margin-right: 30px;
-  }
-
-  .login-help__txt {
-    font-size: 12px;
-    color: #888888;
-  }
-
-  .login-help__txt::after {
-    content: "▶️";
-    margin-left: 30px;
-  }
-
-  /* ログインポップアップ*/
-  .overlay{
-    width: 60%;
-    height: 50%;
-    z-index: 1;
-    position: fixed;
-    top: 25%;
-    left: 20%;
-    background-color: #fff;
-    border-radius: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .error-message {
-    display: block;
-    margin-bottom: 40px;
-    padding-top: 40px;
-    font-size: 20px;
-    text-align: center;
-  }
-
-  .success-message {
-    display: block;
-    margin-bottom: 40px;
-    padding-top: 40px;
-    font-size: 20px;
-    color: #92CECA;
-    text-align: center;
-  }
-
-  .sub-message {
-    font-size: 14px;
-    text-align: center;
-  }
-
-  .close-btn {
-    display: block;
-    margin: auto;
-    width: 200px;
-    height: 50px;
-    border-radius: 25px;
-    border: none;
-  }
 </style>

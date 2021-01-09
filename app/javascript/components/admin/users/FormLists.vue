@@ -100,18 +100,23 @@ export default {
 <style scoped>
   .form{
     width: 100%;
+    display: flex;
   }
   input{
     display: inline-block;
     text-align: center;
     border:1px solid #BDBDBD;
-    height: 2em;    
+    height: auto;
+    line-height: 2;
+    padding: 0;
   }
   select{
     display: inline-block;
     text-align: center;
     border:1px solid #BDBDBD;
-    height: 2em;    
+    height: auto;
+    line-height: 2;
+    padding: 0;
   }
   option{
     display: inline-block;
@@ -136,7 +141,7 @@ export default {
     border: none;
   }
   .change_btn{
-    width: 5%;
+    width: auto;
     color: white;
     border: none;
     margin: 0 6px;
@@ -144,7 +149,7 @@ export default {
     background: linear-gradient(121.55deg, #F9516F 11.31%, #FF8F6B 87.66%);
   }
   .delete_btn{
-    width: 5%;
+    width: auto;
     color: white;
     border: none;
     border-radius: 10px;

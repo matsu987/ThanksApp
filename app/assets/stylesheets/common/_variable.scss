@@ -1,0 +1,22 @@
+$primary-color: #ff6368;
+$primary-dark-color: #f9516f;
+$secondary-color: #ffc967;
+$secondary-dark-color: #ff8f6b;
+$accent-color: #00b693;
+$accent-light-color: #7ef3dd;
+$gradation-color: linear-gradient(160.47deg, $primary-dark-color 11.31%, $secondary-dark-color 87.66%);
+$text-color: #333;
+$text-light-color: #888;
+$white:#fff;
+$gray-color: #BDBDBD;
+$contrast: darken($primary-color, 10%);
+
+$hd-min: 1300px;
+$desktop-max: 1100px;
+$desktop-md: 1024px;
+$desktop-min: 992px;
+$laptop-max: 991px;
+$laptop-min: 768px;
+$tablet-max: 767px;
+$tablet-min: 576px;
+$mobile-max: 480px;

@@ -1,0 +1,40 @@
+@mixin xxl {
+  @media screen and (min-width: $hd-min) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media screen and (max-width: $desktop-max) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media screen and (max-width: $desktop-md) {
+    @content;
+  }
+}
+@mixin md {
+  @media screen and (max-width: $laptop-max) {
+    @content;
+  }
+}
+@mixin sm {
+  @media screen and (max-width: $tablet-max) {
+    @content;
+  }
+}
+@mixin xs {
+  @media screen and (max-width: $mobile-max) {
+    @content;
+  }
+}
+
+@mixin alpha-attribute($attribute, $color, $background) {
+  $percent: alpha($color) * 100%;
+  $opaque: opacify($color, 1);
+  $solid-color: mix($opaque, $background, $percent);
+  #{$attribute}: $solid-color;
+  #{$attribute}: $color;
+}

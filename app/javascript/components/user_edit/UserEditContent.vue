@@ -18,9 +18,9 @@
     <section class="user">
       <h2>基本情報</h2>
       <form class="user__form" @submit.prevent="updateUser">
-        <div class="user__form__boxies">
-          <div class="user__form__boxies__box">
-            <label for="avatar" class="user__form__boxies__box__avatar">
+        <div class="user__form-boxies">
+          <div class="user__form-boxies-profile">
+            <label for="avatar" class="user__form-boxies-profile-avatar">
               <p>プロフィール画像</p>
               <img v-if="confirmedImage" class="avatar-img" :src="confirmedImage">
               <img v-else-if="avatar" class="avatar-img" :src="avatar">
@@ -28,33 +28,33 @@
             </label>
             <input type="file" class="hidden" id="avatar" accept="image/jpeg, image/png" @change="confirmImage"/>
           </div>
-          <div class="user__form__boxies__box">
+          <div class="user__form-boxies-box">
           　<label>姓</label>
-            <input type="text" class="user__form__boxies__box__text" v-model="current_user.family_name" :placeholder="current_user.family_name">
+            <input type="text" class="user__form-boxies-box-text" v-model="current_user.family_name" :placeholder="current_user.family_name">
           </div>
-          <div class="user__form__boxies__box">
+          <div class="user__form-boxies-box">
             <label>名</label>
-            <input type="text" class="user__form__boxies__box__text" v-model="current_user.given_name" :placeholder="current_user.given_name">
+            <input type="text" class="user__form-boxies-box-text" v-model="current_user.given_name" :placeholder="current_user.given_name">
           </div>
         </div>
-        <input type="submit" value="変更" class="user__form__submit" >
+        <input type="submit" value="変更" class="user__form-submit" >
       </form>
     </section>
 
     <section class="login">
       <h2>ログイン情報</h2>
       <form class="login__form" @submit.prevent="updateLogin">
-        <div class="login__form__boxies">
-          <div class="login__form__boxies__box">
+        <div class="login__form-boxies">
+          <div class="login__form-boxies-box">
             <label>メールアドレス</label>
-            <input type="email" class="login__form__boxies__box__text" v-model="current_user.email" :placeholder="current_user.email">
+            <input type="email" class="login__form-boxies-box-text" v-model="current_user.email" :placeholder="current_user.email">
           </div>
-          <div class="login__form__boxies__box">
+          <div class="login__form-boxies-box">
             <label>パスワード</label>
-            <input type="password" class="login__form__boxies__box__text" autocomplete="new-password" v-model="current_user.password">
+            <input type="password" class="login__form-boxies-box-text" autocomplete="new-password" v-model="current_user.password">
           </div>
         </div>
-        <input type="submit" value="変更" class="login__form__submit">
+        <input type="submit" value="変更" class="login__form-submit">
       </form>
     </section>
 
@@ -250,307 +250,8 @@ export default {
 </script>
 
 <style scoped>
-* {
+/* * {
   font-size: 14px;
-}
+} */
 
-main{
-  width: 65%;
-  height: 100vh;
-  background-color: #fff;
-  margin-left: 35%;
-}
-
-h2 {
-  font-size: 16px;
-  padding-left: 20px;
-  border-bottom: inset 2px #ff0000;
-}
-
-section {
-  width: 80%;
-  height: 200px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  padding: 10px 30px;
-  margin: 35px auto;
-}
-
-form {
-  padding: 20px;
-}
-
-.hidden {
-  display: none;
-}
-
-/* ポップアップ */
-.overlay{
-  width: 60%;
-  height: 50%;
-  z-index: 1;
-  position: fixed;
-  top: 25%;
-  left: 20%;
-  background-color: #fff;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.error-message {
-  display: block;
-  margin-bottom: 40px;
-  padding-top: 40px;
-  font-size: 20px;
-  text-align: center;
-}
-
-.success-message {
-  display: block;
-  margin-bottom: 40px;
-  padding-top: 40px;
-  font-size: 20px;
-  color: #92CECA;
-  text-align: center;
-}
-
-.sub-message {
-  font-size: 14px;
-  text-align: center;
-}
-
-.close-btn {
-  display: block;
-  margin: auto;
-  width: 200px;
-  height: 50px;
-  border-radius: 25px;
-  border: none;
-}
-
-/* ユーザー情報 */
-.user {
-  height: 200px;
-}
-
-.user--admin::after {
-  content: "※管理者のみ";
-  font-size: 10px;
-  color: gray;
-}
-
-.user__form {
-  display: flex;
-  padding-top: 20px;
-}
-
-.user__form__boxies {
-  width: 83%;
-}
-
-.user__form__boxies__box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.user__form__boxies__box__avatar {
-  display: flex;
-  margin-bottom: 10px;
-}
-
-.user__form__boxies__box__avatar p {
-  line-height: 40px;
-}
-
-.avatar-img {
-  height: 40px;
-  width: 40px;
-  margin-left: 200px;
-  border-radius: 999px;
-}
-
-.user__form__boxies__box__text {
-  margin: 0 40px 20px 0;
-  height: 30px;
-  width: 60%;
-  padding-left: 20px;
-  border: solid 1px #ff0000;
-  border-radius: 10px;
-}
-
-.user__form__submit {
-  width: 100px;
-  height: 80px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  margin-top: 20px;
-}
-
-/* ログイン情報 */
-.login {
-  height: 200px;
-}
-
-.login--admin::after {
-  content: "※管理者のみ";
-  font-size: 10px;
-  color: gray;
-}
-
-.login__form {
-  display: flex;
-  padding-top: 40px;
-}
-
-.login__form__boxies {
-  width: 83%;
-}
-
-.login__form__boxies__box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.login__form__boxies__box__text {
-  margin: 0 40px 20px 0;
-  height: 30px;
-  width: 60%;
-  padding-left: 20px;
-  border: solid 1px #ff0000;
-  border-radius: 10px;
-}
-
-.login__form__submit {
-  width: 100px;
-  height: 80px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-}
-
-/* 部署登録 */
-.group {
-  height: 300px;
-}
-
-.group--admin::after {
-  content: "※管理者のみ";
-  font-size: 10px;
-  color: gray;
-}
-
-.group__form {
-  display: flex;
-  padding-top: 40px;
-}
-
-.group__form__boxies {
-  width: 83%;
-}
-
-.group__form__boxies__box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.form--required {
-  width: 100px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.form--required::after {
-  width: 35px;
-  text-align: center;
-  content: '必須';
-  color: #fff;
-  border-radius: 5px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-}
-
-.form--optional {
-  width: 100px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.form--optional::after {
-  width: 35px;
-  text-align: center;
-  content: '任意';
-  color: #fff;
-  border-radius: 5px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-}
-
-.group__form__boxies__box__text {
-  margin: 0 40px 20px 0;
-  height: 30px;
-  width: 60%;
-  padding-left: 20px;
-  border: solid 1px #ff0000;
-  border-radius: 10px;
-}
-
-.group-parent {
-  width: 100px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.group-parent::after {
-  width: 35px;
-  text-align: center;
-  content: '親';
-  color: #fff;
-  border-radius: 5px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  margin-left: 20px;
-}
-
-.group-child {
-  width: 100px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.group-child::after {
-  width: 35px;
-  text-align: center;
-  content: '子';
-  color: #fff;
-  border-radius: 5px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  margin-left: 20px;
-}
-
-.group-grandchild {
-  width: 100px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.group-grandchild::after {
-  width: 35px;
-  text-align: center;
-  content: '孫';
-  color: #fff;
-  border-radius: 5px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  margin-left: 20px;
-}
-
-.group__form__submit {
-  width: 100px;
-  height: 150px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  margin-top: 20px;
-}
 </style>

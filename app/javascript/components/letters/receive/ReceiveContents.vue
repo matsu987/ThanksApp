@@ -2,11 +2,11 @@
   <main>
     <div class="main-header">
       <div class="timebox">
-        <span v-on:click="decreClick">←</span>
+        <span v-on:click="decreClick"><</span>
         <div class="time">
           {{receive.year}}年{{receive.month}}月
         </div>
-        <span v-on:click="increClick">→</span>
+        <span v-on:click="increClick">></span>
       </div>
       <div class="countbox">
         <p class="countbox_title">今月受け取った数</p>
@@ -40,7 +40,7 @@
           <img v-else class="form__avatar" src="~person.png">
           <p class="form__sender__name">From: {{ thank.sender.name }}</p>
         </div>
-        <button class="form__btn-box__close" @click="closeModal">閉じる</button>
+        <button class="btn btn-color-close btn-size-md btn-type-round" @click="closeModal">閉じる</button>
       </form>
     </div>
   </main>
@@ -200,7 +200,7 @@ main{
   width: 65%;
   height: 100vh;
   background-color: #fff;
-  margin-left: 300px;
+  /* margin-left: 300px; */
 }
 
 .main-header{
@@ -230,7 +230,7 @@ main{
   margin: 0 5px;
 }
 
-.countbox {
+/* .countbox {
   background: linear-gradient(166.64deg, #F9516F 11.31%, #FF8F6B 87.66%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255,255,255,0.0);
@@ -239,32 +239,32 @@ main{
   display: flex;
   font-size: 24px;
   border: 1px solid #ff0000;
-}
+} */
 
-.countbox_title{
+/* .countbox_title{
   padding: 10px;
   width: 250px;
-}
+} */
 
-.countbox_num{
+/* .countbox_num{
   border-left: 1px solid #ff0000;
   padding: 10px;
-  width: 50px;
-}
+  width: 50px; */
+/* } */
 
-.contents{
+/* .contents{
   width: 100%;
   padding: 0 5%;
   display: grid;
   grid-template-columns: 30% 30% 30%;
   grid-template-rows: 300px 300px;
   gap: 10px;
-}
-.content{
+} */
+/* .content{
   background: #FFFFFF;
   padding: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
+} */
 .content_name_unopened{
   text-align: center;
   line-height: 35px;
@@ -329,32 +329,35 @@ main{
 
 /* 詳細ポップアップ */
 .overlay{
-  width: 38%;
-  height: 90%;
+  width: 50%;
+  height: 85%;
   z-index: 1;
   position: fixed;
-  top: 4%;
-  left: 48%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  border-radius: 8px;
+  padding: 40px 24px;
 }
 
 .form {
-  width: 80%;
+  /* width: 80%; */
 }
 
 .form__title {
-  margin: 20px 0;
+  /* margin: 20px 0; */
   color: #ff0000;
   text-align: center;
 }
 
 .form__reciever {
   display: flex;
-  margin: 10px 50px 10px 0;
+  /* margin: 10px 50px 10px 0; */
 }
 
 .form__reciever__img {
@@ -363,10 +366,10 @@ main{
   border-radius: 999px;
 }
 
-.form__reciever__name {
+/* .form__reciever__name {
   line-height: 50px;
   margin-left: 10px;
-}
+} */
 
 .form__user-btn {
   display: block;
@@ -379,17 +382,22 @@ main{
   margin: 20px 0 20px 0;
 }
 
-.form__text {
+/* .form__text {
   height: 60%;
   width: 100%;
   border: 1px solid #ff0000;
-  word-break: break-word;
-}
+  word-break: break-all;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.8;
+  letter-spacing: .08em;
+  margin: 16px auto;
+} */
 
 .form__sender {
   display: flex;
   justify-content: flex-end;
-  margin: 10px 50px 10px 0;
+  /* margin: 10px 50px 10px 0; */
 }
 
 .form__avatar {
@@ -398,10 +406,10 @@ main{
   border-radius: 999px;
 }
 
-.form__sender__name {
+/* .form__sender__name {
   line-height: 50px;
   margin-left: 10px;
-}
+} */
 
 .form__btn-box {
   display: flex;
@@ -412,7 +420,7 @@ main{
   width: 35%;
 }
 
-.form__btn-box__close {
+/* .form__btn-box__close {
   display: block;
   border-radius: 18px;
   background: #fff;
@@ -421,6 +429,6 @@ main{
   height: 30px;
   color: #BDBDBD;
   margin-bottom: 10px;
-}
+} */
 
 </style>

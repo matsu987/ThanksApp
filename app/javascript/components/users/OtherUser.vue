@@ -32,9 +32,9 @@ export default {
   display: flex;
 }
 
-main{
+/* main{
   width: 65%;
   height: 100vh;
   background-color: #fff;
-}
+} */
 </style>

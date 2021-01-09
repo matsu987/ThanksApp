@@ -2,11 +2,11 @@
   <main>
     <div class="main-header">
       <div class="timebox">
-        <span v-on:click="decreClick">←</span>
+        <span v-on:click="decreClick"><</span>
         <div class="time">
           {{send.year}}年{{send.month}}月
         </div>
-        <span v-on:click="increClick">→</span>
+        <span v-on:click="increClick">></span>
       </div>
       <div class="countbox">
         <div class="send-count">
@@ -51,13 +51,11 @@
           <p class="form__sender__name">From: {{ thank.sender.name }}</p>
         </div>
         <div class="form__btn-box">
-          <div class="form__btn-box__second">
-            <button class="form__btn-box__close">保存せずに閉じる</button>
-            <button class="form__btn-box__delete" @click="deleteThank">削除</button>
-          </div>
-          <button class="form__btn-box__one-time" @click="oneTime">一時保存</button>
-          <button class="form__btn-box__confirm" @click="confirm">確定</button>
+            <button class="btn btn-color-close btn-type-rounded-corners">保存せずに閉じる</button>
+            <button class="btn btn-color-gray btn-size-sm btn-type-rounded-corners" @click="deleteThank">削除</button>
+            <button class="btn btn-color-primary-normal btn-size-xs btn-type-rounded-corners" @click="oneTime">一時保存</button>
         </div>
+        <button class="btn btn-color-primary btn-size-lg btn-type-rounded-corners" @click="confirm">確定</button>
       </form>
     </div>
 
@@ -71,7 +69,7 @@
             </ul>
           </div>
           <p class="success-message" v-if="errors.length == 0">更新が完了しました！</p>
-          <button class="overlay-finish__close-btn" v-on:click="closefinishModal">Close</button>
+          <button class="btn btn-size-sm btn-color-close btn-type-round" v-on:click="closefinishModal">Close</button>
         </div>
       </div>
     </div>
@@ -320,318 +318,5 @@ export default {
 </script>
 
 <style scoped>
-main{
-  width: 65%;
-  height: 100vh;
-  background-color: #fff;
-  margin-left: 35%;
-}
 
-.main-header{
-  display: flex;
-  background: linear-gradient(166.64deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: rgba(255,255,255,0.0);
-  color: #ff0000;
-  width: 90%;
-  margin: 0 auto;
-}
-
-.timebox{
-  display: flex;
-  font-size: 24px;
-  margin: 2rem;
-  padding: 10px;
-}
-.timebox span{
-  background: black;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: rgba(255,255,255,0.0);
-  color: black;  
-}
-
-.time{
-  margin: 0 5px;
-}
-
-.countbox {
-  background: linear-gradient(166.64deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: rgba(255,255,255,0.0);
-  color: #ff0000;
-  margin: 2rem;
-  /* 受信一覧との差分 */
-  /* display: flex; */
-  font-size: 24px;
-  border: 1px solid #ff0000;
-}
-
-.send-count{
-  display: flex;
-}
-
-.send-edit{
-  display: flex;
-}
-
-.send-confirm{
-  display: flex;
-}
-
-.countbox_title{
-  padding: 10px;
-  width: 250px;
-}
-
-.countbox_num{
-  border-left: 1px solid #ff0000;
-  padding: 10px;
-  width: 50px;
-}
-
-.contents{
-  width: 100%;
-  padding: 0 5%;
-  display: grid;
-  grid-template-columns: 30% 30% 30%;
-  grid-template-rows: 300px 300px;
-  gap: 10px;
-}
-.content{
-  background: #FFFFFF;
-  padding: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-.content_name_unopened{
-  text-align: center;
-  line-height: 35px;
-  height: 35px;
-  background: linear-gradient(166.64deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: rgba(255,255,255,0.0);
-  color: #ff0000;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  border: 2px solid  #ff0000;
-}
-
-.content_name_opened{
-  text-align: center;
-  line-height: 35px;
-  height: 35px;
-  background: linear-gradient(166.64deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  color: #fff;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.content_text{
-  margin-top: 15px;
-  height: 150px;
-  word-wrap: break-word;
-  color: #444444;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 170%;
-  letter-spacing: 0.05em;
-  overflow: hidden;
-}
-.content_from-user{
-  display: flex;
-  height: 60px;
-}
-
-.user-name{
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 55px;
-  color: #444444;
-  word-break: break-all;
-}
-.avatar-img {
-  height: 55px;
-  width: 55px;
-  margin: auto;
-  border-radius: 999px;
-}
-
-/* 編集ポップアップ */
-.overlay{
-  width: 38%;
-  height: 90%;
-  z-index: 1;
-  position: fixed;
-  top: 4%;
-  left: 48%;
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-}
-
-.form {
-  width: 80%;
-}
-
-.form__title {
-  margin: 20px 0;
-  color: #ff0000;
-  text-align: center;
-}
-
-.form__reciever {
-  display: flex;
-  margin: 10px 50px 10px 0;
-}
-
-.form__reciever__img {
-  height: 50px;
-  width: 50px;
-  border-radius: 999px;
-}
-
-.form__reciever__name {
-  line-height: 50px;
-  margin-left: 10px;
-}
-
-.form__user-btn {
-  display: block;
-  background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  border-radius: 18px;
-  border: none;
-  width: 30%;
-  height: 45px;
-  color: white;
-  margin: 20px 0 20px 0;
-}
-
-.form__text {
-  height: 60%;
-  width: 100%;
-  border: 1px solid #ff0000;
-}
-
-.form__sender {
-  display: flex;
-  justify-content: flex-end;
-  margin: 10px 50px 10px 0;
-}
-
-.form__avatar {
-  height: 50px;
-  width: 50px;
-  border-radius: 999px;
-}
-
-.form__sender__name {
-  line-height: 50px;
-  margin-left: 10px;
-}
-
-.form__btn-box {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.form__btn-box__second {
-  width: 35%;
-}
-
-.form__btn-box__close {
-  display: block;
-  border-radius: 18px;
-  background: #fff;
-  border: 2px solid #BDBDBD;
-  width: 100%;
-  height: 30px;
-  color: #BDBDBD;
-  margin-bottom: 10px;
-}
-
-.form__btn-box__delete {
-  display: block;
-  border-radius: 18px;
-  background: #BDBDBD;
-  width: 100%;
-  height: 30px;
-  color: #fff;
-  border: none;
-}
-
-.form__btn-box__one-time {
-  display: block;
-  border-radius: 18px;
-  border: 2px solid #ff0000;
-  background: #fff;
-  width: 35%;
-  height: 70px;
-  color: #ff0000;
-  margin: 0 10px;
-}
-
-.form__btn-box__confirm {
-  display: block;
-  background: linear-gradient(160.47deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  border-radius: 18px;
-  border: none;
-  width: 25%;
-  height: 70px;
-  color: white;
-}
-
-/* 更新完了ポップアップ */
-.overlay-finish{
-  width: 60%;
-  height: 50%;
-  z-index: 1;
-  position: fixed;
-  top: 25%;
-  left: 20%;
-  background-color: #fff;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.error-message {
-  display: block;
-  margin-bottom: 40px;
-  padding-top: 40px;
-  font-size: 20px;
-  text-align: center;
-}
-
-.success-message {
-  display: block;
-  margin-bottom: 40px;
-  padding-top: 40px;
-  font-size: 20px;
-  color: #92CECA;
-  text-align: center;
-}
-
-.sub-message {
-  font-size: 14px;
-  text-align: center;
-}
-
-.overlay-finish__close-btn {
-  display: block;
-  margin: auto;
-  width: 200px;
-  height: 50px;
-  border-radius: 25px;
-  border: none;
-}
 </style>
