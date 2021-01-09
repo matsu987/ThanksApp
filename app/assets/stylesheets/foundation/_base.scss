@@ -424,8 +424,8 @@ input:-webkit-autofill:active {
 
   &-user {
     display: flex;
-    align-items: flex-start;
-    margin-top: 16px;
+    align-items: center;
+    margin: 16px auto;
 
     &-img {
       width: 60px;
@@ -438,7 +438,7 @@ input:-webkit-autofill:active {
       color: $text-color;
       font-size: 1.8rem;
       font-weight: 700;
-      line-height: 75px;
+      line-height: 1.6;
       padding-left: 5px;
     }
   }
@@ -1534,13 +1534,15 @@ form {
   color: #fff;
   border-radius: 5px;
   background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
+  cursor: pointer;
 
   & + & {
     margin-left: 16px;
   }
 }
 
-#registaration-modal {
+#registaration-modal,
+#join-modal {
   .VueCarousel-dot-container {
   }
 
@@ -1559,6 +1561,7 @@ form {
 
   .slide-image img{
     height: 325px;
+    margin: 0 auto;
   }
 }
 
