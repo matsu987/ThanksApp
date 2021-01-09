@@ -186,11 +186,13 @@ export default {
       e.currentTarget.classList.add("active");
     }
   }
-
 }
 </script>
 
 <style scoped>
-
+  main {
+    width: 100%;
+    padding: 0;
+  }
 
 </style>

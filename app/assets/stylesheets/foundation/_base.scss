@@ -46,6 +46,22 @@ img[src*="_sp"] {
   }
 }
 
+.pc_only {
+  display: block;
+
+  @include xs {
+    display: none;
+  }
+}
+
+.sp_only {
+  display: none;
+
+  @include xs {
+    display: block;
+  }
+}
+
 
 [v-cloak] {
     display: none;
@@ -145,6 +161,11 @@ input:-webkit-autofill:active {
   &-width {
     &-full {
       width: 100%;
+      max-width: 480px;
+
+      @include xs {
+        max-width: 100%;
+      }
     }
 
     &-half {
@@ -160,6 +181,16 @@ input:-webkit-autofill:active {
     &-round {
       border-radius: 999px;
     }
+  }
+}
+
+.container {
+  display: flex;
+
+  @include xs {
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0 0 80px;
   }
 }
 
@@ -326,17 +357,17 @@ input:-webkit-autofill:active {
 
 /* ログインポップアップ*/
 .overlay {
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%)translateY(-50%);
-  background-color: rgba(28, 28, 28, .6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  // width: 100%;
+  // height: 100%;
+  // z-index: 1;
+  // position: fixed;
+  // top: 50%;
+  // left: 50%;
+  // transform: translateX(-50%)translateY(-50%);
+  // background-color: rgba(28, 28, 28, .6);
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
 
   .content {
     width: 50%;
@@ -383,9 +414,19 @@ input:-webkit-autofill:active {
   height: 100vh;
   background-color: #ffeded;
   // display: flex;
-  flex-direction: column;
-  align-items: start;
+  // flex-direction: column;
+  // align-items: start;
   padding: 24px;
+
+  @include xs {
+    position: relative;
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+  }
 }
 
 .side-bar__header {
@@ -393,14 +434,28 @@ input:-webkit-autofill:active {
   // display: flex;
   // flex-direction: column;
 
-  &-logo {
+  @include xs {
+    display: flex;
+  }
+
+  &__logo {
     // width: 225px;
     margin: 0 auto;
+
+    @include xs {
+      width: 100%;
+      max-width: 160px;
+      margin: 0 auto 8px 0;
+    }
   }
 
   &-company {
     display: flex;
     margin-top: 8px;
+
+    @include xs {
+      display: none;
+    }
 
     &-logo {
       width: 35%;
@@ -427,6 +482,10 @@ input:-webkit-autofill:active {
     align-items: center;
     margin: 16px auto;
 
+    @include xs {
+      display: none;
+    }
+
     &-img {
       width: 60px;
       height: 60px;
@@ -440,6 +499,24 @@ input:-webkit-autofill:active {
       font-weight: 700;
       line-height: 1.6;
       padding-left: 5px;
+    }
+  }
+  & +.side-bar__header-btn {
+    @include xs {
+      background: #fff;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.06);
+      padding: 16px 0;
+    }
+
+    .btn {
+      @include xs {
+        width: 85%;
+      }
     }
   }
 }
@@ -459,6 +536,10 @@ input:-webkit-autofill:active {
 .side-bar__menu {
   width: 90%;
   margin: 32px auto 0;
+
+  // @include xs {
+  //   display: none;
+  // }
 
   &-item {
     font-size: 1.6rem;
@@ -490,6 +571,98 @@ input:-webkit-autofill:active {
     }
   }
 }
+
+/* チェックボックスは非表示に */
+.side-bar__header-hamburger-hidden {
+  display: none;
+}
+
+/* ハンバーガーアイコンの設置スペース */
+.side-bar__header-hamburger-open {
+  @include xs {
+    display: flex;
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 15;
+    cursor: pointer;
+  }
+}
+
+/* ハンバーガーメニューのアイコン */
+.side-bar__header-hamburger-open span,
+.side-bar__header-hamburger-open span:before,
+.side-bar__header-hamburger-open span:after {
+  @include xs {
+    content: '';
+    display: block;
+    height: 4px;
+    width: 32px;
+    border-radius: 4px;
+    background: $gradation-color;
+    transition: 0.5s;
+    position: absolute;
+  }
+}
+
+/* 三本線のうち一番上の棒の位置調整 */
+.side-bar__header-hamburger-open span:before {
+  bottom: 10px;
+}
+
+/* 三本線のうち一番下の棒の位置調整 */
+.side-bar__header-hamburger-open span:after {
+  top: 10px;
+}
+
+/* アイコンがクリックされたら真ん中の線を透明にする */
+#side-bar__header-hamburger-check:checked ~ .side-bar__header-hamburger-open span {
+  background: rgba(255, 255, 255, 0);
+}
+
+/* アイコンがクリックされたらアイコンが×印になように上下の線を回転 */
+#side-bar__header-hamburger-check:checked ~ .side-bar__header-hamburger-open span::before {
+  bottom: 0;
+  transform: rotate(45deg);
+}
+
+#side-bar__header-hamburger-check:checked ~ .side-bar__header-hamburger-open span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* メニューのデザイン*/
+.side-bar__menu {
+  @include xs {
+    width: 100%;
+    height: 100vw;
+    position: absolute;
+    top: 0;
+    left: 100%;/* メニューを画面の外に飛ばす */
+    background: #fff;
+    transition: .5s;
+    margin: 0;
+    padding: 80px 5% 0;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.06);
+    z-index: 10;
+  }
+}
+
+/* アイコンがクリックされたらメニューを表示 */
+#side-bar__header-hamburger-check:checked ~ .side-bar__menu {
+  @include xs {
+    left: 0;/* メニューを画面に入れる */
+  }
+}
+
+.popup {
+  @include xs {
+    position: absolute;
+  }
+}
+
 .active-text {
   color: #ff0000;
 }
@@ -501,12 +674,22 @@ input:-webkit-autofill:active {
   height: auto;
   z-index: 1;
   position: fixed;
-  top: 10%;
-  left: 400px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fff;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
+  border-radius: 16px;
   padding: 32px;
+
+  @include xs {
+    width: 95%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+  }
 }
 
 .form {
@@ -558,16 +741,19 @@ input:-webkit-autofill:active {
 .form__text {
   height: 50%;
   width: 100%;
-  min-height: 240px;
+  height: 240px;
   border: 2px solid #ff0000;
   margin: 16px auto;
-  max-height: 240px;
   overflow-y: scroll;
   word-break: break-all;
   padding: 16px;
   font-size: 14px;
   line-height: 1.6;
   letter-spacing: .06em;
+
+  @include xs {
+    max-height: 160px;
+  }
 }
 
 .form__sender {
@@ -591,12 +777,25 @@ input:-webkit-autofill:active {
   align-items: baseline;
   margin-bottom: 16px;
 
+  @include xs {
+    flex-wrap: wrap;
+  }
+
   button {
     font-size: 1.4rem;
     margin: 0;
 
+    @include xs {
+      width: 100%;
+    }
+
     & + button {
       margin-left: 8px;
+
+      @include xs {
+        margin-left: 0;
+        margin-top: 8px !important;
+      }
     }
   }
 }
@@ -635,16 +834,22 @@ input:-webkit-autofill:active {
 
 /* ユーザー検索 */
 .user-overlay{
-  max-width: 560px;
+  max-width: 480px;
   width:100%;
   height: auto;
   z-index: 1;
   position: fixed;
-  top: 10%;
-  left: 400px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background-color: $white;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
   padding: 32px;
+  z-index: 25;
+
+  @include xs {
+    width: 90%;
+  }
 }
 
 .user-overlay__box {
@@ -752,7 +957,7 @@ input:-webkit-autofill:active {
   top: 25%;
   left: 20%;
   background-color: transparent;
-  border-radius: 40px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -809,7 +1014,13 @@ main{
   width: calc(100% - 300px);
   height: 100vh;
   background-color: #fff;
-  // padding: 40px;
+  padding: 0 5%;
+
+  @include xs {
+    width: 100%;
+    padding: 0 5%;
+    height: auto;
+  }
 }
 
 .main-header{
@@ -819,6 +1030,12 @@ main{
   -webkit-text-fill-color: rgba(255,255,255,0.0);
   color: #ff0000;
   width: 100%;
+
+  @include xs {
+    // display: none;
+    flex-direction: column-reverse;
+    margin: 40px auto 8px;
+  }
 }
 
 .timebox{
@@ -826,7 +1043,14 @@ main{
   font-size: 24px;
   margin: 2rem;
   padding: 10px;
+
+  @include xs {
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+  }
 }
+
 .timebox span{
   background: black;
   -webkit-background-clip: text;
@@ -853,18 +1077,44 @@ main{
   border-right: 2px solid #ff0000;
   border-bottom: 2px solid #ff0000;
   border-radius: 4px;
+
+  @include xs {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &-inner {
+    display: flex;
+    width: 100%;
+  }
 }
 
 .send-count{
   display: flex;
+
+  @include xs {
+    width: 100%;
+    border-bottom: 2px solid #ff0000;
+  }
 }
 
 .send-edit{
   display: flex;
+
+  @include xs {
+    width: 100%;
+    border-bottom: 2px solid #ff0000;
+  }
 }
 
 .send-confirm{
   display: flex;
+
+  @include xs {
+    width: 100%;
+  }
 }
 
 .countbox_title{
@@ -875,6 +1125,10 @@ main{
   display: flex;
   align-items: center;
   border-left: 2px solid #ff0000;
+
+  @include xs {
+    width: 100%;
+  }
 }
 
 .countbox_num{
@@ -889,13 +1143,19 @@ main{
   display: grid;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: auto auto auto;
-  gap: 10px;
+  gap: 16px;
+
+  @include xs {
+    grid-template-columns: 100%;
+    padding: 0;
+  }
 }
 .content{
   background: #FFFFFF;
   padding: 24px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
 .content_name_unopened{
   text-align: center;
   line-height: 35px;
@@ -961,19 +1221,19 @@ main{
 }
 
 /* 編集ポップアップ */
-.overlay{
-  width: 38%;
-  height: 90%;
-  z-index: 1;
-  position: fixed;
-  top: 4%;
-  left: 48%;
-  background-color: #fff;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-}
+// .overlay{
+//   width: 38%;
+//   height: 90%;
+//   z-index: 1;
+//   position: fixed;
+//   top: 4%;
+//   left: 48%;
+//   background-color: #fff;
+//   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+//   box-sizing: border-box;
+//   display: flex;
+//   justify-content: center;
+// }
 
 .form {
   width: 100%;
@@ -1038,10 +1298,10 @@ main{
   border-bottom: 2px solid #adadad;
 }
 
-.form__btn-box {
-  display: flex;
-  // justify-content: flex-end;
-}
+// .form__btn-box {
+//   display: flex;
+//   // justify-content: flex-end;
+// }
 
 .form__btn-box__second {
   width: 35%;
@@ -1153,7 +1413,7 @@ section {
 }
 
 form {
-  padding: 20px;
+  // padding: 20px;
 }
 
 .hidden {
@@ -1168,14 +1428,20 @@ form {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translateX(-50%)translateY(-50%);
+  transform: translate(-50%, -50%);
   background-color: #fff;
   // box-shadow: none;
-  border-radius: 40px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 32px 40px;
+
+  @include xs {
+    width: 95%;
+    margin: 0;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .error-message {
@@ -1223,9 +1489,18 @@ form {
     display: flex;
     padding-top: 24px;    
 
+    @include xs {
+      flex-direction: column;
+      padding: 8px 16px;
+    }
+
     &-boxies {
       width: 100%;
       margin-right: 32px;
+
+      @include xs {
+        margin: 0 0 24px 0;
+      }
 
       &-profile {
         display: flex;
@@ -1284,6 +1559,11 @@ form {
       border-radius: 10px;
       color: #fff;
       font-weight: 700;
+
+      @include xs {
+        width: 100%;
+        height: auto;
+      }
     }
   }
 }
@@ -1302,9 +1582,17 @@ form {
     display: flex;
     padding-top: 24px;    
 
+    @include xs {
+      flex-direction: column;
+    }
+
     &-boxies {
-      width: 100%;
-      margin-right: 32px;width: 83%;
+      margin-right: 32px;
+      width: 83%;
+
+      @include xs {
+        margin: 0 0 24px 0;
+      }
 
       &-box {
         display: flex;
@@ -1341,6 +1629,11 @@ form {
       border-radius: 10px;
       color: #fff;
       font-weight: 700;
+
+      @include xs {
+        width: 100%;
+        height: auto;
+      }
     }
   }
 }
@@ -1360,15 +1653,43 @@ form {
 .group__form {
   display: flex;
   padding-top: 40px;
+
+  @include xs {
+    flex-direction: column;
+    padding: 16px 8px;
+  }
 }
 
 .group__form__boxies {
   width: 83%;
+
+  @include xs {
+    width: 100%;
+  }
 }
 
 .group__form__boxies__box {
   display: flex;
   justify-content: space-between;
+
+  @include xs {
+    flex-direction: column;
+  }
+
+  & + & {
+    @include xs {
+      margin-top: 12px;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 24px;
+  }
+
+  label {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
 }
 
 .form--required {
@@ -1410,6 +1731,11 @@ form {
   border-radius: 8px;
   font-size: 12px;
   word-break: break-all;
+
+  @include xs {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 .group-parent {
@@ -1462,12 +1788,17 @@ form {
 
 .group__form__submit {
   width: 100px;
-  height: 150px;
+  height: 100px;
   background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
   border: none;
   border-radius: 10px;
   color: #fff;
   font-weight: 900;
+
+  @include xs {
+    width: 100%;
+    height: auto;
+  }
 }
 
 
@@ -1477,7 +1808,7 @@ form {
 // 
 #overlay{
   /*　要素を重ねた時の順番　*/
-  z-index:1;
+  z-index: 10;
   /*　画面全体を覆う設定　*/
   position:fixed;
   top:0;
@@ -1499,10 +1830,19 @@ form {
   background: #fff;
   padding: 24px;
   text-align: center;
+  border-radius: 8px;
+
+  @include xs {
+    width: 90%;
+  }
 }
 
 .tutorial-text {
   font-size: 1.6rem;
+
+  @include xs {
+    font-size: 1.4rem;
+  }
 }
 
 .tutorial-btns{
@@ -1520,6 +1860,10 @@ form {
   border-radius: 10px;
   color: #fff;
   margin-top: 20px;
+
+  @include xs {
+    font-size: 1.2rem;
+  }
 
   & + & {
     margin-left: 16px;
@@ -1570,10 +1914,19 @@ form {
 .company__form {
   display: flex;
   padding-top: 40px;
+
+  @include xs {
+    flex-direction: column;
+    padding: 16px 8px;
+  }
 }
 
 .company__form__boxies {
   width: 83%;
+
+  @include xs {
+    width: 100%;
+  }
 }
 
 .company__form__btn-box {
@@ -1585,12 +1938,31 @@ form {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
+
+  @include xs {
+    flex-direction: column;
+  }
+
+  & + & {
+    margin-top: 12px;
+  }
+
+  label {
+    @include xs {
+      margin-bottom: 4px;
+    }
+  }
 }
 
 .form--required {
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  @include xs {
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
 
 .form--required::after {
@@ -1628,11 +2000,20 @@ form {
   border: solid 1px #ff0000;
   border-radius: 8px;
   word-break: break-all;
+
+  @include xs {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 .company__form__boxies_sub-text {
   font-size: 11px;
   color: #888888;
+
+  @include xs {
+    margin: 16px 0;
+  }
 }
 
 .company__form__submit {
@@ -1645,6 +2026,11 @@ form {
   font-weight: 900;
   // margin-top: 20px;
 
+  @include xs {
+    width: 100%;
+    height: auto;
+  }
+
   & + .company__form__submit {
     margin-top: 16px;
   }
@@ -1652,32 +2038,109 @@ form {
 
 /* グループ登録/参加申請 */
 
-.group--admin::after {
-  content: "※管理者のみ";
-  font-size: 10px;
-  color: gray;
-}
+// .group--admin::after {
+//   content: "※管理者のみ";
+//   font-size: 10px;
+//   color: gray;
+// }
 
-.group__form {
+// .group__form__boxies__box {
+//   display: flex;
+//   justify-content: space-between;
+//   font-size: 13px;
+
+//   @include xs {
+//     flex-direction: column;
+//   }
+// }
+
+// .group__form__submit {
+//   width: 100px;
+//   height: 100px;
+//   background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
+//   border: none;
+//   border-radius: 10px;
+//   color: #fff;
+// }
+
+
+.conts {
   display: flex;
-  padding-top: 40px;
-}
+  flex-direction: column;
+  overflow: scroll;
+  max-height: 640px;
+  margin-top: 75px;
 
-.group__form__boxies {
-  width: 83%;
-}
+  @include xs {
+    max-height: 360px;
+    margin-top: 40px;
+  }
 
-.group__form__boxies__box {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-}
+  ul {
+    width: 960px;
+  }
 
-.group__form__submit {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(157.74deg, #F9516F 11.31%, #FF8F6B 87.66%);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
+  .conts_title{
+    display: flex;
+    flex-direction: row;
+    height: 2rem;
+    line-height: 2rem;
+
+    @include xs {
+      position: sticky;
+      left: 0;
+      top: 0; 
+      z-index: 1;
+    }
+
+    div{
+      display: inline-block;
+      text-align: center;
+      border:1px solid #BDBDBD;
+      background:#F2C94C;    
+
+      &.name {
+        position: sticky;
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+  .cont {
+    display: flex;
+    flex-direction: row;
+    /* height: 2rem;
+    line-height: 2rem; */
+    margin-top: 0.5em;
+    letter-spacing: -1em;
+    
+    li{
+      letter-spacing: inherit;
+    }
+  }
+  .name{
+    width: 160px;
+  }
+
+  .email{
+    width: 30%;
+  }
+
+  .status{
+    width: 8%;
+  }
+
+  .group{
+    width: 10%;
+  }
+
+  .change_btn.bg_none{
+    border: none;
+    background: #FFF;    
+  }
+
+  .delete_btn.bg_none{
+    border: none;
+    background: #FFF;    
+  }
 }

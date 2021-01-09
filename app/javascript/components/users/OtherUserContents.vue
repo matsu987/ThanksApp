@@ -13,8 +13,8 @@
       </section>
 
       <section class="">
-        <button class="btn btn-color-close btn-size-xs btn-width-half btn-type-round" @click="logoutBtn">ログアウト</button>
-        <button class="btn btn-color-close btn-size-xs btn-width-half btn-type-round" @click="deleteUser">退会する</button>
+        <button class="btn btn-color-close btn-size-xs btn-width-full btn-type-round" @click="logoutBtn">ログアウト</button>
+        <button class="btn btn-color-close btn-size-xs btn-width-full btn-type-round" @click="deleteUser">退会する</button>
       </section>
     </div>
   </main>

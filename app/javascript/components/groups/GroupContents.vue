@@ -8,7 +8,7 @@
           <div class="company__form__boxies">
             <div class="company__form__boxies__box">
               <label>
-                <div class="company__form__boxies__box form--required">コミュニティ名</div>
+                <div class="form--required">コミュニティ名</div>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="belong_to_company.company.name" placeholder="例）株式会社〇〇〇〇">
             </div>
@@ -40,7 +40,7 @@
           </div>
           <div class="company__form__btn-box">
             <input v-if="belong_to_company.admin" type="submit" value="編集" class="company__form__submit" >
-            <button v-if="belong_to_company.admin"  type="button" @click="releaseThanks" class="company__form__submit" >メッセージ<br>公開</button>
+            <button v-if="belong_to_company.admin"  type="button" @click="releaseThanks" class="company__form__submit" >メッセージ<br class="pc_only">公開</button>
           </div>
         </form>
       </section>
