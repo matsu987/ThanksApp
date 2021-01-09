@@ -101,9 +101,9 @@ input:-webkit-autofill:active {
   letter-spacing: .08em;
   margin: 0 auto;
 
-  & + .btn {
-    margin-top: 16px;
-  }
+  // & + .btn {
+  //   margin-top: 16px;
+  // }
 
   &-color {
     &-primary {
@@ -200,16 +200,30 @@ input:-webkit-autofill:active {
 
 .ari-logo {
   margin: 3% 0 0 12%;
+
+  @include xs {
+    margin: 0 auto;
+  }
 }
 
 .main-contents {
   width: 100vw;
   height: 100vh;
   background: #FFEDF0;
-}
 
-.main-header {
-  background-color: $white;
+  @include xs {
+    padding: 40px 0;
+  }
+
+  .main-header {
+    background-color: $white;
+
+    @include xs {
+      width: 90%;
+      margin: 0 auto 40px;
+      max-width: 480px;
+    }
+  }
 }
 
 .main-box {
@@ -220,6 +234,10 @@ input:-webkit-autofill:active {
   background-color: $white;
   background-position-y: -45vw;
   background-repeat: repeat no-repeat;
+
+  @include xs {
+    background-position-y: -75vw;
+  }
 }
 
 .main-box__img {
@@ -228,6 +246,10 @@ input:-webkit-autofill:active {
   width: 50%;
   justify-content: center;
   align-items: center;
+
+  @include xs {
+    display: none;
+  }
 }
 
 .thanks-img {
@@ -242,6 +264,10 @@ input:-webkit-autofill:active {
 
 .login-signup__content {
   flex-grow: 1;
+
+  @include xs {
+    margin-bottom: 40px;
+  }
 }
 
 .login-signup__box {
@@ -262,6 +288,10 @@ input:-webkit-autofill:active {
   font-weight: 900;
   font-size:  1.6rem;
   border-radius: 4px 4px 0 0;
+
+  & + & {
+
+  }
 }
 
 .transparent {
@@ -709,7 +739,7 @@ input:-webkit-autofill:active {
 
   &__select {
     display: flex;
-    margin-bottom: 24px;
+    // margin-bottom: 24px;
     flex-direction: column;
   }
 }
@@ -781,6 +811,13 @@ input:-webkit-autofill:active {
     flex-wrap: wrap;
   }
 
+  & + button {
+    @include xs {
+      width: 100%;
+      padding: .8em;
+    }
+  }
+
   button {
     font-size: 1.4rem;
     margin: 0;
@@ -846,16 +883,22 @@ input:-webkit-autofill:active {
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
   padding: 32px;
   z-index: 25;
+  overflow-y: scroll;
+  max-height: 480px;
 
   @include xs {
     width: 90%;
+    padding: 16px;
   }
 }
 
 .user-overlay__box {
   display: flex;
-  height: 90%;
+  height: 100%;
   padding: 20px;
+  overflow-y: scroll;
+  max-height: 360px;
+  margin: 0 auto 16px;
 }
 
 .groups-content {
@@ -864,17 +907,28 @@ input:-webkit-autofill:active {
 }
 
 .groups-content__title {
-  margin-bottom: 20px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
 }
 
 .groups-content__result {
   height: 90%;
-  background: #FAFAFA;
-  overflow: scroll;
+
+
 }
 
 .groups-content__result__box {
-  padding-top: 10px;
+  font-size: 1.3rem;
+  padding: .8em;
+  display: flex;
+  align-items: center;
+  background: #fff7f7;
+
+  & + & {
+    margin-top: 10px;    
+  }
 }
 
 .arrow-content {
@@ -883,13 +937,18 @@ input:-webkit-autofill:active {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &::after {
+    content: "⇨";
+    font-size: 4.5rem;
+    color: gray;
+
+    @include xs {
+      font-size: 2.8rem;
+    }
+  }
 }
 
-.arrow-content::after {
-  content: "⇨";
-  font-size: 4.5rem;
-  color: gray;
-}
 .users-content {
   height: 100%;
   width: 40%;
@@ -903,27 +962,37 @@ input:-webkit-autofill:active {
 
 .users-content__result {
   height: 90%;
-  background: #FAFAFA;
+  // background: #FAFAFA;
 }
 
 .users-content__result__box {
   display: flex;
-  padding: 10px 0 0 10px;
+  align-items: flex-start;
+  // padding: 10px 0 0 10px;
+
+  & + & {
+    margin-top: 8px;
+  }
 }
 
 .users-content__result__box__img {
-  width: 40px;
+  width: 32px;
   border-radius: 999px;
+  object-fit: contain;
+  font-family: 'object-fit: cover;'; 
 }
 
 .users-content__result__box__name {
-  line-height: 40px;
+  line-height: 1.6;
   padding-left: 5px;
 }
 
 .user-overlay__btn-box {
   display: flex;
   justify-content: center;
+  position: sticky;
+  bottom: 0;
+  left: 50%;
 }
 
 .close-btn {
@@ -952,7 +1021,7 @@ input:-webkit-autofill:active {
 .overlay-finish{
   width: 60%;
   height: 50%;
-  z-index: 1;
+  z-index: 20;
   position: fixed;
   top: 25%;
   left: 20%;
@@ -1139,7 +1208,7 @@ main{
 
 .contents{
   width: 100%;
-  padding: 0 5%;
+  // padding: 0 5%;
   display: grid;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: auto auto auto;
@@ -1151,9 +1220,17 @@ main{
   }
 }
 .content{
-  background: #FFFFFF;
+  background: #fff;
   padding: 24px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: .3s;
+  border: 2px solid #fff;
+
+  &:hover {
+    border: 2px solid #ff0000;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.08);
+  }
 }
 
 .content_name_unopened{
@@ -1196,9 +1273,14 @@ main{
   line-height: 170%;
   letter-spacing: 0.05em;
   overflow: scroll;
+  border: 1px solid #c5c5c5;
+  padding: 12px;
 }
+
 .content_from-user{
   display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
   // height: 60px;
 }
 
@@ -1206,12 +1288,13 @@ main{
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.4;
   color: #444444;
   word-break: break-all;
   display: flex;
   align-items: center;
+  margin-left: 8px;
 }
 .avatar-img {
   height: 55px;
@@ -1250,6 +1333,10 @@ main{
   // margin: 10px 50px 10px 0;
   margin: 0;
   align-items: flex-end;
+
+  &+ button {
+    margin-top: 16px;
+  }
 }
 
 .form__reciever__img {
@@ -1424,13 +1511,13 @@ form {
 .overlay{
   width: 60%;
   height: auto;
-  z-index: 1;
+  z-index: 20;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  // box-shadow: none;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -1440,7 +1527,6 @@ form {
   @include xs {
     width: 95%;
     margin: 0;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -1591,12 +1677,18 @@ form {
       width: 83%;
 
       @include xs {
+        width: 100%;
         margin: 0 0 24px 0;
       }
 
       &-box {
         display: flex;
         align-items: center;
+
+        @include xs {
+          flex-direction: column;
+          align-items: flex-start;
+        }
 
         & + & {
           margin-top: 16px;
@@ -1607,6 +1699,10 @@ form {
           line-height: 1;
           white-space: nowrap;
           min-width: 100px;
+
+          @include xs {
+            margin-bottom: 8px;
+          }
         }
         
         &-text {
@@ -1617,6 +1713,10 @@ form {
           line-height: 1;
           margin-left: 16px;
           padding: 6px 8px;
+
+          @include xs {
+            margin-left: 0;
+          }
         }
       }
     }

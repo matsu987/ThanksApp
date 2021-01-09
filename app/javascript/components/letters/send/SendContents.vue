@@ -55,7 +55,7 @@
             <button class="btn btn-color-gray btn-size-sm btn-type-rounded-corners" @click="deleteThank">削除</button>
             <button class="btn btn-color-primary-normal btn-size-xs btn-type-rounded-corners" @click="oneTime">一時保存</button>
         </div>
-        <button class="btn btn-color-primary btn-size-lg btn-type-rounded-corners" @click="confirm">確定</button>
+        <button class="btn btn-color-primary btn-size-md btn-type-rounded-corners" @click="confirm">確定</button>
       </form>
     </div>
 
