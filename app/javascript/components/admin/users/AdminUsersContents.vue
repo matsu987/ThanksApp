@@ -105,8 +105,8 @@ export default {
   .cont {
     display: flex;
     flex-direction: row;
-    height: 2rem;
-    line-height: 2rem;
+    /* height: 2rem;
+    line-height: 2rem; */
     margin-top: 0.5em;
     letter-spacing: -1em;
   }
@@ -132,5 +132,8 @@ export default {
   .delete_btn.bg_none{
     border: none;
     background: #FFF;    
+  }
+  .form {
+    padding: 0;
   }
 </style>

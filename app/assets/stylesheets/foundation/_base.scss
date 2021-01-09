@@ -404,10 +404,12 @@ input:-webkit-autofill:active {
 
     &-logo {
       width: 35%;
+      object-fit: contain;
     }
 
     &-info {
       padding-left: 13px;
+      word-break: break-all;
 
       &-name {
         font-weight: 700;
@@ -558,7 +560,14 @@ input:-webkit-autofill:active {
   width: 100%;
   min-height: 240px;
   border: 2px solid #ff0000;
-  margin: 8px auto;
+  margin: 16px auto;
+  max-height: 240px;
+  overflow-y: scroll;
+  word-break: break-all;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: .06em;
 }
 
 .form__sender {
@@ -980,6 +989,7 @@ main{
   display: flex;
   // margin: 10px 50px 10px 0;
   margin: 0;
+  align-items: flex-end;
 }
 
 .form__reciever__img {
@@ -989,10 +999,11 @@ main{
 }
 
 .form__reciever__name {
-  line-height: 50px;
+  line-height: 1.6;
   padding-left: 4px;
   border-bottom: 2px solid #adadad;
-  margin-bottom: 16px;
+  padding-bottom: 4px;
+  // margin-bottom: 16px;
 }
 
 .form__user-btn {
@@ -1011,6 +1022,7 @@ main{
   justify-content: flex-end;
   // margin: 10px 50px 10px 0;
   margin-bottom: 24px;
+  align-items: flex-end;
 }
 
 .form__avatar {
@@ -1020,8 +1032,9 @@ main{
 }
 
 .form__sender__name {
-  line-height: 50px;
+  line-height: 1.6;
   padding-left: 4px;
+  padding-bottom: 4px;
   border-bottom: 2px solid #adadad;
 }
 
@@ -1334,7 +1347,8 @@ form {
 
 /* 部署登録 */
 .group {
-  height: 300px;
+  // height: 300px;
+  width: 100%;
 
   &__admin::after {
     content: "※管理者のみ";
@@ -1391,10 +1405,11 @@ form {
   margin: 0 40px 20px 0;
   height: auto;
   width: 55%;
-  padding-left: 20px;
+  padding: .4em .8em;
   border: solid 1px #ff0000;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 12px;
+  word-break: break-all;
 }
 
 .group-parent {
@@ -1606,9 +1621,10 @@ form {
   margin: 0 40px 20px 0;
   height: 30px;
   width: 60%;
-  padding-left: 20px;
+  padding: .4em .8em;
   border: solid 1px #ff0000;
-  border-radius: 10px;
+  border-radius: 8px;
+  word-break: break-all;
 }
 
 .company__form__boxies_sub-text {
@@ -1662,6 +1678,3 @@ form {
   border-radius: 10px;
   color: #fff;
 }
-
-
-

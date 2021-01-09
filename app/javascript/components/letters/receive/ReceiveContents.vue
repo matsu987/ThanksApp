@@ -382,17 +382,17 @@ main{
   margin: 20px 0 20px 0;
 }
 
-.form__text {
+/* .form__text {
   height: 60%;
   width: 100%;
   border: 1px solid #ff0000;
-  word-break: break-word;
+  word-break: break-all;
   padding: 16px;
   font-size: 14px;
   line-height: 1.8;
   letter-spacing: .08em;
   margin: 16px auto;
-}
+} */
 
 .form__sender {
   display: flex;

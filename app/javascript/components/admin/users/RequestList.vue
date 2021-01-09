@@ -116,7 +116,7 @@ export default {
     text-align: center;
     border:1px solid #BDBDBD;
     height: 2em;  
-    background:#E0E0E0;   
+    background:#E0E0E0;
   }
   option{
     display: inline-block;
