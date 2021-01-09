@@ -16,7 +16,11 @@
         <h3 class="side-bar__header-user-name">{{current_user.family_name}} {{current_user.given_name}}さん</h3>
       </div>
     </div>
-    <button class="btn btn-color-primary btn-size-sm btn-width-full btn-type-round" @click="ThanksNew">新規作成</button>
+    <div class="side-bar__header-btn">
+      <button class="btn btn-color-primary btn-size-sm btn-width-full btn-type-round" @click="ThanksNew">新規作成</button>
+    </div>
+    <input type="checkbox" id="side-bar__header-hamburger-check" class="side-bar__header-hamburger-hidden" >
+    <label for="side-bar__header-hamburger-check" class="side-bar__header-hamburger-open"><span></span></label>
     <ul class="side-bar__menu">
       <li class="side-bar__menu-item" v-bind:class="[ links.receive.active ? 'active-list' : '']">
         <a :href="links.receive.url" class="side-bar__menu-item-text" v-bind:class="[ links.receive.active ? 'active-text' : '']">受信一覧</a>

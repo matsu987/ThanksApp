@@ -9,8 +9,10 @@
         <span v-on:click="increClick">></span>
       </div>
       <div class="countbox">
-        <p class="countbox_title">今月受け取った数</p>
-        <p class="countbox_num">{{thanks.length}}</p>
+        <div class="countbox-inner">
+          <p class="countbox_title">今月受け取った数</p>
+          <p class="countbox_num">{{thanks.length}}</p>
+        </div>
       </div>        
     </div>
     <div class="contents">
@@ -196,14 +198,14 @@ export default {
 </script>
 
 <style scoped>
-main{
+/* main{
   width: 65%;
   height: 100vh;
   background-color: #fff;
-  /* margin-left: 300px; */
-}
+  margin-left: 300px;
+} */
 
-.main-header{
+/* .main-header{
   display: flex;
   background: linear-gradient(166.64deg, #F9516F 11.31%, #FF8F6B 87.66%);
   -webkit-background-clip: text;
@@ -211,9 +213,9 @@ main{
   color: #ff0000;
   width: 90%;
   margin: 0 auto;
-}
+} */
 
-.timebox{
+/* .timebox{
   display: flex;
   font-size: 24px;
   margin: 2rem;
@@ -228,7 +230,7 @@ main{
 
 .time{
   margin: 0 5px;
-}
+} */
 
 /* .countbox {
   background: linear-gradient(166.64deg, #F9516F 11.31%, #FF8F6B 87.66%);
@@ -265,7 +267,7 @@ main{
   padding: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 } */
-.content_name_unopened{
+/* .content_name_unopened{
   text-align: center;
   line-height: 35px;
   height: 35px;
@@ -308,9 +310,9 @@ main{
 .content_from-user{
   display: flex;
   height: 60px;
-}
+} */
 
-.user-name{
+/* .user-name{
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
@@ -325,10 +327,10 @@ main{
   width: 55px;
   margin: auto;
   border-radius: 999px;
-}
+} */
 
 /* 詳細ポップアップ */
-.overlay{
+/* .overlay{
   width: 50%;
   height: 85%;
   z-index: 1;
@@ -343,28 +345,13 @@ main{
   justify-content: center;
   border-radius: 8px;
   padding: 40px 24px;
-}
+} */
 
-.form {
-  /* width: 80%; */
-}
-
-.form__title {
-  /* margin: 20px 0; */
-  color: #ff0000;
-  text-align: center;
-}
-
-.form__reciever {
-  display: flex;
-  /* margin: 10px 50px 10px 0; */
-}
-
-.form__reciever__img {
+/* .form__reciever__img {
   height: 50px;
   width: 50px;
   border-radius: 999px;
-}
+} */
 
 /* .form__reciever__name {
   line-height: 50px;
@@ -412,8 +399,8 @@ main{
 } */
 
 .form__btn-box {
-  display: flex;
-  justify-content: flex-end;
+  /* display: flex;
+  justify-content: flex-end; */
 }
 
 .form__btn-box__second {

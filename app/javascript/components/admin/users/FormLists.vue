@@ -125,7 +125,9 @@ export default {
     height: 2em;
   }
   .name{
-    width: 20%;
+    width: 160px;
+    position: sticky;
+    left: 0;
   }
   .email{
     width: 30%;
