@@ -567,10 +567,6 @@ input:-webkit-autofill:active {
   width: 90%;
   margin: 32px auto 0;
 
-  // @include xs {
-  //   display: none;
-  // }
-
   &-item {
     font-size: 1.6rem;
     font-weight: 700;
@@ -616,7 +612,7 @@ input:-webkit-autofill:active {
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 15;
+    z-index: 40;
     cursor: pointer;
   }
 }
@@ -676,7 +672,7 @@ input:-webkit-autofill:active {
     margin: 0;
     padding: 80px 5% 0;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.06);
-    z-index: 10;
+    z-index: 30;
   }
 }
 
@@ -1577,7 +1573,7 @@ form {
 
     @include xs {
       flex-direction: column;
-      padding: 8px 16px;
+      padding: 24px 16px 8px;
     }
 
     &-boxies {
@@ -1670,6 +1666,7 @@ form {
 
     @include xs {
       flex-direction: column;
+      padding: 24px 16px 8px;    
     }
 
     &-boxies {
