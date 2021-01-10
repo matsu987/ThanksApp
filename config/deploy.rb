@@ -13,7 +13,7 @@ lock '3.11.2'
 set :application, 'ThanksApp'
 
 # どのリポジトリからアプリをpullするかを指定する
-set :repo_url,  'git@github.com:chomatsuken-div/ThanksApp.git'
+set :repo_url,  'git@github.com:matsu987/ThanksApp.git'
 
 # バージョンが変わっても共通で参照するディレクトリを指定
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
@@ -43,19 +43,13 @@ namespace :deploy do
     invoke 'unicorn:restart'
   end
 
-  desc 'upload master.key csv'
+  desc 'upload master.key'
   task :upload do
     on roles(:app) do |host|
       if test "[ ! -d #{shared_path}/config ]"
         execute "mkdir -p #{shared_path}/config"
       end
       upload!('config/master.key', "#{shared_path}/config/master.key")
-
-      if test "[ ! -d #{shared_path}/db/seeds/csv ]"
-        execute "mkdir -p #{shared_path}/db/seeds/csv"
-      end
-      upload!('db/seeds/csv/div-groups.csv', "#{shared_path}/db/seeds/csv/div-groups.csv")
-      upload!('db/seeds/csv/div-users.csv', "#{shared_path}/db/seeds/csv/div-users.csv")
     end
   end
   before :starting, 'deploy:upload'
