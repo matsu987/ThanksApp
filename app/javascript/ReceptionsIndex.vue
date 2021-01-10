@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div id="app">
     <Header></Header>
     <ReceptionBox></ReceptionBox>
@@ -6,20 +6,20 @@
 </template>
 
 <script>
-import Header from 'components/shared/Header.vue';
-import ReceptionBox from 'components/ReceptionBox.vue';
-import 'flower.png'
+// import Header from 'components/shared/Header.vue';
+// import ReceptionBox from 'components/ReceptionBox.vue';
+// import 'flower.png'
 
-export default {
-  components: {
-    Header,ReceptionBox
-  },
-  data: function () {
-    return {
-      message: "Hello Vue!"
-    }
-  }
-}
+// export default {
+//   components: {
+//     Header,ReceptionBox
+//   },
+//   data: function () {
+//     return {
+//       message: "Hello Vue!"
+//     }
+//   }
+// }
 </script>
 
 <style scoped>

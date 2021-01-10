@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div id="app" class="container">
     <Header header-nav="Mypage" mypage-nav="group"></Header>
     <AdminContents></AdminContents>
