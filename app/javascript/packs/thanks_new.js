@@ -5,15 +5,15 @@
 // like app/views/layouts/application.html.erb.
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
-import Vue from 'vue'
-import ThanksNew from '../ThanksNew.vue'
+// import Vue from 'vue'
+// import ThanksNew from '../ThanksNew.vue'
 
-document.addEventListener('DOMContentLoaded', () => {
-  const thanksNew = new Vue({
-    render: h => h(ThanksNew)
-  }).$mount()
-  document.body.appendChild(thanksNew.$el)
-})
+// document.addEventListener('DOMContentLoaded', () => {
+//   const thanksNew = new Vue({
+//     render: h => h(ThanksNew)
+//   }).$mount()
+//   document.body.appendChild(thanksNew.$el)
+// })
 
 
 // The above code uses Vue without the compiler, which means you cannot
