@@ -16,9 +16,3 @@
 //= require jquery_ujs
 //= require jquery-ui/widgets/autocomplete
 //= require_tree .
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/object-fit-images/3.2.4/ofi.js"></script>
-
-<script>
-  objectFitImages();
-</script>
