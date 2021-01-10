@@ -33,7 +33,7 @@ set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 set :keep_releases, 5
 
 # デプロイ処理が終わった後、Unicornを再起動するための記述
-set :linked_files, %w{ config/master.key db/seeds/csv/div-users.csv db/seeds/csv/div-groups.csv }
+set :linked_files, %w{ config/master.key }
 
 # 元々記述されていた after 「'deploy:publishing', 'deploy:restart'」以下を削除して、次のように書き換え
 
