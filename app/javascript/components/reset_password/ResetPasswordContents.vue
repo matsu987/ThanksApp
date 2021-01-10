@@ -21,7 +21,7 @@
 
     <!-- パスワードリセットフォーム -->
     <form action="/users/password" accept-charset="UTF-8" method="post" class="reset-form" @submit.prevent="createPass">
-      <img src='~ari-letter-logo.jpg' class="ari-logo">
+      <img src='' class="ari-logo">
       <div class="reset-form__message">
         パスワードをお忘れの場合は登録メールアドレスを入力して入力してパスワードの再設定を行ってください。<br>
         パスワード再設定用のメールをお送りします。<br>
@@ -40,7 +40,7 @@
 
 <script>
 import axios from 'axios';
-import 'ari-letter-logo.jpg';
+// import 'ari-letter-logo.jpg';
 
 export default {
   data: function(){
