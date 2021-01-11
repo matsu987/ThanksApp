@@ -39,7 +39,7 @@
             <p class="company__form__boxies_sub-text">&#x203B;感謝のメッセージ一斉公開日時を設定しない場合は毎月末に感謝のメッセージが一斉に公開されます。<br>メッセージを送られたユーザーはメッセージが公開されるまで確認ができません。</p>
           </div>
           <div class="company__form__btn-box">
-            <input v-if="belong_to_company.admin" type="submit" value="編集" class="company__form__submit" >
+            <input v-if="belong_to_company.admin" type="submit" value="更新" class="company__form__submit" >
             <button v-if="belong_to_company.admin"  type="button" @click="releaseThanks" class="company__form__submit" >メッセージ<br class="pc_only">公開</button>
           </div>
         </form>
@@ -92,7 +92,7 @@
     <!-- グループ情報 -->
     <div v-for="(group, index) in belong_to_company.groups">
       <section class="group">
-        <h2 class="">グループ情報&#x203B;申請中</h2>
+        <h2 class="">所属している組織名とグループ名一覧</h2>
         <form class="group__form" @submit.prevent="createGroup">
           <div class="group__form__boxies">
             <div class="group__form__boxies__box">
@@ -185,7 +185,10 @@
               <li><font color="red">{{ errors }}</font></li>
             </ul>
           </div>
-          <p class="success-message" v-if="errors.length == 0">登録が完了しました！<br><span class="sub-message">ユーザー設定画面から部署に参加してください</span></p>
+          <p class="success-message" v-if="errors.length == 0 && createContent">登録が完了しました！<br><span class="sub-message"></span></p>
+          <p class="success-message" v-if="errors.length == 0 && updateContent">更新が完了しました！<br><span class="sub-message"></span></p>
+          <p class="success-message" v-if="errors.length == 0 && releaseContent">公開が完了しました！<br><span class="sub-message"></span></p>
+          <p class="success-message" v-if="errors.length == 0 && joinContent">参加申請が完了しました！<br><span class="sub-message"></span></p>
           <button class="btn btn-color-close btn-size-md btn-type-round" v-on:click="closeModal">Close</button>
         </div>
       </div>
@@ -218,6 +221,10 @@ export default {
         name: ''
       },
       showContent: false,
+      createContent: false,
+      updateContent: false,
+      releaseContent: false,
+      joinContent: false,
       errors: [],
     }
   },
@@ -269,6 +276,7 @@ export default {
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
             } else {
+              this.$data.createContent = true
               this.openModal();
             }
 
@@ -292,6 +300,7 @@ export default {
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
           } else {
+            this.$data.updateContent = true
             this.openModal();
           }
 
@@ -315,6 +324,7 @@ export default {
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
             } else {
+              this.$data.createContent = true
               this.openModal();
             }
 
@@ -337,6 +347,7 @@ export default {
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
             } else {
+              this.$data.releaseContent = true
               this.openModal();
             }
 
@@ -356,7 +367,6 @@ export default {
       .get(url, {params: {company_id: this.$data.selected_company}})
       .then(response => {
         this.$data.groups = response.data
-        console.log(this.$data.groups)
       });
     },
     joinRequest: function(e) {
@@ -373,6 +383,7 @@ export default {
             if (response.data && response.data.errors) {
             this.errors = response.data.errors;
             } else {
+              this.$data.joinContent = true
               this.openModal();
             }
 

@@ -22,7 +22,7 @@ class Api::CompaniesController < ApplicationController
   end
 
   def update # 組織更新
-    company = Company.find(params[:id])
+    company = Company.find( params[:company][:id])
     if company.update(company_params)
       group = Group.where(ancestry: nil, company_id: company.id).first
       if group.update(name: params[:company][:name])

@@ -9,7 +9,7 @@
               <li><font color="red">{{ errors }}</font></li>
             </ul>
           </div>
-          <p class="success-message" v-if="errors.length == 0">登録が完了しました！<br><span class="sub-message"></span></p>
+          <p class="success-message" v-if="errors.length == 0">更新が完了しました！<br><span class="sub-message"></span></p>
           <button class="close-btn" v-on:click="closeModal">Close</button>
         </div>
       </div>
