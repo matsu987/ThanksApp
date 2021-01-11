@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     reload: function(e){
-      document.location.reload()
+      document.location.reload();
     },
     changeStatus: function(e){
       e.preventDefault();
@@ -66,7 +66,7 @@ export default {
         request:      this.$data.data.request
       })
       .then(response => {
-        reload();
+        this.reload();
         // if(response.data.error){
         //   console.log(response.data.error.text)
         // }
@@ -97,7 +97,7 @@ export default {
             }
           }
         }
-        reload();
+        this.reload();
       });
     }
 

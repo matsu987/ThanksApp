@@ -23,7 +23,7 @@
             <label for="avatar" class="user__form-boxies-profile-avatar">
               <p>プロフィール画像</p>
               <img v-if="confirmedImage" class="avatar-img" :src="confirmedImage">
-              <img v-else-if="avatar" class="avatar-img" :src="avatar">
+              <!--<img v-else-if="avatar" class="avatar-img" :src="avatar">-->
               <img v-else class="avatar-img" src="~avatar.png">
             </label>
             <input type="file" class="hidden" id="avatar" accept="image/jpeg, image/png" @change="confirmImage"/>
@@ -93,10 +93,9 @@ export default {
   },
   created() {
     axios
-    .get('/users.json')
+    .get('/api/users/login.json')
     .then(response => {
-      this.$data.current_user = response.data.current_user
-      this.$data.avatar = response.data.avatar
+      this.$data.current_user = response.data
     });
 
     axios

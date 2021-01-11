@@ -51,6 +51,9 @@ export default {
     };
   },
   methods: {
+    reload: function(e){
+      document.location.reload();
+    },
     changeStatus: function(e){
       e.preventDefault();
       axios
@@ -70,6 +73,7 @@ export default {
             }
           }
         }
+        this.reload();
       });
     },
     deleteStatus: function(){
@@ -91,6 +95,7 @@ export default {
             }
           }
         }
+        this.reload();
       });
     }
   }
