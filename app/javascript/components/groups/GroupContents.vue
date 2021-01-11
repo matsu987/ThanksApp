@@ -32,11 +32,11 @@
             </div>
             <div class="company__form__boxies__box">
               <label>
-                <p class="company__form__boxies__box">感謝のメッセージ 一斉公開日時</p>
+                <p class="company__form__boxies__box">感謝のメッセージ<br>一斉公開日時</p>
               </label>
               <input type="datetime" class="company__form__boxies__box__text" v-model="belong_to_company.company.release_time" placeholder="例）2020年01月01日23:00">
             </div>
-            <p class="company__form__boxies_sub-text">&#x203B;感謝のメッセージ 一斉公開日時を設定しない場合は毎月末に感謝のメッセージが一斉に公開されます。<br>メッセージを送られたユーザーはメッセージが公開されるまで確認ができません。</p>
+            <p class="company__form__boxies_sub-text">&#x203B;感謝のメッセージ一斉公開日時を設定しない場合は毎月末に感謝のメッセージが一斉に公開されます。<br>メッセージを送られたユーザーはメッセージが公開されるまで確認ができません。</p>
           </div>
           <div class="company__form__btn-box">
             <input v-if="belong_to_company.admin" type="submit" value="編集" class="company__form__submit" >
@@ -195,7 +195,6 @@
 
 <script>
 import axios from 'axios';
-import 'avatar.png';
 
 export default {
   data: function () {

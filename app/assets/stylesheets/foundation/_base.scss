@@ -1951,6 +1951,17 @@ form {
   }
 }
 
+.tutorial-sub-text {
+  font-size: 1.6rem;
+  text-align: left;
+  font-weight: 600;
+  color: #ff6368;
+  margin: 1rem 0;
+  p {
+    margin-bottom: 5px;
+  }
+}
+
 .tutorial-btns{
   display: flex;
   justify-content: center;
