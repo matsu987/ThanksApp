@@ -18,7 +18,7 @@
                     <li><font color="red">{{ e }}</font></li>
                   </ul>
                 </div>
-                <p class="success-message" v-if="errors.length == 0 && successContent">パスワードの再設定が完了しました。<br><span class="sub-message">ログインして早速、感謝のメッセージを送りましょう。</span></p>
+                <p class="success-message" v-if="errors.length == 0">パスワードの再設定が完了しました。<br><span class="sub-message">ログインして早速、感謝のメッセージを送りましょう。</span></p>
                 <button class="btn btn-color-close btn-size-md btn-type-round" v-on:click="closeModal">Close</button>
               </div>
             </div>
@@ -139,7 +139,6 @@ export default {
             this.errors = response.data.errors_introduction;
             }
             else{
-              this.$data.successContent = true
               this.success_introduction = response.data.success_introduction;
               this.openModal();
             }
