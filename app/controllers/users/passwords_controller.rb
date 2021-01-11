@@ -37,20 +37,21 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # PUT /resource/password
   def update
-    self.resource = resource_class.reset_password_by_token(reset_password_token: params[:reset_password_token])
+    self.resource = resource_class.reset_password_by_token(reset_password_token: params[:reset_password_token], password: params[:password])
     if resource.errors.empty?
       resource.unlock_access! if unlockable?(resource)
       if Devise.sign_in_after_reset_password
         flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
         set_flash_message!(:notice, flash_message)
-        resource.after_database_authentication
+        # resource.after_database_authentication
         sign_in(resource_name, resource)
+        return render json: {success_introduction: "ログインに成功しました。" }
       else
         set_flash_message!(:notice, :updated_not_active)
       end
       respond_with resource, location: after_resetting_password_path_for(resource)
     else
-      render json: {success_introduction: "パスワードを設定いたしました。" }
+      render json: {success_introduction: "パスワードの設定に失敗しました。" }
     end
   end
 
