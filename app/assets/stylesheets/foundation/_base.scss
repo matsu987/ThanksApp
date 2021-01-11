@@ -183,6 +183,42 @@ input:-webkit-autofill:active {
     }
   }
 }
+// 404 500エラーページ
+#error-page {
+  .body-header {
+    img {
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+  .body-content {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1.6rem;
+    h1 {
+      font-size: 4rem;
+      text-align: center;
+    }
+    .sub-text {
+      max-width: 650px;
+      margin: 0 auto;
+      ul {
+        li {
+          list-style: disc;
+          list-style-position: inside;
+          a {
+            color: #0d52ab;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    
+  }
+}
+//
 
 .container {
   display: flex;
