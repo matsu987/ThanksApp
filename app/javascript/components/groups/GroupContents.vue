@@ -181,8 +181,8 @@
       <div class="overlay" v-show="showContent">
         <div class="content">
           <div class="error-message" v-if="errors.length != 0">
-            <ul >
-              <li><font color="red">{{ errors }}</font></li>
+            <ul v-for="(error, index) in errors">
+              <li><font color="red">{{ error }}</font></li>
             </ul>
           </div>
           <p class="success-message" v-if="errors.length == 0 && createContent">登録が完了しました！<br><span class="sub-message"></span></p>
@@ -281,6 +281,8 @@ export default {
             }
 
           } else {
+            this.$data.errors = response.data.errors;
+            this.$data.showContent = true
             let e = response.data;
           }
         })
@@ -305,6 +307,9 @@ export default {
           }
 
           } else {
+            console.log(response.data.errors)
+            this.$data.errors = response.data.errors;
+            this.$data.showContent = true
             let e = response.data;
           }
         })
