@@ -8,7 +8,7 @@
               <div class="name">氏名</div>
               <div class="email">メールアドレス</div>
               <div class="status">権限</div>
-              <div class="group">グループ名</div>
+              <div class="group">組織内のグループ名</div>
               <button class="change_btn bg_none"></button>
               <button class="delete_btn bg_none"></button>                        
             </li>

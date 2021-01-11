@@ -53,6 +53,9 @@ export default {
     };
   },
   methods: {
+    reload: function(e){
+      document.location.reload()
+    },
     changeStatus: function(e){
       e.preventDefault();
       axios
@@ -63,6 +66,7 @@ export default {
         request:      this.$data.data.request
       })
       .then(response => {
+        reload();
         // if(response.data.error){
         //   console.log(response.data.error.text)
         // }
@@ -93,6 +97,7 @@ export default {
             }
           }
         }
+        reload();
       });
     }
 

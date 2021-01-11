@@ -16614,7 +16614,7 @@ document.addEventListener('DOMContentLoaded', function(){
       })
       .done(function(users){
         users.forEach( function(user){
-          // グループ名を検索時に表示させる。
+          // 組織内のグループ名を検索時に表示させる。
           // 同一名の人が検索できてしまうことを考えると顔写真付きの方がいいかもしれない
           user_profile = { label: user.name,  value: user.name } 
           //

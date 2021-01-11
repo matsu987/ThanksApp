@@ -4,7 +4,7 @@
       <div v-show="modalChoise">
           <p class="tutorial-text">どちらのチュートリアルを確認しますか？</p>
           <div class="tutorial-btns">
-            <button class="tutorial-btn" v-on:click="RegisterModal">コミュニティ登録方法</button>
+            <button class="tutorial-btn" v-on:click="RegisterModal">組織登録方法</button>
             <button class="tutorial-btn" v-on:click="JoinModal">グループ参加方法</button>
           </div>
           <button class="btn btn-color-close btn-size-xs btn-type-round" v-on:click="closeModal">Close</button>

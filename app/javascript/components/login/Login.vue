@@ -6,7 +6,6 @@
       </div>
       <div class="main-box">
         <div class="main-box__img">
-          <img class="thanks-img" src="~login/thanks-text.png">
           <img class="pc-img" src="~login/pc.png">
         </div>
 

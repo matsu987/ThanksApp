@@ -3,7 +3,7 @@ class User::GroupController < ApplicationController
     @groups = Group.where(ancestry: nil)
   end
 
-  def create # ユーザーのグループ参加申請
+  def create # ユーザーの組織内のグループ参加申請
     case [params[:company_id].present?, params[:parent_group_id].present?, params[:child_group_id].present?, params[:grandchild_group_id].present?]
     when [true, true, true, true]
       group = Group.find(params[:grandchild_group_id])

@@ -1,14 +1,14 @@
 <template>
   <main>
-    <!-- コミュニティ情報 -->
+    <!-- 組織情報 -->
     <div v-if='belong_to_company.company'>
       <section class="company">
-        <h2>コミュニティ情報</h2>
+        <h2>組織情報</h2>
         <form class="company__form" @submit.prevent="updateCompany">
           <div class="company__form__boxies">
             <div class="company__form__boxies__box">
               <label>
-                <div class="form--required">コミュニティ名</div>
+                <div class="form--required">組織名</div>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="belong_to_company.company.name" placeholder="例）株式会社〇〇〇〇">
             </div>
@@ -32,11 +32,11 @@
             </div>
             <div class="company__form__boxies__box">
               <label>
-                <p class="company__form__boxies__box">公開日時</p>
+                <p class="company__form__boxies__box">感謝のメッセージ 一斉公開日時</p>
               </label>
               <input type="datetime" class="company__form__boxies__box__text" v-model="belong_to_company.company.release_time" placeholder="例）2020年01月01日23:00">
             </div>
-            <p class="company__form__boxies_sub-text">&#x203B;公開日時を設定しない場合は毎月末に感謝のメッセージが一斉に公開されます。<br>メッセージを送られたユーザーはメッセージが公開されるまで確認ができません。</p>
+            <p class="company__form__boxies_sub-text">&#x203B;感謝のメッセージ 一斉公開日時を設定しない場合は毎月末に感謝のメッセージが一斉に公開されます。<br>メッセージを送られたユーザーはメッセージが公開されるまで確認ができません。</p>
           </div>
           <div class="company__form__btn-box">
             <input v-if="belong_to_company.admin" type="submit" value="編集" class="company__form__submit" >
@@ -46,15 +46,15 @@
       </section>
     </div>
 
-    <!-- コミュニティ登録 -->
+    <!-- 組織登録 -->
     <div v-else>
       <section class="company">
-        <h2>コミュニティ登録</h2>
+        <h2>組織登録</h2>
         <form class="company__form" @submit.prevent="createCompany">
           <div class="company__form__boxies">
             <div class="company__form__boxies__box">
               <label>
-                <div class="form--required">コミュニティ名</div>
+                <div class="form--required">組織名</div>
               </label>
               <input type="text" class="company__form__boxies__box__text" v-model="company.name" placeholder="例）株式会社〇〇〇〇">
             </div>
@@ -78,11 +78,11 @@
             </div>
             <div class="company__form__boxies__box">
               <label>
-                <p class="company__form__boxies__box">公開日時</p>
+                <p class="company__form__boxies__box">感謝のメッセージ 一斉公開日時</p>
               </label>
               <input type="datetime" class="company__form__boxies__box__text" v-model="company.release_time" placeholder="例）2020年01月01日23:00">
             </div>
-            <p class="company__form__boxies_sub-text">&#x203B;公開日時を設定しない場合は毎月末に感謝のメッセージが一斉に公開されます。<br>メッセージを送られたユーザーはメッセージが公開されるまで確認ができません。</p>
+            <p class="company__form__boxies_sub-text">&#x203B;感謝のメッセージ 一斉公開日時を設定しない場合は毎月末に感謝のメッセージが一斉に公開されます。<br>メッセージを送られたユーザーはメッセージが公開されるまで確認ができません。</p>
           </div>
           <input type="submit" value="登録" class="company__form__submit" >
         </form>
@@ -97,13 +97,13 @@
           <div class="group__form__boxies">
             <div class="group__form__boxies__box">
               <label>
-                <div class="form--required">コミュニティ名</div>
+                <div class="form--required">組織名</div>
               </label>
               <p class="group__form__boxies__box__text">{{belong_to_company.company.name}}</p>
             </div>
             <div class="group__form__boxies__box" v-show="group.ancestry">
               <label>
-                <div class="form--required">グループ名</div>
+                <div class="form--required">組織内のグループ名</div>
               </label>
               <p class="group__form__boxies__box__text">{{group.name}}</p>
             </div>
@@ -121,7 +121,7 @@
           <div class="group__form__boxies">
             <div class="group__form__boxies__box">
               <label>
-                <div class="form--required">コミュニティ名</div>
+                <div class="form--required">組織名</div>
               </label>
               <p v-if="belong_to_company.company" class="group__form__boxies__box__text">{{belong_to_company.company.name}}</p>
               <select v-else class="group__form__boxies__box__text">
@@ -131,7 +131,7 @@
             </div>
             <div class="group__form__boxies__box">
               <label>
-                <div class="form--required">グループ名</div>
+                <div class="form--required">組織内のグループ名</div>
               </label>
               <input class="group__form__boxies__box__text" type="text" v-model="parent_group.name" placeholder="テストグループ">
             </div>
@@ -144,12 +144,12 @@
     <!-- グループ申請 -->
     <div>
       <section class="group">
-        <h2 class="">グループ参加申請</h2>
+        <h2 class="">組織内のグループ参加申請<span>例）部署、部門、チームなど、組織の内にある集団</span></h2>
         <form class="group__form" @submit.prevent="joinRequest">
           <div class="group__form__boxies">
             <div class="group__form__boxies__box">
               <label>
-                <div class="form--required">コミュニティ名</div>
+                <div class="form--required">組織名</div>
               </label>
               <p v-if="belong_to_company.company" class="group__form__boxies__box__text">{{belong_to_company.company.name}}</p>
               <select v-else class="group__form__boxies__box__text" v-model="selected_company" @change="changeCompany">
@@ -159,7 +159,7 @@
             </div>
             <div class="group__form__boxies__box">
               <label>
-                <div class="">グループ名</div>
+                <div class="">組織内のグループ名</div>
               </label>
               <select v-if="belong_to_company.groups" class="group__form__boxies__box__text" v-model="selected_group">
                 <option selected>選択してください</option>
@@ -230,7 +230,7 @@ export default {
       this.$data.current_user = response.data
     });
 
-    // コミュニティ全て取得
+    // 組織全て取得
     let group_index_url = `/api/users/${this.$data.current_user.id}/companies.json`;
     axios
     .get(group_index_url)
@@ -238,7 +238,7 @@ export default {
       this.$data.companies = response.data
     });
 
-    // 所属しているコミュニティを取得
+    // 所属している組織を取得
     let group_belong_url = `/api/users/${this.$data.current_user.id}/company/belong_to.json`;
     axios
     .get(group_belong_url)

@@ -1,11 +1,11 @@
 class Api::CompaniesController < ApplicationController
 
-  def index # 複数のコミュニティを取得
+  def index # 複数の組織を取得
     companies = Company.all
     render json: companies, status: 200
   end
 
-  def create #コミュニティ登録
+  def create #組織登録
     company = Company.new(company_params)
     if company.save
       group = company.groups.new(name: params[:company][:name], user_ids: [current_user.id])
@@ -21,7 +21,7 @@ class Api::CompaniesController < ApplicationController
     end
   end
 
-  def update # コミュニティ更新
+  def update # 組織更新
     company = Company.find(params[:id])
     if company.update(company_params)
       group = Group.where(ancestry: nil, company_id: company.id).first
@@ -35,7 +35,7 @@ class Api::CompaniesController < ApplicationController
     end
   end
 
-  def belong_to_company # 所属しているコミュニティを取得
+  def belong_to_company # 所属している組織を取得
     group_users = current_user&.group_users
     admin_group_users = group_users&.where(status: 1)
     group_ids = []
@@ -63,7 +63,7 @@ class Api::CompaniesController < ApplicationController
 
   private
   def company_params
-    params[:company][:release_time] = params[:company][:detailed_time] if params[:company][:detailed_time].present? # 公開日時に詳細日が設定されている場合公開日時を書き換え
+    params[:company][:release_time] = params[:company][:detailed_time] if params[:company][:detailed_time].present? # 感謝のメッセージ 一斉公開日時に詳細日が設定されている場合感謝のメッセージ 一斉公開日時を書き換え
     params.require(:company).permit(:name, :post_number, :address, :phone_number, :release_time)
   end
 end

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       get 'receive'    , to: 'receive#index'     # 受信一覧ページ
       get 'send'       , to: 'send#index'        # 送信一覧ページ
     end
-      get 'community'  , to: 'groups#index'      # コミュニティ設定ページ
+      get 'community'  , to: 'groups#index'      # 組織設定ページ
       get 'admin'      , to: 'admin/users#index' # 管理者設定ページ
       get 'other'      , to: 'users/other#index' # その他ページ
     # member do
@@ -34,16 +34,16 @@ Rails.application.routes.draw do
     delete "users/:id/signout"              , to: 'users#signout'               # ログアウト
     delete "users/:id"                       , to: 'users#destroy'               # ユーザー退会
 
-    # コミュニティ処理
-    post   "users/:user_id/community"        , to: 'companies#create'            # コミュニティ登録
-    patch  "users/:user_id/community"        , to: 'companies#update'            # コミュニティ更新
-    get    "users/:user_id/company/belong_to", to: 'companies#belong_to_company' # ログインしているユーザーの所属しているコミュニティデータ取得
-    get    "users/:user_id/companies"        , to: 'companies#index'             # コミュニティ全取得
+    # 組織処理
+    post   "users/:user_id/community"        , to: 'companies#create'            # 組織登録
+    patch  "users/:user_id/community"        , to: 'companies#update'            # 組織更新
+    get    "users/:user_id/company/belong_to", to: 'companies#belong_to_company' # ログインしているユーザーの所属している組織データ取得
+    get    "users/:user_id/companies"        , to: 'companies#index'             # 組織全取得
 
     # グループ処理
     post   "users/:user_id/groups"           , to: 'groups#create'               # グループ登録
     get    "users/:user_id/groups"           , to: 'groups#index'                # 会社に紐づいているグループを取得
-    post   "users/:user_id/group_users"      , to: 'group_users#create'          # グループ参加申請
+    post   "users/:user_id/group_users"      , to: 'group_users#create'          # 組織内のグループ参加申請
     get    "search/users"                    , to: 'search/users#index'          # ユーザー検索
 
     # メッセージ処理

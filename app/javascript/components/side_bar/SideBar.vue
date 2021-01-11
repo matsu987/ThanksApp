@@ -3,7 +3,6 @@
     <div class="side-bar__header">
       <img src="~logo.png" class="side-bar__header__logo">
       <div class="side-bar__header-company">
-        <img src="~company-logo.png" class="side-bar__header-company-logo">
         <div class="side-bar__header-company-info" v-cloak>
           <h3 class="side-bar__header-company-info-name" v-if="belong_to_company.company">{{belong_to_company.company.name}}</h3>
           <h3 class="side-bar__header-company-info-name" v-else>未所属</h3>
@@ -32,7 +31,7 @@
         <a :href="links.account.url" class="side-bar__menu-item-text" v-bind:class="[ links.account.active ? 'active-text' : '']">アカウント設定</a>
       </li>
       <li class="side-bar__menu-item" v-bind:class="[ links.community.active ? 'active-list' : '']">
-        <a :href="links.community.url" class="side-bar__menu-item-text" v-bind:class="[ links.community.active ? 'active-text' : '']">コミュニティ設定</a>
+        <a :href="links.community.url" class="side-bar__menu-item-text" v-bind:class="[ links.community.active ? 'active-text' : '']">組織設定</a>
       </li>
       <li class="side-bar__menu-item" v-bind:class="[ links.admin.active ? 'active-list' : '']" v-if="belong_to_company.admin">
         <a :href="links.admin.url" class="side-bar__menu-item-text" v-bind:class="[ links.admin.active ? 'active-text' : '']">管理者設定</a>
@@ -75,7 +74,7 @@
           <h2 class="groups-content__title">グループから検索する</h2>
           <ul class="groups-content__result">
             <li v-for="(group, index) in groups" :key="group.id" @click="groupBox(index)" :data-id="group.id" ref="group" class="groups-content__result__box">
-              <p v-if="!group.ancestry">{{group.name}}（コミュニティ全体）</p>
+              <p v-if="!group.ancestry">{{group.name}}（組織全体）</p>
               <p v-else>{{group.name}}</p>
             </li>
           </ul>
@@ -117,7 +116,6 @@
 <script>
 import axios from 'axios';
 import 'logo.png';
-import 'company-logo.png';
 import 'avatar.png';
 
 export default {
@@ -210,7 +208,7 @@ export default {
       }
     });
 
-    // 所属しているコミュニティを取得
+    // 所属している組織を取得
     let group_belong_url = `/api/users/${this.$data.current_user.id}/company/belong_to.json`;
     axios
     .get(group_belong_url)
@@ -228,7 +226,7 @@ export default {
       e.preventDefault();
       this.$data.showUserSelect = true
 
-      // 所属しているコミュニティのグループを取得
+      // 所属している組織のグループを取得
       let url = `/api/users/${this.$data.current_user.id}/groups.json`;
       axios
       .get(url, {params: {company_id: this.$data.belong_to_company.company.id}})
@@ -314,7 +312,6 @@ export default {
       this.$data.thank.receiver.avatar = $(selectUserBox).data("avatar")
       this.$data.userSelectbtn = false
       this.$data.showUserSelect = false
-      console.log(this.$data)
     },
     closeUserModal: function(e) {
       e.preventDefault();
