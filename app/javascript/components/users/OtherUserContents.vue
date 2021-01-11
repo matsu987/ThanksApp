@@ -1,18 +1,16 @@
 <template>
   <main>
-    <div>
+    <div class="other-contents">
       <section class="">
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfjTDwq0919haawfpVijGTRP60GruFrcp9JoQ964Y5XCp5VVw/viewform?embedded=true" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
       </section>
 
-      <section class="">
-        <h2>アリレターLP</h2>
-        <a href="">
-          <img src="">
-        </a>
+      <section class="related-service">
+        <h2>アリレターサイト</h2>
+        <a href="https://ariletter.co-r-e.net/" target="_blank" rel="noopener noreferrer">https://ariletter.co-r-e.net/</a>
       </section>
 
-      <section class="">
+      <section class="related-user">
         <button class="btn btn-color-close btn-size-xs btn-width-full btn-type-round" @click="logoutBtn">ログアウト</button>
         <button class="btn btn-color-close btn-size-xs btn-width-full btn-type-round" @click="deleteUser">退会する</button>
       </section>
@@ -52,12 +50,14 @@ export default {
     },
     deleteUser: function(e) {
       e.preventDefault();
-      let url = `/api/users/${this.$data.current_user.id}.json`;
-      axios
-      .delete(url)
-      .then(response => {
-        document.location.reload()
-      });
+      if(window.confirm('退会手続きをされますと、アリレターのサービスがご利用できなくなります。再度ご利用いただくには、新規登録が必要となります。本当に退会してもよろしいでしょうか？')) {
+        let url = `/api/users/${this.$data.current_user.id}.json`;
+        axios
+        .delete(url)
+        .then(response => {
+          document.location.reload()
+        });
+      }
     },
   },
 }

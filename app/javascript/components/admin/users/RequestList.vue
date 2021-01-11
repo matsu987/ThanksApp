@@ -80,25 +80,27 @@ export default {
       });
     },
     deleteStatus: function(){
-      axios
-      .patch('/api/admin/requests/destroy.json', {
-        user_id:      this.$data.data.user.id,
-        status:       this.$data.data.user.status,
-        company_id:   this.$data.data.company_id,
-        request:      this.$data.data.user.request
-      })
-      .then(response => {
-        if(response.data.error){
-        }
-        else{
-          for(let user of this.$data.users){
-            if(user.id == response.data.user.id){
-              user.status = response.data.user.status
+      if (window.confirm('取消した場合、組織に所属していたユーザーは「感謝のメッセージ」の受信および送信ができなくなります。本当に削除してよろしいでしょう？')) {
+        axios
+        .patch('/api/admin/requests/destroy.json', {
+          user_id:      this.$data.data.user.id,
+          status:       this.$data.data.user.status,
+          company_id:   this.$data.data.company_id,
+          request:      this.$data.data.user.request
+        })
+        .then(response => {
+          if(response.data.error){
+          }
+          else{
+            for(let user of this.$data.users){
+              if(user.id == response.data.user.id){
+                user.status = response.data.user.status
+              }
             }
           }
-        }
-        this.reload();
-      });
+          this.reload();
+        });
+      }
     }
 
   }

@@ -1082,6 +1082,7 @@ main{
   height: 100vh;
   background-color: #fff;
   padding: 0 5%;
+  overflow: auto;
 
   @include xs {
     width: 100%;
@@ -2259,5 +2260,25 @@ form {
   .delete_btn.bg_none{
     border: none;
     background: #FFF;    
+  }
+}
+
+
+// その他ページ
+.other-contents {
+  .related-service {
+    a {
+      font-size: 2rem;
+      color: #0d52ab;
+      margin: 1rem 0 0 2rem;
+      text-decoration: underline;
+      display: block;
+    }
+  }
+  .related-user {
+    .btn {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
   }
 }
