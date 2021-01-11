@@ -95,4 +95,6 @@ Rails.application.routes.draw do
   end
 
   resources :groups, only: [:index, :new]
+
+  get '*path', controller: 'application', action: 'render_404'
 end
