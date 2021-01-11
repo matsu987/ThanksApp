@@ -119,7 +119,7 @@ export default {
             'X-Requested-With': 'XMLHttpRequest',
             'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
           };
-          var url = location.pathname + ".json"
+          var url = '/api/users/id/letters/receive.json'
           axios
           .get(url, {
             params: {
@@ -138,7 +138,7 @@ export default {
             'X-Requested-With': 'XMLHttpRequest',
             'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
           };
-          var url = location.pathname + ".json"
+          var url = '/api/users/id/letters/receive.json'
           axios
           .get(url, {
             params: {
@@ -147,7 +147,7 @@ export default {
             }
           })
           .then( response => {
-            this.$data.thanks = response.data.receive_thanks
+            this.$data.thanks = response.data
           })
       }
     },
@@ -176,7 +176,7 @@ export default {
             'X-Requested-With': 'XMLHttpRequest',
             'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
           };
-          var url = location.pathname + ".json"
+          var url = '/api/users/id/letters/receive.json'
           axios
           .get(url, {
             params: {
@@ -185,7 +185,7 @@ export default {
             }
           })
           .then( response => {
-            this.$data.thanks = response.data.receive_thanks
+            this.$data.thanks = response.data
           })
       }
     },

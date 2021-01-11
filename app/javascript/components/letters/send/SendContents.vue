@@ -138,28 +138,34 @@ export default {
   computed: {
     thanks_edit_count: function(){
       var edit_count = 0
-      var thanks = this.$data.thanks
-      for (var i = 0; i < thanks.length; i++) {
-        if(thanks[i].transmission_status == "0"){
-          edit_count++
+      if (this.$data.thanks) {
+        var thanks = this.$data.thanks
+        for (var i = 0; i < thanks.length; i++) {
+          if(thanks[i].transmission_status == "0"){
+            edit_count++
+          }
+          
         }
-        
+        return edit_count;
       }
-      return edit_count;
     },
     thanks_send_count: function(){
-      var thanks_count = this.$data.thanks.length
-      return thanks_count
+      if (this.$data.thanks) {
+        var thanks_count = this.$data.thanks.length
+        return thanks_count
+      }
     },
     thanks_confirm_count: function(){
       var confirm_count = 0
-      var thanks = this.$data.thanks
-      for (var i = 0; i < thanks.length; i++) {
-        if(thanks[i].transmission_status == "1"){
-          confirm_count++
+      if (this.$data.thanks) {
+        var thanks = this.$data.thanks
+        for (var i = 0; i < thanks.length; i++) {
+          if(thanks[i].transmission_status == "1"){
+            confirm_count++
+          }
         }
+        return confirm_count
       }
-      return confirm_count
     }    
   },
   methods: {
@@ -176,7 +182,7 @@ export default {
         'X-Requested-With': 'XMLHttpRequest',
         'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         };
-        var url = location.pathname + ".json"
+        var url = "/api/users/id/letters/send.json"
         axios
         .get(url, {
           params: {
@@ -185,7 +191,7 @@ export default {
           }
         })
         .then( response => {
-          this.$data.thanks = response.data.send_thanks
+          this.$data.thanks = response.data
         })
       }else{
         this.send.year++
@@ -194,7 +200,7 @@ export default {
         'X-Requested-With': 'XMLHttpRequest',
         'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         };
-        var url = location.pathname + ".json"
+        var url = "/api/users/id/letters/send.json"
         axios
         .get(url, {
           params: {
@@ -203,7 +209,7 @@ export default {
           }
         })
         .then( response => {
-          this.$data.thanks = response.data.send_thanks
+          this.$data.thanks = response.data
         })
 }
     },
@@ -214,7 +220,7 @@ export default {
         'X-Requested-With': 'XMLHttpRequest',
         'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         };
-        var url = location.pathname + ".json"
+        var url = "/api/users/id/letters/send.json"
         axios
         .get(url, {
           params: {
@@ -223,7 +229,7 @@ export default {
           }
         })
         .then( response => {
-          this.$data.thanks = response.data.send_thanks
+          this.$data.thanks = response.data
         })
       }else{
         this.send.year--
@@ -232,7 +238,7 @@ export default {
         'X-Requested-With': 'XMLHttpRequest',
         'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         };
-        var url = location.pathname + ".json"
+        var url =  "/api/users/id/letters/send.json"
         axios
         .get(url, {
           params: {
@@ -241,7 +247,7 @@ export default {
           }
         })
         .then( response => {
-          this.$data.thanks = response.data.send_thanks
+          this.$data.thanks = response.data
         })
       }
     },
