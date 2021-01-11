@@ -63,6 +63,7 @@ class Api::CompaniesController < ApplicationController
 
   private
   def company_params
+    params[:company][:release_time] = Time.current.end_of_month
     params[:company][:release_time] = params[:company][:detailed_time] if params[:company][:detailed_time].present? # 感謝のメッセージ 一斉公開日時に詳細日が設定されている場合感謝のメッセージ 一斉公開日時を書き換え
     params.require(:company).permit(:name, :post_number, :address, :phone_number, :release_time)
   end
