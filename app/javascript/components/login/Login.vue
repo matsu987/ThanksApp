@@ -50,7 +50,7 @@
               </div>
               <div class="user-form__help">
                 <img class="user-form__help-icon" src="~login/help.png" alt="ヘルプマーク">
-                <a href="#" class="user-form__help-txt">
+                <a href="/users/password/new" class="user-form__help-txt">
                   パスワードを再設定する
                 </a>
               </div>
