@@ -1,12 +1,13 @@
 <template>
   <form class="form">
-    <input class="name" type="text" placeholder="name" v-model="data.user.family_name + data.user.given_name">
-    <input class="email" type="text" placeholder="email" v-model="data.user.email">
+    <input class="name" type="text" placeholder="name" v-model="data.user.family_name + data.user.given_name" readonly="true">
+    <input class="email" type="text" placeholder="email" v-model="data.user.email" readonly="true">
+    <input class="group" v-model="data.group.name" readonly="true">
+    <input class="status" v-model="data.status" readonly="true">
     <select name="status" class="status" v-model="data.user.status">
       <option class="status" value="管理者">管理者</option>
       <option class="status" value="一般">一般</option>
     </select>
-    <input class="group" v-model="data.group.name">
     <button class="change_btn" type="submit" @click="changeStatus">変更</button>
     <button class="delete_btn" type="submit" @click="deleteStatus">削除</button>  
   </form>
@@ -63,17 +64,18 @@ export default {
         company_id: this.$data.data.company_id
       })
       .then(response => {
+        console.log(response)
         if(response.data.error){
-          console.log(response.data.error.text)
         }
         else{
-          for(let user of this.$data.users){
-            if(user.id == response.data.user.id){
-              user.status = response.data.user.status
-            }
-          }
+          this.reload();
+          // for(let user of this.$data.users){
+          //   if(user.id == response.data.user.id){
+          //     user.status = response.data.user.status
+          //   }
+          // }
         }
-        this.reload();
+        
       });
     },
     deleteStatus: function(){

@@ -6,8 +6,8 @@ class Api::Admin::UsersController < ApplicationController
     @company_group = current_user.groups.first.root
     @company_group.subtree.each do |group|
       group.users.each do |user|
-        request = group.group_users.where(user_id: user.id).first.request
-        user_info = {user: user, group: group, request: request}
+        group_user = user.group_users.where(group_id: group.id).first
+        user_info = {user: user, group: group, request: group_user.request, status: group_user.status}
         @users.push(user_info)
       end
     end
@@ -18,15 +18,14 @@ class Api::Admin::UsersController < ApplicationController
     if @error
       return @error
     else
-      @group_user = GroupUser.find_by(user_id: update_params[:user_id])
+      @user = User.find(params[:user_id])
       case update_params[:status]
-        when "管理者" 
-          then
-          @group_user.update(status: "管理者")
-        else 
-          @group_user.update(status: "一般")
+        when "管理者"
+          @user.group_users.each { |group_user| group_user.update(status: "管理者")}
+        else
+          @user.group_users.each { |group_user| group_user.update(status: "一般")}
       end
-      @user = @group_user.user
+      render json: @user, status: 200
     end
   end
 
