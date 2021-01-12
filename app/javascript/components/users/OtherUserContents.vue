@@ -79,4 +79,12 @@ h2 {
   display: none;
 }
 
+.related-user .btn {
+  max-width: 400px;
+}
+
+.related-user .btn + .btn {
+  margin-top: 16px;
+}
+
 </style>
