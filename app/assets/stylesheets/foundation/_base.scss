@@ -504,6 +504,8 @@ input:-webkit-autofill:active {
 
   @include xs {
     display: flex;
+    align-items:  flex-start;
+    height: auto;
   }
 
   &__logo {
@@ -1139,6 +1141,7 @@ main{
     // display: none;
     flex-direction: column-reverse;
     margin: 40px auto 8px;
+    -webkit-text-fill-color: #ff6368;
   }
 }
 
@@ -1166,6 +1169,11 @@ main{
   font-size: 2.2rem;
   font-weight: 700;
   margin: 0 5px;
+
+  @include xs {
+    color: $primary-color;
+    background: transparent;
+  }
 }
 
 .countbox {
@@ -1187,6 +1195,7 @@ main{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    -webkit-text-fill-color: $primary-color;
   }
 
   &-inner {
